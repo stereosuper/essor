@@ -42,25 +42,25 @@ gulp.task('styles', function () {
             ]
         }))
         .pipe($.sourcemaps.write())
-        .pipe(gulp.dest('dest/wp-content/themes/super/css'))
+        .pipe(gulp.dest('dest/wp-content/themes/essor/css'))
         .pipe($.size({title: 'styles'}));
 });
 
 gulp.task('fonts', function() {
     return gulp.src('src/fonts/**/*')
-        .pipe(gulp.dest('dest/wp-content/themes/super/fonts'))
+        .pipe(gulp.dest('dest/wp-content/themes/essor/fonts'))
         .pipe($.size({ title: 'fonts' }));
 });
 
 gulp.task('img', function() {
     return gulp.src('src/img/**/*')
-        .pipe(gulp.dest('dest/wp-content/themes/super/img'))
+        .pipe(gulp.dest('dest/wp-content/themes/essor/img'))
         .pipe($.size({ title: 'img' }));
 });
 
 gulp.task('layoutImg', function() {
     return gulp.src('src/layoutImg/**/*')
-        .pipe(gulp.dest('dest/wp-content/themes/super/layoutImg'))
+        .pipe(gulp.dest('dest/wp-content/themes/essor/layoutImg'))
         .pipe($.size({ title: 'layoutImg' }));
 });
 
@@ -77,26 +77,26 @@ gulp.task('js', function () {
         .pipe($.sourcemaps.init({loadMaps: true}))
         .pipe($.uglify())
         .pipe($.sourcemaps.write('./'))
-        .pipe(gulp.dest('dest/wp-content/themes/super/js'))
+        .pipe(gulp.dest('dest/wp-content/themes/essor/js'))
         .pipe($.size({ title: 'js' }));
 });
 
 
 gulp.task('theme', function() {
     return gulp.src('src/theme/**/*')
-        .pipe(gulp.dest('dest/wp-content/themes/super'))
+        .pipe(gulp.dest('dest/wp-content/themes/essor'))
         .pipe($.size({title: 'theme'}));
 });
 
 
 gulp.task('sitemap', function () {
-    gulp.src('dest/wp-content/themes/super/**/*.html', {
+    gulp.src('dest/wp-content/themes/essor/**/*.html', {
             read: false
         })
         .pipe(sitemap({
             siteUrl: 'http://essor.com'
         }))
-        .pipe(gulp.dest('dest/wp-content/themes/super'));
+        .pipe(gulp.dest('dest/wp-content/themes/essor'));
 });
 
 gulp.task('root', function() {
