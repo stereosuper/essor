@@ -1,4 +1,20 @@
 <?php
+# BEGIN SecuPress Correct Constants Values
+define( 'ERRORLOGFILE', '/Applications/MAMP/logs/wp_errorlogfile.log' ); // Added by SecuPress.
+//define( 'WP_DEBUG_DISPLAY', false ); // Added by SecuPress.
+# END SecuPress
+
+
+# BEGIN SecuPress unfiltered_html
+define( 'DISALLOW_UNFILTERED_HTML', true );
+# END SecuPress
+
+
+# BEGIN SecuPress file_edit
+define( 'DISALLOW_FILE_EDIT', true );
+# END SecuPress
+
+
 /**
  * La configuration de base de votre installation WordPress.
  *
@@ -49,14 +65,7 @@ define('DB_COLLATE', '');
  *
  * @since 2.6.0
  */
-define('AUTH_KEY',         'mng_m(!Yw.w(i8W_,$[O(@LM;ui]xIcJ#I(ZgOTT(P:(NZG&2:P>OS2_Mz +.xZt');
-define('SECURE_AUTH_KEY',  ']:yvS_F`=x r7E)=gA2;&M%LKptF}Z,z+U0~IEb7nO7bk)0UT>-r$izcTwdD)=Da');
-define('LOGGED_IN_KEY',    '$8%xgH`sn3k7,u^oDPNqT$_/=-Q75b1{/Q}#IVViG{#,n5rx+T9QwT(.,#eXc7M$');
-define('NONCE_KEY',        'He|QlUreEJ-S.$3uXS^Njtz@SQ` &e{3GoUr4?b4}Jg)6NSe)P+>wZPW1khH9< K');
-define('AUTH_SALT',        'f+!4d(9xLj08QNT^$]Wm(tC7@?=,DdCxP}&I&iAl!ip]=pkG`uX<V^yQMBDUZ,h0');
-define('SECURE_AUTH_SALT', 'T 29;F@WB]bxUtf%R~vOr>,)f0>cIJW-O9 Z<!#LNVzu%~z@rmoSLERo7vf*Z*?V');
-define('LOGGED_IN_SALT',   'u`.+EP#`GFvC7}T8H>[h%u@+%BTo0f?e3Sr._&Mw;(e(KRR!>I?NBV;?19OV+#[e');
-define('NONCE_SALT',       'A*ac8bChvb$qB-m1xFg!h*Rco8=U|A^udET/[K_E&(EfkE)Z]*)AT#5Pu,N0Q-}6');
+/** SecuPress: if you ever want to add secret keys back here, get new ones at https://api.wordpress.org/secret-key/1.1/salt. */
 /**#@-*/
 
 /**
@@ -82,7 +91,11 @@ $table_prefix  = 'essor_';
  *
  * @link https://codex.wordpress.org/Debugging_in_WordPress
  */
-define('WP_DEBUG', false);
+define('WP_DEBUG', true);
+
+define('WP_POST_REVISIONS', 5);
+define('EMPTY_TRASH_DAYS', 10);
+define('WP_AUTO_UPDATE_CORE', true);
 
 /* C’est tout, ne touchez pas à ce qui suit ! */
 
