@@ -117,6 +117,16 @@ function essor_mce_before_init( $styles ){
 }
 add_filter( 'tiny_mce_before_init', 'essor_mce_before_init' );
 
+// Add Options Page
+if( function_exists('acf_add_options_page') ){
+    acf_add_options_page( array(
+        'position'   => 2,
+        'page_title' => 'Paramètres du thème',
+        'menu_title' => 'Paramètres',
+        'redirect'   => false
+    ) );
+}
+
 /*-----------------------------------------------------------------------------------*/
 /* Menus
 /*-----------------------------------------------------------------------------------*/
