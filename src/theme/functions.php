@@ -64,7 +64,7 @@ add_filter( 'login_errors', create_function('$a', "return null;") );
 /* Admin
 /*-----------------------------------------------------------------------------------*/
 // Remove some useless admin stuff
-function essor_remove_submenus() {
+function essor_remove_submenus(){
     $page = remove_submenu_page( 'themes.php', 'themes.php' );
 }
 add_action( 'admin_menu', 'essor_remove_submenus', 999 );
@@ -123,6 +123,7 @@ add_filter( 'tiny_mce_before_init', 'essor_mce_before_init' );
 register_nav_menus(
 	array(
 		'primary' => 'Primary Menu',
+        'secondary' => 'Secondary Menu',
 	)
 );
 
