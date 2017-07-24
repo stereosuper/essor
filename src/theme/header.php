@@ -22,6 +22,8 @@
 			<nav role='navigation'>
 				<?php wp_nav_menu( array( 'theme_location' => 'primary', 'container' => false, 'menu_class' => 'menu-main' ) ); ?>
 
+				<?php get_search_form(true); ?>
+
 				<?php if( get_field('contactLink', 'options') ){ ?>
 					<a href='<?php the_field('contactLink', 'options') ?>'>Contact</a>
 				<?php } ?>
