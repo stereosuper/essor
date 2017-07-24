@@ -1,7 +1,7 @@
 <?php
 # BEGIN SecuPress Correct Constants Values
 define( 'ERRORLOGFILE', '/Applications/MAMP/logs/wp_errorlogfile.log' ); // Added by SecuPress.
-//define( 'WP_DEBUG_DISPLAY', false ); // Added by SecuPress.
+define( 'WP_DEBUG_DISPLAY', false ); // Added by SecuPress.
 # END SecuPress
 
 

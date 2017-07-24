@@ -17,10 +17,15 @@
 
 		<header role='banner'>
 
-			<a href='<?php echo home_url('/'); ?>' title='<?php bloginfo( 'name' ); ?>' rel='home'><?php bloginfo( 'name' ); ?></a>
+			<a href='<?php echo home_url('/'); ?>' title='<?php bloginfo( 'name' ); ?>' rel='home'>
+				<img src='<?php echo get_template_directory_uri(); ?>/layoutImg/essor.svg' alt='<?php bloginfo( 'name' ); ?>'>
+			</a>
 
 			<nav role='navigation'>
-				<?php wp_nav_menu( array( 'theme_location' => 'primary', 'container' => false, 'menu_class' => 'menu-main' ) ); ?>
+				<button type='button'>Nos métiers</button>
+				<?php wp_nav_menu( array( 'theme_location' => 'primary', 'container' => false, 'menu_class' => 'menu-main', 'depth' => 1 ) ); ?>
+
+				<?php wp_nav_menu( array( 'theme_location' => 'primary', 'container' => false, 'menu_class' => 'menu-secondary', 'sub_menu' => true ) ); ?>
 
 				<?php get_search_form(true); ?>
 
