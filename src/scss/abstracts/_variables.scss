@@ -2,8 +2,12 @@
 
 
 // Colors
-$white: rgb(255, 255, 255);
-$black: rgb(0, 0, 0);
+$white: #fff;
+$black: #000;
+
+$primary: #e5512c;
+$text: #646a74;
+$grey: #edf0f5;
 
 
 // Transitions
@@ -11,20 +15,21 @@ $transition: 0.3s ease-in-out;
 
 
 // Fonts
-// $font: 'font', sans-serif;
+$poppins: 'poppins', sans-serif;
+$poppinsLight: 'poppins-light', $poppins;
+$poppinsMedium: 'poppins-medium', $poppins;
 
 
 // Mediaqueries
 $retina: 'only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi)';
 
 $desktop: '1100px';
-$desktop-small: '960px';
+$desktopSmall: '960px';
 $tablet: '780px';
 $phone: '580px';
-$phone-small: '400px';
+$phoneSmall: '400px';
 
 
 // Grid
-$col: 100/12*1%;
-
-$gutter: 10px;
+$col: 100/8*1%;
+$gutter: 30px;

@@ -1,7 +1,14 @@
 /* Grid */
 
+.container, .container-small{
+    padding: 0 $gutter;
+    margin: 0 auto;
+}
+
 .container{
     max-width: 1200px;
-    padding: 0 $gutter*2;
-    margin: 0 auto;
+}
+
+.container-small{
+    max-width: 900px;
 }
