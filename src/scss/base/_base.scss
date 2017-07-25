@@ -68,13 +68,18 @@ b, strong{
 }
 
 i, em{
-
+    font-family: $proximaLightIt;
+    font-size: 1.05em;
+    font-style: normal;
 }
 
 blockquote{
     padding: 25px $gutter 35px;
     margin: 2.8em $gutter*-1;
-    background: $grey;
+    font-family: $proximaLightIt;
+    font-size: 1.8rem;
+    text-indent: 30px;
+    background: $grey url(../layoutImg/quote.svg) no-repeat #{$gutter} 25px / 20px;
     > p{
         margin: 0;
     }
