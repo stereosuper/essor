@@ -155,6 +155,10 @@ function essort_get_current_submenu( $sorted_menu_items, $args ) {
                 break;
             }
         }
+
+        if( $root_id == 0){
+            $root_id = $sorted_menu_items[1]->ID;
+        }
   
         // find the top level parent
         if( ! isset( $args->direct_parent ) ){
