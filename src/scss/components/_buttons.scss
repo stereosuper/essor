@@ -1,1 +1,22 @@
 /* Buttons */
+
+.btn-contact, .btn-search{
+    width: 20px;
+    text-indent: -99em;
+    overflow: hidden;
+    > .icon{
+        float: left;
+        height: inherit;
+    }
+}
+.btn-contact{
+    height: 15px;
+}
+.btn-search{
+    height: 20px;
+    color: $primary;
+    transition: $transition;
+    &:hover, &:focus{
+        filter: saturate(200%);
+    }
+}

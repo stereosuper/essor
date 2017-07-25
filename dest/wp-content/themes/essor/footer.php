@@ -16,7 +16,7 @@
 
                 <span>&copy;<?php echo get_the_date('Y'); ?> - Groupe Essor</span>
 
-                <?php wp_nav_menu( array( 'theme_location' => 'secondary', 'container' => false, 'menu_class' => 'menu-main' ) ); ?>
+                <?php wp_nav_menu( array( 'theme_location' => 'secondary', 'container' => false, 'menu_class' => 'menu-footer' ) ); ?>
 
             </div>
         </footer>
@@ -24,7 +24,7 @@
         <svg style='position:absolute;width:0;height:0;overflow:hidden' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
             <defs>
                 <symbol id='icon-mail' viewBox='0 0 41 32'>
-                    <title>Mail</title>
+                    <title>Contact</title>
                     <path d='M34.987 0h-29.44c-2.987 0-5.547 2.347-5.547 5.333v21.333c0 2.987 2.56 5.333 5.547 5.333h29.44c2.987 0 5.547-2.347 5.547-5.333v-21.333c0-2.987-2.56-5.333-5.547-5.333zM34.987 3.627c0.213 0 0.427 0 0.64 0l-15.36 11.947-15.36-11.947c0.213 0 0.427 0 0.64 0h29.44zM34.987 28.373h-29.44c-1.067 0-1.92-0.853-1.92-1.707 0 0 0 0 0 0v-19.413l15.573 11.947c0.64 0.427 1.493 0.427 2.133 0l15.36-11.947v19.413c0.213 1.067-0.64 1.707-1.707 1.707 0 0 0 0 0 0z'/>
                 </symbol>
 

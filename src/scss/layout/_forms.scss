@@ -1,14 +1,26 @@
 /* Forms */
 
 ::-webkit-input-placeholder{
+    font-family: $proximaLightIt;
+    font-size: 1.8rem;
+    color: rgba($text, 0.4);
 }
 ::-moz-placeholder{
+    font-family: $proximaLightIt;
+    color: $grey;
 }
 :-ms-input-placeholder{
+    font-family: $proximaLightIt;
+    color: $grey;
 }
 
 fieldset{
 
+}
+
+button{
+    border: 0;
+    color: inherit;
 }
 
 input, textarea, select, button{
@@ -19,6 +31,11 @@ input, textarea, select, button{
 }
 
 input, textarea{
+    padding: 15px 25px 13px;
+    border: 1px solid rgba($text, 0.5);
+    font-family: $poppinsLight;
+    line-height: 1.2;
+    color: $text;
   	&:-webkit-autofill{
       	box-shadow: 0 0 0 1000px #fff inset;
   	}
@@ -41,5 +58,11 @@ select{
     // hide the arrow on edge + ie
     &::-ms-expand{
         display: none;
+    }
+}
+
+.form-search{
+    > input{
+        padding-right: 60px;
     }
 }

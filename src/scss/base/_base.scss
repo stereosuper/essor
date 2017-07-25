@@ -177,24 +177,10 @@ hr{
 a{
     position: relative;
     color: $primary;
-    text-decoration: none;
+    text-decoration-color: rgba($primary, 0.5);
     transition: $transition;
-    &:after{
-        content: '';
-        position: absolute;
-        height: 1px;
-        left: 0;
-        right: 0;
-        bottom: 2px;
-        background: currentColor;
-        opacity: 0.5;
-        transition: transform $transition;
-    }
     &:focus, &:hover{
         filter: saturate(200%);
-        &:after{
-            transform: translate3d(0, -2px, 0);
-        }
     }
     &:focus{
         outline: 0;
@@ -215,10 +201,10 @@ a{
     height: 1px;
     padding: 0;
     border: 0;
-    clip: rect(0 0 0 0);
     position: absolute;
     margin: -1px;
     overflow: hidden;
+    clip: rect(0 0 0 0);
 }
 
 .clearfix{

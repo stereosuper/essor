@@ -144,7 +144,7 @@ function essor_css_attributes_filter($var){
 add_filter( 'nav_menu_css_class', 'essor_css_attributes_filter' );
 
 // Get current submenu
-function essort_get_current_submenu( $sorted_menu_items, $args ) {
+function essort_get_current_submenu( $sorted_menu_items, $args ){
     if( isset( $args->sub_menu ) ){
         $root_id = 0;
         // find the current menu item
@@ -188,14 +188,21 @@ function essort_get_current_submenu( $sorted_menu_items, $args ) {
                 unset( $sorted_menu_items[$key] );
             }
         }
-        
-        return $sorted_menu_items;
-
-    }else{
-        return $sorted_menu_items;
     }
+
+    return $sorted_menu_items;
 }
 add_filter( 'wp_nav_menu_objects', 'essort_get_current_submenu', 10, 2 );
+
+// Display descriptions in menu
+function essort_menu_display_desc( $item_output, $item, $depth, $args ){
+    if( isset( $args->desc ) ){
+        $item_output = preg_replace( '/<\/a>/', '<span>' . $item->description . '</span></a>', $item_output );
+    }
+
+    return $item_output;
+}
+add_filter( 'walker_nav_menu_start_el', 'essort_menu_display_desc', 10, 4 );
 
 
 /*-----------------------------------------------------------------------------------*/
