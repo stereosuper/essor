@@ -280,11 +280,10 @@ a{
     }
 
     img{
-        &.alignleft{
-            margin-left: 0;
-        }
-        &.alignright{
-            margin-right: 0;
+        &.alignleft, &.alignright{
+            display: block;
+            float: none;
+                margin: 1.8em auto;
         }
         &.alignnone{
             max-width: 100%;
