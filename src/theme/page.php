@@ -2,6 +2,8 @@
 
 	<?php if ( have_posts() ) : the_post(); ?>
 
+		<?php the_post_thumbnail('full'); ?>
+
 		<div class='container-small'>
 			<h1><?php the_title(); ?></h1>
 			<?php the_content(); ?>

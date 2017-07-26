@@ -251,6 +251,11 @@ a{
     }
 }
 
+.wp-post-image{
+    width: 100%;
+    margin: -100px 0;
+}
+
 
 @media (max-width: $desktop){
     img{
@@ -268,6 +273,12 @@ a{
 }
 
 @media (max-width: $desktopSmall){
+    h1{
+        &:before{
+            left: -20px;
+        }
+    }
+
     li{
         &:before{
             width: 10px;
