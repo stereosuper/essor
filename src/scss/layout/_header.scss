@@ -23,13 +23,15 @@
             transform: translate3d(-85px, 0, 0);
         }
         .logo{
-            transform: scale(0.8);
+            transform: scale(0.8) translate3d(-20px, 0, 0);
         }
         .btn-menu-main{
-            transform: translate3d(-115px, 0, 0);
+            transform: translate3d(-135px, 0, 0);
         }
-        .menu-main-wrapper:hover > .menu-main, .btn-menu-main:focus + .menu-main{
-            transform: translate3d(-115px, 0, 0);
+        .menu-main{
+            &:after{
+                margin: 0 0 0 -135px;
+            }
         }
         .menu-secondary{
             a{
