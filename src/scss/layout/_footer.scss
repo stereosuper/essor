@@ -3,15 +3,25 @@
 .footer{
     padding: 55px 0 40px;
     font-size: 1.3rem;
-    background: $text;
+    background: $text url(../layoutImg/footer.png) no-repeat -50px -60px;
     color: $white;
     .title, .subtitle{
         display: block;
         color: $greyText;
     }
     .title{
+        position: relative;
         font-family: $poppins;
         font-size: 2rem;
+        &:before{
+            content: '';
+            width: 18px;
+            height: 2px;
+            position: absolute;
+            top: 10px;
+            left: -$gutter;
+            background: $white;
+        }
     }
     .subtitle{
         margin: 0 0 30px;
