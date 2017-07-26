@@ -2,10 +2,12 @@
 
 .footer{
     padding: 55px 0 40px;
+    font-size: 1.3rem;
     background: $text;
-    color: $greyText;
+    color: $white;
     .title, .subtitle{
         display: block;
+        color: $greyText;
     }
     .title{
         font-family: $poppins;
@@ -38,16 +40,12 @@
 .footer-top{
     p, ul{
         margin: 0 0 40px;
-        font-size: 1.3rem;
-    }
-    p{
-        color: $white;
     }
     li{
         margin: 0 0 3px;
         > a{
             text-decoration: none;
-            color: $white;
+            color: inherit;
         }
     }
     img{
@@ -78,5 +76,33 @@
         padding: 0 $gutter/2;
         color: $greyText;
         text-decoration-color: rgba($greyText, 0.5);
+    }
+}
+
+.menu-social{
+    font-size: 2rem;
+    color: $text;
+    > li{
+        display: inline-block;
+        margin: 0 10px 0 0;
+    }
+    a{
+        display: block;
+        width: 50px;
+        height: 50px;
+        background: $white;
+        text-indent: -99em;
+        overflow: hidden;
+    }
+    .icon{
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+    }
+    .icon-linkedin{
+        font-size: 1.6rem;
     }
 }
