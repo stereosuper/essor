@@ -1,5 +1,15 @@
 /* Buttons */
 
+.btn{
+    display: inline-block;
+    padding: 15px 35px;
+    font-family: $poppinsMedium;
+    font-size: 1.4rem;
+    text-decoration: none;
+    color: $text;
+    background: $white;
+}
+
 .btn-contact, .btn-search{
     width: 20px;
     text-indent: -99em;

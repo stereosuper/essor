@@ -1,7 +1,7 @@
 /* Grid */
 
 .main{
-    padding: 100px 0 0;
+    padding: 100px 0;
 }
 
 .container, .container-small{
@@ -9,8 +9,12 @@
     margin: 0 auto;
 }
 
-.container{
+.container, .container-full{
     max-width: 1200px;
+}
+
+.container-full{
+    margin: 0 auto;
 }
 
 .container-small{

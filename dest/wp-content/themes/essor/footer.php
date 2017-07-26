@@ -1,22 +1,73 @@
         </main>
 
-        <footer role='contentinfo'>
-            <div class='container'>
+        <footer role='contentinfo' class='footer'>
+            <div class='container-full'>
                 
-                <?php the_field('offersTitle', 'options'); ?>
-                <?php the_field('offersSubtitle', 'options'); ?>
-                <a href='<?php the_field('offersPage', 'options'); ?>' class='btn'><?php the_field('offersBtn', 'options'); ?></a>
+                <div class='footer-cols footer-top'>
+                    <?php if( get_field('offersTitle', 'options') ){ ?>
+                        <div class='col-4'>
+                            <span class='title'><?php the_field('offersTitle', 'options'); ?></span>
+                            <span class='subtitle'><?php the_field('offersSubtitle', 'options'); ?></span>
 
-                <?php the_field('newsTitle', 'options'); ?>
-                <?php the_field('newsSubtitle', 'options'); ?>
+                            <?php $jobsQuery = new WP_Query( array('post_type' => 'offre', 'posts_per_page' => 4) ); ?>
+                            <?php if( $jobsQuery->have_posts() ){ ?>
+                                <ul>
+                                    <?php while( $jobsQuery->have_posts() ){ $jobsQuery->the_post(); ?>
+                                        <li><a href='<?php the_permalink(); ?>'><?php the_title(); ?></a></li>
+                                    <?php } ?>
+                                </ul>
+                            <?php }else{ ?>
+                                <p>Pas d'offre d'emploi disponible en ce moment.</p>
+                            <?php } ?>
 
-                <?php the_field('officesTitle', 'options'); ?>
-                <?php the_field('officesSubtitle', 'options'); ?>
-                <a href='<?php the_field('officesPage', 'options'); ?>' class='btn'><?php the_field('officesBtn', 'options'); ?></a>
+                            <?php if( get_field('offersPage', 'options') && get_field('offersBtn', 'options') ){ ?>
+                                <a href='<?php the_field('offersPage', 'options'); ?>' class='btn'><?php the_field('offersBtn', 'options'); ?></a>
+                            <?php } ?>
+                        </div>
+                    <?php } ?>
 
-                <span>&copy;<?php echo get_the_date('Y'); ?> - Groupe Essor</span>
+                    <?php if( get_field('newsTitle', 'options') ){ ?>
+                        <div class='col-2'>
+                            <span class='title'><?php the_field('newsTitle', 'options'); ?></span>
+                            <span class='subtitle'><?php the_field('newsSubtitle', 'options'); ?></span>
 
-                <?php wp_nav_menu( array( 'theme_location' => 'secondary', 'container' => false, 'menu_class' => 'menu-footer' ) ); ?>
+                            <?php if( have_rows('newsLinks', 'options') ){ ?>
+                                <ul>
+                                    <?php while( have_rows('newsLinks', 'options') ){ the_row(); ?>
+                                        <li><a href='<?php the_sub_field('link'); ?>'><?php the_sub_field('text'); ?></a></li>
+                                    <?php } ?>
+                                </ul>
+                            <?php } ?>
+
+                            <?php if( have_rows('socialNetworks', 'options') ){ ?>
+                                <ul class='menu-social'>
+                                    <?php while( have_rows('socialNetworks', 'options') ){ the_row(); ?>
+                                        <li><a href='<?php the_sub_field('link'); ?>'><?php the_sub_field('name'); ?></a></li>
+                                    <?php } ?>
+                                </ul>
+                            <?php } ?>
+                        </div>
+                    <?php } ?>
+
+                    <?php if( get_field('officesTitle', 'options') ){ ?>
+                        <div class='col-2'>
+                            <span class='title'><?php the_field('officesTitle', 'options'); ?></span>
+                            <span class='subtitle'><?php the_field('officesSubtitle', 'options'); ?></span>
+
+                            <?php echo wp_get_attachment_image( get_field('officesMap', 'options'), 'medium' ); ?>
+
+                            <?php if( get_field('officesPage', 'options') && get_field('officesBtn', 'options') ){ ?>
+                                <a href='<?php the_field('officesPage', 'options'); ?>' class='btn'><?php the_field('officesBtn', 'options'); ?></a>
+                            <?php } ?>
+                        </div>
+                    <?php } ?>
+                </div>
+                
+                <div class='footer-cols footer-bottom'>
+                    <span class='footer-copy'>&copy;<?php echo get_the_date('Y'); ?> - Groupe Essor</span>
+
+                    <?php wp_nav_menu( array( 'theme_location' => 'secondary', 'container' => false, 'menu_class' => 'menu-footer' ) ); ?>
+                </div>
 
             </div>
         </footer>
