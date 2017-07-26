@@ -3,7 +3,7 @@
         <footer role='contentinfo' class='footer'>
             <div class='container-full'>
                 
-                <div class='footer-cols footer-top'>
+                <div class='grid footer-top'>
                     <?php if( get_field('offersTitle', 'options') ){ ?>
                         <div class='col-4'>
                             <span class='title'><?php the_field('offersTitle', 'options'); ?></span>
@@ -63,7 +63,7 @@
                     <?php } ?>
                 </div>
                 
-                <div class='footer-cols footer-bottom'>
+                <div class='grid footer-bottom'>
                     <span class='footer-copy'>&copy;<?php echo get_the_date('Y'); ?> - Groupe Essor</span>
 
                     <?php wp_nav_menu( array( 'theme_location' => 'secondary', 'container' => false, 'menu_class' => 'menu-footer' ) ); ?>
