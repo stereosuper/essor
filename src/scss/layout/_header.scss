@@ -49,14 +49,11 @@
         transition: transform $transition;
     }
     .btn-contact{
-        transition: filter $transition, 0.1s opacity $transition;
+        transition: color $transition, 0.1s opacity $transition;
         &.off{
             opacity: 0;
             transition-delay: 0s;
         }
-    }
-    ul{
-        margin: 0;
     }
     li{
         &:before{
@@ -73,10 +70,7 @@
     align-items: center;
     justify-content: space-between;
     flex-grow: 1;
-    margin: 0 3.35% 0 5.25%;
-    a{
-        color: $text;
-    }
+    margin: 0 0 0 5.25%;
 }
 
 .menu-main{
@@ -86,6 +80,7 @@
     position: absolute;
     top: 100%;
     left: 0;
+    margin: 0;
     flex-wrap: wrap;
     z-index: -1;
     text-align: center;
@@ -173,10 +168,18 @@
     }
 }
 
+.menu-secondary-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1;
+}
+
 .menu-secondary{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin: 0 6.8% 0 auto;
     transition: 0.1s opacity $transition;
     &.off{
         opacity: 0;
@@ -185,6 +188,7 @@
     a{
         display: block;
         padding: 23px 22px;
+        color: $text;
         &:after{
             content: '';
             position: absolute;
@@ -262,5 +266,164 @@
         right: 20px;
         margin: auto;
         transform-origin: 50% 50%;
+    }
+}
+
+.burger{
+    display: none;
+    width: 35px;
+    height: 25px;
+    position: relative;
+    overflow: hidden;
+    text-indent: -99em;
+    &:before, &:after{
+        content: '';
+        height: 3px;
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin: auto;
+        background: $text;
+    }
+    &:before{
+        top: 0;
+    }
+    &:after{
+        bottom: 0;
+    }
+    > i{
+        height: 3px;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        background: $primary;
+    }
+}
+
+.menu-nav{
+    display: none;
+    height: 50px;
+    padding: 14px 0;
+    border-top: 2px solid $grey;
+    margin: 40px -40px 0;
+    text-align: center;
+    background: $white;
+}
+.btn-swipe{
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin: 5px;
+    text-indent: -99em;
+    overflow: hidden;
+    border-radius: 50%;
+    background: $grey;
+    &.on{
+        pointer-events: none;
+        background: $primary;
+    }
+}
+
+
+@media (max-width: $desktop){
+    .btn-menu-main, .header-form-search{
+        display: none;
+    }
+
+    .header{
+        .btn-contact{
+            display: block;
+            width: auto;
+            height: auto;
+            padding: 10px 25px;
+            font-family: $poppinsMedium;
+            font-size: 2rem;
+            line-height: 1;
+            text-indent: 0;
+            color: $text;
+            &:hover, &:focus{
+                color: $primary;
+            }
+            > .icon{
+                display: none;
+            }
+        }
+    }
+
+    .menu-main{
+        display: block;
+        width: 100%;
+        padding: 0;
+        position: static;
+        opacity: 1;
+        text-align: left;
+        background: $white;
+        transform: none;
+        &:after{
+            content: none;
+        }
+        > li{
+            width: 100%;
+            margin: 0 0 30px;
+            &:last-child{
+                margin: 0;
+            }
+        }
+        a{
+            display: block;
+            padding: 10px 25px;
+            border: 0;
+            font-family: $poppinsMedium;
+            line-height: 1;
+            background: none;
+            color: $text;
+        }
+        span{
+            display: none;
+        }
+    }
+
+    .menu-secondary-wrapper{
+        display: block;
+    }
+
+    .menu-secondary{
+        display: block;
+        margin: 0;
+        li{
+            margin: 0 0 30px;
+        }
+        a{
+            display: block;
+            padding: 10px 25px;
+            font-family: $poppinsMedium;
+            font-size: 2rem;
+            line-height: 1;
+            &:after{
+                display: none;
+            }
+            &:hover, &:focus{
+                color: $primary;
+            }
+        }
+    }
+
+    .main-nav{
+        display: block;
+        padding: 40px 40px 0;
+        position: absolute;
+        top: 57px;
+        left: 0;
+        right: 0;
+        margin: 0;
+        overflow: hidden;
+        background: $white;
+    }
+
+    .burger, .menu-nav{
+        display: block;
     }
 }

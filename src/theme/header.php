@@ -46,6 +46,8 @@
 					</svg>
 				</a>
 
+				<button type='button' id='burger' class='burger'>Menu<i></i></button>
+
 				<nav role='navigation' class='main-nav'>
 					<div class='menu-main-wrapper'>
 						<button type='button' class='btn-menu-main'>
@@ -56,14 +58,21 @@
 						<?php wp_nav_menu( array( 'theme_location' => 'primary', 'container' => false, 'menu_class' => 'menu-main', 'depth' => 1, 'desc' => true ) ); ?>
 					</div>
 
-					<?php wp_nav_menu( array( 'theme_location' => 'primary', 'container' => false, 'menu_class' => 'menu-secondary js-form-off', 'sub_menu' => true, 'menu_id' => 'menuSecondary' ) ); ?>
+					<div class='menu-secondary-wrapper'>
+						<?php wp_nav_menu( array( 'theme_location' => 'primary', 'container' => false, 'menu_class' => 'menu-secondary js-form-off', 'sub_menu' => true, 'menu_id' => 'menuSecondary' ) ); ?>
+
+						<?php get_search_form(true); ?>
+
+						<?php if( get_field('contactLink', 'options') ){ ?>
+							<a href='<?php the_field('contactLink', 'options') ?>' class='btn-contact js-form-off'>Contact <svg class='icon'><use xlink:href='#icon-mail'></use></svg></a>
+						<?php } ?>
+					</div>
+
+					<div class='menu-nav'>
+						<button type='button' class='btn-swipe on'>Menu principal</button>
+						<button type='button' class='btn-swipe'>Menu secondaire</button>
+					</div>
 				</nav>
-
-				<?php get_search_form(true); ?>
-
-				<?php if( get_field('contactLink', 'options') ){ ?>
-					<a href='<?php the_field('contactLink', 'options') ?>' class='btn-contact js-form-off'>Contact <svg class='icon'><use xlink:href='#icon-mail'></use></svg></a>
-				<?php } ?>
 
 			</div>
 
