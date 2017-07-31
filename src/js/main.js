@@ -4,6 +4,7 @@ var $ = require('jquery-slim');
 
 // require('gsap');
 require('gsap/CSSPlugin');
+require('gsap/ScrollToPlugin');
 var TweenLite = require('gsap/TweenLite');
 
 
@@ -48,6 +49,44 @@ $(function(){
         $('.js-form-off').removeClass('off');
         $(this).parent().removeClass('on');
 
+    });
+
+    body.on('click', '#burger', function(e){
+        e.preventDefault();
+
+        scrollTop = $(document).scrollTop();
+
+        if( $('#mainNav').hasClass('on') ){
+            $('#mainNav').removeClass('on');
+            $('#main').removeClass('menu-open');
+        }else{
+            if( scrollTop === 0 ){
+                $('#mainNav').addClass('on');
+                $('#main').addClass('menu-open');
+            }else{
+                TweenLite.to(window, 0.5, {scrollTo: 0, onComplete: function(){
+                    $('#mainNav').addClass('on');
+                    $('#main').addClass('menu-open');
+                }});
+            }
+        }
+
+        $(this).toggleClass('on');
+    }).on('click', '#main.menu-open', function(){
+        
+        $('#mainNav').removeClass('on');
+        $('#main').removeClass('menu-open');
+        
+    });
+
+    body.on('click', '.js-btn-menu', function(e){
+        e.preventDefault();
+
+        if( $(this).hasClass('on') ) return;
+
+        $(this).index() === 0 ? $('#menus').removeClass('swiped') : $('#menus').addClass('swiped');
+
+        $(this).addClass('on').siblings().removeClass('on');
     });
 
 
