@@ -1,0 +1,9 @@
+/* Projects */
+.projects{
+    display: flex;
+    margin: 0;
+    padding: 0;
+    > li{
+        width: 25%;
+    }
+}

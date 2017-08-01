@@ -47,6 +47,7 @@
     position: relative;
     margin: 128px 0 0;
     padding: 10px 0;
+    background: $white;
     &:before, &:after{
         content: '';
         display: block;

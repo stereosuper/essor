@@ -57,6 +57,41 @@ get_header(); ?>
                     <p>Ce projet devra répondre à quatre enjeux: éviter de consommer (le label PassivHaus est visé), produire de l’énergie (1 100 m2 de panneaux photovoltaïques et cogénération gaz et huiles alimentaires usagées en réflexion), stocker l’énergie (batteries lithium) et maîtriser les usages. Venez visiter le bâtiment au Parc Ar Mor Tertiaire, à Saint-Herblain (44)</p>
                 </div>
             </div>
+            <h2>Projets similaires</h2>
+            <ul class='projects'>
+                <li>
+                    <h3>Parc de stationnement pour le groupe Total<span>Pau (64)</span></h3>
+                    <ul>
+                        <li><a href='#'>Essor immobilière</a></li>
+                        <li><a href='#'>Bureaux</a></li>
+                        <li><a href='#'>2016</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <h3>Oceanet<span>Saint-Herblain (44)</span></h3>
+                    <ul>
+                        <li><a href='#'>Essor immobilière</a></li>
+                        <li><a href='#'>Bureaux</a></li>
+                        <li><a href='#'>2014</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <h3>Agence Pôle Emploi à Pau Blum<span>Pau Blum (64)</span></h3>
+                    <ul>
+                        <li><a href='#'>Essor immobilière</a></li>
+                        <li><a href='#'>Bureaux</a></li>
+                        <li><a href='#'>2015</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <h3>Siège de Varel Europe à Pau<span>Pau (64)</span></h3>
+                    <ul>
+                        <li><a href='#'>Essor immobilière</a></li>
+                        <li><a href='#'>Bureaux</a></li>
+                        <li><a href='#'>2011</a></li>
+                    </ul>
+                </li>
+            </ul>
         </div>
     <?php endif; ?>
 
