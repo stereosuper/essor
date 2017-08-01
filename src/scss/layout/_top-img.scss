@@ -1,0 +1,12 @@
+/* Top img */
+.wrapper-top-img{
+    height: 710px;
+    max-height: calc(90vh - 102px);
+    .top-img{
+        width: 100%;
+        height: 100%;
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+}

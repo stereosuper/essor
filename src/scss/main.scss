@@ -20,13 +20,15 @@
     'layout/grid',
     'layout/forms',
     'layout/header',
-    'layout/footer';
+    'layout/footer',
+    'layout/top-img';
 
 @import
     'components/buttons';
 
 @import
-    'pages/home';
+    'pages/home',
+    'pages/reference';
 
 @import
     'base/print';
