@@ -119,6 +119,11 @@
                 background: rgba(#6b6f77, 0.98);
                 color: rgba($white, 0.6);
             }
+            span{
+                &:first-child{
+                    background: url(../layoutImg/check.svg) no-repeat 100% 40% / 22px;
+                }
+            }
         }
     }
     a{
@@ -131,9 +136,15 @@
         color: $white;
     }
     span{
-        display: block;
-        font-family: $poppinsLight;
-        font-size: 1.35rem;
+        display: inline-block;
+        &:first-child{
+            padding: 0 35px;
+        }
+        &:last-child{
+            display: block;
+            font-family: $poppinsLight;
+            font-size: 1.35rem;
+        }
     }
 }
 
@@ -198,6 +209,7 @@
     }
     .current-menu-item, .current_page_parent{
         > a{
+            color: $primary;
             pointer-events: none;
             &:after{
                 width: 42px;
@@ -454,7 +466,7 @@
                 top: 0;
                 bottom: 0;
                 left: 0;
-                right: -80px;
+                right: -60px;
                 margin: auto;
                 z-index: -1;
                 background: $primary;
@@ -470,11 +482,16 @@
                     background: $white;
                     color: $primary;
                 }
+                span{
+                    &:first-child{
+                        background: url(../layoutImg/check-orange.svg) no-repeat 0 35% / 20px;
+                    }
+                }
             }
         }
         a{
             display: inline-block;
-            padding: 10px 50px 10px 25px;
+            padding: 10px 50px 10px 0;
             border: 0;
             font-family: $poppinsMedium;
             line-height: 1;
@@ -482,13 +499,16 @@
             color: $text;
         }
         span{
-            display: none;
+            padding: 0 30px;
+            &:last-child{
+                display: none;
+            }
         }
     }
 
     .menu-main-wrapper, .menu-secondary-wrapper{
         width: 50%;
-        padding: 0 40px;
+        padding: 0 $gutter;
     }
     .menu-secondary-wrapper{
         display: block;
