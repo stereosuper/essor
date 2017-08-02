@@ -95,6 +95,45 @@
     }
 }
 
+.filters{
+    padding: $gutter $gutter 2*$gutter;
+    color: $white;
+    background: $primary;
+    .title{
+        position: relative;
+        font-family: $poppinsMedium;
+        font-size: 2rem;
+        &:before, &:after{
+            content: '';
+            display: block;
+            width: 20px;
+            height: 2px;
+            position: absolute;
+            top: 50%;
+            margin-top: -1px;
+        }
+        &:before{
+            left: -50px;
+            background: $primary;
+        }
+        &:after{
+            left: -30px;
+            background: $white;
+        }
+    }
+    ul{
+        margin: 2.5em 0 0;
+        > li{
+            &:before{
+                content: none;
+            }
+        }
+        a{
+            color: $white;
+        }
+    }
+}
+
 @media(max-width: $desktopSmall){
     .side-infos{
         display: flex;

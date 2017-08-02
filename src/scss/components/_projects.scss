@@ -4,15 +4,31 @@
     flex-wrap: wrap;
     margin: 0;
     padding: 0;
+    &.complete{
+        width: calc(100% + #{2*$gutter});
+        margin-left: -$gutter;
+        > li{
+            margin-bottom: -72px;
+            &:nth-child(4n+2){
+                margin-top: 96px;
+            }
+            &:nth-child(4n+3){
+                margin-top: 168px;
+            }
+            &:nth-child(4n+4){
+                margin-top: 192px;
+            }
+        }
+    }
     > li{
         width: 25%;
         &:before{
             content: none;
         }
-        &:nth-child(2){
+        &:nth-child(4n+2){
             margin-top: 96px;
         }
-        &:nth-child(3){
+        &:nth-child(4n+3){
             margin-top: 48px;
         }
     }
@@ -44,7 +60,6 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: lavender;
         background-position: 50% 50%;
         background-repeat: no-repeat;
         background-size: cover;
@@ -76,10 +91,10 @@
     .projects{
         >li{
             width: 50%;
-            &:nth-child(3){
+            &:nth-child(4n+3){
                 margin-top: 0;
             }
-            &:nth-child(4){
+            &:nth-child(4n+4){
                 margin-top: 96px;
             }
         }
@@ -92,7 +107,7 @@
         }
         >li{
             width: 100%;
-            &:nth-child(1), &:nth-child(2), &:nth-child(3), &:nth-child(4){
+            &:nth-child(4n+1), &:nth-child(4n+2), &:nth-child(4n+3), &:nth-child(4n+4){
                 margin-top: 0;
             }
         }
