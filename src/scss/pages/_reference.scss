@@ -32,7 +32,7 @@
     margin: 0 0 45px;
     ul{
         width: calc(33.3333% - #{$gutter});
-        margin: 0;
+        margin: 0 0 0 20px;
         > li{
             &:before{
                 content: none;
@@ -44,9 +44,12 @@
     }
 }
 .side-infos{
-    position: relative;
-    margin: 128px 0 0;
-    padding: 10px 0;
+    position: absolute;
+    left: 0;
+    top: 128px;
+    margin: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
     background: $white;
     &:before, &:after{
         content: '';
@@ -55,7 +58,7 @@
         height: 2px;
         background: $primary;
         position: absolute;
-        left: 0;
+        left: $gutter;
     }
     &:before{
         top: 0;
@@ -88,6 +91,51 @@
         &.alignleft{
             width: calc(66.6666666667% + 40px);
             margin-left: calc(-33.3333% - 50px);
+        }
+    }
+}
+
+@media(max-width: $desktopSmall){
+    .side-infos{
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        width: 100%;
+        position: relative;
+        left: auto;
+        top: auto;
+        padding-left: 0;
+        padding-right: 0;
+        > li{
+            width: calc(50% - 20px);
+        }
+        &:before, &:after{
+            left: 0;
+        }
+    }
+    .content-right-aligned{
+        width: 100%;
+    }
+    .col-6{
+        img{
+            &.alignleft{
+                width: auto;
+                margin-left: auto;
+            }
+        }
+    }
+}
+@media(max-width: $phone){
+    .wrapper-title-links{
+        display: block;
+        ul{
+            width: 100%;
+            margin-left: 0;
+        }
+    }
+    .side-infos{
+        > li{
+            width: calc(100%);
         }
     }
 }

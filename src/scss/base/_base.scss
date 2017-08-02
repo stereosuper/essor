@@ -296,6 +296,16 @@ a{
             left: -20px;
         }
     }
+    .half-title{
+        width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+        text-align: center;
+        &:before{
+            left: 50%;
+            margin-left: -45px;
+        }
+    }
 
     li{
         &:before{
@@ -325,8 +335,10 @@ a{
     h1{
         font-size: 4.2rem;
     }
-
     h2{
         font-size: 3rem;
+    }
+    h3{
+        font-size: 1.8rem;
     }
 }

@@ -11,9 +11,20 @@ get_header(); ?>
 
         </div>
         <div class='container'>
-            <div class='grid'>
-                <div class='col-2'>
-                    <ul class='side-infos'>
+            <div class='grid align-end pos-relative'>
+                <div class='col-6 content-right-aligned'>
+                    <div class='bloc-title'>
+                        <div class='wrapper-title-links'>
+                            <h1><span>Saint-Herblain (44)</span>Delta Green</h1>
+                            <ul>
+                                <li><a href='#'>2017</a></li>
+                                <li><a href='#'>Bureaux</a></li>
+                                <li><a href='#'>Essor Ingénierie</a></li>
+                            </ul>
+                        </div>
+                        <p>Privilégier les orientations Sud et Nord (propres à l’optimisation des ressources naturelles), développer la flexibilité du bâtiment (aménagements et système constructif) pour accueillir les gens et les accompagner dans leurs besoins d’évolution, dimensionner les espaces de travail en fonction de la pénétration idéale de la lumières : tels étaient les 3 axes de réflexion qui ont guidés la construction de l’immeuble de bureaux Delta Green...</p>
+                    </div>
+                    <ul class='side-infos col-2'>
                         <li>
                             <span class='info-title'>Surface</span>
                             <span class='info-content'>4 600 m²</span>
@@ -35,19 +46,6 @@ get_header(); ?>
                             <span class='info-content'>CR&ON Architectes - Grenoble</span>
                         </li>
                     </ul>
-                </div>
-                <div class='col-6'>
-                    <div class='bloc-title'>
-                        <div class='wrapper-title-links'>
-                            <h1><span>Saint-Herblain (44)</span>Delta Green</h1>
-                            <ul>
-                                <li><a href='#'>2017</a></li>
-                                <li><a href='#'>Bureaux</a></li>
-                                <li><a href='#'>Essor Ingénierie</a></li>
-                            </ul>
-                        </div>
-                        <p>Privilégier les orientations Sud et Nord (propres à l’optimisation des ressources naturelles), développer la flexibilité du bâtiment (aménagements et système constructif) pour accueillir les gens et les accompagner dans leurs besoins d’évolution, dimensionner les espaces de travail en fonction de la pénétration idéale de la lumières : tels étaient les 3 axes de réflexion qui ont guidés la construction de l’immeuble de bureaux Delta Green...</p>
-                    </div>
                     <h3>Énergie positive</h3>
                     <p>La société GALEO porte DELTAGREEN, un projet de bâtiment tertiaire innovant d’une surface de 4 608 m² dont la livraison est prévue début 2017. Labellisé projet innovant 2013-2014 par le Cluster NovaBuild et la Région Pays de la Loire, DELTAGREEN est né du constat qu’aujourd’hui, nous concevons des bâtiments théoriquement de plus en plus performants (en phase avec la Réglementation Thermique en vigueur) mais que dans la réalité les consommations énergétiques réelles ne sont pas maîtrisées.</p>
                     <p><strong>La nécessité de compenser les besoins énergétiques du bâtiment par des énergies renouvelables et de produire de l’énergie ont été identifiés dès la conception.</strong></p>
