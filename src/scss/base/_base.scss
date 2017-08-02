@@ -256,6 +256,24 @@ a{
     margin: -100px 0;
 }
 
+.half-title{
+    position: relative;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 30px $gutter 0;
+    &:before{
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: $gutter;
+        width: 90px;
+        height: 2px;
+        background: $primary;
+    }
+}
+
 
 @media (max-width: $desktop){
     img{
