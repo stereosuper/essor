@@ -12974,18 +12974,102 @@ return jQuery;
 
 var $ = require('jquery-slim');
 
-// require('gsap');
 require('gsap/CSSPlugin');
 require('gsap/ScrollToPlugin');
 var TweenLite = require('gsap/TweenLite');
+
+module.exports = function (body, nav, menus, pageWrapper) {
+    if (!nav.length) return;
+
+    var scrollTop;
+
+    body.on('click', '#burger', function (e) {
+
+        e.preventDefault();
+
+        scrollTop = $(document).scrollTop();
+
+        if (nav.hasClass('on')) {
+            nav.removeClass('on');
+            pageWrapper.removeClass('menu-open');
+        } else {
+            if (scrollTop === 0) {
+                nav.addClass('on');
+                pageWrapper.addClass('menu-open');
+            } else {
+                TweenLite.to(window, 0.5, { scrollTo: 0, onComplete: function onComplete() {
+                        nav.addClass('on');
+                        pageWrapper.addClass('menu-open');
+                    } });
+            }
+        }
+
+        $(this).toggleClass('on');
+    }).on('click', '#main.menu-open', function () {
+
+        nav.removeClass('on');
+        pageWrapper.removeClass('menu-open');
+    }).on('click', '.js-btn-menu', function (e) {
+
+        e.preventDefault();
+
+        if ($(this).hasClass('on')) return;
+
+        $(this).index() === 0 ? menus.removeClass('swiped') : menus.addClass('swiped');
+        $(this).addClass('on').siblings().removeClass('on');
+    });
+};
+
+},{"gsap/CSSPlugin":1,"gsap/ScrollToPlugin":2,"gsap/TweenLite":3,"jquery-slim":4}],6:[function(require,module,exports){
+'use strict';
+
+var $ = require('jquery-slim');
+
+module.exports = function (form) {
+    if (!form.length) return;
+
+    var eltsToHide = $('.js-form-off');
+
+    form.on('submit', function (e) {
+
+        e.preventDefault();
+
+        if (!$(this).hasClass('on')) {
+
+            $(this).children('input').focus();
+            eltsToHide.addClass('off');
+            $(this).addClass('on');
+        } else if ($(this).children('input').val() !== '') {
+
+            $(this)[0].submit();
+        }
+    }).on('focusout', 'input', function () {
+
+        eltsToHide.removeClass('off');
+        $(this).parent().removeClass('on');
+    });
+};
+
+},{"jquery-slim":4}],7:[function(require,module,exports){
+'use strict';
+
+var $ = require('jquery-slim');
+
+// require('gsap');
+// require('gsap/CSSPlugin');
+// require('gsap/ScrollToPlugin');
+// var TweenLite = require('gsap/TweenLite');
+
 
 $(function () {
 
     window.requestAnimFrame = require('./requestAnimFrame.js');
     var throttle = require('./throttle.js');
 
+    var animSearchform = require('./animSearchform.js');
+    var animResponsiveHeader = require('./animResponsiveHeader.js');
+
     var body = $('body');
-    // window.outerWidth returns the window width including the scroll, but it's not working with $(window).outerWidth
     var windowWidth = window.outerWidth,
         windowHeight = $(window).height();
     var scrollTop;
@@ -12997,61 +13081,11 @@ $(function () {
         windowHeight = $(window).height();
     }
 
-    $('#formSearch').on('submit', function (e) {
+    // Open and close header searchform
+    animSearchform($('#formSearch'));
 
-        e.preventDefault();
-
-        if (!$(this).hasClass('on')) {
-
-            $(this).children('input').focus();
-            $('.js-form-off').addClass('off');
-            $(this).addClass('on');
-        } else if ($(this).children('input').val() !== '') {
-
-            $(this)[0].submit();
-        }
-    }).on('focusout', 'input', function () {
-
-        $('.js-form-off').removeClass('off');
-        $(this).parent().removeClass('on');
-    });
-
-    body.on('click', '#burger', function (e) {
-        e.preventDefault();
-
-        scrollTop = $(document).scrollTop();
-
-        if ($('#mainNav').hasClass('on')) {
-            $('#mainNav').removeClass('on');
-            $('#main').removeClass('menu-open');
-        } else {
-            if (scrollTop === 0) {
-                $('#mainNav').addClass('on');
-                $('#main').addClass('menu-open');
-            } else {
-                TweenLite.to(window, 0.5, { scrollTo: 0, onComplete: function onComplete() {
-                        $('#mainNav').addClass('on');
-                        $('#main').addClass('menu-open');
-                    } });
-            }
-        }
-
-        $(this).toggleClass('on');
-    }).on('click', '#main.menu-open', function () {
-
-        $('#mainNav').removeClass('on');
-        $('#main').removeClass('menu-open');
-    });
-
-    body.on('click', '.js-btn-menu', function (e) {
-        e.preventDefault();
-
-        if ($(this).hasClass('on')) return;
-
-        $(this).index() === 0 ? $('#menus').removeClass('swiped') : $('#menus').addClass('swiped');
-
-        $(this).addClass('on').siblings().removeClass('on');
-    });
+    // Handle responsive header: burger menus + menus to swipe
+    animResponsiveHeader(body, $('#mainNav'), $('#menus'), $('#main'));
 
     $(window).on('resize', throttle(function () {
         requestAnimFrame(resizeHandler);
@@ -13060,11 +13094,12 @@ $(function () {
     $(document).on('scroll', throttle(function () {
         scrollTop = $(document).scrollTop();
 
+        // Add a class to header when page is scrolled
         scrollTop > 100 ? $('.header').addClass('on') : $('.header').removeClass('on');
     }, 60));
 });
 
-},{"./requestAnimFrame.js":6,"./throttle.js":7,"gsap/CSSPlugin":1,"gsap/ScrollToPlugin":2,"gsap/TweenLite":3,"jquery-slim":4}],6:[function(require,module,exports){
+},{"./animResponsiveHeader.js":5,"./animSearchform.js":6,"./requestAnimFrame.js":8,"./throttle.js":9,"jquery-slim":4}],8:[function(require,module,exports){
 "use strict";
 
 module.exports = function () {
@@ -13073,7 +13108,7 @@ module.exports = function () {
        };
 }();
 
-},{}],7:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 "use strict";
 
 module.exports = function (callback, delay) {
@@ -13096,6 +13131,6 @@ module.exports = function (callback, delay) {
     };
 };
 
-},{}]},{},[5])
+},{}]},{},[7])
 
 //# sourceMappingURL=main.js.map

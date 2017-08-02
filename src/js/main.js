@@ -3,9 +3,9 @@
 var $ = require('jquery-slim');
 
 // require('gsap');
-require('gsap/CSSPlugin');
-require('gsap/ScrollToPlugin');
-var TweenLite = require('gsap/TweenLite');
+// require('gsap/CSSPlugin');
+// require('gsap/ScrollToPlugin');
+// var TweenLite = require('gsap/TweenLite');
 
 
 $(function(){
@@ -13,8 +13,10 @@ $(function(){
     window.requestAnimFrame = require('./requestAnimFrame.js');
     var throttle = require('./throttle.js');
 
+    var animSearchform = require('./animSearchform.js');
+    var animResponsiveHeader = require('./animResponsiveHeader.js');
+
     var body = $('body');
-    // window.outerWidth returns the window width including the scroll, but it's not working with $(window).outerWidth
     var windowWidth = window.outerWidth, windowHeight = $(window).height();
     var scrollTop;
 
@@ -27,67 +29,11 @@ $(function(){
         windowHeight = $(window).height();
     }
 
+    // Open and close header searchform
+    animSearchform( $('#formSearch') );
 
-    $('#formSearch').on('submit', function(e){
-        
-        e.preventDefault();
-
-        if( !$(this).hasClass('on') ){
-            
-            $(this).children('input').focus();
-            $('.js-form-off').addClass('off');
-            $(this).addClass('on');
-        
-        }else if( $(this).children('input').val() !== '' ){
-            
-            $(this)[0].submit();
-        
-        }
-
-    }).on('focusout', 'input', function(){
-        
-        $('.js-form-off').removeClass('off');
-        $(this).parent().removeClass('on');
-
-    });
-
-    body.on('click', '#burger', function(e){
-        e.preventDefault();
-
-        scrollTop = $(document).scrollTop();
-
-        if( $('#mainNav').hasClass('on') ){
-            $('#mainNav').removeClass('on');
-            $('#main').removeClass('menu-open');
-        }else{
-            if( scrollTop === 0 ){
-                $('#mainNav').addClass('on');
-                $('#main').addClass('menu-open');
-            }else{
-                TweenLite.to(window, 0.5, {scrollTo: 0, onComplete: function(){
-                    $('#mainNav').addClass('on');
-                    $('#main').addClass('menu-open');
-                }});
-            }
-        }
-
-        $(this).toggleClass('on');
-    }).on('click', '#main.menu-open', function(){
-        
-        $('#mainNav').removeClass('on');
-        $('#main').removeClass('menu-open');
-        
-    });
-
-    body.on('click', '.js-btn-menu', function(e){
-        e.preventDefault();
-
-        if( $(this).hasClass('on') ) return;
-
-        $(this).index() === 0 ? $('#menus').removeClass('swiped') : $('#menus').addClass('swiped');
-
-        $(this).addClass('on').siblings().removeClass('on');
-    });
+    // Handle responsive header: burger menus + menus to swipe
+    animResponsiveHeader( body, $('#mainNav'), $('#menus'), $('#main') );
 
 
     $(window).on('resize', throttle(function(){
@@ -100,8 +46,8 @@ $(function(){
     $(document).on('scroll', throttle(function(){
         scrollTop = $(document).scrollTop();
         
+        // Add a class to header when page is scrolled
         scrollTop > 100 ? $('.header').addClass('on') : $('.header').removeClass('on');
-
     }, 60));
 
 });
