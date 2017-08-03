@@ -54,60 +54,47 @@
             </div>
 
             <h2 class='half-title'>Projets similaires</h2>
-            <ul class='projects'>
-                <li>
-                    <a href='#'>
-                        <span class='wrapper-img'>
-                            <span class='img' style='background-image: url("<?php echo get_stylesheet_directory_uri();?>/img/visuel-ref.jpg")'></span>
-                        </span>
-                        <h3>Parc de stationnement pour le groupe Total<span>Pau (64)</span></h3>
-                    </a>
-                    <ul>
-                        <li><a href='#'>Essor immobilière</a></li>
-                        <li><a href='#'>Bureaux</a></li>
-                        <li><a href='#'>2016</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href='#'>
-                        <span class='wrapper-img'>
-                            <span class='img' style='background-image: url("<?php echo get_stylesheet_directory_uri();?>/img/visuel-ref.jpg")'></span>
-                        </span>
-                        <h3>Oceanet<span>Saint-Herblain (44)</span></h3>
-                    </a>
-                    <ul>
-                        <li><a href='#'>Essor immobilière</a></li>
-                        <li><a href='#'>Bureaux</a></li>
-                        <li><a href='#'>2014</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href='#'>
-                        <span class='wrapper-img'>
-                            <span class='img' style='background-image: url("<?php echo get_stylesheet_directory_uri();?>/img/visuel-ref.jpg")'></span>
-                        </span>
-                        <h3>Agence Pôle Emploi à Pau Blum<span>Pau Blum (64)</span></h3>
-                    </a>
-                    <ul>
-                        <li><a href='#'>Essor immobilière</a></li>
-                        <li><a href='#'>Bureaux</a></li>
-                        <li><a href='#'>2015</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href='#'>
-                        <span class='wrapper-img'>
-                            <span class='img' style='background-image: url("<?php echo get_stylesheet_directory_uri();?>/img/visuel-ref.jpg")'></span>
-                        </span>
-                        <h3>Siège de Varel Europe à Pau<span>Pau (64)</span></h3>
-                    </a>
-                    <ul>
-                        <li><a href='#'>Essor immobilière</a></li>
-                        <li><a href='#'>Bureaux</a></li>
-                        <li><a href='#'>2011</a></li>
-                    </ul>
-                </li>
-            </ul>
+            <?php
+            $similarProjectsQuery = new WP_Query( array('post_type' => 'reference', 'posts_per_page' => 4, 'post__not_in' => array($post->ID), 'tax_query' => array(array('taxonomy' => 'batiment', 'field' => 'slug', 'terms' => $buildingTypes[0]->slug))) );
+
+            if( $similarProjectsQuery->have_posts() ) :
+            ?>
+                <ul class='projects'>
+                    <?php while( $similarProjectsQuery->have_posts() ) : $similarProjectsQuery->the_post(); ?>
+                        <li>
+                            <a href='<?php the_permalink(); ?>'>
+                                <span class='wrapper-img'>
+                                    <span class='img' style='background-image:url("<?php echo get_the_post_thumbnail_url(); ?>")'></span>
+                                </span>
+                                <h3><?php the_title(); ?><span><?php the_field('place'); ?></span></h3>
+                            </a>
+                            <ul>
+                                <li>
+                                    <?php
+                                    $sectors = get_the_terms( $post->ID, 'metier' );
+                                    if( $sectors ){
+                                        foreach( $sectors as $sector ){ ?>
+                                            <a href='#'><?php echo $sector->name; ?></a>
+                                        <?php }
+                                    }
+                                    ?>
+                                </li>
+                                <li>
+                                    <?php
+                                    $buildingTypes = get_the_terms( $post->ID, 'batiment' );
+                                    if( $buildingTypes ){
+                                        foreach( $buildingTypes as $buildingType ){ ?>
+                                            <a href='#'><?php echo $buildingType->name; ?></a>
+                                        <?php }
+                                    }
+                                    ?>
+                                </li>
+                                <li><a href='#'><?php echo get_the_date( 'Y' ); ?></a></li>
+                            </ul>
+                        </li>
+                    <?php endwhile; ?>
+                </ul>
+            <?php endif; ?>
         </div>
     <?php endif; ?>
 
