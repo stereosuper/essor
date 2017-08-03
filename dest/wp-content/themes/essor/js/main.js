@@ -13055,6 +13055,29 @@ module.exports = function (form) {
 
 var $ = require('jquery-slim');
 
+module.exports = function (dropdowns) {
+    if (!dropdowns.length) return;
+    var dropdownButton;
+
+    dropdowns.each(function (index) {
+        dropdownButton = $(this).find('.dropdown-title');
+        dropdownButton.on('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            $('.dropdown-title').not(this).parents('.dropdown').removeClass('isOpen');
+            $(this).parents('.dropdown').toggleClass('isOpen');
+        });
+        $('html').click(function () {
+            dropdowns.removeClass('isOpen');
+        });
+    });
+};
+
+},{"jquery-slim":4}],8:[function(require,module,exports){
+'use strict';
+
+var $ = require('jquery-slim');
+
 // require('gsap');
 // require('gsap/CSSPlugin');
 // require('gsap/ScrollToPlugin');
@@ -13068,11 +13091,13 @@ $(function () {
 
     var animSearchform = require('./animSearchform.js');
     var animResponsiveHeader = require('./animResponsiveHeader.js');
+    var customDropdown = require('./dropdown.js');
 
     var body = $('body');
     var windowWidth = window.outerWidth,
         windowHeight = $(window).height();
     var scrollTop;
+    var dropdowns = $('.dropdown');
 
     // isMobile.any ? body.addClass('is-mobile') : body.addClass('is-desktop');
 
@@ -13087,6 +13112,9 @@ $(function () {
     // Handle responsive header: burger menus + menus to swipe
     animResponsiveHeader(body, $('#mainNav'), $('#menus'), $('#main'));
 
+    // Open and close custom dropdowns
+    customDropdown(dropdowns);
+
     $(window).on('resize', throttle(function () {
         requestAnimFrame(resizeHandler);
     }, 60)).on('load', function () {});
@@ -13099,7 +13127,7 @@ $(function () {
     }, 60));
 });
 
-},{"./animResponsiveHeader.js":5,"./animSearchform.js":6,"./requestAnimFrame.js":8,"./throttle.js":9,"jquery-slim":4}],8:[function(require,module,exports){
+},{"./animResponsiveHeader.js":5,"./animSearchform.js":6,"./dropdown.js":7,"./requestAnimFrame.js":9,"./throttle.js":10,"jquery-slim":4}],9:[function(require,module,exports){
 "use strict";
 
 module.exports = function () {
@@ -13108,7 +13136,7 @@ module.exports = function () {
        };
 }();
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 "use strict";
 
 module.exports = function (callback, delay) {
@@ -13131,6 +13159,6 @@ module.exports = function (callback, delay) {
     };
 };
 
-},{}]},{},[7])
+},{}]},{},[8])
 
 //# sourceMappingURL=main.js.map

@@ -21,32 +21,31 @@ get_header(); ?>
                 <div class='filters'>
                     <span class='title'>Filter</span>
                     <form>
-                        <div class='select'>
-                            <select>
-                                <option value='' selected>Tout type de bâtiment</option>
-                                <option value=''>Bureaux</option>
-                                <option value=''>Usines</option>
-                                <option value=''>Locaux d'activités</option>
-                                <option value=''>Entrepôts</option>
-                                <option value=''>Hôtels</option>
-                                <option value=''>Hypermarchés</option>
-                                <option value=''>Centres commerciaux</option>
-                                <option value=''>Zones d'activités</option>
-                            </select>
-                            <svg class='icon icon-down'><use xlink:href='#icon-down'></use></svg>
+                        <div class='dropdown'>
+                            <button type='button' class='dropdown-title'>Tout type de bâtiment<svg class='icon icon-down'><use xlink:href='#icon-down'></use></svg></button>
+                            <ul>
+                                <li><a href='#'>Bureaux</a></li>
+                                <li><a href='#'>Usines</a></li>
+                                <li><a href='#'>Locaux d'activités</a></li>
+                                <li><a href='#'>Entrepôts</a></li>
+                                <li><a href='#'>Hôtels</a></li>
+                                <li><a href='#'>Hypermarchés</a></li>
+                                <li><a href='#'>Centres commerciaux</a></li>
+                                <li><a href='#'>Zones d'activités</a></li>
+                            </ul>
                         </div>
-                        <div class='select'>
-                            <select>
-                                <option value='' selected>Tous les métiers</option>
-                                <option value=''>Usines</option>
-                                <option value=''>Locaux d'activités</option>
-                                <option value=''>Entrepôts</option>
-                                <option value=''>Hôtels</option>
-                                <option value=''>Hypermarchés</option>
-                                <option value=''>Centres commerciaux</option>
-                                <option value=''>Zones d'activités</option>
-                            </select>
-                            <svg class='icon icon-down'><use xlink:href='#icon-down'></use></svg>
+                        <div class='dropdown'>
+                            <button type='button' class='dropdown-title'>Tous les métiers<svg class='icon icon-down'><use xlink:href='#icon-down'></use></svg></button>
+                            <ul>
+                                <li><a href='#'>Bureaux</a></li>
+                                <li><a href='#'>Usines</a></li>
+                                <li><a href='#'>Locaux d'activités</a></li>
+                                <li><a href='#'>Entrepôts</a></li>
+                                <li><a href='#'>Hôtels</a></li>
+                                <li><a href='#'>Hypermarchés</a></li>
+                                <li><a href='#'>Centres commerciaux</a></li>
+                                <li><a href='#'>Zones d'activités</a></li>
+                            </ul>
                         </div>
                     </form>
                 </div>

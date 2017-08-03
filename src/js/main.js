@@ -15,10 +15,12 @@ $(function(){
 
     var animSearchform = require('./animSearchform.js');
     var animResponsiveHeader = require('./animResponsiveHeader.js');
+    var customDropdown = require('./dropdown.js');
 
     var body = $('body');
     var windowWidth = window.outerWidth, windowHeight = $(window).height();
     var scrollTop;
+    var dropdowns = $('.dropdown');
 
 
 
@@ -34,6 +36,9 @@ $(function(){
 
     // Handle responsive header: burger menus + menus to swipe
     animResponsiveHeader( body, $('#mainNav'), $('#menus'), $('#main') );
+
+    // Open and close custom dropdowns
+    customDropdown(dropdowns);
 
 
     $(window).on('resize', throttle(function(){
