@@ -52,13 +52,13 @@
                     <?php the_content(); ?>
                 </div>
             </div>
-
-            <h2 class='half-title'>Projets similaires</h2>
+            
             <?php
             $similarProjectsQuery = new WP_Query( array('post_type' => 'reference', 'posts_per_page' => 4, 'post__not_in' => array($post->ID), 'tax_query' => array(array('taxonomy' => 'batiment', 'field' => 'slug', 'terms' => $buildingTypes[0]->slug))) );
 
             if( $similarProjectsQuery->have_posts() ) :
             ?>
+                <h2 class='half-title'>Projets similaires</h2>
                 <ul class='projects'>
                     <?php while( $similarProjectsQuery->have_posts() ) : $similarProjectsQuery->the_post(); ?>
                         <li>
