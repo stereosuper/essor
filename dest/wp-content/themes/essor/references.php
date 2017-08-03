@@ -48,7 +48,12 @@ get_header(); ?>
             </div>
 
             <?php
-            $projectsQuery = new WP_Query( array('post_type' => 'reference', 'posts_per_page' => 10) );
+            $projectsArgs = array('post_type' => 'reference', 'posts_per_page' => 10);
+            if( get_field('sector') ){
+                $projectsArgs['tax_query'] = array(array('taxonomy' => 'metier', 'field' => 'slug', 'terms' => get_field('sector')->slug));
+            }
+            
+            $projectsQuery = new WP_Query( $projectsArgs );
 
             if( $projectsQuery->have_posts() ) :
             ?>
