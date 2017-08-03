@@ -3,6 +3,11 @@
 Template Name: Références
 */
 
+$buildingTypeQuery = isset( $_GET['batiment'] ) ? $_GET['batiment'] : '';
+$dateQuery = isset( $_GET['year'] ) ? $_GET['year'] : '';
+
+$currentPageLink = get_the_permalink();
+
 get_header(); ?>
 
     <?php if ( have_posts() ) : the_post(); ?>
@@ -48,9 +53,18 @@ get_header(); ?>
             </div>
 
             <?php
-            $projectsArgs = array('post_type' => 'reference', 'posts_per_page' => 10);
+            $projectsArgs = array('post_type' => 'reference', 'posts_per_page' => 10, 'tax_query' => array('relation' => 'AND'));
+            
             if( get_field('sector') ){
-                $projectsArgs['tax_query'] = array(array('taxonomy' => 'metier', 'field' => 'slug', 'terms' => get_field('sector')->slug));
+                array_push($projectsArgs['tax_query'], array('taxonomy' => 'metier', 'field' => 'slug', 'terms' => get_field('sector')->slug));
+            }
+
+            if( $buildingTypeQuery ){
+                array_push($projectsArgs['tax_query'], array('taxonomy' => 'batiment', 'field' => 'slug', 'terms' => $buildingTypeQuery));
+            }
+
+            if( $dateQuery ){
+                $projectsArgs['date_query'] = array(array('year'  => $dateQuery)); 
             }
             
             $projectsQuery = new WP_Query( $projectsArgs );
@@ -82,12 +96,12 @@ get_header(); ?>
                                     $buildingTypes = get_the_terms( $post->ID, 'batiment' );
                                     if( $buildingTypes ){
                                         foreach( $buildingTypes as $buildingType ){ ?>
-                                            <a href='#'><?php echo $buildingType->name; ?></a>
+                                            <a href='<?php echo $currentPageLink; ?>?batiment=<?php echo $buildingType->slug; ?>'><?php echo $buildingType->name; ?></a>
                                         <?php }
                                     }
                                     ?>
                                 </li>
-                                <li><a href='#'><?php echo get_the_date( 'Y' ); ?></a></li>
+                                <li><a href='<?php echo $currentPageLink; ?>?year=<?php echo get_the_date( 'Y' ); ?>'><?php echo get_the_date( 'Y' ); ?></a></li>
                             </ul>
                         </li>
                     <?php endwhile; ?>

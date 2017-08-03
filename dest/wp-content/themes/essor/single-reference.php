@@ -12,13 +12,13 @@
                         <div class='wrapper-title-links'>
                             <h1><span><?php the_field('place'); ?></span><?php the_title(); ?></h1>
                             <ul>
-                                <li><a href='#'><?php echo get_the_date( 'Y' ); ?></a></li>
+                                <li><a href='<?php the_field('refsLink', 'options'); ?>?year=<?php echo get_the_date( 'Y' ); ?>'><?php echo get_the_date( 'Y' ); ?></a></li>
                                 <li>
                                     <?php
                                     $buildingTypes = get_the_terms( $post->ID, 'batiment' );
                                     if( $buildingTypes ){
                                         foreach( $buildingTypes as $buildingType ){ ?>
-                                            <a href='#'><?php echo $buildingType->name; ?></a>
+                                            <a href='<?php the_field('refsLink', 'options'); ?>?batiment=<?php echo $buildingType->slug; ?>'><?php echo $buildingType->name; ?></a>
                                         <?php }
                                     }
                                     ?>
@@ -84,12 +84,12 @@
                                     $buildingTypes = get_the_terms( $post->ID, 'batiment' );
                                     if( $buildingTypes ){
                                         foreach( $buildingTypes as $buildingType ){ ?>
-                                            <a href='#'><?php echo $buildingType->name; ?></a>
+                                            <a href='<?php the_field('refsLink', 'options'); ?>?batiment=<?php echo $buildingType->slug; ?>'><?php echo $buildingType->name; ?></a>
                                         <?php }
                                     }
                                     ?>
                                 </li>
-                                <li><a href='#'><?php echo get_the_date( 'Y' ); ?></a></li>
+                                <li><a href='<?php the_field('refsLink', 'options'); ?>?year=<?php echo get_the_date( 'Y' ); ?>'><?php echo get_the_date( 'Y' ); ?></a></li>
                             </ul>
                         </li>
                     <?php endwhile; ?>
