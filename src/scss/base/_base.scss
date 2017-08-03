@@ -273,6 +273,23 @@ a{
         background: $primary;
     }
 }
+.wrapper-title{
+    display: flex;
+    width: calc(100% + #{2*$gutter});
+    margin: 0 0 95px #{-$gutter};
+    .title{
+        width: 50%;
+        margin: 0 12.5%;
+        padding-right: $gutter;
+    }
+    .filters{
+        align-self: flex-start;
+        margin-top: 116px;
+        width: 25%;
+        min-width: 300px;
+        flex-shrink: 0;
+    }
+}
 
 
 @media (max-width: $desktop){
@@ -287,6 +304,10 @@ a{
             max-width: calc(100% + #{2*$gutter});
             margin: 1.8em $gutter*-1;
         }
+    }
+    .wrapper-title{
+        width: 100%;
+        margin-left: 0;
     }
 }
 
@@ -329,6 +350,12 @@ a{
             margin: 1.8em 0;
         }
     }
+    .wrapper-title{
+        .title{
+            margin: 0;
+            width: auto;
+        }
+    }
 }
 
 @media (max-width: $tablet){
@@ -340,5 +367,17 @@ a{
     }
     h3{
         font-size: 1.8rem;
+    }
+    .wrapper-title{
+        display: block;
+        .title{
+            padding-right: 0;
+        }
+        .filters{
+            margin: 20px 0 50px;
+            width: 100%;
+            max-width: 300px;
+            min-width: 0;
+        }
     }
 }

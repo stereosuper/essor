@@ -96,11 +96,13 @@
 }
 
 .filters{
-    padding: $gutter $gutter 2*$gutter;
+    padding: 50px $gutter 35px;
     color: $white;
     background: $primary;
     .title{
+        display: block;
         position: relative;
+        margin: 0 0 10px;
         font-family: $poppinsMedium;
         font-size: 2rem;
         &:before, &:after{
@@ -121,15 +123,11 @@
             background: $white;
         }
     }
-    ul{
-        margin: 2.5em 0 0;
-        > li{
-            &:before{
-                content: none;
-            }
-        }
-        a{
-            color: $white;
+    .select{
+        margin-top: 28px;
+        width: 100%;
+        select{
+            width: 100%;
         }
     }
 }

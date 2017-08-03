@@ -61,6 +61,30 @@ select{
         display: none;
     }
 }
+.select{
+    display: inline-block;
+    max-width: 100%;
+    position: relative;
+    max-width: 100%;
+    select{
+        height: 45px;
+        padding: 0 40px 0 20px;
+        border: 1px solid $white;
+        appearance: none;
+        font-family: $proximaLightIt;
+        font-size: 1.8rem;
+        line-height: 1;
+        color: $white;
+    }
+    .icon{
+        width: 12px;
+        height: 6px;
+        position: absolute;
+        top: 50%;
+        margin: -3px 0 0;
+        right: 15px;
+    }
+}
 
 .form-search{
     > input{
