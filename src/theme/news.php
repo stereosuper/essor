@@ -1,0 +1,64 @@
+<?php 
+/*
+Template Name: Actualités
+*/
+get_header(); ?>
+
+    <?php if ( have_posts() ) : the_post(); ?>
+        <div class='container'>
+            <div class='wrapper-title'>
+                <div class='title'>
+                    <h1>Actualités</h1>
+                    <p>Retrouvez ici toutes les actualités qui ont fait et font l’histoire du Groupe Essor.</p>
+                </div>
+            </div>
+            <ul class='news'>
+                <li>
+                    <a href='#'>
+                        <span class='wrapper-img'>
+                            <span class='img' style='background-image: url("<?php echo get_stylesheet_directory_uri();?>/img/visuel-ref.jpg")'></span>
+                        </span>
+                        <span class='wrapper-txt'>
+                            <h3>Delta Green est lauréat du prix immobilier d’entreprise 2017</h3>
+                            <p>Groupe DPGDELTA, et sa filiale Delta Engineering, Maître d'Oeuvre sur l'opération DELTA GREEN, Lauréat du Prix Immobilier d'Entreprise.</p>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href='#'>
+                        <span class='wrapper-img'>
+                            <span class='img' style='background-image: url("<?php echo get_stylesheet_directory_uri();?>/img/visuel-ref.jpg")'></span>
+                        </span>
+                        <span class='wrapper-txt'>
+                            <h3>Une politique de recrutement dynamique et ambitieuse pour le Groupe Essor</h3>
+                            <p>ESSOR à la recherche de nouveaux talents.</p>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href='#'>
+                        <span class='wrapper-img'>
+                            <span class='img' style='background-image: url("<?php echo get_stylesheet_directory_uri();?>/img/visuel-ref.jpg")'></span>
+                        </span>
+                        <span class='wrapper-txt'>
+                            <h3>Delta Green est lauréat du prix immobilier d’entreprise 2017</h3>
+                            <p>Groupe DPGDELTA, et sa filiale Delta Engineering, Maître d'Oeuvre sur l'opération DELTA GREEN, Lauréat du Prix Immobilier d'Entreprise.</p>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href='#'>
+                        <span class='wrapper-img'>
+                            <span class='img' style='background-image: url("<?php echo get_stylesheet_directory_uri();?>/img/visuel-ref.jpg")'></span>
+                        </span>
+                        <span class='wrapper-txt'>
+                            <h3>Une politique de recrutement dynamique et ambitieuse pour le Groupe Essor</h3>
+                            <p>ESSOR à la recherche de nouveaux talents.</p>
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    <?php endif; ?>
+
+<?php get_footer(); ?>
