@@ -2,8 +2,8 @@
 Contributors: SecuPress, juliobox, GregLone
 Tags: wordpress security, secure, security plugin, hack, malware, 
 Requires at least: 3.7
-Tested up to: 4.8
-Stable tag: 1.3
+Tested up to: 4.8.2
+Stable tag: 1.3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -178,9 +178,24 @@ The answer is no. SecuPress is not compatible with another security plugin. Just
 
 == Changelog ==
 
+= 1.3.1 =
+
+* 02 august 2017
+* Improvement #512: Remove the recovery email notice, you won't need to fill this anymore
+* Improvement #507: Lighter Move Login module with less options, no .htaccess/web.config/ngnix.conf modifications but more decisions and less bugs instead of endless bugs.
+* Improvement #506: Remove the scan and fix for empty user agent (not efficient enough in 2017, too much false positive)
+* Improvement #505: Remove the scan and fix for too long URLs (not efficient enough in 2017, too much false positive)
+* Improvement #488: New bad user agent (Gecko/2009032609 Firefox), thanks to Fabrice from wpformation.com
+* Improvement #481: Better message (less sarcastic, yes) when you lock yourself out.
+* Fix #504: On some servers, $_SERVER['SERVER_ADDR'] does not exists, well, ok.
+* Fix #502: Move login was not cool with PasswordLess
+* Fix #501: Some multisites websites could not validate their licence.
+* Fix #473: Captcha always returned "human verification fail" when autofill from browser is enabled.
+
+
 = 1.3 =
 
-* 18 july 2017
+* 13 june 2017
 * New: You can now set your PRO licence key in the settings page without installing the PRO version. This will replace your free version by the PRO one, quietly.
 * Improvement #448: Better detection of user's right for DB scan
 * Improvement #308: Sometimes after a scan (step 1), some results are still tagged as "new", you should encounter less cases.
@@ -396,6 +411,11 @@ The answer is no. SecuPress is not compatible with another security plugin. Just
 * Initial release \o/
 
 == Upgrade Notice ==
+
+= 1.3.1 =
+
+* 02 august 2017
+* Please check you Move Login settings and usage after update, this module has been revamped and simplified.
 
 = 1.0.5 =
 

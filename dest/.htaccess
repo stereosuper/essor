@@ -43,19 +43,6 @@
 </IfModule>
 # END SecuPress
 
-# BEGIN SecuPress move_login
-<IfModule mod_rewrite.c>
-    RewriteEngine On
-    RewriteBase /
-    RewriteRule ^essor-login/?$ /wp-login.php [QSA,L]
-    RewriteRule ^logout/?$ /wp-login.php?action=logout [QSA,L]
-    RewriteRule ^register/?$ /wp-login.php?action=register [QSA,L]
-    RewriteRule ^lostpassword/?$ /wp-login.php?action=lostpassword [QSA,L]
-    RewriteRule ^resetpass/?$ /wp-login.php?action=resetpass [QSA,L]
-    RewriteRule ^postpass/?$ /wp-login.php?action=postpass [QSA,L]
-</IfModule>
-# END SecuPress
-
 # BEGIN SecuPress directory_index
 <IfModule mod_dir.c>
     DirectoryIndex index.php index.html index.htm index.cgi index.pl index.xhtml
