@@ -11,7 +11,7 @@ $currentPageLink = get_the_permalink();
 get_header(); ?>
 
     <?php if ( have_posts() ) : the_post(); ?>
-        <li class='container'>
+        <div class='container'>
             <div class='wrapper-title'>
                 <div class='title'>
                     <h1><?php the_title(); ?></h1>
