@@ -180,12 +180,13 @@ a{
     text-decoration-color: rgba($primary, 0.5);
     transition: $transition;
     &:focus, &:hover{
-
+        opacity: 0.7;
     }
     &:focus{
         outline: 0;
     }
     &:active{
+        opacity: 1;
         filter: saturate(200%);
     }
 }

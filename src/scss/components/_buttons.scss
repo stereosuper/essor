@@ -16,6 +16,15 @@
         bottom: 0;
         right: 25px;
         margin: auto;
+        transition: transform $transition;
+    }
+    &:hover, &:focus{
+        color: $white;
+        opacity: 1;
+        background: $primary;
+        > .icon{
+            transform: translate3d(5px, 0, 0);
+        }
     }
 }
 
@@ -30,12 +39,22 @@
 }
 .btn-contact{
     height: 15px;
+    > .icon{
+        transform: translate3d(0, 0, 0);
+        transition: $transition;
+    }
+    &:hover, &:focus{
+        opacity: 1;
+        > .icon{
+            opacity: 0.7;
+        }
+    }
 }
 .btn-search{
     height: 20px;
     color: $primary;
     transition: $transition;
     &:hover, &:focus{
-        filter: saturate(200%);
+        opacity: 0.7;
     }
 }

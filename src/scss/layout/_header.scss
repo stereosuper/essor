@@ -57,7 +57,7 @@
         transition: transform $transition;
     }
     .btn-contact{
-        transition: color $transition, 0.1s opacity $transition;
+        transition: 0.1s opacity $transition;
         &.off{
             opacity: 0;
             transition-delay: 0s;
@@ -134,6 +134,9 @@
         font-size: 2rem;
         background: rgba(#535861, 0.98);
         color: $white;
+        &:hover, &:focus{
+            opacity: 0.9;
+        }
     }
     span{
         display: inline-block;
@@ -156,6 +159,9 @@
     height: 100%;
     padding: 0 25px 0 0;
     position: relative;
+    &:hover, &:focus{
+        opacity: 0.7;
+    }
     > .icon{
         width: 13px;
         position: absolute;
@@ -331,6 +337,12 @@
     &:after{
         bottom: 0;
     }
+    &:hover{
+        opacity: 0.7;
+        > i{
+            background: $text;
+        }
+    }
     &.on{
         transform: rotate(180deg);
         &:before{
@@ -497,6 +509,10 @@
             line-height: 1;
             background: $white;
             color: $text;
+            &:hover, &:focus{
+                opacity: 1;
+                color: $primary;
+            }
         }
         span{
             padding: 0 30px;
@@ -530,6 +546,7 @@
                 display: none;
             }
             &:hover, &:focus{
+                opacity: 1;
                 color: $primary;
             }
         }
