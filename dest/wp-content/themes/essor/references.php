@@ -56,7 +56,7 @@ get_header(); ?>
             $projectsArgs = array('post_type' => 'reference', 'posts_per_page' => 10, 'tax_query' => array('relation' => 'AND'));
             
             if( get_field('sector') ){
-                array_push($projectsArgs['tax_query'], array('taxonomy' => 'metier', 'field' => 'slug', 'terms' => get_field('sector')->slug));
+                array_push($projectsArgs['tax_query'], array('taxonomy' => 'metier', 'field' => 'slug', 'terms' => get_term(get_field('sector'))->slug));
             }
 
             if( $buildingTypeQuery ){
@@ -86,7 +86,7 @@ get_header(); ?>
                                     $sectors = get_the_terms( $post->ID, 'metier' );
                                     if( $sectors ){
                                         foreach( $sectors as $sector ){ ?>
-                                            <a href='#'><?php echo $sector->name; ?></a>
+                                            <a href='<?php echo get_the_permalink(get_posts(array('post_type' => 'page', 'posts_per_page' => 1, 'meta_query' => array(array('key' => 'sector', 'compare' => 'LIKE', 'value' => $sector->term_id))))[0]->ID); ?>'><?php echo $sector->name; ?></a>
                                         <?php }
                                     }
                                     ?>
