@@ -1,14 +1,12 @@
 /* Buttons */
 
-.btn{
+.btn, .btn-light{
     display: inline-block;
     padding: 15px 50px 15px 35px;
     position: relative;
     font-family: $poppinsMedium;
     font-size: 1.4rem;
     text-decoration: none;
-    color: $text;
-    background: $white;
     > .icon{
         width: 12px;
         position: absolute;
@@ -19,12 +17,25 @@
         transition: transform $transition;
     }
     &:hover, &:focus{
-        color: $white;
         opacity: 1;
-        background: $primary;
         > .icon{
             transform: translate3d(5px, 0, 0);
         }
+    }
+}
+.btn-light{
+    color: $text;
+    background: $white;
+    &:hover, &:focus{
+        color: $white;
+        background: $primary;
+    }
+}
+.btn{
+    color: $white;
+    background: $primary;
+    &:hover, &:focus{
+        background: $text;
     }
 }
 

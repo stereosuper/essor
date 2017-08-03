@@ -44,15 +44,38 @@ input, textarea{
         // FF red borders
         box-shadow: none;
     }
+    &:hover{
+        border-color: $text;
+    }
+    &:focus{
+        border-color: $primary;
+    }
+    .error &{
+        border-color: $error;
+    }
 }
 
 input{
-    // hide the symbols of input search
+    width: 270px;
+    &[type=email]{
+        width: 420px;
+    }
+    &[type=tel]{
+        width: 180px;
+    }
     &[type=search]{
         &::-webkit-search-cancel-button, &::-webkit-search-decoration{
             display: none;
         }
     }
+    .optional &{
+        margin: 0 20px 0 0;
+    }
+}
+
+textarea{
+    width: 600px;
+    height: 260px;
 }
 
 select{
@@ -140,8 +163,112 @@ select{
     }
 }
 
+label{
+    // min-width: 270px;
+    width: 32%;
+    min-width: 32%;
+    padding: 0 $gutter 0 0;
+    font-family: $poppinsMedium;
+    line-height: 1.4;
+    text-align: right;
+    cursor: pointer;
+    .optional &{
+        font-family: $poppinsLight;
+    }
+    .error &{
+        color: $error;
+    }
+}
+
+.field{
+    display: flex;
+    margin: 0 0 20px;
+    align-items: center;
+    > i{
+        display: inline-block;
+        margin: 5px 0;
+        color: $primary;
+    }
+}
+.field-top{
+    align-items: flex-start;
+    > label{
+        margin-top: 15px;
+    }
+}
+
+.form-error, .form-success{
+    position: relative;
+    margin-top: 0;
+    font-family: $poppinsMedium;
+    &:before{
+        content: '';
+        width: 2px;
+        position: absolute;
+        top: -25px;
+        bottom: -15px;
+        left: -$gutter;
+    }
+    > span{
+        display: block;
+        font-family: $poppinsLight;
+    }
+}
+.form-error{
+    color: $error;
+    &:before{
+        background: $error;
+    }
+}
+.form-success{
+    margin-bottom: 50px;
+    color: $success;
+    &:before{
+        background: $success;
+    }
+}
+
 .form-search{
     > input{
         padding-right: 60px;
+        &:focus{
+            border-color: rgba($text, 0.5);
+        }
+    }
+}
+
+.form-contact{
+    padding: 25px 0 0;
+    .btn{
+        margin: 30px 0 0 32%;
+    }
+}
+
+
+@media (max-width: $desktopSmall){
+    .form-error{
+        &:before{
+            left: -20px;
+        }
+    }
+}
+
+@media (max-width: $tablet){
+    .field{
+        flex-wrap: wrap;
+    }
+
+    label{
+        display: block;
+        width: 100%;
+        min-width: 100%;
+        margin: 0 0 5px;
+        text-align: left;
+    }
+
+    .form-contact{
+        .btn{
+            margin-left: 0;
+        }
     }
 }

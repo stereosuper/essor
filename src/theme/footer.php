@@ -21,7 +21,7 @@
                             <?php } ?>
 
                             <?php if( get_field('offersPage', 'options') && get_field('offersBtn', 'options') ){ ?>
-                                <a href='<?php the_field('offersPage', 'options'); ?>' class='btn'><?php the_field('offersBtn', 'options'); ?> <svg class='icon'><use xlink:href='#icon-right'></use></svg></a>
+                                <a href='<?php the_field('offersPage', 'options'); ?>' class='btn-light'><?php the_field('offersBtn', 'options'); ?> <svg class='icon'><use xlink:href='#icon-right'></use></svg></a>
                             <?php } ?>
                         </div>
                     <?php } ?>
@@ -57,7 +57,7 @@
                             <?php echo wp_get_attachment_image( get_field('officesMap', 'options'), 'medium' ); ?>
 
                             <?php if( get_field('officesPage', 'options') && get_field('officesBtn', 'options') ){ ?>
-                                <a href='<?php the_field('officesPage', 'options'); ?>' class='btn'><?php the_field('officesBtn', 'options'); ?> <svg class='icon'><use xlink:href='#icon-right'></use></svg></a>
+                                <a href='<?php the_field('officesPage', 'options'); ?>' class='btn-light'><?php the_field('officesBtn', 'options'); ?> <svg class='icon'><use xlink:href='#icon-right'></use></svg></a>
                             <?php } ?>
                         </div>
                     <?php } ?>
