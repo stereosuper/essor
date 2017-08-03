@@ -10,6 +10,7 @@
     }
     > li{
         width: 25%;
+        padding-left: 0;
         &:before{
             content: none;
         }
@@ -91,6 +92,7 @@
         margin: 1.5em 0;
         padding: 0 $gutter;
         > li{
+            padding-left: 0;
             &:before{
                 content: none;
             }

@@ -99,13 +99,14 @@ blockquote{
 
 li{
     position: relative;
+    padding-left: 30px;
     &:before{
         content: '';
-        width: 15px;
+        width: 10px;
         height: 2px;
         position: absolute;
-        top: 8px;
-        left: -$gutter;
+        top: 10px;
+        left: 0;
         font-family: $poppinsMedium;
         background: $primary;
         color: $primary;
