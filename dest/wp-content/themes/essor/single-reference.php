@@ -12,9 +12,27 @@
                         <div class='wrapper-title-links'>
                             <h1><span><?php the_field('place'); ?></span><?php the_title(); ?></h1>
                             <ul>
-                                <li><a href='#'>2017</a></li>
-                                <li><a href='#'>Bureaux</a></li>
-                                <li><a href='#'>Essor Ingénierie</a></li>
+                                <li><a href='#'><?php echo get_the_date( 'Y' ); ?></a></li>
+                                <li>
+                                    <?php
+                                    $buildingTypes = get_the_terms( $post->ID, 'batiment' );
+                                    if( $buildingTypes ){
+                                        foreach( $buildingTypes as $buildingType ){ ?>
+                                            <a href='#'><?php echo $buildingType->name; ?></a>
+                                        <?php }
+                                    }
+                                    ?>
+                                </li>
+                                <li>
+                                    <?php
+                                    $sectors = get_the_terms( $post->ID, 'metier' );
+                                    if( $sectors ){
+                                        foreach( $sectors as $sector ){ ?>
+                                            <a href='#'><?php echo $sector->name; ?></a>
+                                        <?php }
+                                    }
+                                    ?>
+                                </li>
                             </ul>
                         </div>
                         <?php the_excerpt(); ?>

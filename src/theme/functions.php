@@ -214,7 +214,7 @@ function essor_post_type(){
         'singular_label' => 'Référence',
         'public' => true,
         'menu_icon' => 'dashicons-portfolio',
-        'supports' => array('title', 'editor', 'thumbnail', 'excerpt', 'revisions')
+        'supports' => array('title', 'editor', 'thumbnail', 'excerpt', 'revisions'),
     ) );
 
     register_post_type( 'offre', array(
@@ -234,6 +234,23 @@ function essor_post_type(){
     ) );
 }
 add_action( 'init', 'essor_post_type' );
+
+function essor_taxonomies(){
+    register_taxonomy( 'metier', 'reference', array(
+        'label' => 'Métiers',
+        'singular_label' => 'Métier',
+        'hierarchical' => true,
+        'show_admin_column' => true
+    ) );
+
+    register_taxonomy( 'batiment', 'reference', array(
+        'label' => 'Types de bâtiment',
+        'singular_label' => 'Type de bâtiment',
+        'hierarchical' => true,
+        'show_admin_column' => true
+    ) );
+}
+add_action( 'init', 'essor_taxonomies' );
 
 
 /*-----------------------------------------------------------------------------------*/
