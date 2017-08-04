@@ -42,7 +42,7 @@
                             <?php if( have_rows('socialNetworks', 'options') ){ ?>
                                 <ul class='menu-social'>
                                     <?php while( have_rows('socialNetworks', 'options') ){ the_row(); ?>
-                                        <li><a href='<?php the_sub_field('link'); ?>'><?php the_sub_field('name'); ?> <svg class='icon icon-<?php the_sub_field('icon'); ?>'><use xlink:href='#icon-<?php the_sub_field('icon'); ?>'></use></svg></a></li>
+                                        <li><a href='<?php the_sub_field('link'); ?>' target='_blank'><?php the_sub_field('name'); ?> <svg class='icon icon-<?php the_sub_field('icon'); ?>'><use xlink:href='#icon-<?php the_sub_field('icon'); ?>'></use></svg></a></li>
                                     <?php } ?>
                                 </ul>
                             <?php } ?>

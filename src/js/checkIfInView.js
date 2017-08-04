@@ -1,10 +1,10 @@
-var $ = require('jquery-slim');
+var $ = require('jquery');
 
 var throttle = require('./throttle.js');
 window.requestAnimFrame = require('./requestAnimFrame.js');
 
 module.exports = function(body, elts){
-    var elt, eltContent, eltHeight, eltTop, eltBottom;
+    var elt, eltHeight, eltTop, eltBottom;
     var windowHeight, windowScroll, windowBottom;
     var launchGapIn = 100, launchGapOut = 250;
 

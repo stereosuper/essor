@@ -1,4 +1,4 @@
-var $ = require('jquery-slim');
+var $ = require('jquery');
 
 module.exports = function(form){
     if( !form.length ) return;

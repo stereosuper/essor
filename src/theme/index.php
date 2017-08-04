@@ -6,13 +6,14 @@
             <div class='title'>
             	<h1><?php single_post_title(); ?></h1>
                 <?php the_field('text', get_option( 'page_for_posts' )); ?>
-            </div>
+			</div>
+			
             <aside>
                 <span class='title-aside'>Réseaux sociaux :</span>
                 <?php if( have_rows('socialNetworks', 'options') ){ ?>
                     <ul class='menu-social'>
                         <?php while( have_rows('socialNetworks', 'options') ){ the_row(); ?>
-                            <li><a href='<?php the_sub_field('link'); ?>'><?php the_sub_field('name'); ?> <svg class='icon icon-<?php the_sub_field('icon'); ?>'><use xlink:href='#icon-<?php the_sub_field('icon'); ?>'></use></svg></a></li>
+                            <li><a href='<?php the_sub_field('link'); ?>' target='_blank'><?php the_sub_field('name'); ?> <svg class='icon icon-<?php the_sub_field('icon'); ?>'><use xlink:href='#icon-<?php the_sub_field('icon'); ?>'></use></svg></a></li>
                         <?php } ?>
                     </ul>
                 <?php } ?>
@@ -21,8 +22,7 @@
 
 		<?php if ( have_posts() ) : ?>
 
-			<ul class='news'>
-
+			<ul class='news' id='ajax-content'>
 				<?php while ( have_posts() ) : the_post(); ?>
 					<li>
 						<a href='<?php the_permalink(); ?>'>
@@ -36,13 +36,6 @@
 						</a>
 					</li>
 				<?php endwhile; ?>
-
-				<li class='load-more'>
-                    <a href='#'>
-                        <span class='txt-more'>Charger la suite<svg class='icon'><use xlink:href='#icon-arrow-bottom'></use></svg></span>
-                    </a>
-                </li>
-
 			</ul>
 		
 		<?php else : ?>

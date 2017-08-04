@@ -1,4 +1,4 @@
-var $ = require('jquery-slim');
+var $ = require('jquery');
 
 require('gsap/CSSPlugin');
 require('gsap/ScrollToPlugin');

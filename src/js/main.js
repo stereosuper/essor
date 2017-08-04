@@ -1,6 +1,6 @@
 'use strict';
 
-var $ = require('jquery-slim');
+var $ = require('jquery');
 
 // require('gsap');
 // require('gsap/CSSPlugin');
@@ -16,13 +16,14 @@ $(function(){
     var animSearchform = require('./animSearchform.js');
     var animResponsiveHeader = require('./animResponsiveHeader.js');
     var customDropdown = require('./dropdown.js');
+    var loadMorePosts = require('./loadMorePosts.js');
 
     var body = $('body');
     var windowWidth = window.outerWidth, windowHeight = $(window).height();
     var scrollTop;
     var dropdowns = $('.dropdown');
 
-
+    
 
     // isMobile.any ? body.addClass('is-mobile') : body.addClass('is-desktop');
 
@@ -39,6 +40,9 @@ $(function(){
 
     // Open and close custom dropdowns
     customDropdown(dropdowns);
+
+    // Load more posts
+    loadMorePosts(wp, $('#ajax-content'));
 
 
     $(window).on('resize', throttle(function(){

@@ -330,6 +330,18 @@ function essor_scripts(){
 	wp_enqueue_script( 'essor-scripts', get_template_directory_uri() . '/js/main.js', array(), ESSOR_VERSION, true );
 
     wp_deregister_script( 'wp-embed' );
+
+    // ajax
+    global $wp_query;
+    $max = $wp_query->max_num_pages;
+    $paged = get_query_var('paged') > 1 ? get_query_var('paged') : 1;
+
+    wp_localize_script( 'essor-scripts', 'wp', array(
+        'adminAjax' => site_url( '/wp-admin/admin-ajax.php' ),
+        'startPage' => $paged,
+        'maxPages' => $max,
+        'nextLink' => next_posts($max, false)
+    ) );
 }
 add_action( 'wp_enqueue_scripts', 'essor_scripts' );
 
