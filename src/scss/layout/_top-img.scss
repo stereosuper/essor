@@ -2,6 +2,9 @@
 .wrapper-top-img{
     height: 710px;
     max-height: calc(90vh - 102px);
+    &.small{
+        height: 432px;
+    }
     .top-img{
         width: 100%;
         height: 100%;
