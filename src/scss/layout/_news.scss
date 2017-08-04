@@ -87,3 +87,13 @@
         }
     }
 }
+
+@media(max-width: $desktop){
+    .news{
+        width: 100%;
+        margin-left: 0;
+    }
+}
+@media(max-width: $desktopSmall){
+    
+}
