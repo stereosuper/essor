@@ -111,15 +111,14 @@ li{
         background: $primary;
         color: $primary;
     }
+    ul, ol{
+        margin: 1em 0;
+    }
 }
 ol, ul{
     padding: 0;
     margin: 1.8em 0;
     list-style: none;
-    ul, ol{
-        padding: 0 0 0 $gutter;
-        margin: 1em 0;
-    }
 }
 ol{
     counter-reset: ol-counter;
