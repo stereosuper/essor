@@ -95,5 +95,32 @@
     }
 }
 @media(max-width: $desktopSmall){
-    
+    .news{
+        > li{
+            &.load-more{
+                a{
+                    width: 100%;
+                }
+            }
+        }
+        .wrapper-img{
+            width: 100%;
+        }
+        .wrapper-txt{
+            width: auto;
+            margin: 0;
+            margin-left: $gutter;
+        }
+    }
+}
+@media(max-width: $tablet){
+    .news{
+        > li{
+            width: 100%;
+            margin-bottom: 60px;
+            &:nth-child(even){
+                margin-top: 0;
+            }
+        }
+    }
 }
