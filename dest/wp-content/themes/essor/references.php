@@ -21,7 +21,7 @@ get_header(); ?>
                 <aside>
                     <span class='title-aside'>Filter</span>
                     <div class='dropdown'>
-                        <button type='button' class='dropdown-title'>Tout type de bâtiment<svg class='icon icon-down'><use xlink:href='#icon-down'></use></svg></button>
+                        <button type='button' class='dropdown-title'><svg class='icon icon-down'><use xlink:href='#icon-down'></use></svg></button>
                         <?php
                         $allBuildingTypes = get_terms('batiment');
                         if( $allBuildingTypes ){ ?>
@@ -34,7 +34,7 @@ get_header(); ?>
                         <?php } ?>
                     </div>
                     <div class='dropdown'>
-                        <button type='button' class='dropdown-title'>Tous les métiers<svg class='icon icon-down'><use xlink:href='#icon-down'></use></svg></button>
+                        <button type='button' class='dropdown-title'><svg class='icon icon-down'><use xlink:href='#icon-down'></use></svg></button>
                         <?php
                         $allSectors = get_terms('metier');
                         if( $allSectors ){ ?>
