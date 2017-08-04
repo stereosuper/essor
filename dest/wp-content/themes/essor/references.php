@@ -68,7 +68,6 @@ get_header(); ?>
             }
             
             $projectsQuery = new WP_Query( $projectsArgs );
-            $countProjects = 0;
 
             if( $projectsQuery->have_posts() ) :
             ?>
@@ -107,11 +106,9 @@ get_header(); ?>
                         </li>
                     <?php $countProjects ++; endwhile; ?>
 
-                    <?php if( $countProjects > 10 ){ ?>
-                        <li class='load-more'>
-                            <a href='#'><span class='txt-more'>Charger la suite<svg class='icon icon-arrow-bottom'><use xlink:href='#icon-arrow-bottom'></use></svg></span></a>
-                        </li>
-                    <?php } ?>
+                    <li class='load-more'>
+                        <a href='#'><span class='txt-more'>Charger la suite<svg class='icon icon-arrow-bottom'><use xlink:href='#icon-arrow-bottom'></use></svg></span></a>
+                    </li>
                 </ul>
             <?php endif; ?>
         </div>

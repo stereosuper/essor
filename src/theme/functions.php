@@ -127,6 +127,13 @@ if( function_exists('acf_add_options_page') ){
     ) );
 }
 
+// Excerpt
+function essor_excerpt_length( $length ){
+    return 25;
+}
+add_filter( 'excerpt_length', 'essor_excerpt_length' );
+
+
 /*-----------------------------------------------------------------------------------*/
 /* Menus
 /*-----------------------------------------------------------------------------------*/
@@ -136,12 +143,6 @@ register_nav_menus(
         'secondary' => 'Secondary Menu',
 	)
 );
-
-// Cleanup WP Menu html
-function essor_css_attributes_filter($var){
-    return is_array($var) ? array_intersect($var, array('current-menu-item', 'current_page_parent')) : '';
-}
-add_filter( 'nav_menu_css_class', 'essor_css_attributes_filter' );
 
 // Get current submenu
 function essort_get_current_submenu( $sorted_menu_items, $args ){
@@ -203,6 +204,34 @@ function essort_menu_display_desc( $item_output, $item, $depth, $args ){
     return $item_output;
 }
 add_filter( 'walker_nav_menu_start_el', 'essort_menu_display_desc', 10, 4 );
+
+// Cleanup WP Menu html
+function essor_css_attributes_filter( $var ){
+    return is_array($var) ? array_intersect($var, array('current-menu-item', 'current_page_parent')) : '';
+}
+add_filter( 'nav_menu_css_class', 'essor_css_attributes_filter' );
+
+// Custom posts parents marked as current
+function essor_custom_post_nav_class( $classes, $item ){
+	global $post;
+	
+	// Getting the post type of the current post
+	$current_post_type = get_post_type_object( get_post_type($post->ID) );
+	$current_post_type_slug = $current_post_type->rewrite['slug'];
+		
+	// Getting the URL of the menu item
+	$menu_slug = strtolower( trim($item->url) );
+	
+	// If the menu item URL contains the current post types slug add the current-menu-item class
+	if( strpos($menu_slug,$current_post_type_slug) !== false ){
+	   $classes[] = 'current-menu-item';
+	}else{
+		$classes = array_diff( $classes, array( 'current_page_parent' ) );
+	}
+	
+	return $classes;
+}
+add_action( 'nav_menu_css_class', 'essor_custom_post_nav_class', 10, 2 );
 
 
 /*-----------------------------------------------------------------------------------*/

@@ -116,7 +116,6 @@
         width: 33.333%;
         &.current-menu-item, &.current_page_parent{
             > a{
-                pointer-events: none;
                 background: rgba(#6b6f77, 0.98);
                 color: rgba($white, 0.6);
             }
@@ -217,7 +216,6 @@
     .current-menu-item, .current_page_parent{
         > a{
             color: $primary;
-            pointer-events: none;
             &:after{
                 width: 42px;
                 opacity: 1;
