@@ -4,7 +4,7 @@ Template Name: Sitemap
 */
 get_header(); ?>
 
-	<div class='container'>
+	<div class='container-small'>
 
 		<?php if ( have_posts() ) : ?>
 
@@ -24,12 +24,12 @@ get_header(); ?>
 						$posts = get_posts( array('post_type' => $postType, 'orderby' => 'title', 'posts_per_page' => -1, 'order' => 'ASC', 'tax_query' => $options) );
 
 						if(!$posts)
-							echo '<p>Nothing was found</p>';
+							echo '<p>Rien n\'a été trouvé</p>';
 
 						$output = "<ul>";
 						foreach( $posts as $post ){
 							$output .= '<li>';
-							$output .= '<a href="'. get_permalink($post->ID) .'" title="Go to '. get_the_title($post->ID) .'">';
+							$output .= '<a href="'. get_permalink($post->ID) .'" title="'. get_the_title($post->ID) .'">';
 							$output .= get_the_title($post->ID);
 							$output .= '</a>';
 							$output .= '</li>';
@@ -40,8 +40,14 @@ get_header(); ?>
 					}
 				?>
 
-				<h2>Blog posts</h2>
+				<h2>Références</h2>
+				<?php listPosts('reference', ''); ?>
+
+				<h2>Articles</h2>
 				<?php listPosts('post', ''); ?>
+
+				<h2>Offres d'emploi</h2>
+				<?php listPosts('offre', ''); ?>
 
 			<?php endwhile; ?>
 
