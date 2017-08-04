@@ -20,34 +20,35 @@ get_header(); ?>
 
                 <aside>
                     <span class='title-aside'>Filter</span>
-                    <form>
-                        <div class='dropdown'>
-                            <button type='button' class='dropdown-title'>Tout type de bâtiment<svg class='icon icon-down'><use xlink:href='#icon-down'></use></svg></button>
+                    <div class='dropdown'>
+                        <button type='button' class='dropdown-title'>Tout type de bâtiment<svg class='icon icon-down'><use xlink:href='#icon-down'></use></svg></button>
+                        <?php
+                        $allBuildingTypes = get_terms('batiment');
+                        if( $allBuildingTypes ){ ?>
                             <ul>
-                                <li><a href='#'>Bureaux</a></li>
-                                <li><a href='#'>Usines</a></li>
-                                <li><a href='#'>Locaux d'activités</a></li>
-                                <li><a href='#'>Entrepôts</a></li>
-                                <li><a href='#'>Hôtels</a></li>
-                                <li><a href='#'>Hypermarchés</a></li>
-                                <li><a href='#'>Centres commerciaux</a></li>
-                                <li><a href='#'>Zones d'activités</a></li>
+                                <li <?php if( !$buildingTypeQuery ){ echo 'class="active"'; } ?>><a href='<?php the_field('refsLink', 'options'); ?>'>Tout type de bâtiment</a></li>
+                                <?php foreach( $allBuildingTypes as $buildingType ){ ?>
+                                    <li <?php if( $buildingTypeQuery === $buildingType->slug){ echo 'class="active"'; } ?>><a href='<?php the_field('refsLink', 'options'); ?>?batiment=<?php echo $buildingType->slug; ?>'><?php echo $buildingType->name; ?></a></li>
+                                <?php } ?>
                             </ul>
-                        </div>
-                        <div class='dropdown'>
-                            <button type='button' class='dropdown-title'>Tous les métiers<svg class='icon icon-down'><use xlink:href='#icon-down'></use></svg></button>
+                        <?php } ?>
+                    </div>
+                    <div class='dropdown'>
+                        <button type='button' class='dropdown-title'>Tous les métiers<svg class='icon icon-down'><use xlink:href='#icon-down'></use></svg></button>
+                        <?php
+                        $allSectors = get_terms('metier');
+                        if( $allSectors ){ ?>
                             <ul>
-                                <li><a href='#'>Bureaux</a></li>
-                                <li><a href='#'>Usines</a></li>
-                                <li><a href='#'>Locaux d'activités</a></li>
-                                <li><a href='#'>Entrepôts</a></li>
-                                <li><a href='#'>Hôtels</a></li>
-                                <li><a href='#'>Hypermarchés</a></li>
-                                <li><a href='#'>Centres commerciaux</a></li>
-                                <li><a href='#'>Zones d'activités</a></li>
+                                <li <?php if( $currentPageLink === get_field('refsLink', 'options') ){ echo "class='active'"; } ?>><a href='<?php the_field('refsLink', 'options'); ?>'>Tous les métiers</a></li>
+                                <?php foreach( $allSectors as $sector ){ ?>
+                                    <?php
+                                    $sectorPageID = get_posts(array('post_type' => 'page', 'posts_per_page' => 1, 'meta_query' => array(array('key' => 'sector', 'compare' => 'LIKE', 'value' => $sector->term_id))))[0]->ID;
+                                    ?>
+                                    <li <?php if( $sectorPageID === $post->ID ){ echo "class='active'"; } ?>><a href='<?php echo get_the_permalink($sectorPageID); ?>'><?php echo $sector->name; ?></a></li>
+                                <?php } ?>
                             </ul>
-                        </div>
-                    </form>
+                        <?php } ?>
+                    </div>
                 </aside>
             </div>
 
@@ -67,6 +68,7 @@ get_header(); ?>
             }
             
             $projectsQuery = new WP_Query( $projectsArgs );
+            $countProjects = 0;
 
             if( $projectsQuery->have_posts() ) :
             ?>
@@ -103,10 +105,13 @@ get_header(); ?>
                                 <li><a href='<?php echo $currentPageLink; ?>?year=<?php echo get_the_date( 'Y' ); ?>'><?php echo get_the_date( 'Y' ); ?></a></li>
                             </ul>
                         </li>
-                    <?php endwhile; ?>
-                    <li class='load-more'>
-                        <a href='#'><span class='txt-more'>Charger la suite<svg class='icon icon-arrow-bottom'><use xlink:href='#icon-arrow-bottom'></use></svg></span></a>
-                    </li>
+                    <?php $countProjects ++; endwhile; ?>
+
+                    <?php if( $countProjects > 10 ){ ?>
+                        <li class='load-more'>
+                            <a href='#'><span class='txt-more'>Charger la suite<svg class='icon icon-arrow-bottom'><use xlink:href='#icon-arrow-bottom'></use></svg></span></a>
+                        </li>
+                    <?php } ?>
                 </ul>
             <?php endif; ?>
         </div>
