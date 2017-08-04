@@ -284,12 +284,43 @@ a{
         margin: 0 12.5%;
         padding-right: $gutter;
     }
-    .filters{
+    aside{
         align-self: flex-start;
         margin-top: 116px;
         width: 25%;
         min-width: 300px;
         flex-shrink: 0;
+        padding: 50px $gutter 35px;
+        color: $white;
+        background: $primary;
+        .title-aside{
+            display: block;
+            position: relative;
+            margin: 0 0 10px;
+            font-family: $poppinsMedium;
+            font-size: 2rem;
+            &:before, &:after{
+                content: '';
+                display: block;
+                width: 20px;
+                height: 2px;
+                position: absolute;
+                top: 50%;
+                margin-top: -1px;
+            }
+            &:before{
+                left: -50px;
+                background: $primary;
+            }
+            &:after{
+                left: -30px;
+                background: $white;
+            }
+        }
+        .dropdown{
+            margin-top: 28px;
+            width: 100%;
+        }
     }
 }
 

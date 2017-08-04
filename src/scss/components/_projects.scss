@@ -31,17 +31,6 @@
                     padding-bottom: 88%;
                 }
             }
-            .txt-more{
-                position: absolute;
-                left: $gutter;
-                right: $gutter;
-                bottom: 40px;
-                .icon{
-                    width: 11px;
-                    height: 11px;
-                    margin-left: 10px;
-                }
-            }
         }
     }
     a{
@@ -97,6 +86,17 @@
                 content: none;
             }
         }
+    }
+}
+.txt-more{
+    position: absolute;
+    left: $gutter;
+    right: $gutter;
+    bottom: 40px;
+    .icon{
+        width: 11px;
+        height: 11px;
+        margin-left: 10px;
     }
 }
 

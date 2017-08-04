@@ -7,11 +7,35 @@
     margin-left: -$gutter;
     > li{
         width: 50%;
+        margin-bottom: 40px;
+        padding-left: 0;
         &:before{
             content: none;
         }
         &:nth-child(even){
             margin-top: 96px;
+        }
+        &:last-child{
+            margin-bottom: 0;
+        }
+        &.load-more{
+            a{
+                display: block;
+                position: relative;
+                width: 75%;
+                background: $primary;
+                color: $white;
+                font-family: $poppins;
+                font-size: 2rem;
+                &:before{
+                    content: '';
+                    display: block;
+                    padding-bottom: 48%;
+                }
+            }
+            .txt-more{
+                text-align: right;
+            }
         }
     }
     a{

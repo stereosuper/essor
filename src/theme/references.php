@@ -18,8 +18,8 @@ get_header(); ?>
                     <?php the_content(); ?>
                 </div>
 
-                <div class='filters'>
-                    <span class='title'>Filter</span>
+                <aside>
+                    <span class='title-aside'>Filter</span>
                     <form>
                         <div class='dropdown'>
                             <button type='button' class='dropdown-title'>Tout type de bâtiment<svg class='icon icon-down'><use xlink:href='#icon-down'></use></svg></button>
@@ -48,7 +48,7 @@ get_header(); ?>
                             </ul>
                         </div>
                     </form>
-                </div>
+                </aside>
             </div>
 
             <?php

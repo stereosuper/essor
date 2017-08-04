@@ -11,6 +11,9 @@ get_header(); ?>
                     <h1>Actualités</h1>
                     <p>Retrouvez ici toutes les actualités qui ont fait et font l’histoire du Groupe Essor.</p>
                 </div>
+                <aside>
+                    <span class='title-aside'>Réseaux sociaux :</span>
+                </aside>
             </div>
             <ul class='news'>
                 <li>
@@ -55,6 +58,22 @@ get_header(); ?>
                             <h3>Une politique de recrutement dynamique et ambitieuse pour le Groupe Essor</h3>
                             <p>ESSOR à la recherche de nouveaux talents.</p>
                         </span>
+                    </a>
+                </li>
+                <li>
+                    <a href='#'>
+                        <span class='wrapper-img'>
+                            <span class='img' style='background-image: url("<?php echo get_stylesheet_directory_uri();?>/img/visuel-ref.jpg")'></span>
+                        </span>
+                        <span class='wrapper-txt'>
+                            <h3>Une politique de recrutement dynamique et ambitieuse pour le Groupe Essor</h3>
+                            <p>ESSOR à la recherche de nouveaux talents.</p>
+                        </span>
+                    </a>
+                </li>
+                <li class='load-more'>
+                    <a href='#'>
+                        <span class='txt-more'>Charger la suite<svg class='icon icon-arrow-bottom'><use xlink:href='#icon-arrow-bottom'></use></svg></span>
                     </a>
                 </li>
             </ul>

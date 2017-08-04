@@ -96,40 +96,6 @@
     }
 }
 
-.filters{
-    padding: 50px $gutter 35px;
-    color: $white;
-    background: $primary;
-    .title{
-        display: block;
-        position: relative;
-        margin: 0 0 10px;
-        font-family: $poppinsMedium;
-        font-size: 2rem;
-        &:before, &:after{
-            content: '';
-            display: block;
-            width: 20px;
-            height: 2px;
-            position: absolute;
-            top: 50%;
-            margin-top: -1px;
-        }
-        &:before{
-            left: -50px;
-            background: $primary;
-        }
-        &:after{
-            left: -30px;
-            background: $white;
-        }
-    }
-    .dropdown{
-        margin-top: 28px;
-        width: 100%;
-    }
-}
-
 @media(max-width: $desktopSmall){
     .side-infos{
         display: flex;
