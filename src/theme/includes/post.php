@@ -1,4 +1,4 @@
-<li>
+<li class='isAnimated'>
     <a href='<?php the_permalink(); ?>'>
         <span class='wrapper-img'>
             <span class='img' style='background-image: url("<?php echo get_the_post_thumbnail_url(); ?>")'></span>

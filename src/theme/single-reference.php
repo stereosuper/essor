@@ -8,7 +8,7 @@
         <div class='container'>
             <div class='grid align-end pos-relative'>
                 <div class='col-6 content-right-aligned'>
-                    <div class='bloc-title'>
+                    <div class='bloc-title isAnimated'>
                         <div class='wrapper-title-links'>
                             <h1><span><?php the_field('place'); ?></span><?php the_title(); ?></h1>
                             <ul>
