@@ -19,7 +19,7 @@
             margin-bottom: 0;
         }
         &.load-more{
-            a{
+            > button{
                 display: block;
                 position: relative;
                 width: 75%;
@@ -131,7 +131,7 @@
     .news{
         > li{
             &.load-more{
-                a{
+                > button{
                     width: 100%;
                 }
             }

@@ -94,6 +94,7 @@
     left: $gutter;
     right: $gutter;
     bottom: 40px;
+    text-align: left;
     .icon{
         width: 11px;
         height: 11px;
@@ -120,7 +121,7 @@
                 margin-top: 0;
             }
             &.load-more{
-                a{
+                > button{
                     width: 75%;
                 }
             }
