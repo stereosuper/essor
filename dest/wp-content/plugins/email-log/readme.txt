@@ -3,7 +3,7 @@ Contributors: sudar
 Tags: email, log, log email, resend email, multisite  
 Requires at least: 4.0  
 Tested up to: 4.8  
-Stable tag: 2.0.0  
+Stable tag: 2.0.2  
 
 Log and view all outgoing emails from WordPress. Works with WordPress Multisite as well.
 
@@ -52,6 +52,10 @@ This can be extremely useful when you want to debug by analyzing the emails that
 As [recommended by Ozh][1], the Plugin has an uninstall hook which will clean up the database when the Plugin is uninstalled.
 
  [1]: http://sudarmuthu.com/blog/2009/10/07/lessons-from-wordpress-plugin-competition.html
+
+### Documentation
+
+You can find fully searchable documentation about using the plugin in the [doc section of the Email Log](https://wpemaillog.com/docs/) website.
 
 ### Development
 
@@ -109,6 +113,14 @@ Meanwhile, I have added a hack to handle this condition in v1.7.3 of my plugin. 
 
 This Readme file was generated using <a href = 'http://sudarmuthu.com/wordpress/wp-readme'>wp-readme</a>, which generates readme files for WordPress Plugins.
 == Changelog ==
+
+= v2.0.2 - (2017-08-07) =
+- Fix: Renamed include/util directory to correct case. This caused issues in some install.
+
+= v2.0.1 - (2017-08-04) =
+- Fix: Fixed a JavaScript issue in view logs page.
+- Fix: Fixed a CSS issue in view logs page.
+- Fix: Fixed a race condition between plugin and add-ons.
 
 = v2.0.0 - (2017-08-04) =
 - New: Ability to filter logs by date.
@@ -248,6 +260,12 @@ This Readme file was generated using <a href = 'http://sudarmuthu.com/wordpress/
 - Initial Release
 
 == Upgrade Notice ==
+
+= 2.0.2 =
+Fixed the case of the Util directory. This caused issues in some install.
+
+= 2.0.1 =
+Fixed a JavaScript issue that was introduced in v2.0.0
 
 = 2.0.0 =
 Ability to search logs by date. Dropped support to PHP 5.2

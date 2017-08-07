@@ -16268,15 +16268,15 @@ module.exports = function (wp, container) {
     if (!container.length) return;
 
     var postType = wp.postType;
-    var postMaxNb = wp.postNb;
+    var postMaxNb = parseInt(wp.postNb);
     var loadBtn, loadBtnLi, postNb;
 
     if (!postType || !postMaxNb) return;
 
     // the number of posts per page
-    postNb = postType === 'post' ? 7 : 1;
+    postNb = postType === 'post' ? 7 : 10;
 
-    if (postNb > postMaxNb) return;
+    if (postNb >= postMaxNb) return;
 
     // Insert the "More Posts" link.
     container.append('<li class="load-more isAnimated"><button id="load-more"><span class="txt-more"><span id="text-more">Charger la suite</span><svg class="icon"><use xlink:href="#icon-arrow-bottom"></use></svg></span></button></li>');

@@ -330,11 +330,11 @@ function essor_load_more(){
     if( !isset($_REQUEST) ) return;
 
     $postType = isset( $_POST['postType'] ) ? $_POST['postType'] : '';
-    $offset = isset( $_POST['offset'] ) ? $_POST['offset'] : '';
+    $postNb = isset( $_POST['offset'] ) ? $_POST['offset'] : '';
 
-    if( !$postType || !$offset ) return;    
+    if( !$postType || !$postNb ) return;
         
-    $loop = new WP_Query( array('post_type' => $postType, 'posts_per_page' => 1, 'offset' => $offset) );
+    $loop = new WP_Query( array('post_type' => $postType, 'posts_per_page' => $postNb, 'offset' => $postNb) );
     while( $loop->have_posts() ){
         $loop->the_post();
         if( $postType === 'reference' ){
