@@ -15439,7 +15439,7 @@ module.exports = function (wp, container) {
             success: function success(data) {
                 loadBtnLi.before(data);
 
-                postNb++;
+                postNb += postNb;
 
                 if (postNb < postMaxNb) {
                     loadBtn.find('#text-more').text('Charger la suite');
