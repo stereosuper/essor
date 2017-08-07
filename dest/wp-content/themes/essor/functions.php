@@ -133,6 +133,11 @@ function essor_excerpt_length( $length ){
 }
 add_filter( 'excerpt_length', 'essor_excerpt_length' );
 
+function essor_wrap_embed( $html, $url, $attr ){
+    return '<div class="wrapper-video">' . $html . '</div>';
+}
+add_filter( 'embed_oembed_html', 'essor_wrap_embed', 10, 3 );
+
 
 /*-----------------------------------------------------------------------------------*/
 /* Menus
@@ -321,6 +326,29 @@ add_action( 'widgets_init', 'essor_unregister_default_widgets' );
 /*-----------------------------------------------------------------------------------*/
 /* Enqueue Styles and Scripts
 /*-----------------------------------------------------------------------------------*/
+function essor_load_more(){
+    if( !isset($_REQUEST) ) return;
+
+    $postType = isset( $_POST['postType'] ) ? $_POST['postType'] : '';
+    $offset = isset( $_POST['offset'] ) ? $_POST['offset'] : '';
+
+    if( !$postType || !$offset ) return;    
+        
+    $loop = new WP_Query( array('post_type' => $postType, 'posts_per_page' => 1, 'offset' => $offset) );
+    while( $loop->have_posts() ){
+        $loop->the_post();
+        if( $postType === 'reference' ){
+            get_template_part( 'includes/reference' );
+        }else{
+            get_template_part( 'includes/post' );
+        }
+    }
+
+    wp_die();
+}
+add_action( 'wp_ajax_essor_load_more', 'essor_load_more' );
+add_action( 'wp_ajax_nopriv_essor_load_more', 'essor_load_more' );
+
 function essor_scripts(){
     // header
 	wp_enqueue_style( 'essor-style', get_template_directory_uri() . '/css/main.css', array(), ESSOR_VERSION );
@@ -332,15 +360,17 @@ function essor_scripts(){
     wp_deregister_script( 'wp-embed' );
 
     // ajax
-    global $wp_query;
-    $max = $wp_query->max_num_pages;
-    $paged = get_query_var('paged') > 1 ? get_query_var('paged') : 1;
+    // global $wp_query;
+    // $paged = get_query_var('paged') > 1 ? get_query_var('paged') : 1;
+    // $max = $wp_query->max_num_pages;
 
     wp_localize_script( 'essor-scripts', 'wp', array(
         'adminAjax' => site_url( '/wp-admin/admin-ajax.php' ),
-        'startPage' => $paged,
-        'maxPages' => $max,
-        'nextLink' => next_posts($max, false)
+        'postType' => is_home() ? get_field('postType', get_option( 'page_for_posts' )) : get_field('postType'),
+        'postNb' => is_home() ? wp_count_posts( get_field('postType', get_option( 'page_for_posts' )) )->publish : wp_count_posts( get_field('postType') )->publish
+        // 'startPage' => $paged,
+        // 'maxPages' => $max,
+        // 'nextLink' => next_posts($max, false)
     ) );
 }
 add_action( 'wp_enqueue_scripts', 'essor_scripts' );

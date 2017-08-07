@@ -7,15 +7,19 @@ var TweenLite = require('gsap/TweenLite');
 module.exports = function(wp, container){
     if( !container.length ) return;
 
-    var pageNum = parseInt(wp.startPage) + 1;
-    var max = parseInt(wp.maxPages);
-    var nextLink = wp.nextLink;
-    var loadBtn, loadBtnLi;
+    var postType = wp.postType;
+    var postMaxNb = wp.postNb;
+    var loadBtn, loadBtnLi, postNb;
 
-    if( pageNum > max ) return;
+    if( !postType || !postMaxNb ) return;
+
+    // the number of posts per page
+    postNb = postType === 'post' ? 7 : 1;
+    
+    if( postNb > postMaxNb ) return;
 
     // Insert the "More Posts" link.
-    container.append( '<li class="load-more"><a href="#" id="load-more"><span class="txt-more"><span id="text-more">Charger la suite</span><svg class="icon"><use xlink:href="#icon-arrow-bottom"></use></svg></span></a></li>' );
+    container.append( '<li class="load-more"><button id="load-more"><span class="txt-more"><span id="text-more">Charger la suite</span><svg class="icon"><use xlink:href="#icon-arrow-bottom"></use></svg></span></button></li>' );
 
     loadBtn = $('#load-more');
     loadBtnLi = loadBtn.parent();
@@ -23,19 +27,24 @@ module.exports = function(wp, container){
     loadBtn.on('click', function(e){
         e.preventDefault();
 
-        $(this).find('#text-more').text('Loading posts...');
+        $(this).find('#text-more').text('Chargement...');
 
         $.ajax({
-            url: nextLink,
+            type: 'POST',
+            url: wp.adminAjax,
+            data: {
+                'action' : 'essor_load_more',
+                'postType': postType,
+                'offset': postNb
+            },
             dataType: 'html',
             success: function(data){
-                loadBtnLi.before($(data).find('#ajax-content').find('li'));
+                loadBtnLi.before(data);
 
-                pageNum ++;
-                nextLink = nextLink.replace(/\/page\/[0-9]?/, '/page/'+ pageNum);
+                postNb ++;
 
-                if( pageNum < max ){
-                    loadBtn.attr('href', nextLink).find('#text-more').text('Charger la suite');
+                if( postNb < postMaxNb ){
+                    loadBtn.find('#text-more').text('Charger la suite');
                 }else{
                     TweenLite.to(loadBtnLi, 0.3, {opacity: 0, onComplete: function(){
                         loadBtn.remove();

@@ -18,13 +18,14 @@
             margin-top: 72px;
         }
         &.load-more{
-            a{
+            > button{
                 display: block;
+                width: 100%;
                 position: relative;
-                background: $primary;
-                color: $white;
                 font-family: $poppins;
                 font-size: 2rem;
+                background: $primary;
+                color: $white;
                 &:before{
                     content: '';
                     display: block;
