@@ -54,7 +54,7 @@
             </div>
             
             <?php
-            $similarProjectsQuery = new WP_Query( array('post_type' => 'reference', 'posts_per_page' => 4, 'post__not_in' => array($post->ID), 'tax_query' => array(array('taxonomy' => 'batiment', 'field' => 'slug', 'terms' => $buildingTypes[0]->slug))) );
+            $similarProjectsQuery = new WP_Query( array('post_type' => 'reference', 'posts_per_page' => 4, 'post__not_in' => array($post->ID), 'tax_query' => array(array('taxonomy' => 'batiment', 'field' => 'slug', 'terms' => $buildingTypes[0]->slug)), 'orderby' => 'rand') );
 
             if( $similarProjectsQuery->have_posts() ) :
             ?>
