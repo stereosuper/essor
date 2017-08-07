@@ -101,10 +101,28 @@
         }
     }
 }
+.wrapper-video{
+    position: relative;
+    width: calc(100% + #{2*$gutter});
+    height: 0;
+    margin-left: -$gutter;
+    padding-bottom: 56.25%;
+    > iframe{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
 
 
 @media(max-width: $desktop){
     .news{
+        width: 100%;
+        margin-left: 0;
+    }
+    .wrapper-video{
         width: 100%;
         margin-left: 0;
     }
@@ -129,6 +147,11 @@
     }
 }
 @media(max-width: $tablet){
+    .blog-content{
+        h2{
+            font-size: 2.6rem;
+        }
+    }
     .news{
         > li{
             width: 100%;
