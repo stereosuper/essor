@@ -35,7 +35,7 @@ h1{
     position: relative;
     margin: 3em 0 1em;
     font-size: 5rem;
-    line-height: 1.2;
+    line-height: 1.1;
     color: $primary;
     &:before{
         content: '';
@@ -43,7 +43,7 @@ h1{
         height: 145px;
         position: absolute;
         left: -$gutter;
-        bottom: 0.35em;
+        bottom: calc(100% - 0.85em);
         background: $primary;
     }
 }
