@@ -39,7 +39,7 @@
                     bottom: -2px;      
                 }
             }
-            .current-menu-item, .current_page_parent{
+            .current-menu-item, .current_page_parent, .current_page_ancestor{
                 > a{
                     &:after{
                         bottom: -17px;
@@ -114,7 +114,7 @@
     }
     > li{
         width: 33.333%;
-        &.current-menu-item, &.current_page_parent{
+        &.current-menu-item, &.current_page_parent, &.current_page_ancestor{
             > a{
                 background: rgba(#6b6f77, 0.98);
                 color: rgba($white, 0.6);
@@ -213,7 +213,7 @@
         opacity: 0;
         transition-delay: 0s;
     }
-    .current-menu-item, .current_page_parent{
+    .current-menu-item, .current_page_parent, .current_page_ancestor{
         > a{
             color: $primary;
             &:after{
@@ -485,7 +485,7 @@
             &:last-child{
                 margin: 0;
             }
-            &.current-menu-item, &.current_page_parent{
+            &.current-menu-item, &.current_page_parent, &.current_page_ancestor{
                 &:after{
                     content: '';
                 }

@@ -212,7 +212,7 @@ add_filter( 'walker_nav_menu_start_el', 'essort_menu_display_desc', 10, 4 );
 
 // Cleanup WP Menu html
 function essor_css_attributes_filter( $var ){
-    return is_array($var) ? array_intersect($var, array('current-menu-item', 'current_page_parent')) : '';
+    return is_array($var) ? array_intersect($var, array('current-menu-item', 'current_page_parent', 'current_page_ancestor')) : '';
 }
 add_filter( 'nav_menu_css_class', 'essor_css_attributes_filter' );
 
