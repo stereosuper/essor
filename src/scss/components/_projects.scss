@@ -38,13 +38,14 @@
         text-decoration: none;
         &:hover, &:focus{
             .wrapper-img{
+                transform: translate3d(0, 0, 0) scaleY(0.9);
                 .img{
-                    transform: translate3d(0, 0, 0) scale(1.1);
+                    transform: translate3d(0, 0, 0) scaleX(1.15) scaleY(1.26);
                 }
             }
             h3{
                 &:after{
-                    transform: translate3d(0, 0, 0) scaleY(0.8);
+                    transform: translate3d(0, 0, 0) scaleY(0.5);
                 }
             }
         }
@@ -53,6 +54,7 @@
         display: block;
         position: relative;
         overflow: hidden;
+        transition: all 0.3s;
         &:before{
             content: '';
             display: block;
@@ -68,7 +70,7 @@
         background-position: 50% 50%;
         background-repeat: no-repeat;
         background-size: cover;
-        transition: transform 0.2s ease-out;
+        transition: transform 0.3s;
     }
     h3{
         position: relative;

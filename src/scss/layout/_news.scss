@@ -42,13 +42,14 @@
         text-decoration: none;
         &:hover, &:focus{
             .wrapper-img{
+                transform: translate3d(0, 0, 0) scale(0.9);
                 .img{
-                    transform: translate3d(0, 0, 0) scale(1.1);
+                    transform: translate3d(0, 0, 0) scale(1.15);
                 }
             }
             .wrapper-txt{
                 &:before{
-                    transform: translate3d(0, 0, 0) scaleY(0.8);
+                    transform: translate3d(0, 0, 0) scaleY(0.5);
                 }
             }
         }
@@ -66,6 +67,7 @@
         position: relative;
         width: 75%;
         overflow: hidden;
+        transition: transform 0.3s;
         &:before{
             content: '';
             display: block;
@@ -81,7 +83,7 @@
             background-position: 50% 50%;
             background-repeat: no-repeat;
             background-size: cover;
-            transition: transform 0.2s ease-out;
+            transition: transform 0.3s;
         }
     }
     .wrapper-txt{
@@ -99,7 +101,7 @@
             left: 0;
             background: $primary;
             transform-origin: 0 100%;
-            transition: transform 0.2s ease-out;
+            transition: transform 0.3s ease-out;
         }
     }
 }
