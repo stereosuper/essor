@@ -40,6 +40,18 @@
     }
     a{
         text-decoration: none;
+        &:hover, &:focus{
+            .wrapper-img{
+                .img{
+                    transform: translate3d(0, 0, 0) scale(1.1);
+                }
+            }
+            .wrapper-txt{
+                &:before{
+                    transform: translate3d(0, 0, 0) scaleY(0.8);
+                }
+            }
+        }
     }
     h3{
         margin: 0;
@@ -53,6 +65,7 @@
         display: block;
         position: relative;
         width: 75%;
+        overflow: hidden;
         &:before{
             content: '';
             display: block;
@@ -68,6 +81,7 @@
             background-position: 50% 50%;
             background-repeat: no-repeat;
             background-size: cover;
+            transition: transform 0.2s ease-out;
         }
     }
     .wrapper-txt{
@@ -84,6 +98,8 @@
             top: -25px;
             left: 0;
             background: $primary;
+            transform-origin: 0 100%;
+            transition: transform 0.2s ease-out;
         }
     }
 }
