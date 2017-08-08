@@ -26,9 +26,9 @@ get_header(); ?>
                         $allBuildingTypes = get_terms('batiment');
                         if( $allBuildingTypes ){ ?>
                             <ul>
-                                <li <?php if( !$buildingTypeQuery ){ echo 'class="active"'; } ?>><a href='<?php the_field('refsLink', 'options'); ?>'>Tout type de bâtiment</a></li>
+                                <li <?php if( !$buildingTypeQuery ){ echo 'class="active"'; } ?>><a href='<?php the_permalink(); ?>'>Tout type de bâtiment</a></li>
                                 <?php foreach( $allBuildingTypes as $buildingType ){ ?>
-                                    <li <?php if( $buildingTypeQuery === $buildingType->slug){ echo 'class="active"'; } ?>><a href='<?php the_field('refsLink', 'options'); ?>?batiment=<?php echo $buildingType->slug; ?>'><?php echo $buildingType->name; ?></a></li>
+                                    <li <?php if( $buildingTypeQuery === $buildingType->slug){ echo 'class="active"'; } ?>><a href='<?php the_permalink(); ?>?batiment=<?php echo $buildingType->slug; ?>'><?php echo $buildingType->name; ?></a></li>
                                 <?php } ?>
                             </ul>
                         <?php } ?>
@@ -44,7 +44,11 @@ get_header(); ?>
                                     <?php
                                     $sectorPageID = get_posts(array('post_type' => 'page', 'posts_per_page' => 1, 'meta_query' => array(array('key' => 'sector', 'compare' => 'LIKE', 'value' => $sector->term_id))))[0]->ID;
                                     ?>
-                                    <li <?php if( $sectorPageID === $post->ID ){ echo "class='active'"; } ?>><a href='<?php echo get_the_permalink($sectorPageID); ?>'><?php echo $sector->name; ?></a></li>
+                                    <?php if( $buildingTypeQuery ){ ?>
+                                        <li <?php if( $sectorPageID === $post->ID ){ echo "class='active'"; } ?>><a href='<?php echo get_the_permalink($sectorPageID); ?>?batiment=<?php echo $buildingTypeQuery; ?>'><?php echo $sector->name; ?></a></li>
+                                    <?php }else{ ?>
+                                        <li <?php if( $sectorPageID === $post->ID ){ echo "class='active'"; } ?>><a href='<?php echo get_the_permalink($sectorPageID); ?>'><?php echo $sector->name; ?></a></li>
+                                    <?php } ?>
                                 <?php } ?>
                             </ul>
                         <?php } ?>
@@ -69,14 +73,16 @@ get_header(); ?>
             
             $projectsQuery = new WP_Query( $projectsArgs );
 
-            if( $projectsQuery->have_posts() ) :
+            if( $projectsQuery->have_posts() ) {
             ?>
                 <ul class='projects complete' id='ajax-content'>
                     <?php while( $projectsQuery->have_posts() ) : $projectsQuery->the_post(); ?>
                         <?php get_template_part( 'includes/reference' ); ?>
                     <?php $countProjects ++; endwhile; ?>
                 </ul>
-            <?php endif; ?>
+            <?php }else{ ?>
+                <p>Il n'y a pas encore de références correspondant à vos critères de recherche!</p>
+            <?php } ?>
         </div>
     <?php endif; ?>
 
