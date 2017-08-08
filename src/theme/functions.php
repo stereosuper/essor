@@ -365,7 +365,7 @@ function essor_scripts(){
     wp_deregister_script( 'wp-embed' );
 
     // load more posts
-    $postType = is_home() ? get_field('postType', get_option( 'page_for_posts' )) : get_field('postType');
+    $postType = is_home() || is_category() ? get_field('postType', get_option( 'page_for_posts' )) : get_field('postType');
     $args = $postType ? array('post_type' => $postType, 'tax_query' => array('relation' => 'AND'), 'post_status' => 'publish', 'posts_per_page' => -1) : '';
     if( get_field('sector') && $args ){
         array_push($args['tax_query'], array('taxonomy' => 'metier', 'field' => 'slug', 'terms' => get_term(get_field('sector'))->slug));
@@ -377,6 +377,9 @@ function essor_scripts(){
     $refDate = isset( $_GET['year'] ) ? $_GET['year'] : '';
     if( $refDate && $args ){
         $args['date_query'] = array(array('year'  => $refDate)); 
+    }
+    if( is_category() && $args ){
+        $args['cat'] = get_query_var('cat');
     }
     $query = $args ? new WP_Query( $args ) : '';
     $postNb = $query ? $query->found_posts : '';

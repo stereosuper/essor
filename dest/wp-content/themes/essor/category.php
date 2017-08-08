@@ -1,42 +1,39 @@
 <?php get_header(); ?>
 
-	<h1>Blog</h1>
-
-	<?php wp_list_categories( array('title_li' => '') ); ?> 
-
-	<?php if ( have_posts() ) : 
-		/*global $paged;
-		if(get_query_var('paged')){
-			$paged = get_query_var('paged');
-		}elseif(get_query_var('page')){
-			$paged = get_query_var('page');
-		}else{
-			$paged = 1;
-		} */
-	?>
-
-		<?php while ( have_posts() ) : the_post(); ?>
-			
-			<span><?php echo get_the_date(); ?></span>
-			<h2><?php the_title(); ?></h2>
-			<?php if ( get_the_post_thumbnail() != '' ) { the_post_thumbnail(); } ?>
-			<span><?php if(get_the_category()){ foreach((get_the_category()) as $cat) { echo $cat->cat_name . ' - '; } } ?></span>
-			<?php the_excerpt(); ?>
-			<a href="<?php the_permalink(); ?>">lire la suite</a>
+	<div class='container'>
 		
-		<?php endwhile; ?>
+		<div class='wrapper-title'>
+            <div class='title'>
+            	<h1><?php echo get_the_title( get_option( 'page_for_posts' ) ) . ' - '; single_cat_title(); ?></h1>
+                <?php the_field('text', get_option( 'page_for_posts' )); ?>
+			</div>
+			
+            <aside>
+                <span class='title-aside'>Réseaux sociaux :</span>
+                <?php if( have_rows('socialNetworks', 'options') ){ ?>
+                    <ul class='menu-social'>
+                        <?php while( have_rows('socialNetworks', 'options') ){ the_row(); ?>
+                            <li><a href='<?php the_sub_field('link'); ?>' target='_blank'><?php the_sub_field('name'); ?> <svg class='icon icon-<?php the_sub_field('icon'); ?>'><use xlink:href='#icon-<?php the_sub_field('icon'); ?>'></use></svg></a></li>
+                        <?php } ?>
+                    </ul>
+                <?php } ?>
+            </aside>
+        </div>
 
-		<?php previous_posts_link('Articles suivants'); ?>
-		<?php next_posts_link('Articles précédents'); ?>
+		<?php if ( have_posts() ) : ?>
 
-		<div class='pagination'>
-			<?php echo paginate_links( array( 'prev_text' => '<b>‹</b> <span>' . 'Précédent' . '</span>', 'next_text'  => '<span>' . 'Suivant' . '</span> <b>›</b>' ) ); ?>
-		</div>
-	
-	<?php else : ?>
-				
-		<p>Pas d'articles</p>
+			<ul class='news' id='ajax-content'>
+				<?php while ( have_posts() ) : the_post(); ?>
+					<?php get_template_part( 'includes/post' ); ?>
+				<?php endwhile; ?>
+			</ul>
+		
+		<?php else : ?>
+					
+			<p>Pas d'articles dans cette catégorie</p>
 
-	<?php endif; ?>
+		<?php endif; ?>
+
+	</div>
 
 <?php get_footer(); ?>
