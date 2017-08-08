@@ -1,6 +1,10 @@
 <?php get_header(); ?>
 
-	<h1>404</h1>
-	<p>Désolée les gars!</p>
+	<div class='container'>
+
+		<h1>404</h1>
+		<p>La page demandée est introuvable.</p>
+
+	</div>
 
 <?php get_footer(); ?>
