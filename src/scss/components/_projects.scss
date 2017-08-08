@@ -83,6 +83,25 @@
         padding: 0 $gutter;
         > li{
             padding-left: 0;
+            a{
+                position: relative;
+                + a{
+                    margin-left: 0.8em;
+                    &:before{
+                        display: inline-block;
+                        position: absolute;
+                        top: 0;
+                        left: -0.8em;
+                        content: '/';
+                        pointer-events: none;
+                    }
+                    &:hover{
+                        &:before{
+                            color: $primary;
+                        }
+                    }
+                }
+            }
             &:before{
                 content: none;
             }
