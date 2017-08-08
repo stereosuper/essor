@@ -16291,7 +16291,13 @@ module.exports = function (wp, container) {
     if (!postType || !postMaxNb) return;
 
     // the number of posts per page
-    postNb = postType === 'post' ? 7 : 10;
+    if (postType === 'reference') {
+        postNb = 10;
+    } else if (postType === 'offre') {
+        postNb = 4;
+    } else {
+        postNb = 7;
+    }
 
     if (postNb >= postMaxNb) return;
 
