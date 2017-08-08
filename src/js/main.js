@@ -18,6 +18,7 @@ $(function(){
     var animResponsiveHeader = require('./animResponsiveHeader.js');
     var customDropdown = require('./dropdown.js');
     var loadMorePosts = require('./loadMorePosts.js');
+    var initScrollReval = require('./initScrollReveal.js');
 
     var body = $('body');
     var windowWidth = window.outerWidth, windowHeight = $(window).height();
@@ -48,15 +49,9 @@ $(function(){
     // ScrollReveal
     window.sr = ScrollReveal();
     //window.scrollReveal = new ScrollReveal({ reset: true, scale: 1, distance: '30px', duration: 800, viewFactor: 0.5 });
+    initScrollReval('.isAnimated');
 
-    sr.reveal('.isAnimated', {
-        origin: 'bottom',
-        distance: '30px',
-        scale: 1,
-        duration: 300,
-        reset: true,
-        viewFactor: 0.5,
-    });
+    
 
     $(window).on('resize', throttle(function(){
         requestAnimFrame(resizeHandler);

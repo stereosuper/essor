@@ -3,6 +3,8 @@ var $ = require('jquery');
 require('gsap/CSSPlugin');
 var TweenLite = require('gsap/TweenLite');
 
+var initScrollReval = require('./initScrollReveal.js');
+
 
 module.exports = function(wp, container){
     if( !container.length ) return;
@@ -40,6 +42,7 @@ module.exports = function(wp, container){
             dataType: 'html',
             success: function(data){
                 loadBtnLi.before(data);
+                initScrollReval('.isAnimated');
 
                 postNb += postNb;
 

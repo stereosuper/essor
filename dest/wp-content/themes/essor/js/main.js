@@ -16259,10 +16259,27 @@ module.exports = function (dropdowns) {
 },{"jquery":4}],9:[function(require,module,exports){
 'use strict';
 
+module.exports = function (elts) {
+
+    sr.reveal(elts, {
+        origin: 'bottom',
+        distance: '30px',
+        scale: 1,
+        duration: 300,
+        reset: true,
+        viewFactor: 0.5
+    });
+};
+
+},{}],10:[function(require,module,exports){
+'use strict';
+
 var $ = require('jquery');
 
 require('gsap/CSSPlugin');
 var TweenLite = require('gsap/TweenLite');
+
+var initScrollReval = require('./initScrollReveal.js');
 
 module.exports = function (wp, container) {
     if (!container.length) return;
@@ -16300,6 +16317,7 @@ module.exports = function (wp, container) {
             dataType: 'html',
             success: function success(data) {
                 loadBtnLi.before(data);
+                initScrollReval('.isAnimated');
 
                 postNb += postNb;
 
@@ -16318,7 +16336,7 @@ module.exports = function (wp, container) {
     });
 };
 
-},{"gsap/CSSPlugin":1,"gsap/TweenLite":3,"jquery":4}],10:[function(require,module,exports){
+},{"./initScrollReveal.js":9,"gsap/CSSPlugin":1,"gsap/TweenLite":3,"jquery":4}],11:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
@@ -16339,6 +16357,7 @@ $(function () {
     var animResponsiveHeader = require('./animResponsiveHeader.js');
     var customDropdown = require('./dropdown.js');
     var loadMorePosts = require('./loadMorePosts.js');
+    var initScrollReval = require('./initScrollReveal.js');
 
     var body = $('body');
     var windowWidth = window.outerWidth,
@@ -16368,15 +16387,7 @@ $(function () {
     // ScrollReveal
     window.sr = ScrollReveal();
     //window.scrollReveal = new ScrollReveal({ reset: true, scale: 1, distance: '30px', duration: 800, viewFactor: 0.5 });
-
-    sr.reveal('.isAnimated', {
-        origin: 'bottom',
-        distance: '30px',
-        scale: 1,
-        duration: 300,
-        reset: true,
-        viewFactor: 0.5
-    });
+    initScrollReval('.isAnimated');
 
     $(window).on('resize', throttle(function () {
         requestAnimFrame(resizeHandler);
@@ -16390,7 +16401,7 @@ $(function () {
     }, 60));
 });
 
-},{"./animResponsiveHeader.js":6,"./animSearchform.js":7,"./dropdown.js":8,"./loadMorePosts.js":9,"./requestAnimFrame.js":11,"./throttle.js":12,"jquery":4,"scrollreveal":5}],11:[function(require,module,exports){
+},{"./animResponsiveHeader.js":6,"./animSearchform.js":7,"./dropdown.js":8,"./initScrollReveal.js":9,"./loadMorePosts.js":10,"./requestAnimFrame.js":12,"./throttle.js":13,"jquery":4,"scrollreveal":5}],12:[function(require,module,exports){
 "use strict";
 
 module.exports = function () {
@@ -16399,7 +16410,7 @@ module.exports = function () {
        };
 }();
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 "use strict";
 
 module.exports = function (callback, delay) {
@@ -16422,6 +16433,6 @@ module.exports = function (callback, delay) {
     };
 };
 
-},{}]},{},[10])
+},{}]},{},[11])
 
 //# sourceMappingURL=main.js.map
