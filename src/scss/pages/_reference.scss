@@ -25,11 +25,19 @@
         font-size: 1.8rem;
     }
 }
+.reference-content{
+    h2{
+        font-size: 3rem;
+    }
+}
 .wrapper-title-links{
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     margin: 0 0 45px;
+    h1{
+        font-size: 4rem;
+    }
     ul{
         width: calc(33.3333% - #{$gutter});
         margin: 0 0 0 20px;
@@ -128,6 +136,18 @@
                 width: auto;
                 margin-left: auto;
             }
+        }
+    }
+}
+@media(max-width: $tablet){
+    .wrapper-title-links{
+        h1{
+            font-size: 3.8rem;
+        }
+    }
+    .reference-content{
+        h2{
+            font-size: 2.6rem;
         }
     }
 }
