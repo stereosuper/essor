@@ -284,6 +284,20 @@ function essor_taxonomies(){
         'hierarchical' => true,
         'show_admin_column' => true
     ) );
+
+    register_taxonomy( 'contrat', 'offre', array(
+        'label' => 'Types de contrat',
+        'singular_label' => 'Type de contrat',
+        'hierarchical' => true,
+        'show_admin_column' => true
+    ) );
+
+    register_taxonomy( 'lieu', 'offre', array(
+        'label' => 'Lieux',
+        'singular_label' => 'Lieu',
+        'hierarchical' => true,
+        'show_admin_column' => true
+    ) );
 }
 add_action( 'init', 'essor_taxonomies' );
 

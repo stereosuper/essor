@@ -91,7 +91,11 @@ get_header(); ?>
             </aside>
 
 			<h1><?php the_title(); ?></h1>
-            <h2><?php the_field('subtitle'); ?></h2>
+            <h2>
+                <?php echo get_the_terms( $post->ID, 'contrat' )[0]->name; ?>
+                -
+                 <?php echo get_the_terms( $post->ID, 'lieu' )[0]->name; ?>
+            </h2>
 			<?php the_content(); ?>
 
             <h3>Postuler</h3>
