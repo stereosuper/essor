@@ -16312,7 +16312,8 @@ module.exports = function (wp, container) {
             data: {
                 'action': 'essor_load_more',
                 'postType': postType,
-                'offset': postNb
+                'offset': postNb,
+                'queryArgs': wp.queryArgs
             },
             dataType: 'html',
             success: function success(data) {

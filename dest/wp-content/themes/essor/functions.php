@@ -331,10 +331,15 @@ function essor_load_more(){
 
     $postType = isset( $_POST['postType'] ) ? $_POST['postType'] : '';
     $postNb = isset( $_POST['offset'] ) ? $_POST['offset'] : '';
+    $args = isset( $_POST['queryArgs'] ) ? $_POST['queryArgs'] : '';
 
     if( !$postType || !$postNb ) return;
+
+    $args['post_type'] = $postType;
+    $args['posts_per_page'] = $postNb;
+    $args['offset'] = $postNb;
         
-    $loop = new WP_Query( array('post_type' => $postType, 'posts_per_page' => $postNb, 'offset' => $postNb) );
+    $loop = new WP_Query( $args );
     while( $loop->have_posts() ){
         $loop->the_post();
         if( $postType === 'reference' ){
@@ -359,18 +364,28 @@ function essor_scripts(){
 
     wp_deregister_script( 'wp-embed' );
 
-    // ajax
-    // global $wp_query;
-    // $paged = get_query_var('paged') > 1 ? get_query_var('paged') : 1;
-    // $max = $wp_query->max_num_pages;
+    // load more posts
+    $postType = is_home() ? get_field('postType', get_option( 'page_for_posts' )) : get_field('postType');
+    $args = $postType ? array('post_type' => $postType, 'tax_query' => array('relation' => 'AND'), 'post_status' => 'publish', 'posts_per_page' => -1) : '';
+    if( get_field('sector') && $args ){
+        array_push($args['tax_query'], array('taxonomy' => 'metier', 'field' => 'slug', 'terms' => get_term(get_field('sector'))->slug));
+    }
+    $refBuildingType = isset( $_GET['batiment'] ) ? $_GET['batiment'] : '';
+    if( $refBuildingType && $args ){
+        array_push($args['tax_query'], array('taxonomy' => 'batiment', 'field' => 'slug', 'terms' => $refBuildingType));
+    }
+    $refDate = isset( $_GET['year'] ) ? $_GET['year'] : '';
+    if( $refDate && $args ){
+        $args['date_query'] = array(array('year'  => $refDate)); 
+    }
+    $query = $args ? new WP_Query( $args ) : '';
+    $postNb = $query ? $query->found_posts : '';
 
     wp_localize_script( 'essor-scripts', 'wp', array(
         'adminAjax' => site_url( '/wp-admin/admin-ajax.php' ),
-        'postType' => is_home() ? get_field('postType', get_option( 'page_for_posts' )) : get_field('postType'),
-        'postNb' => is_home() ? wp_count_posts( get_field('postType', get_option( 'page_for_posts' )) )->publish : wp_count_posts( get_field('postType') )->publish
-        // 'startPage' => $paged,
-        // 'maxPages' => $max,
-        // 'nextLink' => next_posts($max, false)
+        'postType' => $postType,
+        'postNb' => $postNb,
+        'queryArgs' => $args
     ) );
 }
 add_action( 'wp_enqueue_scripts', 'essor_scripts' );
