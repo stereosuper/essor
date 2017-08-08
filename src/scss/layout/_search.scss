@@ -1,0 +1,35 @@
+/* Search */
+.search-results{
+    > li{
+        margin-bottom: 100px;
+        padding-left: 0;
+        &:before{
+            content: none;
+        }
+        &:last-child{
+            margin-bottom: 0;
+        }
+    }
+    a{
+        text-decoration: none;
+        > span{
+            text-decoration: underline;
+            font-size: 1.6rem;
+            .icon{
+                display: inline-block;
+                position: relative;
+                top: -0.1em;
+                width: 8px;
+                height: 8px;
+                margin-left: 10px;
+            }
+        }
+    }
+    h2{
+        margin: 0 0 0.4em;
+    }
+    p{
+        margin: 0.8em 0;
+        color: $text;
+    }
+}
