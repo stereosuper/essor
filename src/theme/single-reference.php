@@ -12,13 +12,13 @@
                         <div class='wrapper-title-links'>
                             <h1><span><?php the_field('place'); ?></span><?php the_title(); ?></h1>
                             <ul>
-                                <li><a href='<?php the_field('refsLink', 'options'); ?>?year=<?php echo get_the_date( 'Y' ); ?>'><?php echo get_the_date( 'Y' ); ?></a></li>
+                                <li><a href='<?php the_field('refsLink', 'options'); ?>?year=<?php echo get_the_date( 'Y' ); ?>'><?php echo get_the_date( 'Y' ); ?><svg class='icon icon-right'><use xlink:href='#icon-right'></use></svg></a></li>
                                 <li>
                                     <?php
                                     $buildingTypes = get_the_terms( $post->ID, 'batiment' );
                                     if( $buildingTypes ){
                                         foreach( $buildingTypes as $buildingType ){ ?>
-                                            <a href='<?php the_field('refsLink', 'options'); ?>?batiment=<?php echo $buildingType->slug; ?>'><?php echo $buildingType->name; ?></a>
+                                            <a href='<?php the_field('refsLink', 'options'); ?>?batiment=<?php echo $buildingType->slug; ?>'><?php echo $buildingType->name; ?><svg class='icon icon-right'><use xlink:href='#icon-right'></use></svg></a>
                                         <?php }
                                     }
                                     ?>
@@ -28,7 +28,7 @@
                                     $sectors = get_the_terms( $post->ID, 'metier' );
                                     if( $sectors ){
                                         foreach( $sectors as $sector ){ ?>
-                                            <a href='<?php echo get_the_permalink(get_posts(array('post_type' => 'page', 'posts_per_page' => 1, 'meta_query' => array(array('key' => 'sector', 'compare' => 'LIKE', 'value' => $sector->term_id))))[0]->ID); ?>'><?php echo $sector->name; ?></a>
+                                            <a href='<?php echo get_the_permalink(get_posts(array('post_type' => 'page', 'posts_per_page' => 1, 'meta_query' => array(array('key' => 'sector', 'compare' => 'LIKE', 'value' => $sector->term_id))))[0]->ID); ?>'><?php echo $sector->name; ?><svg class='icon icon-right'><use xlink:href='#icon-right'></use></svg></a>
                                         <?php }
                                     }
                                     ?>

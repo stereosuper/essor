@@ -42,13 +42,28 @@
         width: calc(33.3333% - #{$gutter});
         margin: 0 0 0 20px;
         > li{
+            display: block;
+            line-height: 1;
+            margin-bottom: 7px;
             padding-left: 0;
+            &:last-child{
+                margin-bottom: 0;
+            }
             &:before{
                 content: none;
             }
         }
         a{
+            display: inline-block;
             color: $white;
+            line-height: 1.1;
+            .icon-right{
+                display: inline-block;
+                vertical-align: baseline;
+                width: 11px;
+                height: 11px;
+                margin-left: 8px;
+            }
         }
     }
 }
@@ -154,9 +169,13 @@
 @media(max-width: $phone){
     .wrapper-title-links{
         display: block;
+        h1{
+            font-size: 3rem;
+        }
         ul{
             width: 100%;
             margin-left: 0;
+            margin-top: 20px;
         }
     }
     .side-infos{
