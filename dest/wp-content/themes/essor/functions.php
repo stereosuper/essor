@@ -146,6 +146,7 @@ register_nav_menus(
 	array(
 		'primary' => 'Primary Menu',
         'secondary' => 'Secondary Menu',
+        'jobs' => 'Jobs Menu'
 	)
 );
 
