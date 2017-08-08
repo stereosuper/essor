@@ -23,9 +23,15 @@ get_header(); ?>
                 $allContractTypes = get_terms('contrat');
                 if( $allContractTypes ){ ?>
                     <ul>
-                        <li <?php if( !$contractTypeQuery ){ echo 'class="active"'; } ?>><a href='<?php the_permalink(); ?>'>Contrat</a></li>
+                        <li <?php if( !$contractTypeQuery ){ echo 'class="active"'; } ?>><a href='<?php the_permalink(); ?>?lieu=<?php echo $placeQuery; ?>'>Contrat</a></li>
                         <?php foreach( $allContractTypes as $contractType ){ ?>
-                            <li <?php if( $contractTypeQuery === $contractType->slug){ echo 'class="active"'; } ?>><a href='<?php the_permalink(); ?>?contrat=<?php echo $contractType->slug; ?>'><?php echo $contractType->name; ?></a></li>
+                            <?php
+                            $link = get_the_permalink() . '?contrat=' . $contractType->slug;
+                            if( $placeQuery ){
+                                $link .= '&lieu=' . $placeQuery;
+                            }
+                            ?>
+                            <li <?php if( $contractTypeQuery === $contractType->slug){ echo 'class="active"'; } ?>><a href='<?php echo $link; ?>'><?php echo $contractType->name; ?></a></li>
                         <?php } ?>
                     </ul>
                 <?php } ?>
@@ -37,9 +43,15 @@ get_header(); ?>
                 $allPlaces = get_terms('lieu');
                 if( $allPlaces ){ ?>
                     <ul>
-                        <li <?php if( !$placeQuery ){ echo 'class="active"'; } ?>><a href='<?php the_permalink(); ?>'>Région</a></li>
+                        <li <?php if( !$placeQuery ){ echo 'class="active"'; } ?>><a href='<?php the_permalink(); ?>?contrat=<?php echo $contractTypeQuery; ?>'>Région</a></li>
                         <?php foreach( $allPlaces as $place ){ ?>
-                            <li <?php if( $placeQuery === $place->slug){ echo 'class="active"'; } ?>><a href='<?php the_permalink(); ?>?lieu=<?php echo $place->slug; ?>'><?php echo $place->name; ?></a></li>
+                            <?php
+                            $link = get_the_permalink() . '?lieu=' . $place->slug;
+                            if( $contractTypeQuery ){
+                                $link .= '&contrat=' . $contractTypeQuery;
+                            }
+                            ?>
+                            <li <?php if( $placeQuery === $place->slug){ echo 'class="active"'; } ?>><a href='<?php echo $link; ?>'><?php echo $place->name; ?></a></li>
                         <?php } ?>
                     </ul>
                 <?php } ?>
