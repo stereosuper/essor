@@ -74,10 +74,10 @@ get_header(); ?>
             $jobsQuery = new WP_Query( $jobsArgs );
 
             if( $jobsQuery->have_posts() ){ ?>
-                <ul>
+                <ul id='ajax-content'>
                     <?php while( $jobsQuery->have_posts() ){ $jobsQuery->the_post(); ?>
                         <li>
-                            <a href='<?php the_permalink(); ?>' id='ajax-content'>
+                            <a href='<?php the_permalink(); ?>'>
                                 <h2><?php the_title(); ?></h2>
                                 <?php echo get_the_terms( $post->ID, 'lieu' )[0]->name; ?>
                                 <?php echo get_the_terms( $post->ID, 'contrat' )[0]->name; ?>
