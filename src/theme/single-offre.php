@@ -9,75 +9,117 @@ $errorPhone = false;
 $errorPhoneTxt = false;
 $errorMail = false;
 $errorMailTxt = false;
+$errorFile = false;
+$errorFileTxt = false;
 $errorEmpty = false;
 $errorSend = false;
 
-$name = isset($_POST['full_name']) ? strip_tags(stripslashes($_POST['full_name'])) : '';
-$phone = isset($_POST['tel']) ? strip_tags($_POST['tel']) : '';
-$mail = isset($_POST['email']) ? strip_tags(stripslashes($_POST['email'])) : '';
+$name = isset($_POST['full_name']) ? sanitize_text_field($_POST['full_name']) : '';
+$phone = isset($_POST['tel']) ? sanitize_text_field($_POST['tel']) : '';
+$mail = isset($_POST['email']) ? sanitize_email($_POST['email']) : '';
 $msg = isset($_POST['message']) ? strip_tags(stripslashes($_POST['message'])) : '';
+$file = isset($_FILES['offer_file']) ? $_FILES['offer_file'] : '';
 $spamUrl = isset($_POST['url']) ? strip_tags(stripslashes($_POST['url'])) : '';
 
 //$mailto = get_field('emails', 'options');
 $mailto = 'shwarp@live.fr';
 
+if( !function_exists( 'wp_handle_upload' ) ){
+    require_once( ABSPATH . 'wp-admin/includes/file.php' );
+}
+
+function essor_upload_dir( $param ){
+    $param['path'] = ABSPATH . '/candidatures';
+    $param['url'] = get_option( 'siteurl' ) . '/candidatures';
+
+    return $param;
+}
+
 if( isset($_POST['submit']) ){
-    if( empty($name) ){
-        $errorName = true;
-        $errorEmpty = true;
-        $error = true;
-    }
 
-    if( !empty($phone) ){
-        if( !(strlen($phone) < 20 && strlen($phone) > 9 && preg_match("/^\+?[^.\-][0-9\.\- ]+$/", $phone)) ){
-            $errorPhoneTxt = 'Le numéro de téléphone est invalide.';
-            $errorPhone = true;
-            $error = true;
-        }
-    }
+    if( !isset($_POST['essor_offer_nonce']) || !wp_verify_nonce($_POST['essor_offer_nonce'], 'essor_offer') ){
 
-    if( empty($mail) ){
-        $errorMail = true;
-        $errorEmpty = true;
         $error = true;
+        $errorSend = 'Nous sommes désolés, une erreur est survenue! Merci de réésayer plus tard.';
+    
     }else{
-        if( !filter_var($mail, FILTER_VALIDATE_EMAIL) ){
-            $errorMailTxt = 'L\'adresse email est invalide.';
-            $errorMail = true;
+
+        if( empty($name) ){
+            $errorName = true;
+            $errorEmpty = true;
             $error = true;
         }
-    }
 
-    if( empty($msg) ){
-        $errorMsg = true;
-        $errorEmpty = true;
-        $error = true;
-    }
-
-
-    if( !$error ){
-        if( empty($spamUrl) ){
-            $subjectMail = 'Nouveau message provenant de essor.group';
-            
-            $headers = 'From: "' . $name . '" <' . $mail . '>' . "\r\n" .
-                       'Reply-To: ' . $mail . "\r\n";
-            
-            $content = 'De: ' . $name . "\r\n" .
-                       'Email: ' . $mail . "\r\n" .
-                       'Téléphone: ' . $phone . "\r\n" .
-            	       'Message: ' . $msg;
-            
-            $sent = wp_mail($mailto, $subjectMail, $content, $headers);
-            
-            if( $sent ){
-                $success = true;
-            }else{
+        if( !empty($phone) ){
+            if( !(strlen($phone) < 20 && strlen($phone) > 9 && preg_match("/^\+?[^.\-][0-9\.\- ]+$/", $phone)) ){
+                $errorPhoneTxt = 'Le numéro de téléphone est invalide.';
+                $errorPhone = true;
                 $error = true;
-                $errorSend = 'Nous sommes désolés, une erreur est survenue! Merci de réésayer plus tard.';
             }
-        }else{
-            $success = true;
         }
+
+        if( empty($mail) ){
+            $errorMail = true;
+            $errorEmpty = true;
+            $error = true;
+        }else{
+            if( !filter_var($mail, FILTER_VALIDATE_EMAIL) ){
+                $errorMailTxt = 'L\'adresse email est invalide.';
+                $errorMail = true;
+                $error = true;
+            }
+        }
+
+        if( empty($msg) ){
+            $errorMsg = true;
+            $errorEmpty = true;
+            $error = true;
+        }
+
+        
+        if( empty($file) ){
+            $errorFile = true;
+            $errorEmpty = true;
+            $error = true;
+        }else{
+            add_filter('upload_dir', 'essor_upload_dir');
+            $upload = wp_handle_upload( $file, array('test_form' => false) );
+            remove_filter('upload_dir', 'essor_upload_dir');
+
+            if( isset($upload['error']) || !isset($upload['file']) ){
+                $errorFileTxt = 'Le fichier fourni est invalide.';
+                $errorFile = true;
+                $errorEmpty = true;
+                $error = true;
+            }
+        }
+
+
+        if( !$error ){
+            if( empty($spamUrl) ){
+                $subjectMail = 'Nouveau message provenant de essor.group';
+
+                $headers = 'From: "' . $name . '" <' . $mail . '>' . "\r\n" .
+                           'Reply-To: ' . $mail . "\r\n";
+
+                $content = 'De: ' . $name . "\r\n" .
+                           'Email: ' . $mail . "\r\n" .
+                           'Téléphone: ' . $phone . "\r\n" .
+                           'Message: ' . $msg;
+
+                $sent = wp_mail($mailto, $subjectMail, $content, $headers, $upload['url']);
+
+                if( $sent ){
+                    $success = true;
+                }else{
+                    $error = true;
+                    $errorSend = 'Nous sommes désolés, une erreur est survenue! Merci de réésayer plus tard.';
+                }
+            }else{
+                $success = true;
+            }
+        }
+
     }
 }
 
@@ -101,13 +143,13 @@ get_header(); ?>
                     </h2>
                     <?php the_content(); ?>
 
-                    <h3>Postuler</h3>
+                    <h3 id='form'>Postuler</h3>
 
                     <div class='form-contact'>
 
                         <?php if( $success ){ ?>
                             <p class='form-success'>
-                                Merci, votre message a bien été envoyé!
+                                Merci, votre candidature a bien été envoyée!
                                 <span>Nous vous répondrons dans les plus bref délais.</span>
                             </p>
                         <?php }else if( $error ){ ?>
@@ -118,36 +160,46 @@ get_header(); ?>
                                     <?php if($errorEmpty) echo 'Merci de corriger les erreurs ci-dessous.'; ?>
                                     <span><?php if($errorMailTxt) echo $errorMailTxt; ?></span>
                                     <span><?php if($errorPhoneTxt) echo $errorPhoneTxt; ?></span>
+                                    <span><?php if($errorFileTxt) echo $errorFileTxt; ?></span>
                                 <?php } ?>
                             </p>
                         <?php } ?>
 
-                        <form method='post' action='<?php the_permalink(); ?>#form' class='<?php if( $success ) echo "success"; ?>' id='form-contact'>
+                        <form method='post' action='<?php the_permalink(); ?>#form' class='<?php if( $success ) echo "success"; ?>' id='form-contact' enctype='multipart/form-data'>
                             <div class='field <?php if($errorName) echo 'error'; ?>'>
                                 <label for='name'>Votre prénom et nom</label>
-                                <input type='text' name='full_name' id='name' value='<?php echo $name; ?>' placeholder='Alain Deloin' required>
+                                <input type='text' name='full_name' id='name' value='<?php echo esc_attr( $name ); ?>' placeholder='Alain Deloin' required>
                             </div>
 
                             <div class='field <?php if($errorMail) echo 'error'; ?>'>
                                 <label for='email'>Votre email</label>
-                                <input type='email' name='email' id='email' value='<?php echo $mail; ?>' placeholder='alain.deloin@laposte.net' required>
+                                <input type='email' name='email' id='email' value='<?php echo esc_attr( $mail ); ?>' placeholder='alain.deloin@laposte.net' required>
                             </div>
 
                             <div class='field optional <?php if($errorPhone) echo 'error'; ?>'>
                                 <label for='tel'>Votre numéro de téléphone</label>
-                                <input type='tel' name='tel' id='tel' value='<?php echo $phone; ?>' placeholder='06 00 00 00 00'>
+                                <input type='tel' name='tel' id='tel' value='<?php echo esc_attr( $phone ); ?>' placeholder='06 00 00 00 00'>
                                 <i>(facultatif)</i>
                             </div>
 
                             <div class='field field-top <?php if($errorMsg) echo 'error'; ?>'>
                                 <label for='message'>Votre message</label>
-                                <textarea class='small' name='message' id='message' placeholder="J'aime beaucoup ce que vous faites! Laissez moi vous parler de mon incroyabe projet." required><?php echo $msg; ?></textarea>
+                                <textarea class='small' name='message' id='message' placeholder="J'aime beaucoup ce que vous faites! Laissez moi vous parler de mon incroyabe projet." required><?php echo esc_textarea( $msg ); ?></textarea>
+                            </div>
+
+                            <div class='field <?php if($errorFile) echo 'error'; ?>'>
+                                <label for='file'>CV / Lettre de motivation</label>
+                                <input type='hidden' name='MAX_FILE_SIZE' value='2621440'>
+                                <input type='file' name='offer_file' id='file' accept='.pdf,.PDF,application/pdf' required>
+                                <span>Format PDF de moins de 2.5Mo</span>
                             </div>
 
                             <div class='hidden'>
-                                <input type='url' name='url' id='url' value='<?php echo $spamUrl; ?>'>
+                                <input type='url' name='url' id='url' value='<?php echo esc_url( $spamUrl ); ?>'>
                                 <label for='url'>Merci de laisser ce champ vide.</label>
                             </div>
+
+                            <?php wp_nonce_field( 'essor_offer', 'essor_offer_nonce' ); ?>
 
                             <button class='btn' type='submit' name='submit' form='form-contact'>
                                 Envoyer
