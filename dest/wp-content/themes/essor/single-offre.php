@@ -87,8 +87,10 @@ get_header(); ?>
 
 		<div class='container'>
             <div class='wrapper-content-sidebar'>
-                <aside>
-                    <?php wp_nav_menu( array( 'theme_location' => 'jobs', 'container' => false, 'menu_class' => 'menu-aside' ) ); ?>
+                <aside class='wrapper-sticky'>
+                    <div class='wrapper-menu-aside' id='blockSticky'>
+                        <?php wp_nav_menu( array( 'theme_location' => 'jobs', 'container' => false, 'menu_class' => 'menu-aside' ) ); ?>
+                    </div>
                 </aside>
                 <div class='content-sidebar'>
                     <h1><?php the_title(); ?></h1>

@@ -16365,6 +16365,7 @@ $(function () {
     var customDropdown = require('./dropdown.js');
     var loadMorePosts = require('./loadMorePosts.js');
     var initScrollReval = require('./initScrollReveal.js');
+    var sticky = require('./sticky.js');
 
     var body = $('body');
     var windowWidth = window.outerWidth,
@@ -16396,6 +16397,11 @@ $(function () {
     //window.scrollReveal = new ScrollReveal({ reset: true, scale: 1, distance: '30px', duration: 800, viewFactor: 0.5 });
     initScrollReval('.isAnimated');
 
+    // Sticky
+    sticky($('#blockSticky'), 130, {
+        minimumWidth: 1200
+    });
+
     $(window).on('resize', throttle(function () {
         requestAnimFrame(resizeHandler);
     }, 60)).on('load', function () {});
@@ -16408,7 +16414,7 @@ $(function () {
     }, 60));
 });
 
-},{"./animResponsiveHeader.js":6,"./animSearchform.js":7,"./dropdown.js":8,"./initScrollReveal.js":9,"./loadMorePosts.js":10,"./requestAnimFrame.js":12,"./throttle.js":13,"jquery":4,"scrollreveal":5}],12:[function(require,module,exports){
+},{"./animResponsiveHeader.js":6,"./animSearchform.js":7,"./dropdown.js":8,"./initScrollReveal.js":9,"./loadMorePosts.js":10,"./requestAnimFrame.js":12,"./sticky.js":13,"./throttle.js":14,"jquery":4,"scrollreveal":5}],12:[function(require,module,exports){
 "use strict";
 
 module.exports = function () {
@@ -16418,6 +16424,122 @@ module.exports = function () {
 }();
 
 },{}],13:[function(require,module,exports){
+'use strict';
+
+var $ = require('jquery');
+
+window.requestAnimFrame = require('./requestAnimFrame.js');
+var throttle = require('./throttle.js');
+
+module.exports = function (stickyElt, givenPosition) {
+    var _ref = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {},
+        _ref$unit = _ref.unit,
+        unit = _ref$unit === undefined ? 'px' : _ref$unit,
+        _ref$updateHeightOnSc = _ref.updateHeightOnScroll,
+        updateHeightOnScroll = _ref$updateHeightOnSc === undefined ? false : _ref$updateHeightOnSc,
+        _ref$wrapper = _ref.wrapper,
+        wrapper = _ref$wrapper === undefined ? true : _ref$wrapper,
+        _ref$minimumWidth = _ref.minimumWidth,
+        minimumWidth = _ref$minimumWidth === undefined ? false : _ref$minimumWidth;
+
+    if (!stickyElt.length) return;
+
+    var position, eltHeight, posTop, belowWidth;
+    var windowHeight = $(window).height();
+    var windowWidth = window.outerWidth;
+    var scrollTop = $(document).scrollTop();
+    var wrapperSticky = stickyElt.closest('.wrapper-sticky');
+
+    function checkWindowHeight() {
+        windowHeight = $(window).height();
+        if (unit === 'vh') {
+            eltHeight = stickyElt.outerHeight();
+            position = windowHeight / (100 / givenPosition) - eltHeight / 2;
+        } else {
+            position = givenPosition;
+        }
+    }
+
+    function scrollHandler() {
+        scrollTop = $(document).scrollTop();
+
+        if (updateHeightOnScroll && stickyElt.hasClass('sticky')) {
+            stickyElt.data('height', stickyElt.outerHeight());
+        }
+
+        posTop = stickyElt.data('initialPos') === 'auto' ? 0 : parseFloat(stickyElt.data('initialPos'), 10);
+
+        if (scrollTop >= stickyElt.data('offsetTop') - position + posTop) {
+            stickyElt.addClass('sticky').css('top', position + 'px');
+            if (scrollTop + position + stickyElt.data('height') >= stickyElt.data('offsetBottom')) {
+                stickyElt.removeClass('sticky').addClass('sticky-stuck').css({ 'top': 'auto', 'bottom': '0' });
+            } else {
+                stickyElt.addClass('sticky').removeClass('sticky-stuck').css({ 'top': position + 'px', 'bottom': '' });
+            }
+        } else {
+            stickyElt.removeClass('sticky').css('top', stickyElt.data('initialPos'));
+        }
+
+        if (minimumWidth && belowWidth) {
+            stickyElt.removeClass('sticky sticky-stuck').css({ 'top': stickyElt.data('initialPos'), 'bottom': '' });
+        }
+    }
+
+    function resizeHandler() {
+        checkWindowHeight();
+
+        windowWidth = window.outerWidth;
+
+        minimumWidth && windowWidth <= minimumWidth ? belowWidth = true : belowWidth = false;
+
+        if (wrapper) {
+            stickyElt.data({
+                'offsetTop': wrapperSticky.offset().top
+            });
+        } else {
+            stickyElt.data({
+                'offsetTop': stickyElt.offset().top
+            });
+        }
+
+        stickyElt.data({
+            'offsetBottom': wrapperSticky.offset().top + wrapperSticky.outerHeight(),
+            'height': stickyElt.outerHeight()
+        });
+
+        scrollHandler();
+    }
+
+    minimumWidth && windowWidth <= minimumWidth ? belowWidth = true : belowWidth = false;
+
+    if (wrapper) {
+        stickyElt.data({
+            'offsetTop': wrapperSticky.offset().top
+        });
+    } else {
+        stickyElt.data({
+            'offsetTop': stickyElt.offset().top
+        });
+    }
+
+    stickyElt.data({
+        'initialPos': stickyElt.css('top'),
+        'offsetBottom': wrapperSticky.offset().top + wrapperSticky.outerHeight(),
+        'height': stickyElt.outerHeight()
+    });
+
+    checkWindowHeight();
+
+    $(document).on('scroll', throttle(function () {
+        requestAnimFrame(scrollHandler);
+    }, 10));
+
+    $(window).on('resize', throttle(function () {
+        requestAnimFrame(resizeHandler);
+    }, 10));
+};
+
+},{"./requestAnimFrame.js":12,"./throttle.js":14,"jquery":4}],14:[function(require,module,exports){
 "use strict";
 
 module.exports = function (callback, delay) {
