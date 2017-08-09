@@ -165,7 +165,7 @@ get_header(); ?>
                             </p>
                         <?php } ?>
 
-                        <form method='post' action='<?php the_permalink(); ?>#form' class='<?php if( $success ) echo "success"; ?>' id='form-contact' enctype='multipart/form-data'>
+                        <form method='post' action='<?php the_permalink(); ?>#form' class='<?php if( $success ) echo "success"; ?>' id='form-offer' enctype='multipart/form-data'>
                             <div class='field <?php if($errorName) echo 'error'; ?>'>
                                 <label for='name'>Votre prénom et nom</label>
                                 <input type='text' name='full_name' id='name' value='<?php echo esc_attr( $name ); ?>' placeholder='Alain Deloin' required>
@@ -201,7 +201,7 @@ get_header(); ?>
 
                             <?php wp_nonce_field( 'essor_offer', 'essor_offer_nonce' ); ?>
 
-                            <button class='btn' type='submit' name='submit' form='form-contact'>
+                            <button class='btn' type='submit' name='submit' form='form-offer'>
                                 Envoyer
                                 <svg class='icon'><use xmlns:xlink='http://www.w3.org/1999/xlink' xlink:href='#icon-right'></use></svg>
                             </button>
