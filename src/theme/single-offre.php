@@ -189,9 +189,9 @@ get_header(); ?>
 
                             <div class='field <?php if($errorFile) echo 'error'; ?>'>
                                 <label for='file'>CV / Lettre de motivation</label>
-                                <input type='hidden' name='MAX_FILE_SIZE' value='2621440'>
+                                <input type='hidden' name='MAX_FILE_SIZE' value='1258292'>
                                 <input type='file' name='offer_file' id='file' accept='.pdf,.PDF,application/pdf' required>
-                                <span>Format PDF de moins de 2.5Mo</span>
+                                <span>Format PDF de moins de 1.2Mo</span>
                             </div>
 
                             <div class='hidden'>
