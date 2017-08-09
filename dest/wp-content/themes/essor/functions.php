@@ -359,6 +359,8 @@ function essor_load_more(){
         $loop->the_post();
         if( $postType === 'reference' ){
             get_template_part( 'includes/reference' );
+        }else if( $postType === 'offre' ){
+            get_template_part( 'includes/offre' );
         }else{
             get_template_part( 'includes/post' );
         }
