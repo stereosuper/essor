@@ -384,6 +384,8 @@ function essor_scripts(){
     // load more posts
     $postType = is_home() || is_category() ? get_field('postType', get_option( 'page_for_posts' )) : get_field('postType');
     $args = $postType ? array('post_type' => $postType, 'tax_query' => array('relation' => 'AND'), 'post_status' => 'publish', 'posts_per_page' => -1) : '';
+    
+    // if post type is reference
     if( get_field('sector') && $args ){
         array_push($args['tax_query'], array('taxonomy' => 'metier', 'field' => 'slug', 'terms' => get_term(get_field('sector'))->slug));
     }
@@ -395,9 +397,22 @@ function essor_scripts(){
     if( $refDate && $args ){
         $args['date_query'] = array(array('year'  => $refDate)); 
     }
+
+    // if post type is offre
+    $offerContractType = isset( $_GET['contrat'] ) ? $_GET['contrat'] : '';
+    if( $offerContractType && $args ){
+        array_push($args['tax_query'], array('taxonomy' => 'contrat', 'field' => 'slug', 'terms' => $offerContractType));
+    }
+    $offerPlace = isset( $_GET['lieu'] ) ? $_GET['lieu'] : '';
+    if( $offerPlace && $args ){
+        array_push($args['tax_query'], array('taxonomy' => 'lieu', 'field' => 'slug', 'terms' => $offerPlace));
+    }
+
+    // if post is post
     if( is_category() && $args ){
         $args['cat'] = get_query_var('cat');
     }
+
     $query = $args ? new WP_Query( $args ) : '';
     $postNb = $query ? $query->found_posts : '';
 
