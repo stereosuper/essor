@@ -104,10 +104,10 @@ if( isset($_POST['submit']) ){
 
                 $content = 'De: ' . $name . "\r\n" .
                            'Email: ' . $mail . "\r\n" .
-                           'Téléphone: ' . $phone . "\r\n" .
+                           'Téléphone: ' . $phone . "\r\n\r\n" .
                            'Message: ' . $msg;
 
-                $sent = wp_mail($mailto, $subjectMail, $content, $headers, $upload['url']);
+                $sent = wp_mail($mailto, $subjectMail, $content, $headers, $upload['file']);
 
                 if( $sent ){
                     $success = true;
