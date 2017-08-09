@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - EWWW Image Optimizer - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-08-02 21:24:30+0000\n"
+"PO-Revision-Date: 2017-08-03 12:30:31+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -11,9 +11,37 @@ msgstr ""
 "Language: fr\n"
 "Project-Id-Version: Plugins - EWWW Image Optimizer - Stable (latest release)\n"
 
+#: ewww-image-optimizer.php:154
+msgid "The regular version of the EWWW Image Optimizer plugin is not permitted on Kinsta sites. Please deactivate EWWW Image Optimizer and install EWWW Image Optimizer Cloud to optimize your images."
+msgstr "La version normale du plugin EWWW Image Optimizer n’est pas autorisée sur les sites Kinsta. Désactivez EWWW Image Optimizer et installez EWWW Image Optimizer Cloud pour optimiser vos images."
+
+#: common.php:7209
+msgid "Resize Settings"
+msgstr "Réglages de redimensionnement"
+
+#: bulk.php:472
+msgid "more..."
+msgstr "plus..."
+
+#: bulk.php:462
+msgid "Temporary failure, attempts remaining:"
+msgstr "Échec temporaire, tentatives restantes :"
+
 #: bulk.php:458
 msgid "Operation timed out, you may need to increase the max_execution_time or memory_limit for PHP"
 msgstr "L’opération a expiré, vous devriez peut-être augmenter les délais max_execution_time ou memory_limit pour PHP"
+
+#: aux-optimize.php:98 common.php:7544
+msgid "Debugging information will be included with your message automatically."
+msgstr "Les informations de débogage seront incluses automatiquement dans votre message."
+
+#: aux-optimize.php:73 aux-optimize.php:99 common.php:7520 common.php:7545
+msgid "This will allow us to assist you more quickly."
+msgstr "Cela nous permet de vous aider plus rapidement."
+
+#: aux-optimize.php:72 common.php:7519
+msgid "Enable the Debugging option and refresh this page to include debugging information with your question."
+msgstr "Activez l’option de débogage et renouvelez la page pour inclure les informations de débogage avec votre question."
 
 #: common.php:7347
 msgid "Enable Embedded Help"
@@ -978,6 +1006,10 @@ msgstr "Désactiver la création"
 #: common.php:7377
 msgid "Disable Optimization"
 msgstr "Désactiver l'optimisation"
+
+#: common.php:7373
+msgid "WordPress, your theme, and other plugins generate various image sizes. You may disable optimization for certain sizes, or completely prevent those sizes from being created."
+msgstr "WordPress, votre thème et d’autres extensions génèrent différentes dimensions d’image. Vous pouvez désactiver l’optimisation pour certaines dimensions ou empêcher ces dimensions d’être créées."
 
 #: common.php:7373 common.php:7393
 msgid "Disable Resizes"
