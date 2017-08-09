@@ -54,7 +54,7 @@ $(function(){
 
     // Sticky
     sticky($('#blockSticky'), 130, {
-        minimumWidth: 1200
+        minimumWidth: 960
     });
 
     $(window).on('resize', throttle(function(){

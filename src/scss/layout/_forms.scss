@@ -76,6 +76,9 @@ input{
 textarea{
     width: 600px;
     height: 260px;
+    &.small{
+        width: 420px;
+    }
 }
 
 select{

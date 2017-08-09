@@ -4,8 +4,6 @@
     justify-content: space-between;
     width: 100%;
     aside{
-        flex-shrink: 0;
-        flex-grow: 0;
         width: 300px;
         margin: 120px 150px 0 0;
     }
@@ -56,5 +54,25 @@
         color: $white;
         text-decoration: none;
         line-height: 1.1;
+    }
+}
+.content-sidebar{
+    flex: 1 1 0%;
+}
+
+@media(max-width: $desktop){
+    .wrapper-content-sidebar{
+        aside{
+            width: 250px;
+            margin-right: 80px;
+        }
+    }
+    .wrapper-menu-aside{
+        width: 250px;
+    }
+}
+@media(max-width: $desktopSmall){
+    .wrapper-content-sidebar{
+        display: block;
     }
 }
