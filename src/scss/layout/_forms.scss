@@ -57,7 +57,7 @@ input, textarea{
 
 input{
     width: 270px;
-    &[type=email]{
+    &[type=email], &.object{
         width: 420px;
     }
     &[type=tel]{
@@ -146,9 +146,6 @@ label{
     }
     > span{
         font-size: 1.5rem;
-    }
-    &.objet input{
-        width: 420px;
     }
 }
 .field-top{
