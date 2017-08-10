@@ -19,6 +19,7 @@ $phone = isset($_POST['tel']) ? sanitize_text_field($_POST['tel']) : '';
 $mail = isset($_POST['email']) ? sanitize_email($_POST['email']) : '';
 $msg = isset($_POST['message']) ? strip_tags(stripslashes($_POST['message'])) : '';
 $file = isset($_FILES['offer_file']) ? $_FILES['offer_file'] : '';
+$ref = isset($_POST['offer_ref']) ? sanitize_text_field($_POST['offer_ref']) : '';
 $spamUrl = isset($_POST['url']) ? strip_tags(stripslashes($_POST['url'])) : '';
 
 //$mailto = get_field('emails', 'options');
@@ -118,6 +119,7 @@ if( isset($_POST['submit']) ){
                 $content = 'De: ' . $name . "\r\n" .
                            'Email: ' . $mail . "\r\n" .
                            'Téléphone: ' . $phone . "\r\n\r\n" .
+                           'Offre: ' . $ref . "\r\n\r\n" .
                            'Message: ' . $msg;
 
                 $sent = wp_mail($mailto, $subjectMail, $content, $headers, $upload['file']);
@@ -211,6 +213,8 @@ get_header(); ?>
                                 <input type='url' name='url' id='url' value='<?php echo esc_url( $spamUrl ); ?>'>
                                 <label for='url'>Merci de laisser ce champ vide.</label>
                             </div>
+
+                            <input type='hidden' name='offer_ref' value='<?php echo esc_attr( get_the_title() ); ?>'>
 
                             <?php wp_nonce_field( 'essor_offer', 'essor_offer_nonce' ); ?>
 
