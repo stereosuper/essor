@@ -28,38 +28,12 @@ aside.contact-aside{
 .wrapper-menu-aside{
     position: relative;
     width: 300px;
-    &:before, &:after{
-        content: '';
-        display: block;
-        width: 20px;
-        position: absolute;
-        left: 0;
-        background: $primary;
-    }
-    &:before{
-        height: 50px;
-        top: 0;
-    }
-    &:after{
-        top: 52px;
-        bottom: 0;
-    }
 }
 .menu-aside{
     width: calc(100% - 20px);
     margin: 0 0 0 20px;
     padding: 40px 30px 40px 10px;
     background: $primary;
-    &:before{
-        content: '';
-        display: block;
-        width: 20px;
-        height: 2px;
-        position: absolute;
-        top: 50px;
-        left: -20px;
-        background: $primary;
-    }
     > li{
         padding: 0;
         &:before{
