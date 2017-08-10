@@ -24,63 +24,72 @@ $spamUrl = isset($_POST['url']) ? strip_tags(stripslashes($_POST['url'])) : '';
 $mailto = get_field('emailsContact', 'options');
 
 if( isset($_POST['submit']) ){
-    if( empty($name) ){
-        $errorName = true;
-        $errorEmpty = true;
-        $error = true;
-    }
 
-    if( !empty($phone) ){
-        if( !(strlen($phone) < 20 && strlen($phone) > 9 && preg_match("/^\+?[^.\-][0-9\.\- ]+$/", $phone)) ){
-            $errorPhoneTxt = 'Le numéro de téléphone est invalide.';
-            $errorPhone = true;
-            $error = true;
-        }
-    }
+	if( !isset($_POST['essor_contact_nonce']) || !wp_verify_nonce($_POST['essor_contact_nonce'], 'essor_contact') ){
+	
+		$error = true;
+		$errorSend = 'Nous sommes désolés, une erreur est survenue! Merci de réssayer plus tard.';
 
-    if( empty($mail) ){
-        $errorMail = true;
-        $errorEmpty = true;
-        $error = true;
-    }else{
-        if( !filter_var($mail, FILTER_VALIDATE_EMAIL) ){
-            $errorMailTxt = 'L\'adresse email est invalide.';
-            $errorMail = true;
-            $error = true;
-        }
-    }
+	}else{
 
-    if( empty($msg) ){
-        $errorMsg = true;
-        $errorEmpty = true;
-        $error = true;
-    }
+		if( empty($name) ){
+			$errorName = true;
+			$errorEmpty = true;
+			$error = true;
+		}
+
+		if( !empty($phone) ){
+			if( !(strlen($phone) < 20 && strlen($phone) > 9 && preg_match("/^\+?[^.\-][0-9\.\- ]+$/", $phone)) ){
+				$errorPhoneTxt = 'Le numéro de téléphone est invalide.';
+				$errorPhone = true;
+				$error = true;
+			}
+		}
+
+		if( empty($mail) ){
+			$errorMail = true;
+			$errorEmpty = true;
+			$error = true;
+		}else{
+			if( !filter_var($mail, FILTER_VALIDATE_EMAIL) ){
+				$errorMailTxt = 'L\'adresse email est invalide.';
+				$errorMail = true;
+				$error = true;
+			}
+		}
+
+		if( empty($msg) ){
+			$errorMsg = true;
+			$errorEmpty = true;
+			$error = true;
+		}
 
 
-    if( !$error ){
-        if( empty($spamUrl) ){
-            $subjectMail = 'Nouveau message provenant de essor.group';
-            
-            $headers = 'From: "' . $name . '" <' . $mail . '>' . "\r\n" .
-                       'Reply-To: ' . $mail . "\r\n";
-            
-            $content = 'De: ' . $name . "\r\n" .
-                       'Email: ' . $mail . "\r\n" .
-                       'Téléphone: ' . $phone . "\r\n\r\n" .
-            	       'Message: ' . $msg;
-            
-            $sent = wp_mail($mailto, $subjectMail, $content, $headers);
-            
-            if( $sent ){
-                $success = true;
-            }else{
-                $error = true;
-                $errorSend = 'Nous sommes désolés, une erreur est survenue! Merci de réésayer plus tard.';
-            }
-        }else{
-            $success = true;
-        }
-    }
+		if( !$error ){
+			if( empty($spamUrl) ){
+				$subjectMail = 'Nouveau message provenant de essor.group';
+				
+				$headers = 'From: "' . $name . '" <' . $mail . '>' . "\r\n" .
+						'Reply-To: ' . $mail . "\r\n";
+				
+				$content = 'De: ' . $name . "\r\n" .
+						'Email: ' . $mail . "\r\n" .
+						'Téléphone: ' . $phone . "\r\n\r\n" .
+						'Message: ' . $msg;
+				
+				$sent = wp_mail($mailto, $subjectMail, $content, $headers);
+				
+				if( $sent ){
+					$success = true;
+				}else{
+					$error = true;
+					$errorSend = 'Nous sommes désolés, une erreur est survenue! Merci de réssayer plus tard.';
+				}
+			}else{
+				$success = true;
+			}
+		}
+	}
 }
 
 get_header(); ?>
@@ -149,6 +158,8 @@ get_header(); ?>
 								<input type='url' name='url' id='url' value='<?php echo esc_url( $spamUrl ); ?>'>
 								<label for='url'>Merci de laisser ce champ vide.</label>
 							</div>
+
+							<?php wp_nonce_field( 'essor_contact', 'essor_contact_nonce' ); ?>
 
 							<button class='btn' type='submit' name='submit' form='form-contact'>
 								Envoyer

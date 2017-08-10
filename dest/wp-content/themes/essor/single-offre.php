@@ -40,7 +40,7 @@ if( isset($_POST['submit']) ){
     if( !isset($_POST['essor_offer_nonce']) || !wp_verify_nonce($_POST['essor_offer_nonce'], 'essor_offer') ){
 
         $error = true;
-        $errorSend = 'Nous sommes désolés, une erreur est survenue! Merci de réésayer plus tard.';
+        $errorSend = 'Nous sommes désolés, une erreur est survenue! Merci de réssayer plus tard.';
     
     }else{
 
@@ -76,28 +76,32 @@ if( isset($_POST['submit']) ){
             $error = true;
         }
 
-        
         if( empty($file) ){
             $errorFile = true;
             $errorEmpty = true;
             $error = true;
         }else{
-            if( in_array(pathinfo($file['name'])['extension'], ['pdf', 'PDF']) ){
-                
-                if( $file['size'] <= 1258292 ){
-                    add_filter('upload_dir', 'essor_upload_dir');
-                    $upload = wp_handle_upload( $file, array('test_form' => false) );
-                    remove_filter('upload_dir', 'essor_upload_dir');
-
-                    if( isset($upload['error']) || !isset($upload['file']) ){
-                        $errorFileTxt = 'Nous sommes désolés, le fichier n\'a pas pu être uploadé. Merci de réessayer plus tard!';
-                    }
-                }else{
-                    $errorFileTxt = 'Le fichier fourni est trop lourd. Merci de ne pas dépasser 1.2Mo.';
-                }
-
+            if( $file['error'] ){
+                $errorFileTxt = 'Le fichier fourni est invalide.';
             }else{
-                $errorFileTxt = 'L\'extension du fichier n\'est pas autorisée. Merci d\'utiliser un PDF.';
+
+                if( in_array(pathinfo($file['name'])['extension'], ['pdf', 'PDF']) ){
+
+                    if( $file['size'] <= 1258292 ){
+                        add_filter('upload_dir', 'essor_upload_dir');
+                        $upload = wp_handle_upload( $file, array('test_form' => false) );
+                        remove_filter('upload_dir', 'essor_upload_dir');
+
+                        if( isset($upload['error']) || !isset($upload['file']) ){
+                            $errorFileTxt = 'Nous sommes désolés, le fichier n\'a pas pu être uploadé. Merci de réessayer plus tard!';
+                        }
+                    }else{
+                        $errorFileTxt = 'Le fichier fourni est trop lourd. Merci de ne pas dépasser 1.2Mo.';
+                    }
+
+                }else{
+                    $errorFileTxt = 'L\'extension du fichier n\'est pas autorisée. Merci d\'utiliser un PDF.';
+                }
             }
 
             if( $errorFileTxt ){
@@ -127,7 +131,7 @@ if( isset($_POST['submit']) ){
                     $success = true;
                 }else{
                     $error = true;
-                    $errorSend = 'Nous sommes désolés, une erreur est survenue! Merci de réésayer plus tard.';
+                    $errorSend = 'Nous sommes désolés, une erreur est survenue! Merci de réssayer plus tard.';
                 }
             }else{
                 $success = true;
