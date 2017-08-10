@@ -259,14 +259,6 @@ function essor_post_type(){
         'menu_icon' => 'dashicons-businessman',
         'supports' => array('title', 'editor', 'thumbnail', 'excerpt', 'revisions')
     ) );
-
-    register_post_type( 'metier', array(
-        'label' => 'Fiches métier',
-        'singular_label' => 'Fiche métier',
-        'public' => true,
-        'menu_icon' => 'dashicons-id',
-        'supports' => array('title', 'editor', 'thumbnail', 'excerpt', 'revisions')
-    ) );
 }
 add_action( 'init', 'essor_post_type' );
 

@@ -59,24 +59,24 @@
 							<button type='button' class='btn-menu-main'>
 								Nos métiers
 								<svg class='icon down'><use xlink:href='#icon-down'></use></svg>
-								<svg class='icon close'><use xlink:href='#icon-close'></use></svg>
+								<!--<svg class='icon close'><use xlink:href='#icon-close'></use></svg>-->
 							</button>
 							<?php wp_nav_menu( array( 'theme_location' => 'primary', 'container' => false, 'menu_class' => 'menu-main', 'depth' => 1, 'desc' => true, 'link_before' => '<span>', 'link_after' => '</span>' ) ); ?>
 						</div>
 
-						<div class='menu-secondary-wrapper'>
+						<div class='menu-secondary-wrapper' id='secondMenu'>
 							<?php wp_nav_menu( array( 'theme_location' => 'primary', 'container' => false, 'menu_class' => 'menu-secondary js-form-off', 'sub_menu' => true, 'menu_id' => 'menuSecondary' ) ); ?>
 
 							<?php get_search_form(true); ?>
 
 							<?php if( get_field('contactLink', 'options') ){ ?>
-								<a href='<?php the_field('contactLink', 'options') ?>' class='btn-contact js-form-off'>Contact <svg class='icon'><use xlink:href='#icon-mail'></use></svg></a>
+								<a href='<?php the_field('contactLink', 'options') ?>' class='btn-contact js-form-off <?php if( get_field('contactLink', 'options') == get_the_permalink() ){ echo "current-menu-item"; } ?>'>Contact <svg class='icon'><use xlink:href='#icon-mail'></use></svg></a>
 							<?php } ?>
 						</div>
 					</div>
 
 					<div class='menu-nav'>
-						<button type='button' class='js-btn-menu btn-swipe on'>Menu principal</button>
+						<button type='button' class='js-btn-menu btn-swipe'>Menu principal</button>
 						<button type='button' class='js-btn-menu btn-swipe'>Menu secondaire</button>
 					</div>
 				</nav>

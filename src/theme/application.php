@@ -1,4 +1,7 @@
 <?php
+/*
+Template Name: Postuler
+*/
 
 $error = false;
 $success = false;
@@ -153,15 +156,8 @@ get_header(); ?>
                     </div>
                 </aside>
                 <div class='content-sidebar'>
-                    <h1><?php the_title(); ?></h1>
-                    <h2>
-                        <?php echo get_the_terms( $post->ID, 'contrat' )[0]->name; ?>
-                        -
-                        <?php echo get_the_terms( $post->ID, 'lieu' )[0]->name; ?>
-                    </h2>
+                    <h1 id='form'><?php the_title(); ?></h1>
                     <?php the_content(); ?>
-
-                    <h3 id='form'>Postuler</h3>
 
                     <div class='small form-offer'>
 
@@ -200,6 +196,12 @@ get_header(); ?>
                                 <i>(facultatif)</i>
                             </div>
 
+                            <div class='field optional'>
+                                <label for='offer_ref'>Référence de l'offre</label>
+                                <input type='text' name='offer_ref' id='offer_ref' value='<?php echo esc_attr( $ref ); ?>'>
+                                <i>(facultatif)</i>
+                            </div>
+
                             <div class='field field-top <?php if($errorMsg) echo 'error'; ?>'>
                                 <label for='message'>Votre message</label>
                                 <textarea class='small' name='message' id='message' placeholder="J'aime beaucoup ce que vous faites! Laissez moi vous parler de mon incroyabe projet." required><?php echo esc_textarea( $msg ); ?></textarea>
@@ -216,8 +218,6 @@ get_header(); ?>
                                 <input type='url' name='url' id='url' value='<?php echo esc_url( $spamUrl ); ?>'>
                                 <label for='url'>Merci de laisser ce champ vide.</label>
                             </div>
-
-                            <input type='hidden' name='offer_ref' value='<?php echo esc_attr( get_the_title() ); ?>'>
 
                             <?php wp_nonce_field( 'essor_offer', 'essor_offer_nonce' ); ?>
 
