@@ -9,6 +9,7 @@ module.exports = function(body, nav, menus, pageWrapper){
     if( !nav.length ) return;
 
     var scrollTop;
+    var btnMenus = $('.js-btn-menu');
 
     body.on('click', '#burger', function(e){
 
@@ -31,11 +32,19 @@ module.exports = function(body, nav, menus, pageWrapper){
             }
         }
 
+        if( $('#secondMenu').find('.current-menu-item').length ){
+            menus.delay(300).queue(function(){ $(this).addClass('swiped').dequeue(); });
+            btnMenus.eq(1).addClass('on');
+        }else{
+            btnMenus.eq(0).addClass('on');
+        }
+
         $(this).toggleClass('on');
 
     }).on('click', '#main.menu-open', function(){
 
         nav.removeClass('on');
+        $('#burger').removeClass('on');
         pageWrapper.removeClass('menu-open');
 
     }).on('click', '.js-btn-menu', function(e){

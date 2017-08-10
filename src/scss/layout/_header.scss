@@ -429,7 +429,7 @@
             line-height: 1;
             text-indent: 0;
             color: $text;
-            &:hover, &:focus{
+            &:hover, &:focus, &.current-menu-item{
                 color: $primary;
             }
             > .icon{
