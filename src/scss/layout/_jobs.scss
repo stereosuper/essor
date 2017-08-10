@@ -96,6 +96,25 @@
     }
 }
 
+.wrapper-dropdowns{
+    .dropdowns{
+        display: flex;
+        position: relative;
+        left: -$gutter;
+        width: calc(100% + #{2*$gutter});
+        margin: 0;
+        padding: 25px 0 25px 37.5%;
+        background: rgba($white, 0.95);
+    }
+    .dropdown{
+        width: calc(40% - #{2*$gutter});
+        margin: 0 2*$gutter 0 $gutter;
+        &:last-child{
+            margin-right: $gutter;
+        }
+    }
+}
+
 @media(max-width: $desktop){
     .wrapper-content-sidebar{
         aside{
