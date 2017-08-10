@@ -59,7 +59,7 @@
 							<button type='button' class='btn-menu-main'>
 								Nos métiers
 								<svg class='icon down'><use xlink:href='#icon-down'></use></svg>
-								<svg class='icon close'><use xlink:href='#icon-close'></use></svg>
+								<!--<svg class='icon close'><use xlink:href='#icon-close'></use></svg>-->
 							</button>
 							<?php wp_nav_menu( array( 'theme_location' => 'primary', 'container' => false, 'menu_class' => 'menu-main', 'depth' => 1, 'desc' => true, 'link_before' => '<span>', 'link_after' => '</span>' ) ); ?>
 						</div>
