@@ -16,7 +16,7 @@ get_header(); ?>
             <div class='wrapper-dropdowns' id='dropdownsSticky'>
                 <div class='container'>
                     <div class='dropdowns'>
-                        <div class='dropdown'>
+                        <div class='dropdown white'>
                             <button type='button' class='dropdown-title'><svg class='icon icon-down'><use xlink:href='#icon-down'></use></svg></button>
                             <?php
                             $allContractTypes = get_terms('contrat');
@@ -35,7 +35,7 @@ get_header(); ?>
                                 </ul>
                             <?php } ?>
                         </div>
-                        <div class='dropdown'>
+                        <div class='dropdown white'>
                             <button type='button' class='dropdown-title'><svg class='icon icon-down'><use xlink:href='#icon-down'></use></svg></button>
                             <?php
                             $allPlaces = get_terms('lieu');
