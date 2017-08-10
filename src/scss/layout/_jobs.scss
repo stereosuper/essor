@@ -7,11 +7,15 @@
     aside{
         width: 300px;
         margin: 120px 150px 0 0;
+        &.over-img{
+            margin-top: -178px;
+        }
     }
 }
 .wrapper-menu-aside{
     position: relative;
     width: 300px;
+    z-index: 3;
     &:before, &:after{
         content: '';
         display: block;

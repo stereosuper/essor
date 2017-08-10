@@ -16407,6 +16407,9 @@ $(function () {
     sticky($('#blockSticky'), 130, {
         minimumWidth: 960
     });
+    sticky($('#blockStickyJobs'), 97, {
+        minimumWidth: 960
+    });
     sticky($('#dropdownsSticky'), 72, {
         minimumWidth: 960
     });

@@ -58,10 +58,9 @@ get_header(); ?>
                 </div>
             </div>
             <div class='container'>
-                
                 <div class='wrapper-content-sidebar'>
-                    <aside>
-                        <div class='wrapper-menu-aside'>
+                    <aside class='over-img wrapper-sticky'>
+                        <div class='wrapper-menu-aside' id='blockStickyJobs'>
                             <?php wp_nav_menu( array( 'theme_location' => 'jobs', 'container' => false, 'menu_class' => 'menu-aside' ) ); ?>
                         </div>
                     </aside>
