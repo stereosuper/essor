@@ -56,6 +56,9 @@ $(function(){
     sticky($('#blockSticky'), 130, {
         minimumWidth: 960
     });
+    sticky($('#dropdownsSticky'), 72, {
+        minimumWidth: 960
+    });
 
     $(window).on('resize', throttle(function(){
         requestAnimFrame(resizeHandler);

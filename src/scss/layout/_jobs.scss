@@ -96,15 +96,24 @@
     }
 }
 
+.wrapper-page{
+    padding: 94px 0;
+}
 .wrapper-dropdowns{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 25px 0;
+    background: rgba($white, 0.95);
+    z-index: 1;
     .dropdowns{
         display: flex;
         position: relative;
         left: -$gutter;
         width: calc(100% + #{2*$gutter});
         margin: 0;
-        padding: 25px 0 25px 37.5%;
-        background: rgba($white, 0.95);
+        padding: 0 0 0 37.5%;
     }
     .dropdown{
         width: calc(40% - #{2*$gutter});
