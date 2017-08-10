@@ -74,5 +74,8 @@
 @media(max-width: $desktopSmall){
     .wrapper-content-sidebar{
         display: block;
+        aside{
+            margin: 0;
+        }
     }
 }
