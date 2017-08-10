@@ -260,11 +260,11 @@ function essor_post_type(){
         'supports' => array('title', 'editor', 'thumbnail', 'excerpt', 'revisions')
     ) );
 
-    register_post_type( 'metier', array(
-        'label' => 'Fiches métier',
-        'singular_label' => 'Fiche métier',
+    register_post_type( 'temoignage', array(
+        'label' => 'Témoignages',
+        'singular_label' => 'Témoignage',
         'public' => true,
-        'menu_icon' => 'dashicons-id',
+        'menu_icon' => 'dashicons-format-quote',
         'supports' => array('title', 'editor', 'thumbnail', 'excerpt', 'revisions')
     ) );
 }
