@@ -1,0 +1,61 @@
+.annotated-image {
+  padding: 0;
+  line-height: 0;
+  position: relative;
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
+.annotated-image.editable span.note {
+  cursor: pointer;
+}
+.annotated-image img {
+  max-width: 100%;
+}
+.annotated-image span.note {
+  display: block;
+  position: absolute;
+  cursor: default;
+}
+
+.annotated-image span.note span.marker {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: -0.75em;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 1em 0.75em 0 0.75em;
+  border-color: #d12a2a transparent transparent transparent;
+}
+.annotated-image span.note span.text {
+  padding: 0.5em;
+  position: absolute;
+  left: 0;
+  bottom: 1em;
+  transform: translateX( -50% );
+  line-height: 1.25em;
+  text-align: center;
+  white-space: nowrap;
+  color: #fff;
+  background: #d12a2a;
+}
+.annotated-image span.note span.text:empty {
+  display: none;
+}
+
+.annotated-image span.note.current span.marker{
+  border-top-color: orange;
+}
+.annotated-image span.note.current span.text{
+  background: orange;
+}
+.annotated-image-wrapper .textarea .acf-input{
+
+}
+.annotated-image-wrapper textarea{
+  width: calc( 100% - 50px );
+  margin-right: 1em;
+}
