@@ -259,14 +259,6 @@ function essor_post_type(){
         'menu_icon' => 'dashicons-businessman',
         'supports' => array('title', 'editor', 'thumbnail', 'excerpt', 'revisions')
     ) );
-
-    register_post_type( 'temoignage', array(
-        'label' => 'Témoignages',
-        'singular_label' => 'Témoignage',
-        'public' => true,
-        'menu_icon' => 'dashicons-format-quote',
-        'supports' => array('title', 'editor', 'thumbnail', 'excerpt', 'revisions')
-    ) );
 }
 add_action( 'init', 'essor_post_type' );
 
