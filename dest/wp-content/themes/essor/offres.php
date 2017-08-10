@@ -9,14 +9,10 @@ $placeQuery = isset( $_GET['lieu'] ) ? $_GET['lieu'] : '';
 get_header(); ?>
 
 	<?php if ( have_posts() ) : the_post(); ?>
-
-		<?php the_post_thumbnail('full'); ?>
-
-		<div class='container-small'>
-            <aside>
-                <?php wp_nav_menu( array( 'theme_location' => 'jobs', 'container' => false, 'menu_class' => 'menu-aside' ) ); ?>
-            </aside>
-
+        <div class='wrapper-top-img small'>
+            <div class='top-img' style='background-image:url("<?php echo get_the_post_thumbnail_url();?>")'></div>
+        </div>
+		<div class='container'>
             <div class='dropdown'>
                 <button type='button' class='dropdown-title'><svg class='icon icon-down'><use xlink:href='#icon-down'></use></svg></button>
                 <?php
@@ -57,29 +53,38 @@ get_header(); ?>
                 <?php } ?>
             </div>
 
-			<h1><?php the_title(); ?></h1>
-			<?php the_content(); ?>
+            <div class='wrapper-content-sidebar'>
+                <aside>
+                    <div class='wrapper-menu-aside'>
+                        <?php wp_nav_menu( array( 'theme_location' => 'jobs', 'container' => false, 'menu_class' => 'menu-aside' ) ); ?>
+                    </div>
+                </aside>
+                <div class='content-sidebar'>
+                    <h1><?php the_title(); ?></h1>
+                    <?php the_content(); ?>
 
-            <?php
-            $jobsArgs = array('post_type' => 'offre', 'posts_per_page' => 4, 'tax_query' => array('relation' => 'AND'), 'post_status' => 'publish');
+                    <?php
+                    $jobsArgs = array('post_type' => 'offre', 'posts_per_page' => 4, 'tax_query' => array('relation' => 'AND'), 'post_status' => 'publish');
 
-            if( $contractTypeQuery ){
-                array_push($jobsArgs['tax_query'], array('taxonomy' => 'contrat', 'field' => 'slug', 'terms' => $contractTypeQuery));
-            }
+                    if( $contractTypeQuery ){
+                        array_push($jobsArgs['tax_query'], array('taxonomy' => 'contrat', 'field' => 'slug', 'terms' => $contractTypeQuery));
+                    }
 
-            if( $placeQuery ){
-                array_push($jobsArgs['tax_query'], array('taxonomy' => 'lieu', 'field' => 'slug', 'terms' => $placeQuery));
-            }
+                    if( $placeQuery ){
+                        array_push($jobsArgs['tax_query'], array('taxonomy' => 'lieu', 'field' => 'slug', 'terms' => $placeQuery));
+                    }
 
-            $jobsQuery = new WP_Query( $jobsArgs );
+                    $jobsQuery = new WP_Query( $jobsArgs );
 
-            if( $jobsQuery->have_posts() ){ ?>
-                <ul id='ajax-content'>
-                    <?php while( $jobsQuery->have_posts() ){ $jobsQuery->the_post(); ?>
-                        <?php get_template_part( 'includes/offre' ); ?>
+                    if( $jobsQuery->have_posts() ){ ?>
+                        <ul class='jobs' id='ajax-content'>
+                            <?php while( $jobsQuery->have_posts() ){ $jobsQuery->the_post(); ?>
+                                <?php get_template_part( 'includes/offre' ); ?>
+                            <?php } ?>
+                        </ul>
                     <?php } ?>
-                </ul>
-            <?php } ?>
+                </div>
+            </div>
 		</div>
 	
 	<?php else : ?>
