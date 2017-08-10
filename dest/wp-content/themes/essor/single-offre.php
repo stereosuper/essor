@@ -40,7 +40,7 @@ if( isset($_POST['submit']) ){
     if( !isset($_POST['essor_offer_nonce']) || !wp_verify_nonce($_POST['essor_offer_nonce'], 'essor_offer') ){
 
         $error = true;
-        $errorSend = 'Nous sommes désolés, une erreur est survenue! Merci de réésayer plus tard.';
+        $errorSend = 'Nous sommes désolés, une erreur est survenue! Merci de réssayer plus tard.';
     
     }else{
 
@@ -127,7 +127,7 @@ if( isset($_POST['submit']) ){
                     $success = true;
                 }else{
                     $error = true;
-                    $errorSend = 'Nous sommes désolés, une erreur est survenue! Merci de réésayer plus tard.';
+                    $errorSend = 'Nous sommes désolés, une erreur est survenue! Merci de réssayer plus tard.';
                 }
             }else{
                 $success = true;
