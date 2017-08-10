@@ -17,22 +17,6 @@
         &:nth-child(even){
             margin-top: 72px;
         }
-        &.load-more{
-            > button{
-                display: block;
-                width: 100%;
-                position: relative;
-                font-family: $poppins;
-                font-size: 2rem;
-                background: $primary;
-                color: $white;
-                &:before{
-                    content: '';
-                    display: block;
-                    padding-bottom: 88%;
-                }
-            }
-        }
     }
     a{
         text-decoration: none;
@@ -124,6 +108,22 @@
             &:before{
                 content: none;
             }
+        }
+    }
+}
+.load-more{
+    > button{
+        display: block;
+        width: 100%;
+        position: relative;
+        font-family: $poppins;
+        font-size: 2rem;
+        background: $primary;
+        color: $white;
+        &:before{
+            content: '';
+            display: block;
+            padding-bottom: 88%;
         }
     }
 }

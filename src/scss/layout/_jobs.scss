@@ -74,6 +74,17 @@
         &:last-child{
             margin-bottom: 0;
         }
+        &.load-more{
+            > button{
+                width: 80%;
+                &:before{
+                    padding-bottom: 35%;
+                }
+            }
+            .txt-more{
+                text-align: right;
+            }
+        }
     }
     a{
         text-decoration: none;

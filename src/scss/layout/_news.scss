@@ -20,16 +20,8 @@
         }
         &.load-more{
             > button{
-                display: block;
-                position: relative;
                 width: 75%;
-                background: $primary;
-                color: $white;
-                font-family: $poppins;
-                font-size: 2rem;
                 &:before{
-                    content: '';
-                    display: block;
                     padding-bottom: 48%;
                 }
             }
