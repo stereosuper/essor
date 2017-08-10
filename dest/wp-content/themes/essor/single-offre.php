@@ -22,8 +22,7 @@ $file = isset($_FILES['offer_file']) ? $_FILES['offer_file'] : '';
 $ref = isset($_POST['offer_ref']) ? sanitize_text_field($_POST['offer_ref']) : '';
 $spamUrl = isset($_POST['url']) ? strip_tags(stripslashes($_POST['url'])) : '';
 
-//$mailto = get_field('emails', 'options');
-$mailto = 'shwarp@live.fr';
+$mailto = get_field('emailsOffers', 'options');
 
 if( !function_exists( 'wp_handle_upload' ) ){
     require_once( ABSPATH . 'wp-admin/includes/file.php' );
