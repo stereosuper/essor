@@ -159,7 +159,7 @@ get_header(); ?>
 
                     <h3 id='form'>Postuler</h3>
 
-                    <div class='form-contact'>
+                    <div class='small form-offer'>
 
                         <?php if( $success ){ ?>
                             <p class='form-success'>
