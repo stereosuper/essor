@@ -156,7 +156,7 @@ get_header(); ?>
                     </div>
                 </aside>
                 <div class='content-sidebar'>
-                    <h1><?php the_title(); ?></h1>
+                    <h1 id='form'><?php the_title(); ?></h1>
                     <?php the_content(); ?>
 
                     <div class='small form-offer'>
