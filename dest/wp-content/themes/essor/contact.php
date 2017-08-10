@@ -12,12 +12,14 @@ $errorPhone = false;
 $errorPhoneTxt = false;
 $errorMail = false;
 $errorMailTxt = false;
+$errorObject = false;
 $errorEmpty = false;
 $errorSend = false;
 
 $name = isset($_POST['full_name']) ? sanitize_text_field($_POST['full_name']) : '';
 $phone = isset($_POST['tel']) ? sanitize_text_field($_POST['tel']) : '';
 $mail = isset($_POST['email']) ? sanitize_email($_POST['email']) : '';
+$object = isset($_POST['object']) ? sanitize_text_field($_POST['object']) : '';
 $msg = isset($_POST['message']) ? strip_tags(stripslashes($_POST['message'])) : '';
 $spamUrl = isset($_POST['url']) ? strip_tags(stripslashes($_POST['url'])) : '';
 
@@ -58,6 +60,12 @@ if( isset($_POST['submit']) ){
 			}
 		}
 
+		if( empty($object) ){
+			$errorObject = true;
+			$errorEmpty = true;
+			$error = true;
+		}
+
 		if( empty($msg) ){
 			$errorMsg = true;
 			$errorEmpty = true;
@@ -75,6 +83,7 @@ if( isset($_POST['submit']) ){
 				$content = 'De: ' . $name . "\r\n" .
 						'Email: ' . $mail . "\r\n" .
 						'Téléphone: ' . $phone . "\r\n\r\n" .
+						'Object: ' . $object . "\r\n\r\n" .
 						'Message: ' . $msg;
 				
 				$sent = wp_mail($mailto, $subjectMail, $content, $headers);
@@ -144,9 +153,9 @@ get_header(); ?>
 								<i>(facultatif)</i>
 							</div>
 
-							<div class='field objet <?php if($errorPhone) echo 'error'; ?>'>
-								<label for='objet'>Objet de votre message</label>
-								<input type='text' name='objet' id='objet' value='<?php echo esc_attr( $phone ); ?>' placeholder='Renseignez le sujet de votre correspondance' required>
+							<div class='field <?php if($errorObject) echo 'error'; ?>'>
+								<label for='object'>Objet de votre message</label>
+								<input type='text' name='object' id='object' class='object' value='<?php echo esc_attr( $object ); ?>' placeholder='Renseignez le sujet de votre correspondance' required>
 							</div>
 
 							<div class='field field-top <?php if($errorMsg) echo 'error'; ?>'>
