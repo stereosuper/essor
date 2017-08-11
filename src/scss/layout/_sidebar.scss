@@ -1,12 +1,16 @@
 /* SIDEBAR */
+
 .wrapper-content-sidebar{
     display: flex;
     justify-content: space-between;
     width: 100%;
     aside{
-        min-width: 300px;
         width: 300px;
+        min-width: 300px;
         margin: 120px 150px 0 0;
+        &.over-img{
+            margin-top: -178px;
+        }
     }
 }
 aside.contact-aside{
@@ -24,10 +28,13 @@ aside.contact-aside{
     position: relative;
     width: 300px;
 }
-
 .wrapper-menu-aside{
     position: relative;
-    width: 300px;
+    width: 330px;
+    z-index: 3;
+    overflow-y: hidden;
+    padding-left: 30px;
+    margin-left: -30px;
 }
 .menu-aside{
     width: calc(100% - 20px);
@@ -36,15 +43,48 @@ aside.contact-aside{
     background: $primary;
     > li{
         padding: 0;
-        &:before{
+        &:before, &:after{
             content: none;
+            display: block;
+            width: 20px;
+            height: 200px;
+            position: absolute;
+            left: -30px;
+            background: $primary;
+        }
+        &:before{
+            top: calc(50% + 1px);
+        }
+        &:after{
+            bottom: calc(50% + 1px);
+        }
+        &.current-menu-item{
+            &:before, &:after{
+                content: '';
+            }
+            a{
+                &:before{
+                    content: '';
+                }
+            }
         }
     }
     a{
+        position: relative;
         font-family: $poppinsLight;
         color: $white;
         text-decoration: none;
         line-height: 1.1;
+        &:before{
+            content: none;
+            display: block;
+            width: 20px;
+            height: 2px;
+            position: absolute;
+            top: calc(50% - 1px);
+            left: -50px;
+            background: $primary;
+        }
     }
 }
 .content-sidebar{
