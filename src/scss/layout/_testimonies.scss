@@ -1,0 +1,63 @@
+/* Testimonies */
+.testimonies{
+    > li{
+        width: calc(100% + #{2*$gutter});
+        margin: 0 0 130px -$gutter;
+        padding: 0;
+        &:before{
+            content: none;
+        }
+        &:last-child{
+            margin-bottom: 0;
+        }
+    }
+    h2{
+        margin: 0;
+        line-height: 1;
+    }
+    h3{
+        margin-top: 0;
+        line-height: 1.2;
+    }
+    h4{
+        margin-top: 0;
+        text-transform: none;
+    }
+    blockquote{
+        margin: 2.85em 0 0;
+        padding: 0;
+        background: none;
+        text-indent: 0;
+        > p{
+            line-height: 1.4;
+            &:first-child{
+                &:before{
+                    content: '';
+                    display: inline-block;
+                    vertical-align: top;
+                    width: 20px;
+                    height: 18px;
+                    margin: -0.2em 10px 0 0;
+                    background: url(../layoutImg/quote.svg) no-repeat 0 0;
+                }
+            }
+        }
+    }
+    .testimonial-img{
+        position: relative;
+        width: 40%;
+        margin: 0 $gutter $gutter 0;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        background-size: cover;
+        float: left;
+        &:before{
+            content: '';
+            display: block;
+            padding-bottom: 100%;
+        }
+    }
+    .content-txt{
+        padding: 0 $gutter;
+    }
+}

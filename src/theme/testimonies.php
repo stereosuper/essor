@@ -17,7 +17,21 @@ get_header(); ?>
 
                 <div class='content-sidebar'>
                     <h1><?php the_title(); ?></h1>
-                    
+                    <?php if(have_rows('testimonies')){ ?>
+                        <ul class='testimonies'>
+                            <?php while (have_rows('testimonies')){ the_row();?>
+                                <li>
+                                    <div class='testimonial-img' style='background-image: url(<?php  the_sub_field('photo'); ?>)'></div>
+                                    <div class='content-txt'>
+                                        <h2><?php the_sub_field('name'); ?></h2>
+                                        <h3><?php the_sub_field('job'); ?></h3>
+                                        <h4><?php the_sub_field('subtitle'); ?></h4>
+                                        <blockquote><?php the_sub_field('quote'); ?></blockquote>
+                                    </div>
+                                </li>
+                            <?php } ?>
+                        </ul>
+                    <?php } ?>
                 </div>
             </div>
 		</div>
