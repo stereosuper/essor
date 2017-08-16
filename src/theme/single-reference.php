@@ -49,6 +49,12 @@
                         </ul>
                     <?php endif; ?>
 
+                    <?php
+                        // if( function_exists('gacfai_get_field') ){
+                        //     echo gacfai_get_field('img', $post->ID, 'full', false, '');
+                        // }
+                    ?>
+
                     <?php the_content(); ?>
                 </div>
             </div>

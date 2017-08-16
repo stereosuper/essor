@@ -373,6 +373,12 @@ function essor_scripts(){
 
     wp_deregister_script( 'wp-embed' );
 
+    // Goliath Plugin - Annoted Images
+    // if (function_exists('gacfai_get_field')) {
+    //     wp_register_style('goliath-annotated-image', plugins_url() . "/goliath-acf-annotated-image/assets/css/goliath-annotated-image.css", array(), '1.0');
+    //     wp_register_script('goliath-annotated-image', plugins_url() . "/goliath-acf-annotated-image/assets/js/goliath-annotated-image.js", array(), '1.0', true);
+    // }
+
     // load more posts
     $postType = is_home() || is_category() ? get_field('postType', get_option( 'page_for_posts' )) : get_field('postType');
     $args = $postType ? array('post_type' => $postType, 'tax_query' => array('relation' => 'AND'), 'post_status' => 'publish', 'posts_per_page' => -1) : '';
