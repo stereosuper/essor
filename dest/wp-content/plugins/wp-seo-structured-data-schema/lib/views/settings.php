@@ -473,6 +473,20 @@ $schemaModel = new KcSeoSchemaModel;
 				</td>
 			</tr>
 		</table>
+        <h2>Schema Settings</h2>
+        <table width="100%" cellpadding="10" class="form-table">
+            <tr class="default">
+                <th>Delete all data</th>
+                <td align="left" scope="row">
+                    <input type="checkbox"
+                           name="delete-data" <?php echo( ! empty( $settings['delete-data'] ) ? "checked" : null ); ?>
+                           value="1"
+                           id="delete-data"
+                    /><label for="delete-data">Enable</label>
+                    <p class="description">This will delete all schema data when plugin is deleted.</p>
+                </td>
+            </tr>
+        </table>
 		<p class="submit"><input type="submit" name="submit" id="tlpSaveButton" class="button button-primary"
 		                         value="<?php _e( 'Save Changes', KCSEO_WP_SCHEMA_SLUG ); ?>"></p>
 

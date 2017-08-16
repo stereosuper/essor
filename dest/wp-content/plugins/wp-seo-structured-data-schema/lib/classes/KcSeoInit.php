@@ -17,7 +17,6 @@ if ( ! class_exists( 'KcSeoInit' ) ):
 
 			register_activation_hook( KCSEO_WP_SCHEMA_PLUGIN_ACTIVE_FILE_NAME, array( $this, 'activePlugin' ) );
 //	        register_deactivation_hook(KCSEO_WP_SCHEMA_PLUGIN_ACTIVE_FILE_NAME, array($this, 'uninstall'));
-
 			// Uninstall hook
 
 		}
@@ -101,8 +100,7 @@ if ( ! class_exists( 'KcSeoInit' ) ):
 				$styles['kcseo-admin-css']   = $KcSeoWPSchema->assetsUrl . 'css/admin.css';
 			}
 			foreach ( $scripts as $script ) {
-				wp_register_script( $script['handle'], $script['src'], $script['deps'], time(),
-					$script['footer'] ); //$KcSeoWPSchema->options['version']
+				wp_register_script( $script['handle'], $script['src'], $script['deps'], time(), $script['footer'] ); //$KcSeoWPSchema->options['version']
 			}
 			foreach ( $styles as $k => $v ) {
 				wp_register_style( $k, $v, false, $KcSeoWPSchema->options['version'] );
@@ -165,8 +163,6 @@ if ( ! class_exists( 'KcSeoInit' ) ):
 			load_plugin_textdomain( KCSEO_WP_SCHEMA_SLUG, false, KCSEO_WP_SCHEMA_LANGUAGE_PATH );
 			$this->updateVariableAndFixIssue();
 		}
-
-
 		function activePlugin() {
 			$this->updateVariableAndFixIssue();
 		}

@@ -207,8 +207,8 @@ if ( ! class_exists( 'KcSeoSchemaModel' ) ):
 						}
 						if ( ! empty( $metaData['performerName'] ) ) {
 							$event["performer"] = array(
-								"@type"   => "Person",
-								"name"    => $KcSeoWPSchema->sanitizeOutPut( $metaData['performerName'] )
+								"@type" => "Person",
+								"name"  => $KcSeoWPSchema->sanitizeOutPut( $metaData['performerName'] )
 							);
 						}
 						if ( ! empty( $metaData['image'] ) ) {
@@ -243,7 +243,8 @@ if ( ! class_exists( 'KcSeoSchemaModel' ) ):
 							$product["name"] = $KcSeoWPSchema->sanitizeOutPut( $metaData['name'] );
 						}
 						if ( ! empty( $metaData['image'] ) ) {
-							$product["image"] = $KcSeoWPSchema->sanitizeOutPut( $metaData['image'] );
+							$img              = $KcSeoWPSchema->imageInfo( absint( $metaData['image'] ) );
+							$product["image"] = $KcSeoWPSchema->sanitizeOutPut( $img['url'], 'url' );
 						}
 						if ( ! empty( $metaData['description'] ) ) {
 							$product["description"] = $KcSeoWPSchema->sanitizeOutPut( $metaData['description'] );
@@ -407,9 +408,9 @@ if ( ! class_exists( 'KcSeoSchemaModel' ) ):
 						if ( ! empty( $metaData['description'] ) ) {
 							$aRating["description"] = $KcSeoWPSchema->sanitizeOutPut( $metaData['description'], 'textarea' );
 						}
-						if( $aRating["@type"] != "Organization"){
+						if ( $aRating["@type"] != "Organization" ) {
 							if ( ! empty( $metaData['image'] ) ) {
-								$img = $KcSeoWPSchema->imageInfo( absint( $metaData['image'] ) );
+								$img              = $KcSeoWPSchema->imageInfo( absint( $metaData['image'] ) );
 								$aRating["image"] = array(
 									"@type"  => "ImageObject",
 									"url"    => $KcSeoWPSchema->sanitizeOutPut( $img['url'], 'url' ),
@@ -425,7 +426,7 @@ if ( ! class_exists( 'KcSeoSchemaModel' ) ):
 							}
 
 							if ( ! empty( $metaData['address'] ) ) {
-								$aRating["address"] =  $KcSeoWPSchema->sanitizeOutPut( $metaData['address'] );
+								$aRating["address"] = $KcSeoWPSchema->sanitizeOutPut( $metaData['address'] );
 							}
 						}
 
@@ -448,6 +449,41 @@ if ( ! class_exists( 'KcSeoSchemaModel' ) ):
 						$html .= $this->get_jsonEncode( $aRating );
 						break;
 
+					case 'restaurant':
+						$restaurant             = array();
+						$restaurant["@context"] = "http://schema.org";
+						$restaurant["@type"]    = "Restaurant";
+						if ( ! empty( $metaData['name'] ) ) {
+							$restaurant["name"] = $KcSeoWPSchema->sanitizeOutPut( $metaData['name'] );
+						}
+						if ( ! empty( $metaData['description'] ) ) {
+							$restaurant["description"] = $KcSeoWPSchema->sanitizeOutPut( $metaData['description'], 'textarea' );
+						}
+						if ( ! empty( $metaData['openingHours'] ) ) {
+							$restaurant["openingHours"] = $KcSeoWPSchema->sanitizeOutPut( $metaData['openingHours'], 'textarea' );
+						}
+						if ( ! empty( $metaData['telephone'] ) ) {
+							$restaurant["telephone"] = $KcSeoWPSchema->sanitizeOutPut( $metaData['telephone'] );
+						}
+						if ( ! empty( $metaData['menu'] ) ) {
+							$restaurant["menu"] = $KcSeoWPSchema->sanitizeOutPut( $metaData['menu'], 'url' );
+						}
+						if ( ! empty( $metaData['image'] ) ) {
+							$img                 = $KcSeoWPSchema->imageInfo( absint( $metaData['image'] ) );
+							$restaurant["image"] = $KcSeoWPSchema->sanitizeOutPut( $img['url'], 'url' );
+						}
+						if ( ! empty( $metaData['address'] ) ) {
+							$restaurant["address"] = $KcSeoWPSchema->sanitizeOutPut( $metaData['address'], 'textarea' );
+						}
+						if ( ! empty( $metaData['priceRange'] ) ) {
+							$restaurant["priceRange"] = $KcSeoWPSchema->sanitizeOutPut( $metaData['priceRange'] );
+						}
+						if ( ! empty( $metaData['servesCuisine'] ) ) {
+							$restaurant["servesCuisine"] = $KcSeoWPSchema->sanitizeOutPut( $metaData['servesCuisine'] );
+						}
+						$html .= $this->get_jsonEncode( $restaurant );
+						break;
+
 					default:
 						break;
 				}
@@ -464,20 +500,20 @@ if ( ! class_exists( 'KcSeoSchemaModel' ) ):
 			$name  = $data['name'];
 			$value = $data['value'];
 
-			$class   = isset( $data['class'] ) ? ( $data['class'] ? $data['class'] : null ) : null;
-			$require = ( isset( $data['required'] ) ? ( $data['required'] ? "<span class='required'>*</span>" : null ) : null );
-			$title   = ( isset( $data['title'] ) ? ( $data['title'] ? $data['title'] : null ) : null );
-			$desc    = ( isset( $data['desc'] ) ? ( $data['desc'] ? $data['desc'] : null ) : null );
-			$holderClass    = ( !empty( $data['holderClass'] ) ? $data['holderClass'] : null );
-			$html .= "<div class='field-container {$holderClass}' id='" . $id . '-container' . "'>";
-			$html .= "<label class='field-label' for='{$id}'>{$title}{$require}</label>";
-			$html .= "<div class='field-content' id='" . $id . '-content' . "'>";
+			$class       = isset( $data['class'] ) ? ( $data['class'] ? $data['class'] : null ) : null;
+			$require     = ( isset( $data['required'] ) ? ( $data['required'] ? "<span class='required'>*</span>" : null ) : null );
+			$title       = ( isset( $data['title'] ) ? ( $data['title'] ? $data['title'] : null ) : null );
+			$desc        = ( isset( $data['desc'] ) ? ( $data['desc'] ? $data['desc'] : null ) : null );
+			$holderClass = ( ! empty( $data['holderClass'] ) ? $data['holderClass'] : null );
+			$html        .= "<div class='field-container {$holderClass}' id='" . $id . '-container' . "'>";
+			$html        .= "<label class='field-label' for='{$id}'>{$title}{$require}</label>";
+			$html        .= "<div class='field-content' id='" . $id . '-content' . "'>";
 			switch ( $data['type'] ) {
 				case 'checkbox':
 					$checked = ( $value ? "checked" : null );
-					$html .= "<div class='kSeo-checkbox-wrapper'>";
-					$html .= "<label for='{$id}'><input type='checkbox' id='{$id}' class='{$class}' name='{$name}' {$checked} value='1' /> Enable</label>";
-					$html .= "</div>";
+					$html    .= "<div class='kSeo-checkbox-wrapper'>";
+					$html    .= "<label for='{$id}'><input type='checkbox' id='{$id}' class='{$class}' name='{$name}' {$checked} value='1' /> Enable</label>";
+					$html    .= "</div>";
 					break;
 
 				case 'text':
@@ -496,23 +532,23 @@ if ( ! class_exists( 'KcSeoSchemaModel' ) ):
 					break;
 
 				case 'image':
-					$html .= '<div class="kSeo-image">';
-						$ImageId = ! empty( $value ) ? absint( $value ) : 0;
-						$image   = $ingInfo = null;
-						if ( $ImageId ) {
-							$image   = wp_get_attachment_image( $ImageId, "thumbnail" );
-							$imgData = $KcSeoWPSchema->imageInfo( $ImageId );
-							$ingInfo .= "<span><strong>URL: </strong>{$imgData['url']}</span>";
-							$ingInfo .= "<span><strong>Width: </strong>{$imgData['width']}px</span>";
-							$ingInfo .= "<span><strong>Height: </strong>{$imgData['height']}px</span>";
-						}
-						$html .= "<div class='kSeo-image-wrapper'>";
-							$html .= '<span class="kSeoImgAdd"><span class="dashicons dashicons-plus-alt"></span></span>';
-							$html .= '<span class="kSeoImgRemove ' . ( $image ? null : "kSeo-hidden" ) . '"><span class="dashicons dashicons-trash"></span></span>';
-							$html .= '<div class="kSeo-image-preview">' . $image . '</div>';
-							$html .= "<input type='hidden' name='{$name}' value='" . absint( $ImageId ) . "' />";
-						$html .= "</div>";
-						$html .= "<div class='image-info'>{$ingInfo}</div>";
+					$html    .= '<div class="kSeo-image">';
+					$ImageId = ! empty( $value ) ? absint( $value ) : 0;
+					$image   = $ingInfo = null;
+					if ( $ImageId ) {
+						$image   = wp_get_attachment_image( $ImageId, "thumbnail" );
+						$imgData = $KcSeoWPSchema->imageInfo( $ImageId );
+						$ingInfo .= "<span><strong>URL: </strong>{$imgData['url']}</span>";
+						$ingInfo .= "<span><strong>Width: </strong>{$imgData['width']}px</span>";
+						$ingInfo .= "<span><strong>Height: </strong>{$imgData['height']}px</span>";
+					}
+					$html .= "<div class='kSeo-image-wrapper'>";
+					$html .= '<span class="kSeoImgAdd"><span class="dashicons dashicons-plus-alt"></span></span>';
+					$html .= '<span class="kSeoImgRemove ' . ( $image ? null : "kSeo-hidden" ) . '"><span class="dashicons dashicons-trash"></span></span>';
+					$html .= '<div class="kSeo-image-preview">' . $image . '</div>';
+					$html .= "<input type='hidden' name='{$name}' value='" . absint( $ImageId ) . "' />";
+					$html .= "</div>";
+					$html .= "<div class='image-info'>{$ingInfo}</div>";
 					$html .= '</div>';
 					break;
 				case 'select':
@@ -523,12 +559,12 @@ if ( ! class_exists( 'KcSeoSchemaModel' ) ):
 					if ( ! empty( $data['options'] ) && is_array( $data['options'] ) ) {
 						if ( $this->isAssoc( $data['options'] ) ) {
 							foreach ( $data['options'] as $optKey => $optValue ) {
-								$slt = ( $optKey == $value ? "selected" : null );
+								$slt  = ( $optKey == $value ? "selected" : null );
 								$html .= "<option value='" . esc_attr( $optKey ) . "' {$slt}>" . esc_html( $optValue ) . "</option>";
 							}
 						} else {
 							foreach ( $data['options'] as $optValue ) {
-								$slt = ( $optValue == $value ? "selected" : null );
+								$slt  = ( $optValue == $value ? "selected" : null );
 								$html .= "<option value='" . esc_attr( $optValue ) . "' {$slt}>" . esc_html( $optValue ) . "</option>";
 							}
 						}
@@ -789,18 +825,18 @@ if ( ! class_exists( 'KcSeoSchemaModel' ) ):
 							'required' => true,
 							'desc'     => "Event start date"
 						),
-						'endDate'       => array(
-							'title'    => 'End date (Recommended)',
-							'type'     => 'text',
-							'class'    => 'kcseo-date',
-							'desc'     => "Event end date"
+						'endDate'         => array(
+							'title' => 'End date (Recommended)',
+							'type'  => 'text',
+							'class' => 'kcseo-date',
+							'desc'  => "Event end date"
 						),
-						'description'           => array(
+						'description'     => array(
 							'title' => 'Description (Recommended)',
 							'type'  => 'textarea',
 							'desc'  => "Event description"
 						),
-						'performerName'           => array(
+						'performerName'   => array(
 							'title' => 'Performer Name (Recommended)',
 							'type'  => 'text',
 							'desc'  => "The performer's name."
@@ -931,7 +967,7 @@ if ( ! class_exists( 'KcSeoSchemaModel' ) ):
 						'thumbnailUrl'     => array(
 							'title'       => 'Thumbnail URL',
 							'type'        => 'url',
-							'placeholder'   => "URL",
+							'placeholder' => "URL",
 							'required'    => true,
 							'desc'        => "A URL pointing to the video thumbnail image file. Images must be at least 160x90 pixels and at most 1920x1080 pixels."
 						),
@@ -1126,26 +1162,26 @@ if ( ! class_exists( 'KcSeoSchemaModel' ) ):
 							'required' => true,
 							'desc'     => "The item that is being rated."
 						),
-						'image' => array(
-							'title'    => 'Image',
-							'type'     => 'image',
-							'required' => true,
+						'image'       => array(
+							'title'       => 'Image',
+							'type'        => 'image',
+							'required'    => true,
 							'holderClass' => 'kSeo-hidden aggregate-except-organization-holder'
 						),
-						'priceRange' => array(
-							'title'    => 'Price Range (Recommended)',
-							'type'     => 'text',
+						'priceRange'  => array(
+							'title'       => 'Price Range (Recommended)',
+							'type'        => 'text',
 							'holderClass' => 'kSeo-hidden aggregate-except-organization-holder',
-							'desc' => "The price range of the business, for example $$$."
+							'desc'        => "The price range of the business, for example $$$."
 						),
-						'telephone' => array(
-							'title'    => 'Telephone (Recommended)',
-							'type'     => 'text',
+						'telephone'   => array(
+							'title'       => 'Telephone (Recommended)',
+							'type'        => 'text',
 							'holderClass' => 'kSeo-hidden aggregate-except-organization-holder'
 						),
-						'address'    => array(
-							'title'    => 'Address (Recommended)',
-							'type'     => 'text',
+						'address'     => array(
+							'title'       => 'Address (Recommended)',
+							'type'        => 'text',
 							'holderClass' => 'kSeo-hidden aggregate-except-organization-holder',
 						),
 						'description' => array(
@@ -1188,6 +1224,57 @@ if ( ! class_exists( 'KcSeoSchemaModel' ) ):
 							'type'     => 'number',
 							'required' => true,
 							'desc'     => "The lowest value allowed in this rating system. <span class='required'>* Required if the rating system is not a 5-point scale.</span> If worstRating is omitted, 1 is assumed."
+						)
+					)
+				),
+				'restaurant'       => array(
+					'title'  => 'Restaurant',
+					'fields' => array(
+						'active'       => array(
+							'type' => 'checkbox'
+						),
+						'name'         => array(
+							'title'    => 'Name of the Restaurant',
+							'type'     => 'text',
+							'required' => true
+						),
+						'description'  => array(
+							'title' => 'Description of the Restaurant',
+							'type'  => 'textarea',
+						),
+						'openingHours' => array(
+							'title' => 'Opening Hours',
+							'type'  => 'textarea',
+							'desc'  => 'Mo,Tu,We,Th,Fr,Sa,Su 11:30-23:00'
+						),
+						'telephone'    => array(
+							'title' => 'Opening Hours',
+							'type'  => 'text',
+							'desc'  => '+155501003333'
+						),
+						'menu'         => array(
+							'title' => 'Menu',
+							'type'  => 'text',
+							'desc'  => 'http://example.com/menu'
+						),
+						'image'        => array(
+							'title'    => 'Image',
+							'type'     => 'image',
+							'required' => true
+						),
+						'address'      => array(
+							'title' => 'Address',
+							'type'  => 'textarea'
+						),
+						'priceRange'   => array(
+							'title' => 'Price Range',
+							'type'  => 'text',
+							'desc'  => 'The price range of the business, for example $$$'
+						),
+						'servesCuisine'   => array(
+							'title' => 'Serves Cuisine',
+							'type'  => 'text',
+							'desc'  => 'The cuisine of the restaurant.'
 						)
 					)
 				)

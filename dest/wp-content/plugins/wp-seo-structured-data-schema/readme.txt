@@ -3,8 +3,8 @@ Contributors: kcseopro
 Donate link:
 Tags: seo, schema, structured data, rich snippets, microdata, json-ld, search engine optimization, local seo, google, sitelinks, schema.org, microformat, serp, amp
 Requires at least: 3.5
-Tested up to: 4.7
-Stable tag: 2.0
+Tested up to: 4.8
+Stable tag: 2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -92,6 +92,11 @@ You'll find the [FAQ on Kcseopro.com](http://kcseopro.com/).
 
 
 == Changelog ==
+
+= 2.1 =
+* Can delete all save data
+* Restaurant Schema (New)
+* Image url fixed for product schema
 
 = 2.0 =
 * Major update at coding and structure
