@@ -20,13 +20,24 @@ get_header(); ?>
                     <?php if(have_rows('testimonies')){ ?>
                         <ul class='testimonies'>
                             <?php while (have_rows('testimonies')){ the_row();?>
-                                <li>
-                                    <div class='testimonial-img' style='background-image: url(<?php  the_sub_field('photo'); ?>)'></div>
+                                <li id='<?php the_sub_field('anchor'); ?>'>
+                                    <?php if( get_sub_field('photo') ){ ?>
+                                        <div class='testimonial-img' style='background-image: url(<?php  the_sub_field('photo'); ?>)'></div>
+                                    <?php } ?>
                                     <div class='content-txt'>
                                         <h2><?php the_sub_field('name'); ?></h2>
-                                        <h3><?php the_sub_field('job'); ?></h3>
-                                        <h4><?php the_sub_field('subtitle'); ?></h4>
-                                        <blockquote><?php the_sub_field('quote'); ?></blockquote>
+                                        <?php if( get_sub_field('job') ){ ?>
+                                            <h3><?php the_sub_field('job'); ?></h3>
+                                        <?php } ?>
+                                        <?php if( get_sub_field('subtitle') ){ ?>
+                                            <h4><?php the_sub_field('subtitle'); ?></h4>
+                                        <?php } ?>
+                                        <?php if( get_sub_field('quote') ){ ?>
+                                            <blockquote><?php the_sub_field('quote'); ?></blockquote>
+                                        <?php } ?>
+                                        <?php if( get_sub_field('wysiwyg') ){ ?>
+                                            <div class='additionnal-content'><?php the_sub_field('wysiwyg'); ?></div>
+                                        <?php } ?>
                                     </div>
                                 </li>
                             <?php } ?>
