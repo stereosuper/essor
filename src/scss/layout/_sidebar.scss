@@ -4,48 +4,45 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    aside{
+    > aside{
         width: 300px;
         min-width: 300px;
         margin: 120px 150px 0 0;
         &.over-img{
             margin-top: -178px;
         }
-    }
-}
-aside.contact-aside{
-    margin: 232px 150px 0 0;
-    .wrapper-aside{
-        padding: 1px 0;
-    }
-    h2 {
-        font-size: 2.2rem;
-        color: $primary;
+        &.contact-aside{
+            margin-top: 232px;
+            h2{
+                font-size: 2.2rem;
+                color: $primary;
+            }
+        }
     }
 }
 
 .wrapper-aside{
-    position: relative;
     width: 300px;
+    padding: 1px 0;
+    position: relative;
 }
 .wrapper-menu-aside{
-    position: relative;
     width: 330px;
+    padding: 0 0 0 $gutter;
+    position: relative;
+    margin: 0 0 0 $gutter*-1;
     z-index: 3;
     overflow-y: hidden;
-    padding-left: 30px;
-    margin-left: -30px;
 }
 .menu-aside{
     width: calc(100% - 20px);
     margin: 0 0 0 20px;
-    padding: 40px 30px 40px 10px;
+    padding: 40px $gutter 40px 10px;
     background: $primary;
     > li{
         padding: 0;
         &:before, &:after{
             content: none;
-            display: block;
             width: 20px;
             height: 200px;
             position: absolute;
@@ -58,26 +55,20 @@ aside.contact-aside{
         &:after{
             bottom: calc(50% + 1px);
         }
-        &.current-menu-item{
-            &:before, &:after{
+        &.current-menu-item, &.current_page_parent{
+            &:before, &:after, a:before{
                 content: '';
-            }
-            a{
-                &:before{
-                    content: '';
-                }
             }
         }
     }
     a{
         position: relative;
         font-family: $poppinsLight;
+        line-height: 1.1;
         color: $white;
         text-decoration: none;
-        line-height: 1.1;
         &:before{
             content: none;
-            display: block;
             width: 20px;
             height: 2px;
             position: absolute;
@@ -91,21 +82,24 @@ aside.contact-aside{
     flex: 1 1 0%;
 }
 
+
 @media(max-width: $desktop){
     .wrapper-content-sidebar{
-        aside{
+        > aside{
             width: 250px;
             margin-right: 80px;
         }
     }
+
     .wrapper-menu-aside{
         width: 250px;
     }
 }
+
 @media(max-width: $desktopSmall){
     .wrapper-content-sidebar{
         flex-direction: column;
-        aside{
+        > aside{
             margin: 0;
             &.contact-aside{
                 margin: 50px 0 0;

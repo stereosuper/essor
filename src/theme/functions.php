@@ -211,31 +211,29 @@ function essort_menu_display_desc( $item_output, $item, $depth, $args ){
 }
 add_filter( 'walker_nav_menu_start_el', 'essort_menu_display_desc', 10, 4 );
 
-// Cleanup WP Menu html
-function essor_css_attributes_filter( $var ){
-    return is_array($var) ? array_intersect($var, array('current-menu-item', 'current_page_parent', 'current_page_ancestor')) : '';
-}
-add_filter( 'nav_menu_css_class', 'essor_css_attributes_filter' );
-
-// Custom posts parents marked as current
+// Custom posts parents marked as current + filter css class in wp nav menu
 function essor_custom_post_nav_class( $classes, $item ){
-	global $post;
+	if( is_singular( 'reference' ) ){
+        if( $item->object_id == url_to_postid( get_field('refsLink', 'options') ) ){
+            $classes[] = 'current_page_parent';
+        }else{
+            $classes = array_diff( $classes, array( 'current_page_parent' ) );
+        }
+    }
+
+    if( is_singular( 'offre' ) ){
+        if( $item->object_id == url_to_postid( get_field('offersLink', 'options') ) ){
+            $classes[] = 'current_page_parent';
+        }else{
+            $classes = array_diff( $classes, array( 'current_page_parent' ) );
+        }
+    }
+
+    if( is_search() || is_404() ){
+        $classes = array_diff( $classes, array( 'current_page_parent' ) );
+    }
 	
-	// Getting the post type of the current post
-	$current_post_type = get_post_type_object( get_post_type($post->ID) );
-	$current_post_type_slug = $current_post_type->rewrite['slug'];
-		
-	// Getting the URL of the menu item
-	$menu_slug = strtolower( trim($item->url) );
-	
-	// If the menu item URL contains the current post types slug add the current-menu-item class
-	if( strpos($menu_slug,$current_post_type_slug) !== false ){
-	   $classes[] = 'current-menu-item';
-	}else{
-		$classes = array_diff( $classes, array( 'current_page_parent' ) );
-	}
-	
-	return $classes;
+	return is_array( $classes ) ? array_intersect( $classes, array('current-menu-item', 'current_page_parent', 'current_page_ancestor') ) : '';
 }
 add_action( 'nav_menu_css_class', 'essor_custom_post_nav_class', 10, 2 );
 
@@ -294,40 +292,40 @@ function essor_taxonomies(){
 add_action( 'init', 'essor_taxonomies' );
 
 
-/*-----------------------------------------------------------------------------------*/
-/* Sidebar & Widgets
-/*-----------------------------------------------------------------------------------*/
-function essor_register_sidebars(){
-	register_sidebar( array(
-		'id' => 'sidebar',
-		'name' => 'Sidebar',
-		'description' => 'Take it on the side...',
-		'before_widget' => '',
-		'after_widget' => '',
-		'before_title' => '',
-		'after_title' => '',
-		'empty_title'=> ''
-	) );
-}
-add_action( 'widgets_init', 'essor_register_sidebars' );
+// /*-----------------------------------------------------------------------------------*/
+// /* Sidebar & Widgets
+// /*-----------------------------------------------------------------------------------*/
+// function essor_register_sidebars(){
+// 	register_sidebar( array(
+// 		'id' => 'sidebar',
+// 		'name' => 'Sidebar',
+// 		'description' => 'Take it on the side...',
+// 		'before_widget' => '',
+// 		'after_widget' => '',
+// 		'before_title' => '',
+// 		'after_title' => '',
+// 		'empty_title'=> ''
+// 	) );
+// }
+// add_action( 'widgets_init', 'essor_register_sidebars' );
 
-// Deregister default widgets
-function essor_unregister_default_widgets(){
-    unregister_widget( 'WP_Widget_Pages' );
-    unregister_widget( 'WP_Widget_Calendar' );
-    unregister_widget( 'WP_Widget_Archives' );
-    unregister_widget( 'WP_Widget_Links' );
-    unregister_widget( 'WP_Widget_Meta' );
-    unregister_widget( 'WP_Widget_Search' );
-    unregister_widget( 'WP_Widget_Text' );
-    unregister_widget( 'WP_Widget_Categories' );
-    unregister_widget( 'WP_Widget_Recent_Posts' );
-    unregister_widget( 'WP_Widget_Recent_Comments' );
-    unregister_widget( 'WP_Widget_RSS' );
-    unregister_widget( 'WP_Widget_Tag_Cloud' );
-    unregister_widget( 'WP_Nav_Menu_Widget' );
-}
-add_action( 'widgets_init', 'essor_unregister_default_widgets' );
+// // Deregister default widgets
+// function essor_unregister_default_widgets(){
+//     unregister_widget( 'WP_Widget_Pages' );
+//     unregister_widget( 'WP_Widget_Calendar' );
+//     unregister_widget( 'WP_Widget_Archives' );
+//     unregister_widget( 'WP_Widget_Links' );
+//     unregister_widget( 'WP_Widget_Meta' );
+//     unregister_widget( 'WP_Widget_Search' );
+//     unregister_widget( 'WP_Widget_Text' );
+//     unregister_widget( 'WP_Widget_Categories' );
+//     unregister_widget( 'WP_Widget_Recent_Posts' );
+//     unregister_widget( 'WP_Widget_Recent_Comments' );
+//     unregister_widget( 'WP_Widget_RSS' );
+//     unregister_widget( 'WP_Widget_Tag_Cloud' );
+//     unregister_widget( 'WP_Nav_Menu_Widget' );
+// }
+// add_action( 'widgets_init', 'essor_unregister_default_widgets' );
 
 
 /*-----------------------------------------------------------------------------------*/

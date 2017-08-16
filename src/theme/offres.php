@@ -12,12 +12,17 @@ get_header(); ?>
         <div class='wrapper-top-img small'>
             <div class='top-img' style='background-image:url("<?php echo get_the_post_thumbnail_url();?>")'></div>
         </div>
+
         <div class='wrapper-sticky wrapper-page'>
+            
             <div class='wrapper-dropdowns' id='dropdownsSticky'>
                 <div class='container'>
                     <div class='dropdowns'>
+                        
                         <div class='dropdown white'>
-                            <button type='button' class='dropdown-title'><svg class='icon icon-down'><use xlink:href='#icon-down'></use></svg></button>
+                            <button type='button' class='dropdown-title'>
+                                <svg class='icon icon-down'><use xlink:href='#icon-down'></use></svg>
+                            </button>
                             <?php
                             $allContractTypes = get_terms('contrat');
                             if( $allContractTypes ){ ?>
@@ -35,8 +40,11 @@ get_header(); ?>
                                 </ul>
                             <?php } ?>
                         </div>
+
                         <div class='dropdown white'>
-                            <button type='button' class='dropdown-title'><svg class='icon icon-down'><use xlink:href='#icon-down'></use></svg></button>
+                            <button type='button' class='dropdown-title'>
+                                <svg class='icon icon-down'><use xlink:href='#icon-down'></use></svg>
+                            </button>
                             <?php
                             $allPlaces = get_terms('lieu');
                             if( $allPlaces ){ ?>
@@ -54,16 +62,20 @@ get_header(); ?>
                                 </ul>
                             <?php } ?>
                         </div>
+
                     </div>
                 </div>
             </div>
+
             <div class='container'>
                 <div class='wrapper-content-sidebar'>
+
                     <aside class='over-img wrapper-sticky'>
                         <div class='wrapper-menu-aside' id='blockStickyJobs'>
                             <?php wp_nav_menu( array( 'theme_location' => 'jobs', 'container' => false, 'menu_class' => 'menu-aside' ) ); ?>
                         </div>
                     </aside>
+
                     <div class='content-sidebar'>
                         <h1><?php the_title(); ?></h1>
                         <?php the_content(); ?>
@@ -89,8 +101,10 @@ get_header(); ?>
                             </ul>
                         <?php } ?>
                     </div>
+
                 </div>
             </div>
+
         </div>
 	
 	<?php else : ?>
