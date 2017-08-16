@@ -146,7 +146,8 @@ register_nav_menus(
 	array(
 		'primary' => 'Primary Menu',
         'secondary' => 'Secondary Menu',
-        'jobs' => 'Jobs Menu'
+        'jobs' => 'Jobs Menu',
+        'about' => 'About Menu'
 	)
 );
 
@@ -236,6 +237,14 @@ function essor_custom_post_nav_class( $classes, $item, $args ){
             }else{
                 $classes = array_diff( $classes, array( 'current_page_parent' ) );
             }
+        }
+    }
+
+    if( is_page_template('about.php') ){
+        if( $item->object_id == url_to_postid( get_field('aboutLink', 'options') ) ){
+            $classes[] = 'current_page_parent';
+        }else{
+            $classes = array_diff( $classes, array( 'current_page_parent' ) );
         }
     }
 

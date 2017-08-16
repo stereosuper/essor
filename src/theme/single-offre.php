@@ -152,6 +152,7 @@ get_header(); ?>
                         <?php wp_nav_menu( array( 'theme_location' => 'jobs', 'container' => false, 'menu_class' => 'menu-aside' ) ); ?>
                     </div>
                 </aside>
+                
                 <div class='content-sidebar'>
                     <h1><?php the_title(); ?></h1>
                     <h2>
@@ -228,6 +229,7 @@ get_header(); ?>
                         </form>
                     </div>
                 </div>
+                
             </div>
 		</div>
 	
