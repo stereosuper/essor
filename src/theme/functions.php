@@ -212,7 +212,7 @@ function essort_menu_display_desc( $item_output, $item, $depth, $args ){
 add_filter( 'walker_nav_menu_start_el', 'essort_menu_display_desc', 10, 4 );
 
 // Custom posts parents marked as current + filter css class in wp nav menu
-function essor_custom_post_nav_class( $classes, $item ){
+function essor_custom_post_nav_class( $classes, $item, $args ){
 	if( is_singular( 'reference' ) ){
         if( $item->object_id == url_to_postid( get_field('refsLink', 'options') ) ){
             $classes[] = 'current_page_parent';
@@ -229,13 +229,23 @@ function essor_custom_post_nav_class( $classes, $item ){
         }
     }
 
+    if( $args->menu_id == 'menuSecondary' ){
+        if( is_page_template('application.php') || is_page_template('testimonies.php') ){
+            if( $item->object_id == url_to_postid( get_field('offersLink', 'options') ) ){
+                $classes[] = 'current_page_parent';
+            }else{
+                $classes = array_diff( $classes, array( 'current_page_parent' ) );
+            }
+        }
+    }
+
     if( is_search() || is_404() ){
         $classes = array_diff( $classes, array( 'current_page_parent' ) );
     }
 	
 	return is_array( $classes ) ? array_intersect( $classes, array('current-menu-item', 'current_page_parent', 'current_page_ancestor') ) : '';
 }
-add_action( 'nav_menu_css_class', 'essor_custom_post_nav_class', 10, 2 );
+add_action( 'nav_menu_css_class', 'essor_custom_post_nav_class', 10, 3 );
 
 
 /*-----------------------------------------------------------------------------------*/
