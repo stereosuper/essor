@@ -57,6 +57,22 @@ get_header(); ?>
                                 <?php endif; ?>
                             <?php endif; ?>
 
+                            <?php if( get_row_layout() == 'timeline' ): ?>
+                                <?php if( have_rows('dates') ): ?>
+                                    <ul class='timeline'>
+                                    <?php while( have_rows('dates') ): the_row(); ?>
+
+                                        <li>
+                                            <b><?php the_sub_field('year'); ?></b>
+                                            <?php echo wp_get_attachment_image( get_sub_field('img'), 'full' ); ?>
+                                            <?php the_sub_field('text'); ?>
+                                        </li>
+
+                                    <?php endwhile; ?>
+                                    </ul>
+                                <?php endif; ?>
+                            <?php endif; ?>
+
                         <?php endwhile; ?>
                     <?php endif; ?>
                 </div>
