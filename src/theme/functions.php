@@ -107,12 +107,32 @@ function essor_right_now_custom_post() {
 }
 add_action( 'dashboard_glance_items', 'essor_right_now_custom_post' );
 
+// News styles in wysiwyg
+function essor_wysiwyg_styleselect( $buttons ){
+    array_unshift( $buttons, 'styleselect' );
+    return $buttons;
+}
+add_filter( 'mce_buttons_2', 'essor_wysiwyg_styleselect' );
+
 // Customize a bit the wysiwyg editor
 function essor_mce_before_init( $styles ){
+    // Add custom styles
+    $style_formats = array(
+        array(
+            'title' => 'Citation avec auteur',
+            'selector' => 'blockquote',
+            'classes' => 'with-cite'
+        ),
+        array(
+            'title' => 'Auteur de la citation',
+            'inline' => 'cite'
+        )
+    );
+    $styles['style_formats'] = json_encode( $style_formats );
     // Remove h1 and code
     $styles['block_formats'] = 'Paragraph=p;Heading 2=h2;Heading 3=h3;Heading 4=h4;Heading 5=h5;Heading 6=h6';
     // Let only the colors you want
-    $styles['textcolor_map'] = '[' . "'000000', 'Noir', '565656', 'Texte'" . ']';
+    $styles['textcolor_map'] = '[' . "'000000', 'Noir', '646a74', 'Texte', 'e5512c', 'Orange'" . ']';
     return $styles;
 }
 add_filter( 'tiny_mce_before_init', 'essor_mce_before_init' );
