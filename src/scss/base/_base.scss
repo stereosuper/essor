@@ -36,6 +36,7 @@ h1{
     margin: 3em 0 1em;
     font-size: 5rem;
     line-height: 1.1;
+    letter-spacing: -0.02em;
     color: $primary;
     &:before{
         content: '';
@@ -87,14 +88,44 @@ i, em{
 
 blockquote{
     padding: 25px $gutter 35px;
+    position: relative;
     margin: 2.8em $gutter*-1;
+    clear: both;
     font-family: $proximaLightIt;
     font-size: 1.8rem;
+    line-height: 1.3;
     text-indent: 30px;
     background: $grey url(../layoutImg/quote.svg) no-repeat #{$gutter} 25px / 20px;
+    &.with-cite{
+        padding: 28px 230px 28px 70px;
+        text-indent: 0;
+        cite{
+            max-width: 160px;
+            position: absolute;
+            top: 10px;
+            right: $gutter;
+            text-align: right;
+            > strong{
+                display: block;
+            }
+        }
+    }
     > p{
         margin: 0;
     }
+    cite{
+        display: block;
+        margin: 10px 0 0;
+        font-family: $poppinsLight;
+        font-size: 1.6rem;
+        text-indent: 0;
+        > strong{
+            font-size: 1.8rem;
+        }
+    }
+}
+cite{
+    font-style: normal;
 }
 
 li{
@@ -143,11 +174,11 @@ img{
     }
     &.alignleft{
         float: left;
-        margin: 0 $gutter 1.8em -150px;
+        margin: 0 $gutter 1.7em -150px;
     }
     &.alignright{
         float: right;
-        margin: 0 -150px 1.8em $gutter;
+        margin: 0 -150px 1.7em $gutter;
     }
     &.alignnone{
         display: block;
@@ -384,11 +415,11 @@ a{
         &.alignleft, &.alignright{
             display: block;
             float: none;
-                margin: 1.8em auto;
+            margin: 1.8em auto;
         }
         &.alignnone{
             max-width: 100%;
-            margin: 1.8em 0;
+            margin: 1.8em auto;
         }
     }
     .wrapper-title{
