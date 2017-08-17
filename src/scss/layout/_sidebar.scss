@@ -36,15 +36,29 @@
 }
 .menu-aside{
     width: calc(100% - 20px);
-    margin: 0 0 0 20px;
     padding: 40px $gutter 40px 10px;
+    position: relative;
+    margin: 0 0 0 20px;
     background: $primary;
+    &:before{
+        width: 20px;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: -20px;
+        background: $primary;
+    }
+    .menu-no-current &{
+        &:before{
+            content: '';
+        }
+    }
     > li{
         padding: 0;
         &:before, &:after{
             content: none;
             width: 20px;
-            height: 200px;
+            height: 300px;
             position: absolute;
             left: -30px;
             background: $primary;
