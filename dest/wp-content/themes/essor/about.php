@@ -21,17 +21,35 @@ get_header(); ?>
                     <?php the_content(); ?>
 
                     <?php if( have_rows('module') ): ?>
-                        <?php while ( have_rows('module') ) : the_row(); ?>
+                        <?php while( have_rows('module') ): the_row(); ?>
 
                             <?php if( get_row_layout() == 'skillsList' ): ?>
                                 <?php if( have_rows('skills') ): ?>
                                     <ul class='list-skills'>
-                                    <?php while ( have_rows('skills') ) : the_row(); ?>
+                                    <?php while( have_rows('skills') ): the_row(); ?>
                                         
                                         <li>
                                             <?php echo wp_get_attachment_image( get_sub_field('logo'), 'full' ); ?>
                                             <h2><?php the_sub_field('name'); ?></h2>
                                             <p><?php the_sub_field('text'); ?></p>
+                                        </li>
+
+                                    <?php endwhile; ?>
+                                    </ul>
+                                <?php endif; ?>
+                            <?php endif; ?>
+
+                            <?php if( get_row_layout() == 'numbersList' ): ?>
+                                <?php if( have_rows('numbers') ): ?>
+                                    <ul class='list-numbers'>
+                                    <?php while( have_rows('numbers') ): the_row(); ?>
+
+                                        <li>
+                                            <div>
+                                                <?php echo wp_get_attachment_image( get_sub_field('img'), 'full' ); ?>
+                                                <b><?php the_sub_field('number'); ?><span><?php the_sub_field('unit'); ?></span></b>
+                                            </div>
+                                            <?php the_sub_field('text'); ?>
                                         </li>
 
                                     <?php endwhile; ?>

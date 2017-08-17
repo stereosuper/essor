@@ -1,0 +1,61 @@
+.list-numbers{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    font-family: $poppins;
+    font-size: 1.8rem;
+    > li{
+        width: 40%;
+        padding: 85px 0 0 55px;
+        &:before{
+            content: none;
+        }
+    }
+    div{
+        position: relative;
+    }
+    img{
+        position: absolute;
+        bottom: 14px;
+        left: -85px;
+    }
+    b{
+        display: block;
+        margin: 0 0 -5px;
+        font-family: $poppinsLight;
+        font-size: 6rem;
+        line-height: 1;
+        span{
+            display: inline-block;
+            margin: 0 0 0 20px;
+            font-family: $poppins;
+            font-size: 4rem;
+        }
+    }
+}
+
+
+@media (max-width: $desktop){
+    .list-numbers{
+        > li{
+            width: 100%;
+        }
+    }
+}
+
+@media (max-width: $desktopSmall){
+    .list-numbers{
+        > li{
+            width: 40%;
+            padding-left: 85px;
+        }
+    }
+}
+
+@media (max-width: $tablet){
+    .list-numbers{
+        > li{
+            width: 100%;
+        }
+    }
+}
