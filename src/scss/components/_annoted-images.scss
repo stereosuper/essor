@@ -1,12 +1,17 @@
+.annotated-image-wrapper{
+    width: 100% !important;
+    height: auto !important;
+}
 .annotated-image{
     position: relative;
     margin: 0 0 20px;
+    cursor: help;
 }
 .annotated-image.editable .note {
     cursor: pointer;
 }
 .annotated-image img {
-    max-width: 100%;
+    width: 100%;
 }
 .annotated-image .note {
     display: block;

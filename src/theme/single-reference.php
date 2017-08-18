@@ -1,9 +1,13 @@
 <?php get_header(); ?>
 
-	<?php if ( have_posts() ) : the_post(); ?>
-        <div class='wrapper-top-img'>
-            <div class='top-img' style='background-image:url("<?php echo get_the_post_thumbnail_url(); ?>")'></div>
-        </div>
+    <?php if ( have_posts() ) : the_post(); ?>
+        <?php if( function_exists('gacfai_get_field') && gacfai_get_field('img') ){ ?>
+            <div><?php echo gacfai_get_field('img', $post->ID, 'full', false, ''); ?></div>
+        <?php }else{ ?>
+            <div class='wrapper-top-img'>
+                <div class='top-img' style='background-image:url("<?php echo get_the_post_thumbnail_url(); ?>")'></div>
+            </div>
+        <?php } ?>
 
         <div class='container'>
             <div class='grid align-end pos-relative'>
@@ -48,12 +52,6 @@
                             <?php endwhile; ?>
                         </ul>
                     <?php endif; ?>
-
-                    <?php
-                        if( function_exists('gacfai_get_field') ){
-                            echo gacfai_get_field('img', $post->ID, 'full', false, '');
-                        }
-                    ?>
 
                     <?php the_content(); ?>
                 </div>
