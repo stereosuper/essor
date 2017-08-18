@@ -21,6 +21,8 @@ $(function(){
     var loadMorePosts = require('./loadMorePosts.js');
     var initScrollReval = require('./initScrollReveal.js');
     var sticky = require('./sticky.js');
+    
+    $.fn.annotatedImage = require('./annotedImages.js');
 
     var body = $('body');
     var windowWidth = window.outerWidth, windowHeight = $(window).height();
@@ -63,6 +65,11 @@ $(function(){
     sticky($('#dropdownsSticky'), 0, {
         minimumWidth: 960
     });
+
+    // Annoted images
+    $('.annotated-image').annotatedImage();
+
+
 
     $(window).on('resize', throttle(function(){
         requestAnimFrame(resizeHandler);

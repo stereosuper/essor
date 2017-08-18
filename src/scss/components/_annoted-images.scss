@@ -1,0 +1,50 @@
+.annotated-image{
+    position: relative;
+    margin: 0 0 20px;
+}
+.annotated-image.editable .note {
+    cursor: pointer;
+}
+.annotated-image img {
+    max-width: 100%;
+}
+.annotated-image .note {
+    display: block;
+    position: absolute;
+    cursor: default;
+}
+
+.annotated-image .icon-marker{
+    width: 30px;
+    height: 45px;
+    position: absolute;
+    bottom: 0.05em;
+    left: -0.85em;
+    z-index: 1;
+    fill: $white;
+}
+.annotated-image .note .text {
+    position: absolute;
+    left: -35px;
+    bottom: 0;
+    color: $white;
+    > p{
+        width: 340px;
+        padding: 30px;
+        background: rgba($text, 0.95);
+    }
+}
+.annotated-image .note .text:empty {
+    display: none;
+}
+
+.annotated-image .note.current .marker{
+    border-top-color: orange;
+}
+.annotated-image .note.current .text{
+    background: orange;
+}
+.annotated-image-wrapper textarea{
+    width: calc( 100% - 50px );
+    margin-right: 1em;
+}
