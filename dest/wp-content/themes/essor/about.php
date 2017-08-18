@@ -73,6 +73,26 @@ get_header(); ?>
                                 <?php endif; ?>
                             <?php endif; ?>
 
+                            <?php if( get_row_layout() == 'peopleList' ): ?>
+                                <div class='wrapper-people'>
+                                    <h2 class='primary'><?php the_sub_field('title'); ?></h2>
+                                    
+                                    <?php if( have_rows('people') ): ?>
+                                        <ul class='list-people'>
+                                        <?php while( have_rows('people') ): the_row(); ?>
+
+                                            <li>
+                                                <?php echo wp_get_attachment_image( get_sub_field('photo'), 'medium' ); ?>
+                                                <h3><?php the_sub_field('name'); ?></h3>
+                                                <p><?php the_sub_field('job'); ?></p>
+                                            </li>
+
+                                        <?php endwhile; ?>
+                                        </ul>
+                                    <?php endif; ?>
+                                </div>
+                            <?php endif; ?>
+
                         <?php endwhile; ?>
                     <?php endif; ?>
                 </div>
