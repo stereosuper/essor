@@ -62,10 +62,10 @@ get_header(); ?>
                                     <ul class='timeline'>
                                     <?php while( have_rows('dates') ): the_row(); ?>
 
-                                        <li>
+                                        <li <?php if( get_sub_field('logo') ){ echo 'class="highlighted"'; } ?>>
                                             <b><?php the_sub_field('year'); ?></b>
-                                            <?php echo wp_get_attachment_image( get_sub_field('img'), 'full' ); ?>
-                                            <?php the_sub_field('text'); ?>
+                                            <?php echo wp_get_attachment_image( get_sub_field('logo'), 'medium' ); ?>
+                                            <p><?php the_sub_field('text'); ?></p>
                                         </li>
 
                                     <?php endwhile; ?>

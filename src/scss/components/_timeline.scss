@@ -1,0 +1,131 @@
+.timeline{
+    max-width: 600px;
+    position: relative;
+    margin: 100px 0 0;
+    &:after{
+        content: '';
+        width: 2px;
+        position: absolute;
+        top: 0;
+        bottom: -55px;
+        left: 0;
+        right: 0;
+        margin: auto;
+        background: $primary;
+    }
+    > li{
+        width: 45%;
+        padding: 0 $gutter;
+        &:before{
+            content: none;
+        }
+        &:after{
+            content: '';
+            width: $gutter;
+            height: 2px;
+            position: absolute;
+            top: 21px;
+            background: $primary;
+        }
+        &:nth-child(even){
+            margin: 0 0 0 55%;
+            &:after{
+                left: -11%;
+            }
+            img{
+                float: right;
+                margin: 0 $gutter*-1 20px 0;
+            }
+        }
+        &:nth-child(odd){
+            &:after{
+                right: -11%;
+            }
+            img{
+                margin: 0 0 20px $gutter*-1;
+            }
+            b{
+                float: right;
+            }
+        }
+        &.highlighted{
+            color: $primary;
+            b{
+                color: $white;
+                &:before{
+                    content: '';
+                }
+            }
+        }
+    }
+    b{
+        display: inline-block;
+        position: relative;
+        margin: 0 0 20px;
+        z-index: 1;
+        font-family: $poppinsMedium;
+        font-size: 3rem;
+        line-height: 1;
+        &:before{
+            position: absolute;
+            top: -5px;
+            left: -8px;
+            bottom: -1px;
+            right: -8px;
+            z-index: -1;
+            background: $text;
+        }
+    }
+    img{
+        max-width: 60%;
+    }
+    p{
+        margin: 0;
+        clear: both;
+    }
+}
+
+
+@media(max-width: $desktopSmall){
+    .timeline{
+        margin: 100px auto 0;
+    }
+}
+
+@media(max-width: $phone){
+    .timeline{
+        &:after{
+            right: auto;
+            bottom: -20px;
+        }
+        > li{
+            width: 100%;
+            &:nth-child(even){
+                margin: 0 0 80px $gutter;
+                &:after{
+                    left: -$gutter;
+                }
+                img{
+                    float: none;
+                    margin-right: 0;
+                }
+            }
+            &:nth-child(odd){
+                margin: 0 0 80px $gutter;
+                &:after{
+                    right: auto;
+                    left: -$gutter;
+                }
+                b{
+                    float: none;
+                }
+                img{
+                    margin-left: 0;
+                }
+            }
+        }
+        img{
+            display: block;
+        }
+    }
+}
