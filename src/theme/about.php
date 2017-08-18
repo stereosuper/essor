@@ -28,7 +28,7 @@ get_header(); ?>
                                     <ul class='list-skills'>
                                     <?php while( have_rows('skills') ): the_row(); ?>
                                         
-                                        <li>
+                                        <li class='isAnimated'>
                                             <?php echo wp_get_attachment_image( get_sub_field('logo'), 'full' ); ?>
                                             <h2><?php the_sub_field('name'); ?></h2>
                                             <p><?php the_sub_field('text'); ?></p>
@@ -44,7 +44,7 @@ get_header(); ?>
                                     <ul class='list-numbers'>
                                     <?php while( have_rows('numbers') ): the_row(); ?>
 
-                                        <li>
+                                        <li class='isAnimated'>
                                             <div>
                                                 <?php echo wp_get_attachment_image( get_sub_field('img'), 'full' ); ?>
                                                 <b><?php the_sub_field('number'); ?><span><?php the_sub_field('unit'); ?></span></b>
@@ -62,7 +62,7 @@ get_header(); ?>
                                     <ul class='timeline'>
                                     <?php while( have_rows('dates') ): the_row(); ?>
 
-                                        <li <?php if( get_sub_field('logo') ){ echo 'class="highlighted"'; } ?>>
+                                        <li class='isAnimated <?php if( get_sub_field('logo') ){ echo 'highlighted'; } ?>'>
                                             <b><?php the_sub_field('year'); ?></b>
                                             <?php echo wp_get_attachment_image( get_sub_field('logo'), 'medium' ); ?>
                                             <p><?php the_sub_field('text'); ?></p>
@@ -81,7 +81,7 @@ get_header(); ?>
                                         <ul class='list-people'>
                                         <?php while( have_rows('people') ): the_row(); ?>
 
-                                            <li>
+                                            <li class='isAnimated'>
                                                 <?php echo wp_get_attachment_image( get_sub_field('photo'), 'medium' ); ?>
                                                 <h3><?php the_sub_field('name'); ?></h3>
                                                 <p><?php the_sub_field('job'); ?></p>
@@ -98,7 +98,7 @@ get_header(); ?>
                                     <ul class='prizes'>
                                     <?php while( have_rows('prizes') ): the_row(); ?>
 
-                                        <li>
+                                        <li class='isAnimated'>
                                             <?php if( get_sub_field('photo') ){ ?>
                                                 <div class='img'>
                                                 <?php echo wp_get_attachment_image( get_sub_field('photo'), 'large' ); ?>
