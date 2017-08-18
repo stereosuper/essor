@@ -95,6 +95,74 @@
     }
 }
 
+.prizes{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    > li{
+        width: 50%;
+        max-width: 300px;
+        padding: 50px $gutter*2 45px 0;
+        &:before{
+            content: none;
+        }
+        &:nth-child(even){
+            margin: 25px 0 0;
+        }
+    }
+    .img{
+        position: relative;
+        margin: 0 $gutter*-1 20px;
+        overflow: hidden;
+        &:before{
+            content: '';
+            display: block;
+            padding: 0 0 88%;
+        }
+        > img{
+            width: auto;
+            height: 100%;
+            min-width: 100%;
+            max-width: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate3d(-50%, -50%, 0);
+        }
+        + h2{
+            &:before{
+                content: '';
+            }
+        }
+    }
+    h2{
+        margin: 0 0 20px;
+        position: relative;
+        font-family: $poppins;
+        &:before{
+            width: 2px;
+            height: 55px;
+            position: absolute;
+            left: 0;
+            top: -57px;
+            background: $primary;
+        }
+        > span{
+            display: block;
+            font-family: $poppinsLight;
+            font-size: 1.6rem;
+        }
+    }
+    h3{
+        margin: 0 0 20px;
+        font-family: $poppinsLight;
+        font-size: 1.6rem;
+        > span{
+            display: block;
+        }
+    }
+}
+
 
 @media (max-width: $desktopLarge){
     .content-about{
@@ -144,6 +212,10 @@
     .list-people{
         margin-left: $gutter;
     }
+
+    .prizes{
+        margin: 0 $gutter*-1 0 $gutter;
+    }
 }
 
 @media (max-width: $tablet){
@@ -155,7 +227,7 @@
 }
 
 @media (max-width: $phone){
-    .list-skills{
+    .list-skills, .prizes{
         > li{
             width: 100%;
         }

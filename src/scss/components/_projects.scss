@@ -1,16 +1,15 @@
 /* Projects */
+
 .projects{
     display: flex;
     flex-wrap: wrap;
     margin: 0;
-    padding: 0;
     &.complete{
-        width: calc(100% + #{2*$gutter});
-        margin-left: -$gutter;
+        margin: 0 $gutter*-1;
     }
     > li{
         width: 25%;
-        padding-left: 0;
+        padding: 0;
         &:before{
             content: none;
         }
@@ -23,9 +22,9 @@
         &:hover, &:focus{
             .wrapper-img{
                 transform: translate3d(0, 0, 0) scaleY(0.9);
-                .img{
-                    transform: translate3d(0, 0, 0) scaleX(1.15) scaleY(1.26);
-                }
+            }
+            .img{
+                transform: translate3d(0, 0, 0) scaleX(1.15) scaleY(1.26);
             }
             h3{
                 &:after{
@@ -38,7 +37,7 @@
         display: block;
         position: relative;
         overflow: hidden;
-        transition: all 0.3s;
+        transition: 0.3s;
         &:before{
             content: '';
             display: block;
@@ -57,14 +56,13 @@
         transition: transform 0.3s;
     }
     h3{
+        padding: 0 $gutter;
         position: relative;
         margin: 1.5em 0 0;
-        padding: 0 $gutter;
-        color: $text;
         line-height: 1.1;
+        color: $text;
         &:after{
             content: '';
-            display: block;
             width: 2px;
             height: 54px;
             position: absolute;
@@ -76,7 +74,7 @@
         }
         > span{
             display: block;
-            margin: 8px 0 0 0;
+            margin: 8px 0 0;
             font-family: $poppinsLight;
             font-size: 1.6rem;
         }
@@ -85,32 +83,33 @@
         margin: 1.5em 0;
         padding: 0 $gutter;
         > li{
-            padding-left: 0;
-            a{
-                position: relative;
-                + a{
-                    margin-left: 0.8em;
-                    &:before{
-                        display: inline-block;
-                        position: absolute;
-                        top: 0;
-                        left: -0.8em;
-                        content: '/';
-                        pointer-events: none;
-                    }
-                    &:hover{
-                        &:before{
-                            color: $primary;
-                        }
-                    }
-                }
-            }
+            padding: 0;
             &:before{
                 content: none;
             }
         }
+        a{
+            position: relative;
+            + a{
+                margin-left: 0.8em;
+                &:before{
+                    content: '/';
+                    display: inline-block;
+                    position: absolute;
+                    top: 0;
+                    left: -0.8em;
+                    pointer-events: none;
+                }
+                &:hover{
+                    &:before{
+                        color: $primary;
+                    }
+                }
+            }
+        }
     }
 }
+
 .load-more{
     > button{
         display: block;
@@ -127,6 +126,7 @@
         }
     }
 }
+
 .txt-more{
     position: absolute;
     left: $gutter;
@@ -140,20 +140,30 @@
     }
 }
 
-@media(max-width: $desktopSmall){
-    .projects{
-        >li{
-            width: 50%;
 
+@media(max-width: $desktop){
+    .projects{
+        &.complete{
+            margin: 0;
         }
     }
 }
+
+@media(max-width: $desktopSmall){
+    .projects{
+        > li{
+            width: 50%;
+        }
+    }
+}
+
 @media(max-width: $phone){
     .projects{
         .wrapper-img{
             width: 75%;
         }
-        >li{
+
+        > li{
             width: 100%;
             &:nth-child(even){
                 margin-top: 0;

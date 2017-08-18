@@ -93,6 +93,33 @@ get_header(); ?>
                                 </div>
                             <?php endif; ?>
 
+                            <?php if( get_row_layout() == 'prizesList' ): ?>
+                                <?php if( have_rows('prizes') ): ?>
+                                    <ul class='prizes'>
+                                    <?php while( have_rows('prizes') ): the_row(); ?>
+
+                                        <li>
+                                            <?php if( get_sub_field('photo') ){ ?>
+                                                <div class='img'>
+                                                <?php echo wp_get_attachment_image( get_sub_field('photo'), 'large' ); ?>
+                                                </div>
+                                                <?php } ?>
+                                            <h2>
+                                                <?php the_sub_field('name'); ?>
+                                                <span><?php the_sub_field('place'); ?></span>
+                                            </h2>
+                                            <h3>
+                                                <?php the_sub_field('prize'); ?>
+                                                <span><?php the_sub_field('year'); ?></span>
+                                            </h3>
+                                            <?php echo wp_get_attachment_image( get_sub_field('logo'), 'medium' ); ?>
+                                        </li>
+
+                                    <?php endwhile; ?>
+                                    </ul>
+                                <?php endif; ?>
+                            <?php endif; ?>
+
                         <?php endwhile; ?>
                     <?php endif; ?>
                 </div>
