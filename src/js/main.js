@@ -16,6 +16,7 @@ $(function(){
 
     var animSearchform = require('./animSearchform.js');
     var animResponsiveHeader = require('./animResponsiveHeader.js');
+    var headerStuck = require('./headerStuck.js');
     var customDropdown = require('./dropdown.js');
     var loadMorePosts = require('./loadMorePosts.js');
     var initScrollReval = require('./initScrollReveal.js');
@@ -39,7 +40,10 @@ $(function(){
     animSearchform( $('#formSearch') );
 
     // Handle responsive header: burger menus + menus to swipe
-    animResponsiveHeader( body, $('#mainNav'), $('#menus'), $('#main') );
+    animResponsiveHeader(body, $('#mainNav'), $('#menus'), $('#main'));
+    
+    // Handle header pushed by filters
+    headerStuck(body, $('.header'), 460, 'page-template-offres');
 
     // Open and close custom dropdowns
     customDropdown(dropdowns);
@@ -56,10 +60,10 @@ $(function(){
     sticky($('#blockSticky'), 130, {
         minimumWidth: 960
     });
-    sticky($('#blockStickyJobs'), 97, {
+    sticky($('#blockStickyJobs'), 25, {
         minimumWidth: 960
     });
-    sticky($('#dropdownsSticky'), 72, {
+    sticky($('#dropdownsSticky'), 0, {
         minimumWidth: 960
     });
 
