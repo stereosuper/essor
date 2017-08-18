@@ -122,6 +122,34 @@ get_header(); ?>
 
                         <?php endwhile; ?>
                     <?php endif; ?>
+                    
+                    <?php
+                        $menu = wp_get_nav_menu_object( get_nav_menu_locations()['about'] );
+                        $menuitems = wp_get_nav_menu_items( $menu->term_id );
+
+                        $i = -1;
+                        foreach( $menuitems as $item ){
+                            $i++;
+
+                            $id = get_post_meta( $item->ID, '_menu_item_object_id', true );
+                            
+                            $links[] = get_page_link( $id );
+                            $titles[] = get_the_title( $id );
+
+                            if( $id == $post->ID ){
+                                $nextid = $i + 1;
+                            }
+                        }
+
+                        if( !empty($links[$nextid]) && !empty($titles[$nextid]) ){ ?>
+                            <div class='about-nav'>
+                                <a href='<?php echo $links[$nextid]; ?>' class='btn'>
+                                    <?php echo $titles[$nextid]; ?>
+                                    <svg class='icon'><use xlink:href='#icon-right'></use></svg>
+                                </a>
+                            </div>
+                        <?php }
+                    ?>
                 </div>
                 
             </div>

@@ -1,7 +1,7 @@
 .timeline{
     max-width: 600px;
     position: relative;
-    margin: 100px 0 0;
+    margin: 100px 0 55px $gutter*-1;
     &:after{
         content: '';
         width: 2px;
@@ -88,12 +88,13 @@
 
 @media(max-width: $desktopSmall){
     .timeline{
-        margin: 100px auto 0;
+        margin: 100px auto 55px;
     }
 }
 
 @media(max-width: $phone){
     .timeline{
+        margin: 100px auto 20px;
         &:after{
             right: auto;
             bottom: -20px;
