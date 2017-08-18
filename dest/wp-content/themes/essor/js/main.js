@@ -16265,37 +16265,6 @@ module.exports = function (dropdowns) {
 },{"jquery":4}],9:[function(require,module,exports){
 'use strict';
 
-var $ = require('jquery');
-
-window.requestAnimFrame = require('./requestAnimFrame.js');
-var throttle = require('./throttle.js');
-
-module.exports = function (body, header, posTop, bodyClass) {
-    if (!body.hasClass(bodyClass)) return;
-
-    var scrollTop;
-
-    function scrollHandler() {
-        scrollTop = $(document).scrollTop();
-        if (scrollTop >= posTop) {
-            header.css({ 'position': 'absolute', 'top': posTop });
-        } else {
-            header.css({ 'position': '', 'top': '' });
-        }
-    }
-
-    $(document).on('scroll', throttle(function () {
-        requestAnimFrame(scrollHandler);
-    }, 10));
-
-    $(window).on('resize', throttle(function () {
-        requestAnimFrame(resizeHandler);
-    }, 10));
-};
-
-},{"./requestAnimFrame.js":13,"./throttle.js":15,"jquery":4}],10:[function(require,module,exports){
-'use strict';
-
 module.exports = function (elts) {
 
     sr.reveal(elts, {
@@ -16308,7 +16277,73 @@ module.exports = function (elts) {
     });
 };
 
-},{}],11:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
+'use strict';
+
+var $ = require('jquery');
+
+window.requestAnimFrame = require('./requestAnimFrame.js');
+var throttle = require('./throttle.js');
+
+module.exports = function (body, header, posTop, bodyClass, blockSticky, minimumWidth) {
+    if (!body.hasClass(bodyClass)) return;
+
+    var scrollTop, belowWidth;
+    var windowWidth = window.outerWidth;
+
+    function headerStuck() {
+        if (scrollTop >= posTop) {
+            header.css({ 'position': 'absolute', 'top': posTop });
+        } else {
+            header.css({ 'position': '', 'top': '' });
+        }
+    }
+
+    function stickyInterval() {
+        if (scrollTop >= blockSticky.data('initialPos') - 95) {
+            if (scrollTop > posTop) {
+                if (scrollTop > posTop + 70) {
+                    blockSticky.css({ 'position': 'fixed', 'top': '25px', 'margin-top': '' });
+                } else {
+                    blockSticky.css({ 'position': '', 'top': '', 'margin-top': blockSticky.height() - 46 + 'px' });
+                }
+            } else {
+                blockSticky.css({ 'position': 'fixed', 'top': '95px', 'margin-top': '' });
+            }
+        } else if (scrollTop < blockSticky.data('initialPos') - 85) {
+            blockSticky.css({ 'position': '', 'top': '', 'margin-top': '' });
+        }
+        if (belowWidth) {
+            blockSticky.css({ 'position': '', 'top': '', 'margin-top': '' });
+        }
+    }
+
+    function scrollHandler() {
+        scrollTop = $(document).scrollTop();
+        headerStuck();
+        stickyInterval();
+    }
+
+    function resizeHandler() {
+        windowWidth = window.outerWidth;
+        minimumWidth && windowWidth <= minimumWidth ? belowWidth = true : belowWidth = false;
+        scrollHandler();
+    }
+
+    blockSticky.data({
+        'initialPos': blockSticky.offset().top
+    });
+
+    $(document).on('scroll', throttle(function () {
+        requestAnimFrame(scrollHandler);
+    }, 10));
+
+    $(window).on('resize', throttle(function () {
+        requestAnimFrame(resizeHandler);
+    }, 10));
+};
+
+},{"./requestAnimFrame.js":13,"./throttle.js":15,"jquery":4}],11:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
@@ -16380,7 +16415,7 @@ module.exports = function (wp, container) {
     });
 };
 
-},{"./initScrollReveal.js":10,"gsap/CSSPlugin":1,"gsap/TweenLite":3,"jquery":4}],12:[function(require,module,exports){
+},{"./initScrollReveal.js":9,"gsap/CSSPlugin":1,"gsap/TweenLite":3,"jquery":4}],12:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
@@ -16399,7 +16434,7 @@ $(function () {
 
     var animSearchform = require('./animSearchform.js');
     var animResponsiveHeader = require('./animResponsiveHeader.js');
-    var headerStuck = require('./headerStuck.js');
+    var jobsSticky = require('./jobsSticky.js');
     var customDropdown = require('./dropdown.js');
     var loadMorePosts = require('./loadMorePosts.js');
     var initScrollReval = require('./initScrollReveal.js');
@@ -16425,7 +16460,7 @@ $(function () {
     animResponsiveHeader(body, $('#mainNav'), $('#menus'), $('#main'));
 
     // Handle header pushed by filters
-    headerStuck(body, $('.header'), 460, 'page-template-offres');
+    jobsSticky(body, $('.header'), 460, 'page-template-offres', $('#blockStickyJobs'), 960);
 
     // Open and close custom dropdowns
     customDropdown(dropdowns);
@@ -16440,9 +16475,6 @@ $(function () {
 
     // Sticky
     sticky($('#blockSticky'), 130, {
-        minimumWidth: 960
-    });
-    sticky($('#blockStickyJobs'), 25, {
         minimumWidth: 960
     });
     sticky($('#dropdownsSticky'), 0, {
@@ -16461,7 +16493,7 @@ $(function () {
     }, 60));
 });
 
-},{"./animResponsiveHeader.js":6,"./animSearchform.js":7,"./dropdown.js":8,"./headerStuck.js":9,"./initScrollReveal.js":10,"./loadMorePosts.js":11,"./requestAnimFrame.js":13,"./sticky.js":14,"./throttle.js":15,"jquery":4,"scrollreveal":5}],13:[function(require,module,exports){
+},{"./animResponsiveHeader.js":6,"./animSearchform.js":7,"./dropdown.js":8,"./initScrollReveal.js":9,"./jobsSticky.js":10,"./loadMorePosts.js":11,"./requestAnimFrame.js":13,"./sticky.js":14,"./throttle.js":15,"jquery":4,"scrollreveal":5}],13:[function(require,module,exports){
 "use strict";
 
 module.exports = function () {
