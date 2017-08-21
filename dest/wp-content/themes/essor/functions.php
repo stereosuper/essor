@@ -235,7 +235,7 @@ add_filter( 'walker_nav_menu_start_el', 'essort_menu_display_desc', 10, 4 );
 // Custom posts parents marked as current + filter css class in wp nav menu
 function essor_custom_post_nav_class( $classes, $item, $args ){
 	if( is_singular( 'reference' ) ){
-        if( $item->object_id == url_to_postid( get_field('refsLink', 'options') ) ){
+        if( $item->object_id == url_to_postid( get_field('refsLink', 'options') ) || $item->object_id == get_option( 'page_on_front' ) ){
             $classes[] = 'current_page_parent';
         }else{
             $classes = array_diff( $classes, array( 'current_page_parent' ) );
@@ -243,7 +243,7 @@ function essor_custom_post_nav_class( $classes, $item, $args ){
     }
 
     if( is_singular( 'offre' ) ){
-        if( $item->object_id == url_to_postid( get_field('offersLink', 'options') ) ){
+        if( $item->object_id == url_to_postid( get_field('offersLink', 'options') ) || $item->object_id == get_option( 'page_on_front' ) ){
             $classes[] = 'current_page_parent';
         }else{
             $classes = array_diff( $classes, array( 'current_page_parent' ) );
@@ -262,6 +262,14 @@ function essor_custom_post_nav_class( $classes, $item, $args ){
 
     if( is_page_template('about.php') ){
         if( $item->object_id == url_to_postid( get_field('aboutLink', 'options') ) ){
+            $classes[] = 'current_page_parent';
+        }else{
+            $classes = array_diff( $classes, array( 'current_page_parent' ) );
+        }
+    }
+
+    if( is_page_template('contact.php') ){
+        if( $item->object_id == get_option( 'page_on_front' ) ){
             $classes[] = 'current_page_parent';
         }else{
             $classes = array_diff( $classes, array( 'current_page_parent' ) );

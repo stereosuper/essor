@@ -16188,7 +16188,7 @@ module.exports = function (body, nav, menus, pageWrapper) {
             }
         }
 
-        if ($('#secondMenu').find('.current-menu-item').length) {
+        if ($('#secondMenu').find('.current-menu-item').length || $('#secondMenu').find('.current_page_parent').length) {
             menus.delay(300).queue(function () {
                 $(this).addClass('swiped').dequeue();
             });
