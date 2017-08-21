@@ -24,7 +24,7 @@
             width: $gutter;
             height: 2px;
             position: absolute;
-            top: 21px;
+            top: 11px;
             background: $primary;
         }
         &:nth-child(even){
@@ -64,13 +64,12 @@
         margin: 0 0 20px;
         z-index: 1;
         font-family: $poppinsMedium;
-        font-size: 3rem;
         line-height: 1;
         &:before{
             position: absolute;
             top: -5px;
             left: -8px;
-            bottom: -1px;
+            bottom: -3px;
             right: -8px;
             z-index: -1;
             background: $text;
