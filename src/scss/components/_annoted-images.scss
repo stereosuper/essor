@@ -5,18 +5,13 @@
 .annotated-image{
     position: relative;
     margin: 0 0 20px;
-    cursor: help;
-}
-.annotated-image.editable .note {
-    cursor: pointer;
 }
 .annotated-image img {
     width: 100%;
 }
 .annotated-image .note {
-    display: block;
     position: absolute;
-    cursor: default;
+    cursor: help;
 }
 
 .annotated-image .icon-marker{
@@ -32,7 +27,12 @@
     position: absolute;
     left: -35px;
     bottom: 0;
+    font-size: 1.3rem;
+    line-height: 1.7;
     color: $white;
+    strong{
+        font-size: 2rem;
+    }
     > p{
         width: 340px;
         padding: 30px;

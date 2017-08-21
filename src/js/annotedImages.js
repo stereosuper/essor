@@ -23,7 +23,7 @@ module.exports = function() {
             }
         }, '.annotated-image-inputs textarea');
 
-    $( document ).on( 'click', '.annotated-image-wrapper span.note' , function() {
+    $( document ).on( 'click', '.annotated-image-wrapper .note' , function() {
         displayRelatedTextarea($(this));
     });
 
@@ -144,10 +144,10 @@ module.exports = function() {
 
         var sanitizedFieldName = sanitizedId( fieldname );
 
-        noteHtml = noteHtml + '<span class="note" id="note-'+ sanitizedFieldName +'-' + id + '" style="left:' + relX.toString() + '%; top:' + relY.toString() + '%">';
+        noteHtml = noteHtml + '<div class="note" id="note-'+ sanitizedFieldName +'-' + id + '" style="left:' + relX.toString() + '%; top:' + relY.toString() + '%">';
         noteHtml = noteHtml + '<svg class="icon icon-marker"><use xlink:href="#icon-marker"></use></svg>';
         noteHtml = noteHtml + '<div class="text"><p>'+text+'</p></div>';
-        noteHtml = noteHtml + '</span>';
+        noteHtml = noteHtml + '</div>';
 
         var $noteHtml = $(noteHtml);
 
@@ -161,6 +161,14 @@ module.exports = function() {
         $('.annotated-image', $container).append($noteHtml);
 
         displayRelatedTextarea($noteHtml);
+
+        $noteHtml.on('mouseenter', function(){
+            $(this).find('.text').fadeIn(animTimeFade, function() {
+                $(this).find('.text').addClass('shown');
+            });
+        }).on('mouseleave', function(){
+            $(this).find('.text').fadeOut(animTimeFade).removeClass('shown');
+        });
     };
 
     var showNextNote = function($container) {
@@ -206,11 +214,11 @@ module.exports = function() {
         var $allTexts = $container.find('.note .text');
         $allTexts.hide().removeClass('shown');
 
-        $container.hover(function() { // mouseenter
-            showNextNote($container);
-        }, function() { // mouseleave
-            showNextNote($container);
-        });
+        // $container.hover(function() { // mouseenter
+        //     showNextNote($container);
+        // }, function() { // mouseleave
+        //     showNextNote($container);
+        // });
     };
 
     var addInputNote = function( $container, relX, relY, text, idx, fieldName ){
