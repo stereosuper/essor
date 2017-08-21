@@ -65,3 +65,10 @@ div[class^='col-']{
     width: $col*2;
     padding: 0 $gutter;
 }
+
+
+@media (max-width: $desktop){
+    .main{
+        padding-top: 77px;
+    }
+}

@@ -1,10 +1,12 @@
 /* References specific style */
+
 .bloc-title{
-    position: relative;
-    left: -$gutter;
     width: calc(100% + #{2*$gutter});
-    margin: -115px 0 70px;
     padding: 55px $gutter 45px;
+    position: relative;
+    margin: -115px 0 70px;
+    left: -$gutter;
+    z-index: 1;
     background: rgba($primary, 0.95);
     color: $white;
     h1{
@@ -25,11 +27,13 @@
         font-size: 1.8rem;
     }
 }
+
 .reference-content{
     h2{
         font-size: 3rem;
     }
 }
+
 .wrapper-title-links{
     display: flex;
     justify-content: space-between;
@@ -59,9 +63,9 @@
             line-height: 1.1;
             .icon-right{
                 display: inline-block;
-                vertical-align: baseline;
                 width: 11px;
                 height: 11px;
+                vertical-align: baseline;
                 margin-left: 8px;
             }
             + a{
@@ -70,22 +74,22 @@
         }
     }
 }
+
 .side-infos{
+    padding-top: 10px;
+    padding-bottom: 10px;
     position: absolute;
     left: 0;
     top: 128px;
     margin: 0;
-    padding-top: 10px;
-    padding-bottom: 10px;
     background: $white;
     &:before, &:after{
         content: '';
-        display: block;
         width: 90px;
         height: 2px;
-        background: $primary;
         position: absolute;
         left: $gutter;
+        background: $primary;
     }
     &:before{
         top: 0;
@@ -113,26 +117,28 @@
         color: $text;
     }
 }
+
 .col-6{
     img{
         &.alignleft{
-            width: calc(66.6666666667% + 40px);
+            width: calc(66.6666% + 40px);
             margin-left: calc(-33.3333% - 50px);
         }
     }
 }
 
+
 @media(max-width: $desktopSmall){
     .side-infos{
         display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
         width: 100%;
+        padding-left: 0;
+        padding-right: 0;
         position: relative;
         left: auto;
         top: auto;
-        padding-left: 0;
-        padding-right: 0;
+        justify-content: space-between;
+        flex-wrap: wrap;
         > li{
             width: calc(50% - 20px);
         }
@@ -140,14 +146,17 @@
             left: 0;
         }
     }
+    
     .content-right-aligned{
         width: 100%;
         padding: 0;
     }
+
     .bloc-title{
-        left: auto;
         width: 100%;
+        left: auto;
     }
+
     .col-6{
         img{
             &.alignleft{
@@ -157,18 +166,21 @@
         }
     }
 }
+
 @media(max-width: $tablet){
     .wrapper-title-links{
         h1{
             font-size: 3.8rem;
         }
     }
+
     .reference-content{
         h2{
             font-size: 2.6rem;
         }
     }
 }
+
 @media(max-width: $phone){
     .wrapper-title-links{
         display: block;
@@ -181,6 +193,7 @@
             margin-top: 20px;
         }
     }
+    
     .side-infos{
         > li{
             width: calc(100%);
