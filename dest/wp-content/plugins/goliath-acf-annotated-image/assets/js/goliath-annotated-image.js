@@ -22,7 +22,7 @@
                 }
             }, '.annotated-image-inputs textarea');
 
-        $( document ).on( 'click', '.annotated-image-wrapper span.note' , function() {
+        $( document ).on( 'click', '.annotated-image-wrapper .note' , function() {
             displayRelatedTextarea($(this));
         });
 
@@ -143,10 +143,10 @@
 
             var sanitizedFieldName = sanitizedId( fieldname );
 
-            noteHtml = noteHtml + '<span class="note" id="note-'+ sanitizedFieldName +'-' + id + '" style="left:' + relX.toString() + '%; top:' + relY.toString() + '%">';
+            noteHtml = noteHtml + '<div class="note" id="note-'+ sanitizedFieldName +'-' + id + '" style="left:' + relX.toString() + '%; top:' + relY.toString() + '%">';
             noteHtml = noteHtml + '<span class="marker"></span>';
-            noteHtml = noteHtml + '<span class="text">'+text+'</span>';
-            noteHtml = noteHtml + '</span>';
+            noteHtml = noteHtml + '<div class="text-wrapper"><div class="text">'+text+'</div></div>';
+            noteHtml = noteHtml + '</div>';
 
             var $noteHtml = $(noteHtml);
 
@@ -222,8 +222,8 @@
             noteInputHtml += '<input type="hidden" name="' + fieldName + '[notes][' + idx.toString() + '][y]" value="' + relY.toString() + '" />';
             noteInputHtml += '<div class="acf-label"><label for="' + fieldName + '_notes_' + idx.toString() + '_text">Texte de la note n°<span class="note-id">'+ idx +'</span></label></div>';
             noteInputHtml += '<div class="acf-input">';
-            noteInputHtml += '<textarea id="' + fieldName + '_notes_' + idx.toString() + '_text" name="' + fieldName + '[notes][' + idx.toString() + '][t]" class="note-input" data-note-id="'+ sanitizedFieldName +'-' + idx  +'">' + text + '</textarea>';
             noteInputHtml += '<a class="acf-icon -cancel" data-name="annotation-remove" data-note-id="'+ sanitizedFieldName +'-' + idx +'" href="#" title="Remove"></a>';
+            noteInputHtml += '<textarea style="margin-top:10px;height:70px" id="' + fieldName + '_notes_' + idx.toString() + '_text" name="' + fieldName + '[notes][' + idx.toString() + '][t]" class="note-input" data-note-id="'+ sanitizedFieldName +'-' + idx  +'">' + text + '</textarea>';
             noteInputHtml += '</div>';
             noteInputHtml += '</div>';
 

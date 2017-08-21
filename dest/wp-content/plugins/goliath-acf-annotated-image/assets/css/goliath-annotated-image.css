@@ -6,54 +6,50 @@
   height: auto;
   margin-bottom: 20px;
 }
-.annotated-image.editable span.note {
+.annotated-image-wrapper.editable .note {
+  opacity: 0.7;
   cursor: pointer;
 }
 .annotated-image img {
   max-width: 100%;
 }
-.annotated-image span.note {
+.annotated-image .note {
   display: block;
   position: absolute;
   cursor: default;
 }
 
-.annotated-image span.note span.marker {
+.annotated-image .note .marker {
   content: "";
-  display: block;
   position: absolute;
-  bottom: 0;
-  left: -0.75em;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 1em 0.75em 0 0.75em;
-  border-color: #d12a2a transparent transparent transparent;
-}
-.annotated-image span.note span.text {
-  padding: 0.5em;
-  position: absolute;
+  bottom: 0.05em;
   left: 0;
-  bottom: 1em;
-  transform: translateX( -50% );
-  line-height: 1.25em;
-  text-align: center;
-  white-space: nowrap;
-  color: #fff;
-  background: #d12a2a;
+  width: 2px;
+  height: 25px;
+  background: #fff;
 }
-.annotated-image span.note span.text:empty {
+.annotated-image .note .text-wrapper {
+  position: absolute;
+  left: -35px;
+  bottom: 30px;
+  line-height: 1.2;
+  color: #fff;
+}
+.annotated-image .note .text{
+  width: 300px;
+  padding: 20px;
+  background: rgba(100,106,116,0.95);
+}
+.annotated-image .note .text strong{
+  font-size: 20px;
+}
+.annotated-image .note .text:empty {
   display: none;
 }
 
-.annotated-image span.note.current span.marker{
-  border-top-color: orange;
-}
-.annotated-image span.note.current span.text{
-  background: orange;
-}
-.annotated-image-wrapper .textarea .acf-input{
-
+.annotated-image .note.current{
+  opacity: 1;
+  z-index: 1;
 }
 .annotated-image-wrapper textarea{
   width: calc( 100% - 50px );

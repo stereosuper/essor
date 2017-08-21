@@ -16390,7 +16390,7 @@ module.exports = function () {
 
         noteHtml = noteHtml + '<div class="note" id="note-' + sanitizedFieldName + '-' + id + '" style="left:' + relX.toString() + '%; top:' + relY.toString() + '%">';
         noteHtml = noteHtml + '<svg class="icon icon-marker"><use xlink:href="#icon-marker"></use></svg>';
-        noteHtml = noteHtml + '<div class="text"><p>' + text + '</p></div>';
+        noteHtml = noteHtml + '<div class="text-wrapper"><div class="text">' + text.replace(/\n/g, "<br />") + '</div></div>';
         noteHtml = noteHtml + '</div>';
 
         var $noteHtml = $(noteHtml);

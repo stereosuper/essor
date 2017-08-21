@@ -23,20 +23,20 @@
     z-index: 1;
     fill: $white;
 }
-.annotated-image .note .text {
+.annotated-image .note .text-wrapper {
     position: absolute;
     left: -35px;
-    bottom: 0;
+    bottom: 30px;
     font-size: 1.3rem;
     line-height: 1.7;
     color: $white;
+}
+.annotated-image .note .text{
+    width: 340px;
+    padding: 30px;
+    background: rgba($text, 0.95);
     strong{
         font-size: 2rem;
-    }
-    > p{
-        width: 340px;
-        padding: 30px;
-        background: rgba($text, 0.95);
     }
 }
 .annotated-image .note .text:empty {
