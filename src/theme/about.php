@@ -129,15 +129,19 @@ get_header(); ?>
 
                         $i = -1;
                         foreach( $menuitems as $item ){
-                            $i++;
+                            if( $item->classes[0] != 'link-download' ){
+                                
+                                $i++;
 
-                            $id = get_post_meta( $item->ID, '_menu_item_object_id', true );
-                            
-                            $links[] = get_page_link( $id );
-                            $titles[] = get_the_title( $id );
+                                $id = get_post_meta( $item->ID, '_menu_item_object_id', true );
+                                
+                                $links[] = get_page_link( $id );
+                                $titles[] = get_the_title( $id );
+    
+                                if( $id == $post->ID ){
+                                    $nextid = $i + 1;
+                                }
 
-                            if( $id == $post->ID ){
-                                $nextid = $i + 1;
                             }
                         }
 
