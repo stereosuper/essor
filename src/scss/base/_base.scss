@@ -97,12 +97,13 @@ blockquote{
     text-indent: 30px;
     background: $grey url(../layoutImg/quote.svg) no-repeat #{$gutter} 25px / 20px;
     &.with-cite{
+        min-height: 95px;
         padding: 28px 230px 28px 70px;
         text-indent: 0;
         cite{
             max-width: 160px;
             position: absolute;
-            top: 10px;
+            top: 17px;
             right: $gutter;
             text-align: right;
             > strong{
