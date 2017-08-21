@@ -69,3 +69,10 @@
         opacity: 0.7;
     }
 }
+
+.link-download{
+    > a{
+        padding: 0 0 0 20px;
+        background: url(../layoutImg/download.svg) no-repeat 0 2px;
+    }
+}

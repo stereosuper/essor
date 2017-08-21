@@ -272,7 +272,7 @@ function essor_custom_post_nav_class( $classes, $item, $args ){
         $classes = array_diff( $classes, array( 'current_page_parent' ) );
     }
 	
-	return is_array( $classes ) ? array_intersect( $classes, array('current-menu-item', 'current_page_parent', 'current_page_ancestor') ) : '';
+	return is_array( $classes ) ? array_intersect( $classes, array('current-menu-item', 'current_page_parent', 'current_page_ancestor', 'link-download') ) : '';
 }
 add_action( 'nav_menu_css_class', 'essor_custom_post_nav_class', 10, 3 );
 

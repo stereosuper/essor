@@ -12,7 +12,7 @@ get_header(); ?>
 
                 <aside class='wrapper-sticky'>
                     <div class='wrapper-menu-aside <?php if( url_to_postid( get_field('aboutLink', 'options') ) == $post->ID ){ echo 'menu-no-current'; } ?>' id='blockSticky'>
-                        <?php wp_nav_menu( array( 'theme_location' => 'about', 'container' => false, 'menu_class' => 'menu-aside' ) ); ?>
+                        <?php wp_nav_menu( array( 'theme_location' => 'about', 'container' => false, 'menu_class' => 'menu-aside', 'desc' => true ) ); ?>
                     </div>
                 </aside>
 
