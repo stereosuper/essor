@@ -153,6 +153,40 @@ function essor_excerpt_length( $length ){
 }
 add_filter( 'excerpt_length', 'essor_excerpt_length' );
 
+function custom_wp_trim_excerpt($wpse_excerpt) {
+    $wpse_excerpt = strip_shortcodes( $wpse_excerpt );
+    $wpse_excerpt = apply_filters('the_content', $wpse_excerpt);
+    $wpse_excerpt = str_replace(']]>', ']]&gt;', $wpse_excerpt);
+    $wpse_excerpt = strip_tags($wpse_excerpt, '<em>,<i>,<a>,<strong>,<b>,<img>,<noscript>');
+
+    $excerpt_length = 109;
+    $tokens = array();
+    $excerptOutput = '';
+    $count = 0;
+
+    preg_match_all('/(<[^>]+>|[^<>\s]+)\s*/u', $wpse_excerpt, $tokens);
+
+    foreach($tokens[0] as $token){
+
+        if($count >= $excerpt_length /*&& preg_match('/[\,\;\?\.\!]\s*$/uS', $token)*/){ //pour arreter l'extrait a un point ou une virgule, etc
+            $excerptOutput .= trim($token);
+            break;
+        }
+
+        $count++;
+        $excerptOutput .= $token;
+    }
+
+    $wpse_excerpt = trim(force_balance_tags($excerptOutput));
+
+    $excerpt_end = ' <a href="'. get_the_permalink() .'" class="" title="'. 'Lire ' . get_the_title() .'">Lire toute l\'histoire</a>';
+    $excerpt_more = apply_filters('excerpt_more', ' ' . $excerpt_end);
+    $wpse_excerpt .= $excerpt_more;
+
+    return $wpse_excerpt;
+}
+
+// Add a div around iframes in wysiwyg
 function essor_wrap_embed( $html, $url, $attr ){
     return '<div class="wrapper-video">' . $html . '</div>';
 }

@@ -147,6 +147,7 @@ get_header(); ?>
 
 		<div class='container'>
             <div class='wrapper-content-sidebar'>
+                
                 <aside class='wrapper-sticky'>
                     <div class='wrapper-menu-aside' id='blockSticky'>
                         <?php wp_nav_menu( array( 'theme_location' => 'jobs', 'container' => false, 'menu_class' => 'menu-aside' ) ); ?>
@@ -229,7 +230,7 @@ get_header(); ?>
                         </form>
                     </div>
                 </div>
-                
+
             </div>
 		</div>
 	
