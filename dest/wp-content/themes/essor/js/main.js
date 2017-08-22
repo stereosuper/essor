@@ -16612,8 +16612,9 @@ var throttle = require('./throttle.js');
 module.exports = function (body, header, posTop, bodyClass, blockSticky, minimumWidth) {
     if (!body.hasClass(bodyClass)) return;
 
-    var scrollTop, belowWidth;
-    var windowWidth = window.outerWidth;
+    var scrollTop,
+        windowWidth = window.outerWidth;
+    var belowWidth = minimumWidth && windowWidth <= minimumWidth ? true : false;
 
     function headerStuck() {
         if (scrollTop >= posTop) {
@@ -16637,21 +16638,10 @@ module.exports = function (body, header, posTop, bodyClass, blockSticky, minimum
         } else if (scrollTop < blockSticky.data('initialPos') - 85) {
             blockSticky.css({ 'position': '', 'top': '', 'margin-top': '' });
         }
+
         if (belowWidth) {
             blockSticky.css({ 'position': '', 'top': '', 'margin-top': '' });
         }
-    }
-
-    function scrollHandler() {
-        scrollTop = $(document).scrollTop();
-        headerStuck();
-        stickyInterval();
-    }
-
-    function resizeHandler() {
-        windowWidth = window.outerWidth;
-        minimumWidth && windowWidth <= minimumWidth ? belowWidth = true : belowWidth = false;
-        scrollHandler();
     }
 
     blockSticky.data({
@@ -16659,11 +16649,21 @@ module.exports = function (body, header, posTop, bodyClass, blockSticky, minimum
     });
 
     $(document).on('scroll', throttle(function () {
-        requestAnimFrame(scrollHandler);
+
+        requestAnimFrame(function () {
+            scrollTop = $(document).scrollTop();
+
+            headerStuck();
+            stickyInterval();
+        });
     }, 10));
 
     $(window).on('resize', throttle(function () {
-        requestAnimFrame(resizeHandler);
+
+        requestAnimFrame(function () {
+            windowWidth = window.outerWidth;
+            belowWidth = minimumWidth && windowWidth <= minimumWidth ? true : false;
+        });
     }, 10));
 };
 

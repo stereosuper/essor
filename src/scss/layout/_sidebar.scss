@@ -131,10 +131,36 @@
     .wrapper-content-sidebar{
         flex-direction: column;
         > aside{
+            width: 100%;
             margin: 0;
             &.contact-aside{
                 margin: 50px 0 0;
                 order: 2;
+            }
+        }
+    }
+
+    .wrapper-menu-aside{
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    .menu-aside{
+        width: 100%;
+        padding: 30px;
+        margin: 0;
+        > li{
+            display: inline-block;
+            &:last-child{
+                a:after{
+                    content: none;
+                }
+            }
+        }
+        a{
+            &:after{
+                content: ' — ';
             }
         }
     }

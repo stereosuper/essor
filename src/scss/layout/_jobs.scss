@@ -23,6 +23,7 @@
         }
     }
     a{
+        display: block;
         text-decoration: none;
     }
     h2{
@@ -31,10 +32,11 @@
         font-size: 2rem;
     }
     p{
-        color: $text;
         font-family: $poppins;
+        color: $text;
     }
 }
+
 .job-details{
     > span{
         font-family: $poppinsLight;
@@ -51,11 +53,11 @@
     padding: 94px 0;
 }
 .wrapper-dropdowns{
+    width: 100%;
+    padding: 15px 0;
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    padding: 15px 0;
     background: rgba($white, 0.95);
     z-index: 1;
     .container{
@@ -64,49 +66,34 @@
     }
     .dropdowns{
         display: flex;
-        position: relative;
         width: calc(100% - 420px);
+        position: relative;
         margin: 0;
     }
     .dropdown{
-        width: calc(40% - #{2*$gutter});
-        margin: 10px 2*$gutter 10px $gutter;
+        width: 32%;
+        margin: 10px 8% 10px $gutter;
         &:last-child{
-            margin-right: $gutter;
+            margin-right: 0;
         }
     }
 }
 
+
 @media(max-width: $desktop){
-    .wrapper-content-sidebar{
-        aside{
-            width: 250px;
-            margin-right: 80px;
-        }
-    }
-    .wrapper-menu-aside{
-        width: 280px;
-    }
     .wrapper-dropdowns{
         .dropdowns{
             width: calc(100% - 350px);
         }
     }
 }
+
 @media(max-width: $desktopSmall){
-    .wrapper-content-sidebar{
-        display: block;
-        aside{
-            margin: 0;
-            &.over-img{
-                margin: 0;
-            }
-        }
-    }
     .wrapper-dropdowns{
-        position: relative;
-        top: auto;
-        left: auto;
+        position: static;
+        .container{
+            padding: 0;
+        }
         .dropdowns{
             width: 100%;
             flex-wrap: wrap;
@@ -120,6 +107,7 @@
             }
         }
     }
+
     .wrapper-page{
         padding: 0;
     }
