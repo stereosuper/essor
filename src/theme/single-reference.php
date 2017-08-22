@@ -3,7 +3,7 @@
     <?php if ( have_posts() ) : the_post(); ?>
         <?php if( function_exists('gacfai_get_field') && gacfai_get_field('img') ){ ?>
             <div><?php echo gacfai_get_field('img', $post->ID, 'full', false, ''); ?></div>
-        <?php }else{ ?>
+        <?php }else if( has_post_thumbnail() ){ ?>
             <div class='wrapper-top-img'>
                 <div class='top-img' style='background-image:url("<?php echo get_the_post_thumbnail_url(); ?>")'></div>
             </div>
