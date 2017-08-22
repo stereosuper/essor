@@ -16767,10 +16767,11 @@ $(function () {
     $.fn.annotatedImage = require('./annotedImages.js');
 
     var body = $('body');
+    var dropdowns = $('.dropdown');
+    var header = $('#header');
     var windowWidth = window.outerWidth,
         windowHeight = $(window).height();
     var scrollTop;
-    var dropdowns = $('.dropdown');
 
     // isMobile.any ? body.addClass('is-mobile') : body.addClass('is-desktop');
 
@@ -16786,7 +16787,7 @@ $(function () {
     animResponsiveHeader(body, $('#mainNav'), $('#menus'), $('#main'));
 
     // Handle header pushed by filters
-    jobsSticky(body, $('.header'), 460, 'page-template-offres', $('#blockStickyJobs'), 960);
+    jobsSticky(body, header, 460, 'page-template-offres', $('#blockStickyJobs'), 960);
 
     // Open and close custom dropdowns
     customDropdown(dropdowns);
@@ -16818,7 +16819,11 @@ $(function () {
         scrollTop = $(document).scrollTop();
 
         // Add a class to header when page is scrolled
-        scrollTop > 100 ? $('.header').addClass('on') : $('.header').removeClass('on');
+        if (windowWidth > 768) {
+            scrollTop > 100 ? header.addClass('on') : header.removeClass('on');
+        } else if (header.hasClass('on')) {
+            header.removeClass('on');
+        }
     }, 60));
 });
 

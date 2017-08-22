@@ -594,3 +594,9 @@
         display: block;
     }
 }
+
+@media (max-width: $tablet){
+    .header-main-wrapper{
+        position: relative;
+    }
+}

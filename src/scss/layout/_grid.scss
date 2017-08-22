@@ -72,3 +72,9 @@ div[class^='col-']{
         padding-top: 77px;
     }
 }
+
+@media (max-width: $tablet){
+    .main{
+        padding-top: 0;
+    }
+}

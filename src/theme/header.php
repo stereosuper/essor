@@ -15,7 +15,7 @@
 
 	<body <?php body_class(); ?>>
 
-		<header role='banner' class='header'>
+		<header role='banner' class='header' id='header'>
 	
 			<div class='container'>
 
