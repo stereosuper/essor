@@ -72,6 +72,7 @@
 
 .link{
     position: relative;
+    font-family: $poppins;
     text-decoration: underline;
     &:after{
         content: '';

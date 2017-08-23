@@ -41,7 +41,12 @@
         &:before{
             content: '';
             display: block;
-            padding-bottom: 88%;
+            padding: 0 0 88%;
+        }
+        &.small{
+            &:before{
+                padding: 0 0 55%;
+            }
         }
     }
     .img{

@@ -43,6 +43,50 @@
     }
 }
 
+.bloc-title-img{
+    width: 100%;
+    padding: 0 $gutter*2 45px $gutter;
+    position: absolute;
+    top: 180px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    z-index: 1;
+    transition: opacity $transition;
+    &.off{
+        opacity: 0;
+    }
+    &:after{
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -$gutter;
+        right: 0;
+        bottom: 0;
+        z-index: -1;
+        background: rgba($white, 0.9);
+    }
+    > h1{
+        padding: 50px 0 0;
+        margin: 0;
+        &:before{
+            bottom: calc(100% - 1.83em);
+        }
+    }
+    > p{
+        margin: 0;
+    }
+}
+
+
+@media(max-width: $desktop){
+    .bloc-title-img{
+        position: static;
+        &.off{
+            opacity: 1;
+        }
+    }
+}
 
 @media(max-width: $tablet){
     .annotated-image{

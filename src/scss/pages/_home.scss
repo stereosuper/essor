@@ -1,1 +1,197 @@
 /* Home specific style */
+
+.home{
+    .main{
+        padding-bottom: 0;
+    }
+    h2{
+        margin-top: 1.85em;
+    }
+    .projects{
+        padding: 60px 0 15px;
+    }
+    img{
+        &.alignleft{
+            margin-left: -$gutter;
+        }
+        &.alignright{
+            margin-right: -$gutter;
+        }
+    }
+}
+
+.bloc-title-small{
+    width: 50%;
+    padding: 1px $gutter;
+    position: absolute;
+    top: -70px;
+    left: 0;
+    background: $primary;
+    color: $white;
+    > h2{
+        margin: 55px 0 0;
+    }
+    > p{
+        margin: 10px 0 65px;
+    }
+}
+
+.list-sectors{
+    display: flex;
+    padding: 25px 0 0;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 0;
+    > li{
+        width: calc(50% - #{$gutter});
+        padding: 25px 0 70px;
+        &:before{
+            content: none;
+        }
+        &:first-child{
+            margin-left: calc(50% + #{$gutter});
+        }
+    }
+    a{
+        display: flex;
+        align-items: flex-start;
+        text-decoration: none;
+        &:hover, &:focus{
+            h3{
+                &:before{
+                    transform: translate3d(5px, 0, 0);
+                }
+            }
+        }
+    }
+    img{
+        margin: 20px $gutter 0 0;
+    }
+    h3{
+        display: inline-block;
+        padding: 0 20px 0 0;
+        position: relative;
+        margin: 0;
+        &:before, &:after{
+            content: '';
+        }
+        &:before{
+            width: 20px;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            background: url(../layoutImg/arrow.svg) no-repeat 100% 9px / 12px;
+            transition: transform $transition;
+        }
+        &:after{
+            display: block;
+            width: 25px;
+            height: 2px;
+            margin: 16px 0 5px;
+            background: $primary;
+        }
+    }
+    p{
+        margin: 0;
+        color: $text;
+    }
+}
+
+.wrapper-map{
+    padding: 50px 0;
+    position: relative;
+    margin: 90px 0 0;
+    overflow: hidden;
+    background: #dfdfe7;
+    &.has-img{
+        padding: 0;
+        > .container{
+            width: 100%;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            transform: translate3d(0, -50%, 0);
+        }
+    }
+    > img{
+        float: right;
+    }
+    h2{
+        margin-top: 25px;
+    }
+    p{
+        max-width: 45%;
+    }
+}
+
+
+@media(max-width: $desktopLarge){
+    .bloc-title-small{
+        width: calc(50% - #{$gutter});
+        left: $gutter;
+    }
+}
+
+@media(max-width: $desktop){
+    .wrapper-map{
+        &.has-img{
+            > .container{
+                top: 60%;
+            }
+        }
+    }
+}
+
+@media(max-width: $desktopSmall){
+    .home{
+        img{
+            &.alignleft{
+                margin-left: auto;
+            }
+            &.alignright{
+                margin-right: auto;
+            }
+        }
+    }
+
+    .bloc-title-small{
+        width: 100%;
+        position: relative;
+        margin-bottom: -70px;
+        left: 0;
+    }
+
+    .list-sectors{
+        > li{
+            width: 100%;
+            padding-bottom: 30px;
+            &:first-child{
+                margin: 0;
+            }
+            &:last-child{
+                padding-bottom: 50px;
+            }
+        }
+    }
+}
+
+@media(max-width: $phone){
+    .home{
+        .projects{
+            > li{
+                margin: 0 0 30px;
+            }
+        }
+    }
+
+    .list-sectors{
+        a{
+            display: block;
+        }
+        img{
+            margin: 0 0 20px;
+        }
+    }
+}

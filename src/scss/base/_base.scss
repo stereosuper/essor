@@ -299,6 +299,14 @@ a{
     margin: -100px 0;
 }
 
+.bg-full{
+    margin: 160px 0 90px;
+    background: $grey;
+    > .container{
+        position: relative;
+    }
+}
+
 .half-title{
     position: relative;
     width: 50%;

@@ -166,8 +166,16 @@ module.exports = function() {
             $(this).find('.text').fadeIn(animTimeFade, function() {
                 $(this).find('.text').addClass('shown');
             });
+
+            if($('#blocTitle').length){
+                $('#blocTitle').addClass('off');
+            }
         }).on('mouseleave', function(){
             $(this).find('.text').fadeOut(animTimeFade).removeClass('shown');
+
+            if($('#blocTitle').length){
+                $('#blocTitle').removeClass('off');
+            }
         });
     };
 
