@@ -23,17 +23,50 @@ get_header(); ?>
         <div class='container-small'>
             <h2><?php the_field('refTitle'); ?></h2>
             <?php the_field('refText'); ?>
+            <ul>
+            <?php $buildingTypes = get_terms('batiment');
+                foreach( $buildingTypes as $buildingType ){ ?>
+                    <li>
+                        <a href="<?php echo get_field('refsLink', 'options') . '?batiment=' . $buildingType->slug; ?>">
+                            <?php echo $buildingType->name; ?>
+                            <?php echo wp_get_attachment_image( get_field('img', $buildingType), 'medium' ); ?>
+                        </a>
+                    </li>
+            <?php } ?>
+            </ul>
             <?php the_field('refText2'); ?>
         </div>
 
         <div class='container'>
             <h2><?php the_field('sectorsTitle'); ?></h2>
             <?php the_field('sectorsText'); ?>
+
+            <?php if( have_rows('sectors') ){ ?>
+                <ul>
+                    <?php while( have_rows('sectors') ){ the_row(); ?>
+                        <li>
+                            <a href='<?php the_sub_field('page'); ?>'>
+                                <?php echo wp_get_attachment_image( get_sub_field('img'), 'medium' ); ?>
+                                <?php the_sub_field('title'); ?>
+                                <?php the_sub_field('text'); ?>
+                            </a>
+                        </li>
+                    <?php } ?>
+                </ul>
+            <?php } ?>
         </div>
 
-        <div class='container-small'>
-            <h2><?php echo get_field('about')->post_title; ?></h2>
-            <?php echo custom_wp_trim_excerpt( get_field('about')->post_content ); ?>
+        <?php if( get_field('about') ){ ?>
+            <div class='container-small'>
+                <h2><?php echo get_field('about')->post_title; ?></h2>
+                <?php echo essor_wp_trim_excerpt( get_field('about')->post_content ); ?>
+            </div>
+        <?php } ?>
+
+        <div class='container'>
+            <h2><?php the_field('mapTitle'); ?></h2>
+            <?php the_field('mapText'); ?>
+            <?php echo wp_get_attachment_image( get_field('mapImg'), 'full' ); ?>
         </div>
 	
 	<?php else : ?>

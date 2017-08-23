@@ -153,11 +153,11 @@ function essor_excerpt_length( $length ){
 }
 add_filter( 'excerpt_length', 'essor_excerpt_length' );
 
-function custom_wp_trim_excerpt($wpse_excerpt) {
+function essor_wp_trim_excerpt($wpse_excerpt) {
     $wpse_excerpt = strip_shortcodes( $wpse_excerpt );
     $wpse_excerpt = apply_filters('the_content', $wpse_excerpt);
     $wpse_excerpt = str_replace(']]>', ']]&gt;', $wpse_excerpt);
-    $wpse_excerpt = strip_tags($wpse_excerpt, '<em>,<i>,<a>,<strong>,<b>,<img>,<noscript>');
+    $wpse_excerpt = strip_tags($wpse_excerpt, '<p>,<h2>,<h3>,<h4>,<h5>,<em>,<i>,<a>,<strong>,<b>,<img>,<noscript>');
 
     $excerpt_length = 109;
     $tokens = array();
@@ -179,7 +179,7 @@ function custom_wp_trim_excerpt($wpse_excerpt) {
 
     $wpse_excerpt = trim(force_balance_tags($excerptOutput));
 
-    $excerpt_end = ' <a href="'. get_the_permalink() .'" class="" title="'. 'Lire ' . get_the_title() .'">Lire toute l\'histoire</a>';
+    $excerpt_end = ' <a href="'. get_the_permalink() .'" class="link" title="'. 'Lire ' . get_the_title() .'">Lire toute l\'histoire</a>';
     $excerpt_more = apply_filters('excerpt_more', ' ' . $excerpt_end);
     $wpse_excerpt .= $excerpt_more;
 
