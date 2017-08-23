@@ -39,7 +39,7 @@ get_header(); ?>
             <?php } ?>
             </ul>
         </div>
-        <div class='container-small'>
+        <div class='container-small' id='metiers'>
             <?php the_field('refText2'); ?>
         </div>
 
