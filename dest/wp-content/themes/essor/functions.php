@@ -119,6 +119,11 @@ function essor_mce_before_init( $styles ){
     // Add custom styles
     $style_formats = array(
         array(
+            'title' => 'Lien fléché',
+            'selector' => 'a',
+            'classes' => 'link'
+        ),
+        array(
             'title' => 'Citation avec auteur',
             'selector' => 'blockquote',
             'classes' => 'with-cite'

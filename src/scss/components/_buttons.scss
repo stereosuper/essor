@@ -70,6 +70,25 @@
     }
 }
 
+.link{
+    position: relative;
+    text-decoration: underline;
+    &:after{
+        content: '';
+        width: 15px;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: -15px;
+        background: url(../layoutImg/arrow.svg) no-repeat 100% 50% / 8px;
+        transition: transform $transition;
+    }
+    &:hover, &:focus{
+        &:after{
+            transform: translate3d(5px, 0, 0);
+        }
+    }
+}
 .link-download{
     > a{
         padding: 0 0 0 20px;
