@@ -118,11 +118,12 @@
     .wrapper-content-sidebar{
         > aside{
             width: 250px;
+            min-width: 250px;
             margin-right: 80px;
         }
     }
 
-    .wrapper-menu-aside{
+    .wrapper-menu-aside, .wrapper-aside{
         width: 250px;
     }
 }
@@ -144,6 +145,9 @@
         width: 100%;
         padding: 0;
         margin: 0;
+    }
+    .wrapper-aside{
+        width: 100%;
     }
 
     .menu-aside{

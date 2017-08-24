@@ -165,7 +165,7 @@ get_header(); ?>
 
                     <h3 id='form'>Postuler</h3>
 
-                    <div class='small form-offer'>
+                    <div class='form-offer'>
 
                         <?php if( $success ){ ?>
                             <p class='form-success'>
@@ -204,7 +204,7 @@ get_header(); ?>
 
                             <div class='field field-top <?php if($errorMsg) echo 'error'; ?>'>
                                 <label for='message'>Votre message</label>
-                                <textarea class='small' name='message' id='message' placeholder="J'aime beaucoup ce que vous faites! Laissez moi vous parler de mon incroyabe projet." required><?php echo esc_textarea( $msg ); ?></textarea>
+                                <textarea name='message' id='message' placeholder="J'aime beaucoup ce que vous faites! Laissez moi vous parler de mon incroyabe projet." required><?php echo esc_textarea( $msg ); ?></textarea>
                             </div>
 
                             <div class='field <?php if($errorFile) echo 'error'; ?>'>
