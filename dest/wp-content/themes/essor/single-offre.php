@@ -188,12 +188,12 @@ get_header(); ?>
                         <form method='post' action='<?php the_permalink(); ?>#form' class='<?php if( $success ) echo "success"; ?>' id='form-offer' enctype='multipart/form-data'>
                             <div class='field <?php if($errorName) echo 'error'; ?>'>
                                 <label for='name'>Votre prénom et nom</label>
-                                <input type='text' name='full_name' id='name' value='<?php echo esc_attr( $name ); ?>' placeholder='Alain Deloin' required>
+                                <input type='text' name='full_name' id='name' value='<?php echo esc_attr( $name ); ?>' placeholder='Jean Dupont' required>
                             </div>
 
                             <div class='field <?php if($errorMail) echo 'error'; ?>'>
                                 <label for='email'>Votre email</label>
-                                <input type='email' name='email' id='email' value='<?php echo esc_attr( $mail ); ?>' placeholder='alain.deloin@laposte.net' required>
+                                <input type='email' name='email' id='email' value='<?php echo esc_attr( $mail ); ?>' placeholder='jean.dupont@laposte.net' required>
                             </div>
 
                             <div class='field optional <?php if($errorPhone) echo 'error'; ?>'>
