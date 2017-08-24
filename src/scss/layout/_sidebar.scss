@@ -115,16 +115,23 @@
 
 
 @media(max-width: $desktop){
-    .wrapper-content-sidebar{
-        > aside{
+    .contact-aside{
+        .wrapper-content-sidebar{
+            > aside{
+                width: 250px;
+                min-width: 250px;
+            }
+        }
+
+        .wrapper-aside{
             width: 250px;
-            min-width: 250px;
-            margin-right: 80px;
         }
     }
 
-    .wrapper-menu-aside, .wrapper-aside{
-        width: 250px;
+    .wrapper-content-sidebar{
+        > aside{
+            margin-right: 80px;
+        }
     }
 }
 
