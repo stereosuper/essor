@@ -1,9 +1,4 @@
-<?php
-/*
-Template Name: Accueil
-*/
-
-get_header(); ?>
+<?php get_header(); ?>
 
 	<?php if ( have_posts() ) : the_post(); ?>
 
