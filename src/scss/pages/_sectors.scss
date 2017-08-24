@@ -1,0 +1,72 @@
+.page-template-sub-front-page{
+    h2{
+        margin: 0;
+        font-size: 2rem;
+        &.has-margin{
+            margin: 3em 0 1em;
+        }
+        + p{
+            margin-top: 0;
+        }
+    }
+    .projects{
+        margin: 30px 0 0;
+    }
+}
+
+.sector-detail{
+    display: flex;
+    align-items: flex-start;
+}
+
+.sector-text{
+    width: 50%;
+    padding: 0 $gutter 0 0;
+}
+
+.list-people-sector{
+    display: flex;
+    padding: 0 0 60px;
+    flex-wrap: wrap;
+    margin: 0;
+    > li{
+        width: 25%;
+        padding: 0 $gutter 0 0;
+        &:before{
+            content: none;
+        }
+    }
+    h3{
+        margin: 0;
+        font-size: 1.8rem;
+        text-transform: uppercase;
+        color: $text;
+    }
+}
+
+.map-sector{
+    display: flex;
+    align-items: center;
+    margin-top: 100px;
+    > div{
+        width: 50%;
+        padding: 0 0 0 $gutter;
+        order: 1;
+    }
+    > img{
+        width: calc(50% + #{$gutter});
+        margin: 0 0 0 $gutter*-1;
+    }
+    h2{
+        font-size: 5rem;
+        color: $primary;
+        &:after{
+            content: '';
+            display: block;
+            width: 150px;
+            height: 2px;
+            margin: 5px 0 50px $gutter*-2;
+            background: $primary;
+        }
+    }
+}

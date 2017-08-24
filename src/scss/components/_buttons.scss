@@ -71,17 +71,13 @@
 }
 
 .link{
-    display: inline-block;
-    position: relative;
     font-family: $poppins;
     text-decoration: underline;
     &:after{
         content: '';
+        display: inline-block;
         width: 15px;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        right: -15px;
+        height: 10px;
         background: url(../layoutImg/arrow.svg) no-repeat 100% 50% / 8px;
         transition: transform $transition;
     }

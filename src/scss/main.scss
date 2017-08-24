@@ -35,11 +35,14 @@
     'components/dropdown',
     'components/numbers',
     'components/timeline',
-    'components/annoted-images';
+    'components/annoted-images',
+    'components/sectors',
+    'components/slider';
 
 @import
     'pages/home',
-    'pages/reference';
+    'pages/reference',
+    'pages/sectors';
 
 @import
     'base/print';

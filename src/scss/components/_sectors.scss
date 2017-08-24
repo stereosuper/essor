@@ -1,0 +1,88 @@
+.list-sectors{
+    display: flex;
+    padding: 25px 0 0;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 0;
+    > li{
+        width: calc(50% - #{$gutter});
+        padding: 25px 0 70px;
+        &:before{
+            content: none;
+        }
+        &:first-child{
+            margin-left: calc(50% + #{$gutter});
+        }
+    }
+    a{
+        display: flex;
+        align-items: flex-start;
+        text-decoration: none;
+        &:hover, &:focus{
+            h3{
+                &:before{
+                    transform: translate3d(5px, 0, 0);
+                }
+            }
+        }
+    }
+    img{
+        margin: 20px $gutter 0 0;
+    }
+    h3{
+        display: inline-block;
+        padding: 0 20px 0 0;
+        position: relative;
+        margin: 0;
+        &:before, &:after{
+            content: '';
+        }
+        &:before{
+            width: 20px;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            background: url(../layoutImg/arrow.svg) no-repeat 100% 9px / 12px;
+            transition: transform $transition;
+        }
+        &:after{
+            display: block;
+            width: 25px;
+            height: 2px;
+            margin: 16px 0 5px;
+            background: $primary;
+        }
+    }
+    p{
+        margin: 0;
+        color: $text;
+    }
+}
+
+
+@media(max-width: $desktopSmall){
+    .list-sectors{
+        > li{
+            width: 100%;
+            padding-bottom: 30px;
+            &:first-child{
+                margin: 0;
+            }
+            &:last-child{
+                padding-bottom: 50px;
+            }
+        }
+    }
+}
+
+@media(max-width: $phone){
+    .list-sectors{
+        a{
+            display: block;
+        }
+        img{
+            margin: 0 0 20px;
+        }
+    }
+}
