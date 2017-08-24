@@ -168,7 +168,7 @@
 @media(max-width: $phone){
     .projects{
         .wrapper-img{
-            width: 75%;
+            max-width: 300px;
         }
 
         > li{
