@@ -11,10 +11,10 @@ get_header(); ?>
         $i = 0;
 
         if( $highlightedProjects ): ?>
-            <div class='slider'>
+            <div class='slider' id='slider'>
                 <?php foreach( $highlightedProjects as $post): ?>
                     <?php setup_postdata($post); ?>
-                    <div <?php if( $i !== 0 ){ echo 'style="display:none"'; } ?>>
+                    <div class='slide <?php if( $i === 0 ){ echo "on"; }else{ echo "off"; } ?>'>
                         <?php if( function_exists('gacfai_get_field') && gacfai_get_field('img') ){ ?>
                             <?php echo gacfai_get_field('img', $post->ID, 'full', false, ''); ?>
                         <?php }else if( has_post_thumbnail() ){ ?>
@@ -26,13 +26,14 @@ get_header(); ?>
 
                 <div class='container'>
                     <ul>
-                        <?php foreach( $highlightedProjects as $post): ?>
+                        <?php $i = 0; foreach( $highlightedProjects as $post): ?>
                             <?php setup_postdata($post); ?>
-                            <li><a href='<?php the_permalink(); ?>'>
-                                <?php the_field('place'); ?>
-                                <?php the_title(); ?>
+                            <li <?php if( $i === 0 ){ echo 'class="on"'; } ?>><a href='<?php the_permalink(); ?>'>
+                                <span><?php the_field('place'); ?></span>
+                                <b><?php the_title(); ?></b>
+                                <svg class='icon'><use xlink:href='#icon-right'></use></svg>
                             </a></li>
-                        <?php endforeach; ?>
+                        <?php $i++; endforeach; ?>
                     </ul>
                     <?php wp_reset_postdata(); ?>
                 </div>

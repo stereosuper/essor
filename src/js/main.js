@@ -21,6 +21,7 @@ $(function(){
     var loadMorePosts = require('./loadMorePosts.js');
     var initScrollReval = require('./initScrollReveal.js');
     var sticky = require('./sticky.js');
+    var setSlider = require('./slider.js');
     
     $.fn.annotatedImage = require('./annotedImages.js');
 
@@ -69,6 +70,9 @@ $(function(){
 
     // Annoted images
     $('.annotated-image').annotatedImage();
+
+    // Slider
+    setSlider( $('#slider') );
 
 
 

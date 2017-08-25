@@ -19,7 +19,7 @@ get_header(); ?>
                 </div>
 
                 <aside>
-                    <span class='title-aside'>Filter</span>
+                    <span class='title-aside'>Filtrer</span>
                     <div class='dropdown'>
                         <button type='button' class='dropdown-title'><svg class='icon icon-down'><use xlink:href='#icon-down'></use></svg></button>
                         <?php

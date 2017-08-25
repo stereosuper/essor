@@ -2,11 +2,11 @@ module.exports = function(elts){
     
     sr.reveal(elts, {
         origin: 'bottom',
-        distance: '30px',
+        distance: '70px',
         scale: 1,
-        duration: 300,
+        duration: 600,
         reset: true,
-        viewFactor: 0.5,
+        viewFactor: 0.1,
     });
 
 }

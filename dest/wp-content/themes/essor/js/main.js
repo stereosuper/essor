@@ -16601,11 +16601,11 @@ module.exports = function (elts) {
 
     sr.reveal(elts, {
         origin: 'bottom',
-        distance: '30px',
+        distance: '70px',
         scale: 1,
-        duration: 300,
+        duration: 600,
         reset: true,
-        viewFactor: 0.5
+        viewFactor: 0.1
     });
 };
 
@@ -16675,7 +16675,7 @@ module.exports = function (body, header, posTop, bodyClass, blockSticky, minimum
     }, 10));
 };
 
-},{"./requestAnimFrame.js":14,"./throttle.js":16,"jquery":4}],12:[function(require,module,exports){
+},{"./requestAnimFrame.js":14,"./throttle.js":17,"jquery":4}],12:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
@@ -16771,6 +16771,7 @@ $(function () {
     var loadMorePosts = require('./loadMorePosts.js');
     var initScrollReval = require('./initScrollReveal.js');
     var sticky = require('./sticky.js');
+    var setSlider = require('./slider.js');
 
     $.fn.annotatedImage = require('./annotedImages.js');
 
@@ -16819,6 +16820,9 @@ $(function () {
     // Annoted images
     $('.annotated-image').annotatedImage();
 
+    // Slider
+    setSlider($('#slider'));
+
     $(window).on('resize', throttle(function () {
         requestAnimFrame(resizeHandler);
     }, 60)).on('load', function () {});
@@ -16835,7 +16839,7 @@ $(function () {
     }, 60));
 });
 
-},{"./animResponsiveHeader.js":6,"./animSearchform.js":7,"./annotedImages.js":8,"./dropdown.js":9,"./initScrollReveal.js":10,"./jobsSticky.js":11,"./loadMorePosts.js":12,"./requestAnimFrame.js":14,"./sticky.js":15,"./throttle.js":16,"jquery":4,"scrollreveal":5}],14:[function(require,module,exports){
+},{"./animResponsiveHeader.js":6,"./animSearchform.js":7,"./annotedImages.js":8,"./dropdown.js":9,"./initScrollReveal.js":10,"./jobsSticky.js":11,"./loadMorePosts.js":12,"./requestAnimFrame.js":14,"./slider.js":15,"./sticky.js":16,"./throttle.js":17,"jquery":4,"scrollreveal":5}],14:[function(require,module,exports){
 "use strict";
 
 module.exports = function () {
@@ -16845,6 +16849,37 @@ module.exports = function () {
 }();
 
 },{}],15:[function(require,module,exports){
+'use strict';
+
+var $ = require('jquery');
+
+require('gsap/CSSPlugin');
+var TweenLite = require('gsap/TweenLite');
+
+module.exports = function (slider) {
+
+    if (!slider.length) return;
+
+    var slides = slider.find('.slide'),
+        nonActiveSlides = slider.find('.slide.off');
+
+    slider.on('click', 'a', function (e) {
+        if (!$(this).parent().hasClass('on')) {
+            e.preventDefault();
+
+            //TweenLite.to(slider.find('.slide.on'), 0.3, {});
+            slider.find('.slide.on').removeClass('on');
+            slides.eq($(this).parent().index()).addClass('on');
+
+            $(this).parent().addClass('on').siblings().removeClass('on');
+        }
+    });
+
+    TweenLite.set(nonActiveSlides, { display: 'none' });
+    nonActiveSlides.removeClass('off');
+};
+
+},{"gsap/CSSPlugin":1,"gsap/TweenLite":3,"jquery":4}],16:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
@@ -16942,7 +16977,7 @@ module.exports = function (stickyElt, givenPosition) {
     }, 10));
 };
 
-},{"./requestAnimFrame.js":14,"./throttle.js":16,"jquery":4}],16:[function(require,module,exports){
+},{"./requestAnimFrame.js":14,"./throttle.js":17,"jquery":4}],17:[function(require,module,exports){
 "use strict";
 
 module.exports = function (callback, delay) {
