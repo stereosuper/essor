@@ -595,6 +595,18 @@
     }
 }
 
+@media (max-width: $desktopSmall){
+    .header{
+        &.on{
+            + .main{
+                .wrapper-menu-aside{
+                    transform: translate3d(0, -20px, 0);
+                }
+            }
+        }
+    }
+}
+
 @media (max-width: $tablet){
     .header-main-wrapper{
         position: relative;
