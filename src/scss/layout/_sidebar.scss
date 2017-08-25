@@ -149,7 +149,7 @@
             width: 100%;
             margin: 0;
             &.over-img{
-                margin: -432px 0 255px;
+                margin: -432px 0 338px;
             }
             &.contact-aside{
                 margin: 50px 0 0;
@@ -205,6 +205,14 @@
 }
 
 @media(max-width: $tablet){
+    .wrapper-content-sidebar{
+        > aside{
+            &.over-img{
+                margin-bottom: 254px;
+            }
+        }
+    }
+
     .wrapper-menu-aside{
         position: static;
         transform: none !important;
