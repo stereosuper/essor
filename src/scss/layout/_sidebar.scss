@@ -149,7 +149,7 @@
             width: 100%;
             margin: 0;
             &.over-img{
-                margin: -432px 0 338px;
+                margin: -432px 0 253px;
             }
             &.contact-aside{
                 margin: 50px 0 0;
@@ -202,6 +202,10 @@
             }
         }
     }
+
+    .content-sidebar{
+        padding-top: 85px;
+    }
 }
 
 @media(max-width: $tablet){
@@ -216,5 +220,9 @@
     .wrapper-menu-aside{
         position: static;
         transform: none !important;
+    }
+
+    .content-sidebar{
+        padding-top: 0;
     }
 }
