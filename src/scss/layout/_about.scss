@@ -22,10 +22,11 @@
 .list-skills{
     display: flex;
     flex-wrap: wrap;
+    margin: 0 -25px;
     font-size: 1.4rem;
     > li{
         width: 33.3333%;
-        padding: 80px 50px 0 0;
+        padding: 80px 25px 0;
         &:before{
             content: none;
         }
