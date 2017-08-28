@@ -120,6 +120,26 @@ get_header(); ?>
                                 <?php endif; ?>
                             <?php endif; ?>
 
+                            <?php if( get_row_layout() == 'partnership' ): ?>
+                                <div class='wrapper-partner'>
+                                    <h2 class='primary'><?php the_sub_field('title'); ?></h2>
+
+                                    <?php if( have_rows('partners') ): ?>
+                                        <ul class='list-partners'>
+                                        <?php while( have_rows('partners') ): the_row(); ?>
+
+                                            <li class='isAnimated'>
+                                                <div class='img'><?php echo wp_get_attachment_image( get_sub_field('img'), 'medium' ); ?></div>
+                                                <h3><?php the_sub_field('name'); ?></h3>
+                                                <p><?php the_sub_field('detail'); ?></p>
+                                            </li>
+
+                                        <?php endwhile; ?>
+                                        </ul>
+                                    <?php endif; ?>
+                                </div>
+                            <?php endif; ?>
+
                         <?php endwhile; ?>
                     <?php endif; ?>
                     

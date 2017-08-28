@@ -54,6 +54,7 @@
 
 .wrapper-people{
     padding: 50px 0 0;
+    clear: both;
     + .wrapper-people{
         padding: 0;
     }
@@ -93,6 +94,44 @@
     p{
         margin: 0;
         letter-spacing: -0.02em;
+    }
+}
+
+.wrapper-partner{
+    padding: 50px 0 0;
+    clear: both;
+    h2{
+        margin: 0 0 35px;
+    }
+}
+.list-partners{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 $gutter*-1 0 0;
+    > li{
+        width: 33.3333%;
+        padding: 0 $gutter*2 50px 0;
+        &:before{
+            content: none;
+        }
+    }
+    .img{
+        display: flex;
+        height: 115px;
+        align-items: center;
+    }
+    img{
+        width: auto;
+        max-height: 100%;
+    }
+    h3{
+        margin: 20px 0 0;
+        font-size: 1.6rem;
+        text-transform: uppercase;
+        color: $text;
+    }
+    p{
+        margin: 0;
     }
 }
 
@@ -222,6 +261,12 @@
     .prizes{
         margin: 0 $gutter*-1 0 $gutter;
     }
+
+    .list-partners{
+        > li{
+            padding-right: $gutter;
+        }
+    }
 }
 
 @media (max-width: $tablet){
@@ -233,7 +278,7 @@
 }
 
 @media (max-width: $phone){
-    .list-skills, .prizes{
+    .list-skills, .prizes, .list-partners{
         > li{
             width: 100%;
         }
