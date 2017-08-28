@@ -16961,18 +16961,18 @@ module.exports = function (stickyElt, givenPosition) {
         scrollHandler();
     }
 
-    init();
-    stickyElt.data({ 'initialPos': stickyElt.css('top') });
+    $(window).on('load', function () {
+        checkWindowHeight();
 
-    console.log(stickyElt.data());
-
-    checkWindowHeight();
+        init();
+        stickyElt.data({ 'initialPos': stickyElt.css('top') });
+    });
 
     $(document).on('scroll', throttle(function () {
-        requestAnimFrame(scrollHandler);
-    }, 10));
 
-    $(window).on('resize', throttle(function () {
+        requestAnimFrame(scrollHandler);
+    }, 10)).on('resize', throttle(function () {
+
         requestAnimFrame(resizeHandler);
     }, 10));
 };
