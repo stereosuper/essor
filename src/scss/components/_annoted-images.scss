@@ -1,6 +1,11 @@
 .annotated-image-wrapper{
+    display: flex;
     width: 100% !important;
     height: auto !important;
+    max-height: calc(90vh - 102px);
+    min-height: 150px;
+    overflow: hidden;
+    align-items: flex-end;
 }
 
 .annotated-image{
@@ -89,6 +94,14 @@
 }
 
 @media(max-width: $tablet){
+    .annotated-image{
+        .note{
+            display: none;
+        }
+    }
+}
+
+@media(max-height: 600px){
     .annotated-image{
         .note{
             display: none;

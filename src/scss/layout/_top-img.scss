@@ -3,6 +3,7 @@
 .wrapper-top-img{
     height: 710px;
     max-height: calc(90vh - 102px);
+    min-height: 150px;
     &.small{
         height: 432px;
     }
