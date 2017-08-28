@@ -282,7 +282,7 @@ function essor_custom_post_nav_class( $classes, $item, $args ){
     }
 
     if( is_singular( 'offre' ) ){
-        if( $item->object_id == url_to_postid( get_field('offersLink', 'options') ) || $item->object_id == get_option( 'page_on_front' ) ){
+        if( $item->object_id == url_to_postid( get_field('jobLink', 'options') ) || $item->object_id == get_option( 'page_on_front' ) ){
             $classes[] = 'current_page_parent';
         }else{
             $classes = array_diff( $classes, array( 'current_page_parent' ) );
@@ -290,8 +290,8 @@ function essor_custom_post_nav_class( $classes, $item, $args ){
     }
 
     if( $args->menu_id == 'menuSecondary' ){
-        if( is_page_template('application.php') || is_page_template('testimonies.php') ){
-            if( $item->object_id == url_to_postid( get_field('offersLink', 'options') ) ){
+        if( is_page_template('application.php') || is_page_template('offres.php') ){
+            if( $item->object_id == url_to_postid( get_field('jobLink', 'options') ) ){
                 $classes[] = 'current_page_parent';
             }else{
                 $classes = array_diff( $classes, array( 'current_page_parent' ) );
@@ -318,8 +318,8 @@ function essor_custom_post_nav_class( $classes, $item, $args ){
     if( is_search() || is_404() ){
         $classes = array_diff( $classes, array( 'current_page_parent' ) );
     }
-	
-	return is_array( $classes ) ? array_intersect( $classes, array('current-menu-item', 'current_page_parent', 'current_page_ancestor', 'link-download') ) : '';
+
+    return is_array( $classes ) ? array_intersect( $classes, array('current-menu-item', 'current_page_parent', 'current-page-ancestor', 'link-download') ) : '';
 }
 add_action( 'nav_menu_css_class', 'essor_custom_post_nav_class', 10, 3 );
 
