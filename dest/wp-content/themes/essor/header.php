@@ -46,6 +46,15 @@
 									<path d='M125.2 36.6v3.9H94.6v-3.9h30.6m1-1H93.6v5.9h32.5v-5.9h.1z' class='logo-grey'/>
 								</g>
 							</svg>
+
+							<?php
+								$sectors = get_field('sectorPages', 'options');
+								if( in_array($post->ID, $sectors) ){ ?>
+									<span style='margin-left:<?php the_field('logoTranslate', $post->ID); ?>px'><?php the_field('name', $post->ID); ?></span>
+								<?php }else if( in_array(wp_get_post_parent_id( $post_ID ), $sectors) ){ ?>
+									<span style='margin-left:<?php the_field('logoTranslate', wp_get_post_parent_id( $post_ID )); ?>px'><?php the_field('name', wp_get_post_parent_id( $post_ID )); ?></span>
+								<?php }
+							?>
 						</a>
 
 						<button type='button' id='burger' class='burger'>Menu<i></i></button>
@@ -57,7 +66,16 @@
 					<div class='menus-wrapper' id='menus'>
 						<div class='menu-main-wrapper'>
 							<button type='button' class='btn-menu-main'>
-								Nos métiers
+								<?php
+									$sectors = get_field('sectorPages', 'options');
+									if( in_array($post->ID, $sectors) ){
+										the_field('name', $post->ID);
+									}else if( in_array(wp_get_post_parent_id( $post_ID ), $sectors) ){
+										the_field('name', wp_get_post_parent_id( $post_ID ));
+									}else{
+										echo 'Nos métiers';
+									}
+								?>
 								<svg class='icon down'><use xlink:href='#icon-down'></use></svg>
 								<!--<svg class='icon close'><use xlink:href='#icon-close'></use></svg>-->
 							</button>
