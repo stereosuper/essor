@@ -172,6 +172,13 @@ get_header(); ?>
                                     <svg class='icon'><use xlink:href='#icon-right'></use></svg>
                                 </a>
                             </div>
+                        <?php }else if( url_to_postid( get_field('aboutLink', 'options') ) == $post->ID ){ ?>
+                            <div class='about-nav'>
+                                <a href='<?php echo $links[0]; ?>' class='btn'>
+                                    <?php echo $titles[0]; ?>
+                                    <svg class='icon'><use xlink:href='#icon-right'></use></svg>
+                                </a>
+                            </div>
                         <?php }
                     ?>
                 </div>
