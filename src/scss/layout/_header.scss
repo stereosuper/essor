@@ -24,6 +24,12 @@
         }
         .logo{
             transform: scale(0.8) translate3d(-20px, 0, 0);
+            &.logo-sector{
+                transform: scale(0.8) translate3d(-20px, 11px, 0);
+            }
+            > span{
+                opacity: 0;
+            }
         }
         .btn-menu-main{
             transform: translate3d(-135px, 0, 0);
@@ -259,8 +265,23 @@
 .logo{
     display: block;
     width: 150px;
+    text-align: right;
     &:after{
         content: none;
+    }
+    &.logo-sector{
+        .logo-grey-change{
+            fill: #9c9da5;
+        }
+    }
+    > span{
+        margin: 0 28px 0 0;
+        font-family: $poppinsBold;
+        font-size: 1.3rem;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+        color: #9c9da5;
+        transition: $transition;
     }
 }
 .logo-primary-fill{

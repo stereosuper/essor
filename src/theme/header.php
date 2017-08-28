@@ -19,9 +19,19 @@
 	
 			<div class='container'>
 
+			<?php
+				$sectors = get_field('sectorPages', 'options');
+				$sectorID = '';
+				if( in_array($post->ID, $sectors) ){
+					$sectorID = $post->ID;
+				}else if( in_array(wp_get_post_parent_id( $post_ID ), $sectors) ){
+					$sectorID = wp_get_post_parent_id( $post_ID );
+				}
+			?>
+
 				<div class='header-main-wrapper'>
 					<div class='header-main'>
-						<a href='<?php echo home_url('/'); ?>' title='<?php bloginfo( 'name' ); ?>' rel='home' class='logo'>
+						<a href='<?php echo home_url('/'); ?>' title='<?php bloginfo( 'name' ); ?>' rel='home' class='logo <?php if( $sectorID ){ echo "logo-sector"; } ?>'>
 							<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 154.3 41.4'>
 								<g class='logo-out'>
 									<path d='M16.3 32C5.9 32 2.4 24.1 1.6 21.8h7.6c.6.9 2.8 3.8 7.3 3.9 4.5 0 7.4-4.3 8.3-5.7l6 2.4c-1.1 2-5.4 9.6-14.5 9.6z' class='logo-primary-fill'/>
@@ -42,19 +52,14 @@
 								<g class='logo-in'>
 									<path d='M122.1 31.9c1.5-2.4 2.4-5.3 2.4-8.3 0-8.4-6.4-14.9-14.5-14.9s-14.5 6.6-14.5 14.9c0 3 .8 5.8 2.4 8.3h-9.2c0-.1-.1-.2-.1-.3-1-2.5-1.5-5.2-1.5-8 0-12.5 10.1-22.3 22.9-22.3 12.9 0 23 9.8 23 22.3 0 2.8-.5 5.5-1.4 8 0 .1-.1.2-.1.3h-9.4z' class='logo-primary-fill'/>
 									<path d='M110 1.8c6.2 0 11.9 2.2 16.1 6.3 4.1 4 6.4 9.5 6.4 15.5 0 2.7-.5 5.3-1.4 7.8H123c1.3-2.3 2-5 2-7.8 0-8.7-6.6-15.4-15-15.4S95 15 95 23.6c0 2.8.7 5.4 2 7.8h-8c-.9-2.5-1.4-5.1-1.4-7.8 0-12.2 9.8-21.8 22.4-21.8m0-1c-13.3 0-23.4 10-23.4 22.8 0 2.9.5 5.7 1.5 8.2.1.2.2.4.2.6h10.5c-.2-.2-.4-.5-.5-.8-1.5-2.3-2.3-5.1-2.3-8 0-7.8 5.8-14.4 14-14.4 8.1 0 14 6.6 14 14.4 0 3-.8 5.8-2.3 8.1-.1.2-.3.5-.5.7h10.6c.1-.2.2-.4.2-.6 1-2.5 1.5-5.3 1.5-8.2C133.5 10.8 123.4.8 110 .8z' class='logo-primary'/>
-									<path d='M94.1 36.1h31.5V41H94.1z' class='logo-grey-fill'/>
-									<path d='M125.2 36.6v3.9H94.6v-3.9h30.6m1-1H93.6v5.9h32.5v-5.9h.1z' class='logo-grey'/>
+									<path d='M94.1 36.1h31.5V41H94.1z' class='logo-grey-fill logo-grey-change'/>
+									<path d='M125.2 36.6v3.9H94.6v-3.9h30.6m1-1H93.6v5.9h32.5v-5.9h.1z' class='logo-grey logo-grey-change'/>
 								</g>
 							</svg>
 
-							<?php
-								$sectors = get_field('sectorPages', 'options');
-								if( in_array($post->ID, $sectors) ){ ?>
-									<span style='margin-left:<?php the_field('logoTranslate', $post->ID); ?>px'><?php the_field('name', $post->ID); ?></span>
-								<?php }else if( in_array(wp_get_post_parent_id( $post_ID ), $sectors) ){ ?>
-									<span style='margin-left:<?php the_field('logoTranslate', wp_get_post_parent_id( $post_ID )); ?>px'><?php the_field('name', wp_get_post_parent_id( $post_ID )); ?></span>
-								<?php }
-							?>
+							<?php if( $sectorID ){ ?>
+								<span><?php the_field('name', $sectorID); ?></span>
+							<?php } ?>
 						</a>
 
 						<button type='button' id='burger' class='burger'>Menu<i></i></button>
@@ -67,11 +72,8 @@
 						<div class='menu-main-wrapper'>
 							<button type='button' class='btn-menu-main'>
 								<?php
-									$sectors = get_field('sectorPages', 'options');
-									if( in_array($post->ID, $sectors) ){
-										the_field('name', $post->ID);
-									}else if( in_array(wp_get_post_parent_id( $post_ID ), $sectors) ){
-										the_field('name', wp_get_post_parent_id( $post_ID ));
+									if( $sectorID ){
+										the_field('name', $sectorID);
 									}else{
 										echo 'Nos métiers';
 									}
