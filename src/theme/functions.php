@@ -63,9 +63,11 @@ add_filter( 'login_errors', create_function('$a', "return null;") );
 /*-----------------------------------------------------------------------------------*/
 /* Admin
 /*-----------------------------------------------------------------------------------*/
+
 // Remove some useless admin stuff
 function essor_remove_submenus(){
-    $page = remove_submenu_page( 'themes.php', 'themes.php' );
+    remove_submenu_page( 'themes.php', 'themes.php' );
+    remove_menu_page( 'edit-comments.php' );
 }
 add_action( 'admin_menu', 'essor_remove_submenus', 999 );
 function essor_remove_top_menus( $wp_admin_bar ){
