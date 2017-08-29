@@ -446,6 +446,18 @@ a{
     h3{
         font-size: 1.8rem;
     }
+
+    blockquote{
+        &.with-cite{
+            padding-right: $gutter;
+            cite{
+                max-width: 100%;
+                margin: 20px 0 0;
+                position: static;
+            }
+        }
+    }
+
     .wrapper-title{
         display: block;
         .title{
