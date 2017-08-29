@@ -29,10 +29,22 @@
         bottom: -90px;
         margin: 0;
         overflow: hidden;
+        &:before{
+            content: '';
+            height: 98px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+            background: $text;
+        }
     }
     li{
         width: 25%;
         padding: 0;
+        border-left: 1px solid #8791a2;
         transform: translate3d(0, 0, 0);
         backface-visibility: hidden;
         transform-origin: 0 50%;
@@ -41,8 +53,8 @@
             content: none;
         }
         &.on{
+            border: 0;
             > a{
-                border: 0;
                 background: $primary;
                 transform: scale(2) translate3d(0, 0, 0);
             }
@@ -53,25 +65,23 @@
                 display: inline-block;
             }
             + li{
+                border: 0;
                 transform: translate3d(100%, 0, 0);
                 + li{
                     transform: translate3d(100%, 0, 0);
                 }
             }
         }
-        &:last-child{
-            > a{
-                border: 0;
-            }
+        &:first-child{
+            border: 0;
         }
     }
     a{
         display: block;
         padding: 25px $gutter;
-        border-right: 1px solid #8791a2;
-        color: $white;
-        background: $text;
         text-decoration: none;
+        background: $text;
+        color: $white;
         transform-origin: 0 50%;
         transform: translate3d(0, 0, 0);
         backface-visibility: hidden;
