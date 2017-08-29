@@ -16,6 +16,7 @@ get_header(); ?>
                 </aside>
 
                 <div class='content-sidebar'>
+
                     <h1><?php the_title(); ?></h1>
                     <?php if(have_rows('testimonies')){ ?>
                         <ul class='testimonies'>
@@ -43,6 +44,22 @@ get_header(); ?>
                             <?php } ?>
                         </ul>
                     <?php } ?>
+
+                    <?php
+                        $menu = wp_get_nav_menu_object( get_nav_menu_locations()['jobs'] );
+                        $menuitems = wp_get_nav_menu_items( $menu->term_id );
+
+                        $id = get_post_meta( $menuitems[1]->ID, '_menu_item_object_id', true );
+
+                    ?>
+                            
+                    <div class='about-nav'>
+                        <a href='<?php echo get_page_link( $id ); ?>' class='btn'>
+                            <?php echo get_the_title( $id ); ?>
+                            <svg class='icon'><use xlink:href='#icon-right'></use></svg>
+                        </a>
+                    </div>
+
                 </div>
             </div>
 		</div>
