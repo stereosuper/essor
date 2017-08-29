@@ -1,8 +1,10 @@
 /* Search */
+
 .search-results{
+    padding: 30px 0;
     > li{
-        margin-bottom: 100px;
-        padding-left: 0;
+        margin: 0 0 70px;
+        padding: 0;
         &:before{
             content: none;
         }
@@ -13,23 +15,34 @@
     a{
         text-decoration: none;
         > span{
-            text-decoration: underline;
             font-size: 1.6rem;
+            text-decoration: underline;
             .icon{
                 display: inline-block;
                 position: relative;
-                top: -0.1em;
                 width: 8px;
                 height: 8px;
-                margin-left: 10px;
+                margin: 0 0 0 10px;
             }
         }
     }
     h2{
         margin: 0 0 0.4em;
+        font-size: 3rem;
+        color: $text;
     }
     p{
         margin: 0.8em 0;
         color: $text;
+    }
+}
+
+.search-nav{
+    display: flex;
+    padding: 50px 0 0;
+    justify-content: space-between;
+    > a{
+        font-family: $poppinsMedium;
+        text-decoration: underline;
     }
 }

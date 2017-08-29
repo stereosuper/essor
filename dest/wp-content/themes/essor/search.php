@@ -20,8 +20,10 @@
 				<?php endwhile; ?>
 			</ul>
 
-			<?php previous_posts_link('Résultats plus récents'); ?>
-			<?php next_posts_link('Résultats plus anciens'); ?>
+			<div class='search-nav'>
+				<?php next_posts_link('Résultats plus anciens'); ?>
+				<?php previous_posts_link('Résultats plus récents'); ?>
+			</div>
 		
 		<?php else : ?>
 					
