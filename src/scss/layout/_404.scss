@@ -1,0 +1,25 @@
+.error404{
+    .container-tiny{
+        padding-left: 8%;
+    }
+
+    h1{
+        margin: 0.8em 0 0;
+        font-size: 13rem;
+        + p{
+            margin: 0 0 4em;
+        }
+    }
+}
+
+@media (max-width: $phone){
+    .error404{
+        .container-tiny{
+            padding-left: $gutter;
+        }
+
+        h1{
+            font-size: 11rem;
+        }
+    }
+}

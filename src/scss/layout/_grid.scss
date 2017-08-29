@@ -27,7 +27,7 @@
 }
 
 
-.container, .container-small{
+.container, .container-small, .container-tiny{
     padding: 0 $gutter;
     margin: 0 auto;
 }
@@ -42,6 +42,10 @@
 
 .container-small{
     max-width: 900px;
+}
+
+.container-tiny{
+    max-width: 600px;
 }
 
 .grid{
