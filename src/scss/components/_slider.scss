@@ -7,6 +7,14 @@
         left: 0;
         right: 0;
         z-index: 2;
+        .icon{
+            display: none;
+            width: 9px;
+            margin: 2px 0 0 3px;
+            vertical-align: top;
+            transform: translate3d(0, 0, 0);
+            transition: transform $transition;
+        }
     }
     .wp-post-image{
         margin: 0;
@@ -28,7 +36,7 @@
         transform: translate3d(0, 0, 0);
         backface-visibility: hidden;
         transform-origin: 0 50%;
-        transition: transform 0.2s;
+        //transition: transform 0.2s;
         &:before{
             content: none;
         }
@@ -67,7 +75,7 @@
         transform-origin: 0 50%;
         transform: translate3d(0, 0, 0);
         backface-visibility: hidden;
-        transition: transform 0.2s, background $transition;
+        transition: transform 0s, background $transition;
         > span{
             display: block;
             transform-origin: 0 60%;
@@ -86,14 +94,6 @@
                 transform: translate3d(5px, 0, 0);
             }
         }
-    }
-    .icon{
-        display: none;
-        width: 9px;
-        margin: 2px 0 0 3px;
-        vertical-align: top;
-        transform: translate3d(0, 0, 0);
-        transition: transform $transition;
     }
 }
 
