@@ -60,16 +60,33 @@
 }
 
 
-@media (max-width: $desktop){
-    .list-numbers{
-        > li{
-            width: 100%;
+@media (max-width: $desktopLarge){
+    .list-numbers-sector{
+        width: 50%;
+        margin: 0;
+        font-size: 1.6rem;
+        b{
+            font-size: 5rem;
         }
     }
 }
 
+@media (max-width: $desktop){
+    .list-numbers:not(.list-numbers-sector){
+        > li{
+            width: 100%;
+        }
+    }
+
+    .list-numbers-sector{
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+}
+
 @media (max-width: $desktopSmall){
-    .list-numbers{
+    .list-numbers:not(.list-numbers-sector){
         > li{
             width: 40%;
             padding-left: 85px;
