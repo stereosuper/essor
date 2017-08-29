@@ -307,11 +307,11 @@ function essor_custom_post_nav_class( $classes, $item, $args ){
         }
     }
 
-    if( is_page_template('contact.php') ){
+    if( is_page_template('contact.php') || is_page_template('application.php') || is_page_template('offres.php') ){
         if( $item->object_id == get_option( 'page_on_front' ) ){
-            $classes[] = 'current_page_parent';
+            $classes[] = 'current-page-ancestor';
         }else{
-            $classes = array_diff( $classes, array( 'current_page_parent' ) );
+            $classes = array_diff( $classes, array( 'current-page-ancestor' ) );
         }
     }
 
