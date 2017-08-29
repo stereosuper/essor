@@ -48,17 +48,22 @@ get_header(); ?>
                     <?php
                         $menu = wp_get_nav_menu_object( get_nav_menu_locations()['jobs'] );
                         $menuitems = wp_get_nav_menu_items( $menu->term_id );
+                        
+                        if( isset($menuitems[1]) ){
+                            $id = get_post_meta( $menuitems[1]->ID, '_menu_item_object_id', true );
+                        }
 
-                        $id = get_post_meta( $menuitems[1]->ID, '_menu_item_object_id', true );
-
+                        if( $id ){
                     ?>
                             
-                    <div class='about-nav'>
-                        <a href='<?php echo get_page_link( $id ); ?>' class='btn'>
-                            <?php echo get_the_title( $id ); ?>
-                            <svg class='icon'><use xlink:href='#icon-right'></use></svg>
-                        </a>
-                    </div>
+                        <div class='about-nav'>
+                            <a href='<?php echo get_page_link( $id ); ?>' class='btn'>
+                                <?php echo get_the_title( $id ); ?>
+                                <svg class='icon'><use xlink:href='#icon-right'></use></svg>
+                            </a>
+                        </div>
+                    
+                        <?php } ?>
 
                 </div>
             </div>
