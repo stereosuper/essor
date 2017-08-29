@@ -7,15 +7,13 @@
 }
 ::-moz-placeholder{
     font-family: $proximaLightIt;
-    color: $grey;
+    font-size: 1.8rem;
+    color: rgba($text, 0.4);
 }
 :-ms-input-placeholder{
     font-family: $proximaLightIt;
-    color: $grey;
-}
-
-fieldset{
-
+    font-size: 1.8rem;
+    color: rgba($text, 0.4);
 }
 
 button{
