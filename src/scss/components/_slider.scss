@@ -1,7 +1,12 @@
 .slider{
+    position: relative;
     margin: 0 0 150px;
     > .container{
-        position: relative;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 2;
     }
     .wp-post-image{
         margin: 0;
@@ -21,6 +26,10 @@
     li{
         width: 25%;
         padding: 0;
+        transform: translate3d(0, 0, 0);
+        backface-visibility: hidden;
+        transform-origin: 0 50%;
+        transition: transform 0.2s;
         &:before{
             content: none;
         }
@@ -28,7 +37,7 @@
             > a{
                 border: 0;
                 background: $primary;
-                transform: scale(2);
+                transform: scale(2) translate3d(0, 0, 0);
             }
             span{
                 transform: scale(0.5);
@@ -57,6 +66,9 @@
         background: $text;
         text-decoration: none;
         transform-origin: 0 50%;
+        transform: translate3d(0, 0, 0);
+        backface-visibility: hidden;
+        transition: transform 0.2s, background $transition;
         > span{
             display: block;
             transform-origin: 0 60%;
@@ -66,16 +78,35 @@
             font-size: 2rem;
             line-height: 1;
         }
+        &:hover, &:focus{
+            opacity: 1;
+            background: $primary;
+        }
+        &:hover{
+            > .icon{
+                transform: translate3d(5px, 0, 0);
+            }
+        }
     }
     .icon{
         display: none;
         width: 9px;
         margin: 2px 0 0 3px;
         vertical-align: top;
+        transform: translate3d(0, 0, 0);
+        transition: transform $transition;
     }
 }
 
 .slide{
+    display: flex;
+    width: 100%;
+    max-height: calc(90vh - 102px);
+    min-height: 150px;
+    overflow: hidden;
+    align-items: flex-end;
+    top: 0;
+    left: 0;
     &.off{
         display: none;
     }

@@ -21,7 +21,6 @@ $(function(){
     var loadMorePosts = require('./loadMorePosts.js');
     var initScrollReval = require('./initScrollReveal.js');
     var sticky = require('./sticky.js');
-    var setSlider = require('./slider.js');
     
     $.fn.annotatedImage = require('./annotedImages.js');
 
@@ -71,16 +70,20 @@ $(function(){
     // Annoted images
     $('.annotated-image').annotatedImage();
 
-    // Slider
-    setSlider( $('#slider') );
-
 
 
     $(window).on('resize', throttle(function(){
-        requestAnimFrame(resizeHandler);
-    }, 60))/*.on('load', function(){
 
-    })*/;
+        requestAnimFrame(resizeHandler);
+
+    }, 60)).on('load', function(){
+
+        var setSlider = require('./slider.js');
+
+        // Slider
+        setSlider( $('#slider') );
+
+    });
 
 
     $(document).on('scroll', throttle(function(){

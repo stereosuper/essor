@@ -16771,7 +16771,6 @@ $(function () {
     var loadMorePosts = require('./loadMorePosts.js');
     var initScrollReval = require('./initScrollReveal.js');
     var sticky = require('./sticky.js');
-    var setSlider = require('./slider.js');
 
     $.fn.annotatedImage = require('./annotedImages.js');
 
@@ -16820,13 +16819,16 @@ $(function () {
     // Annoted images
     $('.annotated-image').annotatedImage();
 
-    // Slider
-    setSlider($('#slider'));
-
     $(window).on('resize', throttle(function () {
+
         requestAnimFrame(resizeHandler);
-    }, 60)) /*.on('load', function(){
-            })*/;
+    }, 60)).on('load', function () {
+
+        var setSlider = require('./slider.js');
+
+        // Slider
+        setSlider($('#slider'));
+    });
 
     $(document).on('scroll', throttle(function () {
         scrollTop = $(document).scrollTop();
@@ -16857,30 +16859,47 @@ var $ = require('jquery');
 require('gsap/CSSPlugin');
 var TweenLite = require('gsap/TweenLite');
 
+window.requestAnimFrame = require('./requestAnimFrame.js');
+var throttle = require('./throttle.js');
+
 module.exports = function (slider) {
 
     if (!slider.length) return;
 
-    var slides = slider.find('.slide'),
+    var slides = slider.find('.slide');
+    var activeSlide = slider.find('.slide.on'),
         nonActiveSlides = slider.find('.slide.off');
 
     slider.on('click', 'a', function (e) {
         if (!$(this).parent().hasClass('on')) {
             e.preventDefault();
 
-            //TweenLite.to(slider.find('.slide.on'), 0.3, {});
-            slider.find('.slide.on').removeClass('on');
-            slides.eq($(this).parent().index()).addClass('on');
+            TweenLite.to(activeSlide, 0.3, { opacity: 0 });
+            activeSlide.removeClass('on').css('z-index', 'auto');
+
+            slides.eq($(this).parent().index()).addClass('on').css('z-index', 1);
+            activeSlide = slider.find('.slide.on');
+            TweenLite.to(activeSlide, 0.3, { opacity: 1 });
+
+            slider.css('height', activeSlide.height());
 
             $(this).parent().addClass('on').siblings().removeClass('on');
         }
     });
 
-    TweenLite.set(nonActiveSlides, { display: 'none' });
-    nonActiveSlides.removeClass('off');
+    slider.css('height', activeSlide.height());
+    slides.css('position', 'absolute');
+    activeSlide.css('z-index', 1);
+    nonActiveSlides.css('opacity', '0').removeClass('off');
+
+    $(window).on('resize', throttle(function () {
+        requestAnimFrame(function () {
+            slider.css('height', activeSlide.height());
+        });
+    }, 60));
 };
 
-},{"gsap/CSSPlugin":1,"gsap/TweenLite":3,"jquery":4}],16:[function(require,module,exports){
+},{"./requestAnimFrame.js":14,"./throttle.js":17,"gsap/CSSPlugin":1,"gsap/TweenLite":3,"jquery":4}],16:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
