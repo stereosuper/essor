@@ -130,3 +130,23 @@
         }
     }
 }
+
+@media (max-width: $desktop){
+    .slider{
+        ul{
+            &:before{
+                height: 95px;
+            }
+        }
+        a{
+            > b{
+                font-size: 1.6rem;
+            }
+        }
+        li:not(.on){
+            span{
+                font-size: 1.4rem;
+            }
+        }
+    }
+}
