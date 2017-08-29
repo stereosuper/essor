@@ -106,13 +106,15 @@ get_header(); ?>
             <?php the_field('projectText'); ?>
         </div>
         
-        <div class='container map-sector'>
-            <div class='map-txt-sector'>
-                <h2><?php the_field('mapTitle'); ?></h2>
-                <?php the_field('mapText'); ?>
+        <?php if( get_field('mapTitle') ){ ?>
+            <div class='container map-sector'>
+                <div class='map-txt-sector'>
+                    <h2><?php the_field('mapTitle'); ?></h2>
+                    <?php the_field('mapText'); ?>
+                </div>
+                <?php echo wp_get_attachment_image( get_field('mapImg'), 'full' ); ?>
             </div>
-            <?php echo wp_get_attachment_image( get_field('mapImg'), 'full' ); ?>
-        </div>
+        <?php } ?>
 	
 	<?php else : ?>
 
