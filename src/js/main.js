@@ -78,9 +78,9 @@ $(function(){
 
     $(window).on('resize', throttle(function(){
         requestAnimFrame(resizeHandler);
-    }, 60)).on('load', function(){
+    }, 60))/*.on('load', function(){
 
-    });
+    })*/;
 
 
     $(document).on('scroll', throttle(function(){

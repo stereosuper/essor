@@ -16825,7 +16825,8 @@ $(function () {
 
     $(window).on('resize', throttle(function () {
         requestAnimFrame(resizeHandler);
-    }, 60)).on('load', function () {});
+    }, 60)) /*.on('load', function(){
+            })*/;
 
     $(document).on('scroll', throttle(function () {
         scrollTop = $(document).scrollTop();
@@ -16961,12 +16962,10 @@ module.exports = function (stickyElt, givenPosition) {
         scrollHandler();
     }
 
-    $(window).on('load', function () {
-        checkWindowHeight();
+    checkWindowHeight();
 
-        init();
-        stickyElt.data({ 'initialPos': stickyElt.css('top') });
-    });
+    init();
+    stickyElt.data({ 'initialPos': stickyElt.css('top') });
 
     $(document).on('scroll', throttle(function () {
 

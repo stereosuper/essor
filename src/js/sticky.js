@@ -75,12 +75,10 @@ module.exports = function(stickyElt, givenPosition, {
     }
 
 
-    $(window).on('load', function(){
-        checkWindowHeight();
-
-        init();
-        stickyElt.data({'initialPos': stickyElt.css('top')});
-    });
+    checkWindowHeight();
+    
+    init();
+    stickyElt.data({'initialPos': stickyElt.css('top')});
     
 
     $(document).on('scroll', throttle(function(){
