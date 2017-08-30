@@ -2,8 +2,8 @@
     display: flex;
     width: 100% !important;
     height: auto !important;
-    max-height: calc(90vh - 102px);
-    min-height: 150px;
+    max-height: calc(95vh - 102px);
+    min-height: 500px;
     overflow: hidden;
     align-items: flex-end;
 }
@@ -91,6 +91,10 @@
         &.off{
             opacity: 1;
         }
+    }
+
+    .annotated-image-wrapper{
+        min-height: 150px;
     }
 }
 
