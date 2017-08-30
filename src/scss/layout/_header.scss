@@ -227,6 +227,11 @@
                 opacity: 1;
                 transform: rotate(90deg);
             }
+            &:hover, &:focus{
+                &:after{
+                    transform: rotate(90deg);
+                }
+            }
         }
     }
     a{
