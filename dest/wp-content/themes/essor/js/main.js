@@ -17935,8 +17935,7 @@ if ( !noGlobal ) {
 return jQuery;
 } );
 
-<<<<<<< HEAD
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 (function (global){
 'use strict';(function (f) {
     if (typeof exports === 'object' && typeof module !== 'undefined') {
@@ -38105,9 +38104,7 @@ return jQuery;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-=======
->>>>>>> 8b59b54a70a8ef29835c93354a1a1eafaffdef77
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 /////    /////    /////    /////
 /////    /////    /////    /////
 /////    /////    /////    /////
@@ -38969,7 +38966,7 @@ return jQuery;
   }
 })();
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
@@ -39048,11 +39045,7 @@ module.exports = function (body, nav, menus, pageWrapper) {
     });
 };
 
-<<<<<<< HEAD
-},{"gsap/CSSPlugin":1,"gsap/ScrollToPlugin":2,"gsap/TweenLite":3,"jquery":4}],8:[function(require,module,exports){
-=======
-},{"gsap/CSSPlugin":1,"gsap/ScrollToPlugin":2,"gsap/TweenLite":3,"hammerjs":4,"jquery":5}],8:[function(require,module,exports){
->>>>>>> 8b59b54a70a8ef29835c93354a1a1eafaffdef77
+},{"gsap/CSSPlugin":1,"gsap/ScrollToPlugin":2,"gsap/TweenLite":3,"hammerjs":4,"jquery":5}],9:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
@@ -39082,11 +39075,7 @@ module.exports = function (form) {
     });
 };
 
-<<<<<<< HEAD
-},{"jquery":4}],9:[function(require,module,exports){
-=======
-},{"jquery":5}],9:[function(require,module,exports){
->>>>>>> 8b59b54a70a8ef29835c93354a1a1eafaffdef77
+},{"jquery":5}],10:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
@@ -39418,11 +39407,7 @@ module.exports = function () {
     });
 };
 
-<<<<<<< HEAD
-},{"jquery":4}],10:[function(require,module,exports){
-=======
-},{"jquery":5}],10:[function(require,module,exports){
->>>>>>> 8b59b54a70a8ef29835c93354a1a1eafaffdef77
+},{"jquery":5}],11:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
@@ -39440,11 +39425,7 @@ module.exports = function (dropdowns) {
     });
 };
 
-<<<<<<< HEAD
-},{"jquery":4}],11:[function(require,module,exports){
-=======
-},{"jquery":5}],11:[function(require,module,exports){
->>>>>>> 8b59b54a70a8ef29835c93354a1a1eafaffdef77
+},{"jquery":5}],12:[function(require,module,exports){
 'use strict';
 
 module.exports = function (elts) {
@@ -39459,7 +39440,7 @@ module.exports = function (elts) {
     });
 };
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
@@ -39525,11 +39506,7 @@ module.exports = function (body, header, posTop, bodyClass, blockSticky, minimum
     }, 10));
 };
 
-<<<<<<< HEAD
-},{"./requestAnimFrame.js":16,"./throttle.js":19,"jquery":4}],13:[function(require,module,exports){
-=======
-},{"./requestAnimFrame.js":15,"./throttle.js":18,"jquery":5}],13:[function(require,module,exports){
->>>>>>> 8b59b54a70a8ef29835c93354a1a1eafaffdef77
+},{"./requestAnimFrame.js":17,"./throttle.js":20,"jquery":5}],14:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
@@ -39601,11 +39578,7 @@ module.exports = function (wp, container) {
     });
 };
 
-<<<<<<< HEAD
-},{"./initScrollReveal.js":11,"gsap/CSSPlugin":1,"gsap/TweenLite":3,"jquery":4}],14:[function(require,module,exports){
-=======
-},{"./initScrollReveal.js":11,"gsap/CSSPlugin":1,"gsap/TweenLite":3,"jquery":5}],14:[function(require,module,exports){
->>>>>>> 8b59b54a70a8ef29835c93354a1a1eafaffdef77
+},{"./initScrollReveal.js":12,"gsap/CSSPlugin":1,"gsap/TweenLite":3,"jquery":5}],15:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
@@ -39628,13 +39601,9 @@ $(function () {
     var loadMorePosts = require('./loadMorePosts.js');
     var initScrollReval = require('./initScrollReveal.js');
     var sticky = require('./sticky.js');
-<<<<<<< HEAD
     var map = require('./map.js');
-
-=======
     var jobsSticky = require('./jobsSticky.js');
     var setSlider = require('./slider.js');
->>>>>>> 8b59b54a70a8ef29835c93354a1a1eafaffdef77
     $.fn.annotatedImage = require('./annotedImages.js');
 
     var body = $('body');
@@ -39675,6 +39644,9 @@ $(function () {
     // Handle responsive header: burger menus + menus to swipe
     animResponsiveHeader(body, $('#mainNav'), $('#menus'), $('#main'));
 
+    // Handle header pushed by filters
+    jobsSticky(body, header, 460, 'page-template-offres', $('#blockStickyJobs'), 960);
+
     // Open and close custom dropdowns
     customDropdown(dropdowns);
 
@@ -39683,7 +39655,6 @@ $(function () {
     //window.scrollReveal = new ScrollReveal({ reset: true, scale: 1, distance: '30px', duration: 800, viewFactor: 0.5 });
     initScrollReval('.isAnimated');
 
-<<<<<<< HEAD
     // Sticky
     sticky($('#blockSticky'), 130, {
         minimumWidth: 960
@@ -39697,14 +39668,13 @@ $(function () {
 
     // Annoted images
     $('.annotated-image').annotatedImage();
-=======
+
     // Since script is loaded asynchronously, load event isn't always fired !!!
     if (document.readyState === 'complete') {
         loadHandler();
     } else {
         $(window).on('load', loadHandler);
     }
->>>>>>> 8b59b54a70a8ef29835c93354a1a1eafaffdef77
 
     $(window).on('resize', throttle(function () {
         requestAnimFrame(resizeHandler);
@@ -39722,8 +39692,7 @@ $(function () {
     }, 60));
 });
 
-<<<<<<< HEAD
-},{"./animResponsiveHeader.js":7,"./animSearchform.js":8,"./annotedImages.js":9,"./dropdown.js":10,"./initScrollReveal.js":11,"./jobsSticky.js":12,"./loadMorePosts.js":13,"./map.js":15,"./requestAnimFrame.js":16,"./slider.js":17,"./sticky.js":18,"./throttle.js":19,"jquery":4,"scrollreveal":6}],15:[function(require,module,exports){
+},{"./animResponsiveHeader.js":8,"./animSearchform.js":9,"./annotedImages.js":10,"./dropdown.js":11,"./initScrollReveal.js":12,"./jobsSticky.js":13,"./loadMorePosts.js":14,"./map.js":16,"./requestAnimFrame.js":17,"./slider.js":18,"./sticky.js":19,"./throttle.js":20,"jquery":5,"scrollreveal":7}],16:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
@@ -39780,10 +39749,7 @@ module.exports = function (slider) {
     init();
 };
 
-},{"jquery":4,"mapbox-gl":5}],16:[function(require,module,exports){
-=======
-},{"./animResponsiveHeader.js":7,"./animSearchform.js":8,"./annotedImages.js":9,"./dropdown.js":10,"./initScrollReveal.js":11,"./jobsSticky.js":12,"./loadMorePosts.js":13,"./requestAnimFrame.js":15,"./slider.js":16,"./sticky.js":17,"./throttle.js":18,"jquery":5,"scrollreveal":6}],15:[function(require,module,exports){
->>>>>>> 8b59b54a70a8ef29835c93354a1a1eafaffdef77
+},{"jquery":5,"mapbox-gl":6}],17:[function(require,module,exports){
 "use strict";
 
 module.exports = function () {
@@ -39792,11 +39758,7 @@ module.exports = function () {
        };
 }();
 
-<<<<<<< HEAD
-},{}],17:[function(require,module,exports){
-=======
-},{}],16:[function(require,module,exports){
->>>>>>> 8b59b54a70a8ef29835c93354a1a1eafaffdef77
+},{}],18:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
@@ -39844,11 +39806,7 @@ module.exports = function (slider) {
     }, 60));
 };
 
-<<<<<<< HEAD
-},{"./requestAnimFrame.js":16,"./throttle.js":19,"gsap/CSSPlugin":1,"gsap/TweenLite":3,"jquery":4}],18:[function(require,module,exports){
-=======
-},{"./requestAnimFrame.js":15,"./throttle.js":18,"gsap/CSSPlugin":1,"gsap/TweenLite":3,"jquery":5}],17:[function(require,module,exports){
->>>>>>> 8b59b54a70a8ef29835c93354a1a1eafaffdef77
+},{"./requestAnimFrame.js":17,"./throttle.js":20,"gsap/CSSPlugin":1,"gsap/TweenLite":3,"jquery":5}],19:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
@@ -39944,11 +39902,7 @@ module.exports = function (stickyElt, givenPosition) {
     }, 10));
 };
 
-<<<<<<< HEAD
-},{"./requestAnimFrame.js":16,"./throttle.js":19,"jquery":4}],19:[function(require,module,exports){
-=======
-},{"./requestAnimFrame.js":15,"./throttle.js":18,"jquery":5}],18:[function(require,module,exports){
->>>>>>> 8b59b54a70a8ef29835c93354a1a1eafaffdef77
+},{"./requestAnimFrame.js":17,"./throttle.js":20,"jquery":5}],20:[function(require,module,exports){
 "use strict";
 
 module.exports = function (callback, delay) {
@@ -39971,6 +39925,6 @@ module.exports = function (callback, delay) {
     };
 };
 
-},{}]},{},[14])
+},{}]},{},[15])
 
 //# sourceMappingURL=main.js.map
