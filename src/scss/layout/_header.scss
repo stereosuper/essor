@@ -429,7 +429,7 @@
     .header{
         padding: 0;
         border: 0;
-        position: relative;
+        position: relative !important;
         background: none;
         &.on{
             transform: none;
@@ -629,6 +629,7 @@
 
 @media (max-width: $desktopSmall){
     .header{
+        top: 0 !important;
         &.on{
             + .main{
                 .wrapper-menu-aside{
