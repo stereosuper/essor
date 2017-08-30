@@ -4,18 +4,18 @@ window.requestAnimFrame = require('./requestAnimFrame.js');
 var throttle = require('./throttle.js');
 
 
-module.exports = function(body, header, posTop, bodyClass, blockSticky, minimumWidth){
-    if( !body.hasClass(bodyClass) ) return;
+module.exports = function(body, header, blockSticky, dropdownsSticky, minimumWidth){
+    if( !blockSticky.length ) return;
+    
     
     var scrollTop, windowWidth = window.outerWidth;
     var belowWidth = minimumWidth && windowWidth <= minimumWidth ? true : false;
+    var dropdownsTop = dropdownsSticky.offset().top;
+    var posTop = windowWidth > 1200 ? dropdownsTop - 72 : dropdownsTop - 57;
+    
 
     function headerStuck(){
-        if( scrollTop >= posTop ){
-            header.css({'position': 'absolute', 'top': posTop});
-        } else {
-            header.css({'position': '', 'top': ''});
-        }
+        scrollTop >= posTop ? header.addClass('off').css({'top': posTop}) : header.removeClass('off').css({'top': ''});
     }
 
     function stickyInterval(){
@@ -29,39 +29,36 @@ module.exports = function(body, header, posTop, bodyClass, blockSticky, minimumW
             }else{
                 blockSticky.css({'position': 'fixed', 'top': '95px', 'margin-top': ''});
             }
-        }else if( scrollTop < blockSticky.data('initialPos') - 85 ){
-            blockSticky.css({'position': '', 'top': '', 'margin-top': ''});
         }
         
-        if( belowWidth ){
+        if( scrollTop < blockSticky.data('initialPos') - 85 || belowWidth ){
             blockSticky.css({'position': '', 'top': '', 'margin-top': ''});
         }
     }
 
 
-    blockSticky.data({
-        'initialPos': blockSticky.offset().top
-    });
+    blockSticky.data({'initialPos': blockSticky.offset().top});
+    console.log(posTop);
 
 
     $(document).on('scroll', throttle(function(){
         
-        requestAnimFrame( function(){
+        requestAnimFrame(function(){
             scrollTop = $(document).scrollTop();
 
             headerStuck();
             stickyInterval();
-        } );
+        });
 
     }, 10));
 
-
     $(window).on('resize', throttle(function(){
         
-        requestAnimFrame( function(){
+        requestAnimFrame(function(){
             windowWidth = window.outerWidth;
             belowWidth = minimumWidth && windowWidth <= minimumWidth ? true : false;
-        } );
+            posTop = windowWidth > 1200 ? dropdownsTop - 72 : dropdownsTop - 57;
+        });
 
     }, 10));
 }

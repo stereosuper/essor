@@ -39448,19 +39448,17 @@ var $ = require('jquery');
 window.requestAnimFrame = require('./requestAnimFrame.js');
 var throttle = require('./throttle.js');
 
-module.exports = function (body, header, posTop, bodyClass, blockSticky, minimumWidth) {
-    if (!body.hasClass(bodyClass)) return;
+module.exports = function (body, header, blockSticky, dropdownsSticky, minimumWidth) {
+    if (!blockSticky.length) return;
 
     var scrollTop,
         windowWidth = window.outerWidth;
     var belowWidth = minimumWidth && windowWidth <= minimumWidth ? true : false;
+    var dropdownsTop = dropdownsSticky.offset().top;
+    var posTop = windowWidth > 1200 ? dropdownsTop - 72 : dropdownsTop - 57;
 
     function headerStuck() {
-        if (scrollTop >= posTop) {
-            header.css({ 'position': 'absolute', 'top': posTop });
-        } else {
-            header.css({ 'position': '', 'top': '' });
-        }
+        scrollTop >= posTop ? header.addClass('off').css({ 'position': 'absolute', 'top': posTop }) : header.removeClass('off').css({ 'position': '', 'top': '' });
     }
 
     function stickyInterval() {
@@ -39474,18 +39472,15 @@ module.exports = function (body, header, posTop, bodyClass, blockSticky, minimum
             } else {
                 blockSticky.css({ 'position': 'fixed', 'top': '95px', 'margin-top': '' });
             }
-        } else if (scrollTop < blockSticky.data('initialPos') - 85) {
-            blockSticky.css({ 'position': '', 'top': '', 'margin-top': '' });
         }
 
-        if (belowWidth) {
+        if (scrollTop < blockSticky.data('initialPos') - 85 || belowWidth) {
             blockSticky.css({ 'position': '', 'top': '', 'margin-top': '' });
         }
     }
 
-    blockSticky.data({
-        'initialPos': blockSticky.offset().top
-    });
+    blockSticky.data({ 'initialPos': blockSticky.offset().top });
+    console.log(posTop);
 
     $(document).on('scroll', throttle(function () {
 
@@ -39502,6 +39497,7 @@ module.exports = function (body, header, posTop, bodyClass, blockSticky, minimum
         requestAnimFrame(function () {
             windowWidth = window.outerWidth;
             belowWidth = minimumWidth && windowWidth <= minimumWidth ? true : false;
+            posTop = windowWidth > 1200 ? dropdownsTop - 72 : dropdownsTop - 57;
         });
     }, 10));
 };
@@ -39608,6 +39604,7 @@ $(function () {
 
     var body = $('body');
     var dropdowns = $('.dropdown');
+    var dropdownsSticky = $('#dropdownsSticky');
     var header = $('#header');
     var windowWidth = window.outerWidth,
         windowHeight = $(window).height();
@@ -39623,10 +39620,10 @@ $(function () {
     function loadHandler() {
         // Sticky
         sticky($('#blockSticky'), 130, { minimumWidth: 960 });
-        sticky($('#dropdownsSticky'), 0, { minimumWidth: 960 });
+        sticky(dropdownsSticky, 0, { minimumWidth: 960 });
 
         // Handle header pushed by filters
-        jobsSticky(body, header, 460, 'page-template-offres', $('#blockStickyJobs'), 960);
+        jobsSticky(body, header, $('#blockStickyJobs'), dropdownsSticky, 960);
 
         // Slider
         setSlider($('#slider'));
@@ -39644,9 +39641,6 @@ $(function () {
     // Handle responsive header: burger menus + menus to swipe
     animResponsiveHeader(body, $('#mainNav'), $('#menus'), $('#main'));
 
-    // Handle header pushed by filters
-    jobsSticky(body, header, 460, 'page-template-offres', $('#blockStickyJobs'), 960);
-
     // Open and close custom dropdowns
     customDropdown(dropdowns);
 
@@ -39655,19 +39649,8 @@ $(function () {
     //window.scrollReveal = new ScrollReveal({ reset: true, scale: 1, distance: '30px', duration: 800, viewFactor: 0.5 });
     initScrollReval('.isAnimated');
 
-    // Sticky
-    sticky($('#blockSticky'), 130, {
-        minimumWidth: 960
-    });
-    sticky($('#dropdownsSticky'), 0, {
-        minimumWidth: 960
-    });
-
     // Charge la map
-    map();
-
-    // Annoted images
-    $('.annotated-image').annotatedImage();
+    //map();
 
     // Since script is loaded asynchronously, load event isn't always fired !!!
     if (document.readyState === 'complete') {

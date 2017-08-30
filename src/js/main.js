@@ -27,6 +27,7 @@ $(function(){
 
     var body = $('body');
     var dropdowns = $('.dropdown');
+    var dropdownsSticky = $('#dropdownsSticky');
     var header = $('#header');
     var windowWidth = window.outerWidth, windowHeight = $(window).height();
     var scrollTop;
@@ -43,10 +44,10 @@ $(function(){
     function loadHandler(){
         // Sticky
         sticky($('#blockSticky'), 130, {minimumWidth: 960});
-        sticky($('#dropdownsSticky'), 0, {minimumWidth: 960});
+        sticky(dropdownsSticky, 0, {minimumWidth: 960});
 
         // Handle header pushed by filters
-        jobsSticky(body, header, 460, 'page-template-offres', $('#blockStickyJobs'), 960);
+        jobsSticky(body, header, $('#blockStickyJobs'), dropdownsSticky, 960);
 
         // Slider
         setSlider( $('#slider') );
@@ -64,9 +65,6 @@ $(function(){
     // Handle responsive header: burger menus + menus to swipe
     animResponsiveHeader(body, $('#mainNav'), $('#menus'), $('#main'));
 
-    // Handle header pushed by filters
-    jobsSticky(body, header, 460, 'page-template-offres', $('#blockStickyJobs'), 960);
-
     // Open and close custom dropdowns
     customDropdown(dropdowns);
 
@@ -75,19 +73,8 @@ $(function(){
     //window.scrollReveal = new ScrollReveal({ reset: true, scale: 1, distance: '30px', duration: 800, viewFactor: 0.5 });
     initScrollReval('.isAnimated');
 
-    // Sticky
-    sticky($('#blockSticky'), 130, {
-        minimumWidth: 960
-    });
-    sticky($('#dropdownsSticky'), 0, {
-        minimumWidth: 960
-    });
-
     // Charge la map
-    map();
-
-    // Annoted images
-    $('.annotated-image').annotatedImage();
+    //map();
 
     // Since script is loaded asynchronously, load event isn't always fired !!!
     if(document.readyState === 'complete'){

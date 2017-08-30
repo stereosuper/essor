@@ -10,6 +10,9 @@
     font-family: $poppins;
     background: $white;
     transition: transform $transition;
+    &.off{
+        position: absolute;
+    }
     &.on{
         background: rgba($white, 0.9);
         transform: translate3d(0, -30px, 0);
@@ -472,6 +475,9 @@
         top: 0;
         background: $white;
         transition: transform $transition;
+        .off &{
+            position: absolute;
+        }
     }
 
     .header-main{
@@ -631,10 +637,19 @@
             }
         }
     }
+
+    .header-main-wrapper{
+        .off &{
+            position: fixed;
+        }
+    }
 }
 
 @media (max-width: $tablet){
     .header-main-wrapper{
         position: relative;
+        .off &{
+            position: relative;
+        }
     }
 }
