@@ -2,7 +2,9 @@
   "name": "essor",
   "version": "0.0.0",
   "main": "gulpfile.js",
-  "dependencies": {},
+  "dependencies": {
+    "hammerjs": "^2.0.8"
+  },
   "devDependencies": {
     "babel-preset-es2015": "^6.24.1",
     "babelify": "^7.3.0",
