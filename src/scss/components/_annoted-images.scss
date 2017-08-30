@@ -102,6 +102,12 @@
     }
 }
 
+@media(max-height: 700px){
+    .bloc-title-img{
+        top: 155px;
+    }
+}
+
 @media(max-height: 600px){
     .annotated-image{
         .note{

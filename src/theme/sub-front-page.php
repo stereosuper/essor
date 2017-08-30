@@ -16,9 +16,9 @@ get_header(); ?>
                     <?php setup_postdata($post); ?>
                     <div class='slide <?php if( $i === 0 ){ echo "on"; }else{ echo "off"; } ?>'>
                         <?php if( function_exists('gacfai_get_field') && gacfai_get_field('img') ){ ?>
-                            <?php echo gacfai_get_field('img', $post->ID, 'full', false, ''); ?>
+                            <a href='<?php the_permalink(); ?>'><?php echo gacfai_get_field('img', $post->ID, 'full', false, ''); ?></a>
                         <?php }else if( has_post_thumbnail() ){ ?>
-                            <?php the_post_thumbnail('full'); ?>
+                            <a href='<?php the_permalink(); ?>'><?php the_post_thumbnail('full'); ?></a>
                         <?php } ?>
                     </div>
                 <?php $i++; endforeach; ?>
