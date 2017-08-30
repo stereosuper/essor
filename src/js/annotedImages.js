@@ -163,15 +163,13 @@ module.exports = function() {
         displayRelatedTextarea($noteHtml);
 
         $noteHtml.on('mouseenter', function(){
-            $(this).find('.text').fadeIn(animTimeFade, function() {
-                $(this).find('.text').addClass('shown');
-            });
+            $(this).find('.text').stop().fadeIn(animTimeFade);
 
             if($('#blocTitle').length){
                 $('#blocTitle').addClass('off');
             }
         }).on('mouseleave', function(){
-            $(this).find('.text').fadeOut(animTimeFade).removeClass('shown');
+            $(this).find('.text').stop().fadeOut(animTimeFade);
 
             if($('#blocTitle').length){
                 $('#blocTitle').removeClass('off');
@@ -179,44 +177,44 @@ module.exports = function() {
         });
     };
 
-    var showNextNote = function($container) {
-        if (!animating) {
-            animating = true;
-            var $nextNote = showNextNoteInterval($container);
-            if ($nextNote.length > 0) {
-                hndShowAnimate = setInterval(function() {
-                    if ($container.filter(':hover').length > 0) {
-                        showNextNoteInterval($container);
-                    } else {
-                        $nextNote = hideNextNoteInterval($container);
-                        if ($nextNote.length <= 0) {
-                            animating = false;
-                            clearInterval(hndShowAnimate);
-                        }
-                    }
-                }, animTimeBetweenNotes);
-            }
-        }
-    };
+    // var showNextNote = function($container) {
+    //     if (!animating) {
+    //         animating = true;
+    //         var $nextNote = showNextNoteInterval($container);
+    //         if ($nextNote.length > 0) {
+    //             hndShowAnimate = setInterval(function() {
+    //                 if ($container.filter(':hover').length > 0) {
+    //                     showNextNoteInterval($container);
+    //                 } else {
+    //                     $nextNote = hideNextNoteInterval($container);
+    //                     if ($nextNote.length <= 0) {
+    //                         animating = false;
+    //                         clearInterval(hndShowAnimate);
+    //                     }
+    //                 }
+    //             }, animTimeBetweenNotes);
+    //         }
+    //     }
+    // };
 
-    var showNextNoteInterval = function($container) {
-        var $nextNote = $container.find('.note .text:not(.shown):first()');
-        if ($nextNote.length > 0) {
-            $nextNote.fadeIn(animTimeFade, function() {
-                $nextNote.addClass('shown');
-            });
-        }
-        return $nextNote;
-    };
+    // var showNextNoteInterval = function($container) {
+    //     var $nextNote = $container.find('.note .text:not(.shown):first()');
+    //     if ($nextNote.length > 0) {
+    //         $nextNote.fadeIn(animTimeFade, function() {
+    //             $nextNote.addClass('shown');
+    //         });
+    //     }
+    //     return $nextNote;
+    // };
 
-    var hideNextNoteInterval = function($container) {
-        var $nextNote = $container.find('.note .text.shown:last()');
-        if ($nextNote.length > 0) {
-            $nextNote.fadeOut(animTimeFade, function() {});
-            $nextNote.removeClass('shown');
-        }
-        return $nextNote;
-    };
+    // var hideNextNoteInterval = function($container) {
+    //     var $nextNote = $container.find('.note .text.shown:last()');
+    //     if ($nextNote.length > 0) {
+    //         $nextNote.fadeOut(animTimeFade, function() {});
+    //         $nextNote.removeClass('shown');
+    //     }
+    //     return $nextNote;
+    // };
 
     var animateNotes = function($container) {
         var $allTexts = $container.find('.note .text');
