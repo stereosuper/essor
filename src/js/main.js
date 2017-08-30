@@ -21,7 +21,8 @@ $(function(){
     var loadMorePosts = require('./loadMorePosts.js');
     var initScrollReval = require('./initScrollReveal.js');
     var sticky = require('./sticky.js');
-    
+    var map = require('./map.js');
+
     $.fn.annotatedImage = require('./annotedImages.js');
 
     var body = $('body');
@@ -30,7 +31,7 @@ $(function(){
     var windowWidth = window.outerWidth, windowHeight = $(window).height();
     var scrollTop;
 
-    
+
 
     // isMobile.any ? body.addClass('is-mobile') : body.addClass('is-desktop');
 
@@ -44,7 +45,7 @@ $(function(){
 
     // Handle responsive header: burger menus + menus to swipe
     animResponsiveHeader(body, $('#mainNav'), $('#menus'), $('#main'));
-    
+
     // Handle header pushed by filters
     jobsSticky(body, header, 460, 'page-template-offres', $('#blockStickyJobs'), 960);
 
@@ -67,6 +68,9 @@ $(function(){
         minimumWidth: 960
     });
 
+    // Charge la map
+    map();
+
     // Annoted images
     $('.annotated-image').annotatedImage();
 
@@ -88,7 +92,7 @@ $(function(){
 
     $(document).on('scroll', throttle(function(){
         scrollTop = $(document).scrollTop();
-        
+
         // Add a class to header when page is scrolled
         if( windowWidth > 768 ){
             scrollTop > 100 ? header.addClass('on') : header.removeClass('on');

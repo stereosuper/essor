@@ -24,6 +24,7 @@
     "gulp-watch": "^4.3.11",
     "jquery": "^3.2.1",
     "jquery-slim": "^3.0.0",
+    "mapbox-gl": "^0.39.1",
     "path": "^0.12.7",
     "scrollreveal": "^3.3.6",
     "vinyl-buffer": "^1.0.0",

@@ -228,7 +228,7 @@ function essort_get_current_submenu( $sorted_menu_items, $args ){
         if( $root_id == 0){
             $root_id = $sorted_menu_items[1]->ID;
         }
-  
+
         // find the top level parent
         if( ! isset( $args->direct_parent ) ){
             $prev_root_id = $root_id;
@@ -345,11 +345,19 @@ function essor_post_type(){
         'menu_icon' => 'dashicons-businessman',
         'supports' => array('title', 'editor', 'thumbnail', 'excerpt', 'revisions')
     ) );
+
+    register_post_type( 'implantation', array(
+        'label' => 'Implantations',
+        'singular_label' => 'Implantation',
+        'public' => true,
+        'menu_icon' => 'dashicons-building',
+        'supports' => array('title', 'editor', 'thumbnail', 'excerpt', 'revisions')
+    ) );
 }
 add_action( 'init', 'essor_post_type' );
 
 function essor_taxonomies(){
-    register_taxonomy( 'metier', 'reference', array(
+    register_taxonomy( 'metier', array('reference', 'implantation'), array(
         'label' => 'Métiers',
         'singular_label' => 'Métier',
         'hierarchical' => true,
@@ -379,6 +387,35 @@ function essor_taxonomies(){
 }
 add_action( 'init', 'essor_taxonomies' );
 
+// Pour faire marcher GMaps dans l'admin d'ACF
+function essor_acf_google_map_api( $api ){
+	$api['key'] = 'AIzaSyCSLNiBRMjgRB_AqXKuBTCvfhdEJwFVEEc';
+	return $api;
+}
+add_filter('acf/fields/google_map/api', 'essor_acf_google_map_api');
+
+
+function essor_get_map_json()
+{
+    $collection = array(
+        'id' => 'implantations',
+        'type' => 'symbol',
+        'source' => array(
+            'type' => 'geojson',
+            'data' => array(
+                'type' => 'FeatureCollection',
+                'features' => array(),
+            ),
+        ),
+        'layout' => array(
+            'icon-image' => 'essor-icon',
+        ),
+    );
+
+    $collection = apply_filters('essor-get-map-features', $collection);
+
+    return $collection;
+}
 
 // /*-----------------------------------------------------------------------------------*/
 // /* Sidebar & Widgets
@@ -431,7 +468,7 @@ function essor_load_more(){
     $args['post_type'] = $postType;
     $args['posts_per_page'] = $postNb;
     $args['offset'] = $postNb;
-        
+
     $loop = new WP_Query( $args );
     while( $loop->have_posts() ){
         $loop->the_post();
@@ -462,7 +499,7 @@ function essor_scripts(){
     // load more posts
     $postType = is_home() || is_category() ? get_field('postType', get_option( 'page_for_posts' )) : get_field('postType');
     $args = $postType ? array('post_type' => $postType, 'tax_query' => array('relation' => 'AND'), 'post_status' => 'publish', 'posts_per_page' => -1) : '';
-    
+
     // if post type is reference
     if( get_field('sector') && $args ){
         array_push($args['tax_query'], array('taxonomy' => 'metier', 'field' => 'slug', 'terms' => get_term(get_field('sector'))->slug));
@@ -473,7 +510,7 @@ function essor_scripts(){
     }
     $refDate = isset( $_GET['year'] ) ? $_GET['year'] : '';
     if( $refDate && $args ){
-        $args['date_query'] = array(array('year'  => $refDate)); 
+        $args['date_query'] = array(array('year'  => $refDate));
     }
 
     // if post type is offre
@@ -498,7 +535,8 @@ function essor_scripts(){
         'adminAjax' => site_url( '/wp-admin/admin-ajax.php' ),
         'postType' => $postType,
         'postNb' => $postNb,
-        'queryArgs' => $args
+        'queryArgs' => $args,
+        'essor_places' => essor_get_map_json()
     ) );
 }
 add_action( 'wp_enqueue_scripts', 'essor_scripts' );
