@@ -4,6 +4,8 @@ require('gsap/CSSPlugin');
 require('gsap/ScrollToPlugin');
 var TweenLite = require('gsap/TweenLite');
 
+var Hammer = require('hammerjs');
+
 
 module.exports = function(body, nav, menus, pageWrapper){
     if( !nav.length ) return;
@@ -56,5 +58,20 @@ module.exports = function(body, nav, menus, pageWrapper){
         $(this).index() === 0 ? menus.removeClass('swiped') : menus.addClass('swiped');
         $(this).addClass('on').siblings().removeClass('on');
 
+    });
+
+    var hammertime = new Hammer(nav.get(0));
+    hammertime.on('swipe', function(e){
+        if( menus.hasClass('swiped') ){
+            if( e.direction === 4 ){
+                menus.removeClass('swiped');
+                $('.js-btn-menu').eq(0).addClass('on').siblings().removeClass('on');
+            }
+        }else{
+            if( e.direction === 2 ){
+                menus.addClass('swiped');
+                $('.js-btn-menu').eq(1).addClass('on').siblings().removeClass('on');
+            }
+        }
     });
 }
