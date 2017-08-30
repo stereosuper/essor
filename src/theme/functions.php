@@ -133,6 +133,11 @@ function essor_mce_before_init( $styles ){
         array(
             'title' => 'Auteur de la citation',
             'inline' => 'cite'
+        ),
+        array(
+            'title' => 'Véritable h1 (pour le SEO)',
+            'block' => 'h1',
+            'classes' => 'p'
         )
     );
     $styles['style_formats'] = json_encode( $style_formats );

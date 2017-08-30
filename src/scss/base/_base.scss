@@ -28,12 +28,12 @@ body{
     //-webkit-text-stroke: 1px transparent;
 }
 
-h1, h2, h3, h4, h5, h6{
+h1, .h1, h2, h3, h4, h5, h6{
     font-family: $poppinsMedium;
     font-weight: 400;
 }
 
-h1{
+h1, .h1{
     position: relative;
     margin: 3em 0 1em;
     font-size: 5rem;
@@ -49,6 +49,9 @@ h1{
         bottom: calc(100% - 0.85em);
         background: $primary;
     }
+}
+.h1{
+    display: block;
 }
 
 h2{
@@ -73,8 +76,18 @@ h5, h6{
     color: $primary;
 }
 
-p{
+p, .p{
     margin: 1.8em 0;
+}
+.p{
+    font-family: $poppinsLight;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    letter-spacing: 0;
+    color: $text;
+    &:before{
+        content: none;
+    }
 }
 
 b, strong{
@@ -302,7 +315,7 @@ a{
 }
 
 .bg-full{
-    margin: 160px 0 90px;
+    margin: 220px 0 90px;
     background: $grey;
     > .container{
         position: relative;
@@ -399,7 +412,7 @@ a{
 }
 
 @media (max-width: $desktopSmall){
-    h1{
+    h1, .h1{
         &:before{
             left: -20px;
         }
