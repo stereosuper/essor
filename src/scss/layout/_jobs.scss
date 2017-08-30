@@ -13,6 +13,7 @@
         &.load-more{
             > button{
                 width: 80%;
+                min-height: 150px;
                 &:before{
                     padding-bottom: 35%;
                 }
@@ -45,6 +46,19 @@
         margin-right: 70px;
         &:last-child{
             margin-right: 0;
+        }
+    }
+}
+
+
+@media (max-width: $phone){
+    .jobs{
+        > li{
+            &.load-more{
+                > button{
+                    width: 100%;
+                }
+            }
         }
     }
 }
