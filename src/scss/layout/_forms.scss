@@ -71,6 +71,7 @@ input{
     &[type=file]{
         min-width: 199px;
         margin: 0 20px 0 0;
+        overflow: hidden;
         border-style: dotted;
         cursor: pointer;
     }
