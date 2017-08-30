@@ -163,6 +163,7 @@
         width: calc(100% + #{$gutter*2});
         padding: 0;
         position: fixed;
+        top: 77px !important;
         margin: 0 $gutter*-1;
         overflow-y: hidden;
         overflow-x: auto;
@@ -218,7 +219,7 @@
     }
 
     .wrapper-menu-aside{
-        position: static;
+        position: static !important;
         transform: none !important;
     }
 
