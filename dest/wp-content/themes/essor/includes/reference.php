@@ -26,6 +26,5 @@
             }
             ?>
         </li>
-        <li><a href='<?php echo $currentPageLink; ?>?year=<?php echo get_the_date( 'Y' ); ?>'><?php echo get_the_date( 'Y' ); ?></a></li>
     </ul>
 </li>

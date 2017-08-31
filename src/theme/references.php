@@ -4,7 +4,6 @@ Template Name: Références
 */
 
 $buildingTypeQuery = isset( $_GET['batiment'] ) ? $_GET['batiment'] : '';
-$dateQuery = isset( $_GET['year'] ) ? $_GET['year'] : '';
 
 $currentPageLink = get_the_permalink();
 
@@ -65,10 +64,6 @@ get_header(); ?>
 
             if( $buildingTypeQuery ){
                 array_push($projectsArgs['tax_query'], array('taxonomy' => 'batiment', 'field' => 'slug', 'terms' => $buildingTypeQuery));
-            }
-
-            if( $dateQuery ){
-                $projectsArgs['date_query'] = array(array('year'  => $dateQuery)); 
             }
             
             $projectsQuery = new WP_Query( $projectsArgs );

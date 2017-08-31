@@ -67,6 +67,7 @@
             <div class='container-small clearfix'>
                 <h2><?php echo get_field('about')->post_title; ?></h2>
                 <?php echo essor_wp_trim_excerpt( get_field('about')->post_content ); ?>
+                <a href='<?php echo get_permalink( get_field('about')->ID ); ?>' class='link'>Lire toute l'histoire</a>
             </div>
         <?php } ?>
 

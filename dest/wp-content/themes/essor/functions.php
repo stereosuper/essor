@@ -165,7 +165,9 @@ function essor_excerpt_length( $length ){
 }
 add_filter( 'excerpt_length', 'essor_excerpt_length' );
 
-function essor_wp_trim_excerpt($wpse_excerpt) {
+function essor_wp_trim_excerpt( $wpse_excerpt ){
+    global $post;
+
     $wpse_excerpt = strip_shortcodes( $wpse_excerpt );
     $wpse_excerpt = apply_filters('the_content', $wpse_excerpt);
     $wpse_excerpt = str_replace(']]>', ']]&gt;', $wpse_excerpt);
@@ -191,7 +193,6 @@ function essor_wp_trim_excerpt($wpse_excerpt) {
 
     $wpse_excerpt = trim(force_balance_tags($excerptOutput));
 
-    $excerpt_end = ' <a href="'. get_the_permalink() .'" class="link" title="'. 'Lire ' . get_the_title() .'">Lire toute l\'histoire</a>';
     $excerpt_more = apply_filters('excerpt_more', ' ' . $excerpt_end);
     $wpse_excerpt .= $excerpt_more;
 
@@ -233,7 +234,7 @@ function essort_get_current_submenu( $sorted_menu_items, $args ){
         if( $root_id == 0){
             $root_id = $sorted_menu_items[1]->ID;
         }
-
+  
         // find the top level parent
         if( ! isset( $args->direct_parent ) ){
             $prev_root_id = $root_id;
@@ -297,7 +298,7 @@ function essor_custom_post_nav_class( $classes, $item, $args ){
     }
 
     if( $args->menu_id == 'menuSecondary' ){
-        if( is_page_template('application.php') || is_page_template('offres.php') ){
+        if( is_page_template('application.php') || is_page_template('testimonies.php') ){
             if( $item->object_id == url_to_postid( get_field('jobLink', 'options') ) ){
                 $classes[] = 'current_page_parent';
             }else{
@@ -314,7 +315,7 @@ function essor_custom_post_nav_class( $classes, $item, $args ){
         }
     }
 
-    if( is_page_template('contact.php') || is_page_template('application.php') || is_page_template('offres.php') ){
+    if( is_page_template('contact.php') || is_page_template('application.php') || is_page_template('testimonies.php') ){
         if( $item->object_id == get_option( 'page_on_front' ) ){
             $classes[] = 'current-page-ancestor';
         }else{
@@ -393,6 +394,10 @@ function essor_taxonomies(){
 add_action( 'init', 'essor_taxonomies' );
 
 
+/*-----------------------------------------------------------------------------------*/
+/* Google Maps ACF
+/*-----------------------------------------------------------------------------------*/
+
 // Pour faire marcher GMaps dans l'admin d'ACF
 function essor_acf_google_map_api( $api ){
 	$api['key'] = 'AIzaSyCSLNiBRMjgRB_AqXKuBTCvfhdEJwFVEEc';
@@ -400,52 +405,26 @@ function essor_acf_google_map_api( $api ){
 }
 add_filter('acf/fields/google_map/api', 'essor_acf_google_map_api');
 
-
-function essor_get_map_json()
-{
-    $collection = array();
+function essor_get_map_json(){
+    $collection = array(
+        'id' => 'implantations',
+        'type' => 'symbol',
+        'source' => array(
+            'type' => 'geojson',
+            'data' => array(
+                'type' => 'FeatureCollection',
+                'features' => array(),
+            ),
+        ),
+        'layout' => array(
+            'icon-image' => 'essor-icon',
+        ),
+    );
 
     $collection = apply_filters('essor-get-map-features', $collection);
 
     return $collection;
 }
-
-
-
-// /*-----------------------------------------------------------------------------------*/
-// /* Sidebar & Widgets
-// /*-----------------------------------------------------------------------------------*/
-// function essor_register_sidebars(){
-// 	register_sidebar( array(
-// 		'id' => 'sidebar',
-// 		'name' => 'Sidebar',
-// 		'description' => 'Take it on the side...',
-// 		'before_widget' => '',
-// 		'after_widget' => '',
-// 		'before_title' => '',
-// 		'after_title' => '',
-// 		'empty_title'=> ''
-// 	) );
-// }
-// add_action( 'widgets_init', 'essor_register_sidebars' );
-
-// // Deregister default widgets
-// function essor_unregister_default_widgets(){
-//     unregister_widget( 'WP_Widget_Pages' );
-//     unregister_widget( 'WP_Widget_Calendar' );
-//     unregister_widget( 'WP_Widget_Archives' );
-//     unregister_widget( 'WP_Widget_Links' );
-//     unregister_widget( 'WP_Widget_Meta' );
-//     unregister_widget( 'WP_Widget_Search' );
-//     unregister_widget( 'WP_Widget_Text' );
-//     unregister_widget( 'WP_Widget_Categories' );
-//     unregister_widget( 'WP_Widget_Recent_Posts' );
-//     unregister_widget( 'WP_Widget_Recent_Comments' );
-//     unregister_widget( 'WP_Widget_RSS' );
-//     unregister_widget( 'WP_Widget_Tag_Cloud' );
-//     unregister_widget( 'WP_Nav_Menu_Widget' );
-// }
-// add_action( 'widgets_init', 'essor_unregister_default_widgets' );
 
 
 /*-----------------------------------------------------------------------------------*/
@@ -464,7 +443,7 @@ function essor_load_more(){
     $args['post_type'] = $postType;
     $args['posts_per_page'] = $postNb;
     $args['offset'] = $postNb;
-
+        
     $loop = new WP_Query( $args );
     while( $loop->have_posts() ){
         $loop->the_post();
@@ -485,7 +464,7 @@ add_action( 'wp_ajax_nopriv_essor_load_more', 'essor_load_more' );
 // Add defer attr to scripts
 function essor_defer_attr( $tag, $handle ){
     $scriptsToDefer = array('essor-scripts');
-
+   
     foreach( $scriptsToDefer as $script ){
         if( $script === $handle ){
             return str_replace( ' src', ' defer src', $tag );
@@ -506,12 +485,12 @@ function essor_scripts(){
 
     wp_register_script( 'essor-scripts', get_template_directory_uri() . '/js/main.js', array(), ESSOR_VERSION, true );
     wp_enqueue_script( 'essor-scripts' );
-
+    
 
     // load more posts
     $postType = is_home() || is_category() ? get_field('postType', get_option( 'page_for_posts' )) : get_field('postType');
     $args = $postType ? array('post_type' => $postType, 'tax_query' => array('relation' => 'AND'), 'post_status' => 'publish', 'posts_per_page' => -1) : '';
-
+    
     // if post type is reference
     if( get_field('sector') && $args ){
         array_push($args['tax_query'], array('taxonomy' => 'metier', 'field' => 'slug', 'terms' => get_term(get_field('sector'))->slug));
@@ -519,10 +498,6 @@ function essor_scripts(){
     $refBuildingType = isset( $_GET['batiment'] ) ? $_GET['batiment'] : '';
     if( $refBuildingType && $args ){
         array_push($args['tax_query'], array('taxonomy' => 'batiment', 'field' => 'slug', 'terms' => $refBuildingType));
-    }
-    $refDate = isset( $_GET['year'] ) ? $_GET['year'] : '';
-    if( $refDate && $args ){
-        $args['date_query'] = array(array('year'  => $refDate));
     }
 
     // if post type is offre

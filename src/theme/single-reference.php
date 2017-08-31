@@ -16,7 +16,6 @@
                         <div class='wrapper-title-links'>
                             <h1><span><?php the_field('place'); ?></span><?php the_title(); ?></h1>
                             <ul>
-                                <li><a href='<?php the_field('refsLink', 'options'); ?>?year=<?php echo get_the_date( 'Y' ); ?>'><?php echo get_the_date( 'Y' ); ?><svg class='icon icon-right'><use xlink:href='#icon-right'></use></svg></a></li>
                                 <li>
                                     <?php
                                     $buildingTypes = get_the_terms( $post->ID, 'batiment' );
