@@ -498,10 +498,6 @@ function essor_scripts(){
     if( $refBuildingType && $args ){
         array_push($args['tax_query'], array('taxonomy' => 'batiment', 'field' => 'slug', 'terms' => $refBuildingType));
     }
-    $refDate = isset( $_GET['year'] ) ? $_GET['year'] : '';
-    if( $refDate && $args ){
-        $args['date_query'] = array(array('year'  => $refDate)); 
-    }
 
     // if post type is offre
     $offerContractType = isset( $_GET['contrat'] ) ? $_GET['contrat'] : '';
