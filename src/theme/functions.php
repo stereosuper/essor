@@ -350,11 +350,19 @@ function essor_post_type(){
         'menu_icon' => 'dashicons-businessman',
         'supports' => array('title', 'editor', 'thumbnail', 'excerpt', 'revisions')
     ) );
+
+    register_post_type( 'implantation', array(
+        'label' => 'Implantations',
+        'singular_label' => 'Implantation',
+        'public' => true,
+        'menu_icon' => 'dashicons-building',
+        'supports' => array('title', 'editor', 'thumbnail', 'excerpt', 'revisions')
+    ) );
 }
 add_action( 'init', 'essor_post_type' );
 
 function essor_taxonomies(){
-    register_taxonomy( 'metier', 'reference', array(
+    register_taxonomy( 'metier', array('reference', 'implantation'), array(
         'label' => 'Métiers',
         'singular_label' => 'Métier',
         'hierarchical' => true,
@@ -383,6 +391,38 @@ function essor_taxonomies(){
     ) );
 }
 add_action( 'init', 'essor_taxonomies' );
+
+
+// Pour faire marcher GMaps dans l'admin d'ACF
+function essor_acf_google_map_api( $api ){
+	$api['key'] = 'AIzaSyCSLNiBRMjgRB_AqXKuBTCvfhdEJwFVEEc';
+	return $api;
+}
+add_filter('acf/fields/google_map/api', 'essor_acf_google_map_api');
+
+
+function essor_get_map_json()
+{
+    $collection = array(
+        'id' => 'implantations',
+        'type' => 'symbol',
+        'source' => array(
+            'type' => 'geojson',
+            'data' => array(
+                'type' => 'FeatureCollection',
+                'features' => array(),
+            ),
+        ),
+        'layout' => array(
+            'icon-image' => 'essor-icon',
+        ),
+    );
+
+    $collection = apply_filters('essor-get-map-features', $collection);
+
+    return $collection;
+}
+
 
 
 // /*-----------------------------------------------------------------------------------*/
@@ -503,7 +543,8 @@ function essor_scripts(){
         'adminAjax' => site_url( '/wp-admin/admin-ajax.php' ),
         'postType' => $postType,
         'postNb' => $postNb,
-        'queryArgs' => $args
+        'queryArgs' => $args,
+        'essor_places' => essor_get_map_json()
     ) );
 }
 add_action( 'wp_enqueue_scripts', 'essor_scripts' );

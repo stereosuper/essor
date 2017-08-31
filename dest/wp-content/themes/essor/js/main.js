@@ -39648,14 +39648,10 @@ $(function () {
     initScrollReval('.isAnimated');
 
     // Charge la map
-    //map();
+    map();
 
     // Since script is loaded asynchronously, load event isn't always fired !!!
-    if (document.readyState === 'complete') {
-        loadHandler();
-    } else {
-        $(window).on('load', loadHandler);
-    }
+    document.readyState === 'complete' ? loadHandler() : $(window).on('load', loadHandler);
 
     $(window).on('resize', throttle(function () {
         requestAnimFrame(resizeHandler);
