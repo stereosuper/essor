@@ -39675,9 +39675,7 @@ $(function () {
 var $ = require('jquery');
 var mapboxgl = require('mapbox-gl');
 
-module.exports = function () {
-
-    if (!$('#map').length) return;
+module.exports = function (slider) {
 
     var map,
         icon,
@@ -39747,41 +39745,50 @@ module.exports = function () {
             },
             "visibility": "visible"
         });
+        handleMarkerClick(layerId);
 
         // Ajoute les layers de marqueurs filtrés par métiers
-        features.forEach(function (feature) {
-            var metiers = feature.properties.metiers;
-            if (metiers) {
-                for (var idx in metiers) {
-                    if (metiers.hasOwnProperty(idx)) {
-                        var metier = metiers[idx];
-                        if (!map.getLayer('layer-' + metier)) {
-                            layerId = 'layer-' + metier;
-                            layers.push(layerId);
-                            map.addLayer({
-                                "id": layerId,
-                                "type": "symbol",
-                                "source": "implantations",
-                                "layout": {
-                                    "icon-image": "essor-icon",
-                                    "icon-allow-overlap": true
-                                },
-                                "visibility": "none",
-                                "filter": ["has", metier]
-                            });
+        //features.forEach(function(feature)
+        console.log('features', features);
+        for (var idx in features) {
+            if (features.hasOwnProperty(idx)) {
+                var feature = features[idx];
+                var metiers = feature.properties.metiers;
+                if (metiers) {
+                    for (var idx in metiers) {
+                        if (metiers.hasOwnProperty(idx)) {
+                            var metier = metiers[idx];
+                            if (!map.getLayer('layer-' + metier)) {
+                                layerId = 'layer-' + metier;
+                                layers.push(layerId);
+                                map.addLayer({
+                                    "id": layerId,
+                                    "type": "symbol",
+                                    "source": "implantations",
+                                    "layout": {
+                                        "icon-image": "essor-icon",
+                                        "icon-allow-overlap": true
+                                    },
+                                    "visibility": "none",
+                                    "filter": ["has", metier]
+                                });
+                                handleMarkerClick(layerId);
+                            }
                         }
                     }
                 }
             }
-        });
-
-        // Gère le click sur les marqueurs
-        map.on('click', 'implantations', function (e) {
-            new mapboxgl.Popup().setLngLat(e.features[0].geometry.coordinates).setHTML('<h2>' + e.features[0].properties.name + '</h2>' + '<ul class="address">' + '<li class="address">' + '<div class="address-l1">' + e.features[0].properties.address_l1 + '</div>' + '<div class=address-l2"">' + e.features[0].properties.address_l2 + '</div>' + '</li>' + '<li class="phone">' + e.features[0].properties.phone + '</li>' + '<li class="email">' + e.features[0].properties.email + '</li>' + '</ul>').addTo(map);
-        });
+        }
 
         // Filtre une première fois la map
         filterMap(false);
+    };
+
+    var handleMarkerClick = function handleMarkerClick(layerId) {
+        // Gère le click sur les marqueurs du layer
+        map.on('click', layerId, function (e) {
+            new mapboxgl.Popup().setLngLat(e.features[0].geometry.coordinates).setHTML('<h2>' + e.features[0].properties.name + '</h2>' + '<ul class="address">' + '<li class="address">' + '<div class="address-l1">' + e.features[0].properties.address_l1 + '</div>' + '<div class=address-l2"">' + e.features[0].properties.address_l2 + '</div>' + '</li>' + '<li class="phone">' + e.features[0].properties.phone + '</li>' + '<li class="email">' + e.features[0].properties.email + '</li>' + '</ul>').addTo(map);
+        });
     };
 
     var filterMap = function filterMap(reload) {
