@@ -39753,7 +39753,7 @@ module.exports = function (slider) {
                 for (var idx in metiers) {
                     if (metiers.hasOwnProperty(idx)) {
                         var metier = metiers[idx];
-                        if (!map.getLayer(metier)) {
+                        if (!map.getLayer('layer-' + metier)) {
                             layerId = 'layer-' + metier;
                             layers.push(layerId);
                             map.addLayer({
