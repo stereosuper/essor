@@ -1,4 +1,5 @@
 <?php
+define('WP_CACHE', true); // Added by WP Rocket
 # BEGIN SecuPress Correct Constants Values
 define( 'ERRORLOGFILE', '/Applications/MAMP/logs/wp_errorlogfile.log' ); // Added by SecuPress.
 define( 'WP_DEBUG_DISPLAY', false ); // Added by SecuPress.
@@ -96,6 +97,8 @@ define('WP_DEBUG', true);
 define('WP_POST_REVISIONS', 5);
 define('EMPTY_TRASH_DAYS', 10);
 define('WP_AUTO_UPDATE_CORE', true);
+define('DISALLOW_FILE_EDIT', true);
+define('DISALLOW_UNFILTERED_HTML', true);
 
 /* C’est tout, ne touchez pas à ce qui suit ! */
 

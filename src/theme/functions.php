@@ -464,6 +464,7 @@ function essor_get_map_json()
 /*-----------------------------------------------------------------------------------*/
 /* Enqueue Styles and Scripts
 /*-----------------------------------------------------------------------------------*/
+// Load more ajax
 function essor_load_more(){
     if( !isset($_REQUEST) ) return;
 
@@ -494,15 +495,31 @@ function essor_load_more(){
 add_action( 'wp_ajax_essor_load_more', 'essor_load_more' );
 add_action( 'wp_ajax_nopriv_essor_load_more', 'essor_load_more' );
 
+// Add defer attr to scripts
+function essor_defer_attr( $tag, $handle ){
+    $scriptsToDefer = array('essor-scripts');
+   
+    foreach( $scriptsToDefer as $script ){
+        if( $script === $handle ){
+            return str_replace( ' src', ' defer src', $tag );
+        }
+    }
+    return $tag;
+}
+add_filter( 'script_loader_tag', 'essor_defer_attr', 10, 2 );
+
+// Register scripts
 function essor_scripts(){
-    // header
+    // styles
 	wp_enqueue_style( 'essor-style', get_template_directory_uri() . '/css/main.css', array(), ESSOR_VERSION );
 
-	// footer
-	wp_deregister_script( 'jquery' );
-	wp_enqueue_script( 'essor-scripts', get_template_directory_uri() . '/js/main.js', array(), ESSOR_VERSION, true );
-
+	// scripts
+    wp_deregister_script( 'jquery' );
     wp_deregister_script( 'wp-embed' );
+
+    wp_register_script( 'essor-scripts', get_template_directory_uri() . '/js/main.js', array(), ESSOR_VERSION, true );
+    wp_enqueue_script( 'essor-scripts' );
+    
 
     // load more posts
     $postType = is_home() || is_category() ? get_field('postType', get_option( 'page_for_posts' )) : get_field('postType');
