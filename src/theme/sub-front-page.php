@@ -41,7 +41,7 @@ get_header(); ?>
         <?php endif; ?>
 
 		<div class='container-small bloc-title-img' id='blocTitle'>
-			<h1><?php the_title(); ?></h1>
+			<span class='h1'><?php the_title(); ?></span>
 			<?php the_content(); ?>
         </div>
 
