@@ -15,7 +15,7 @@
 					<h1><?php the_title(); ?></h1>
 				</div>
 
-				<div class='blog-content'>
+				<div class='blog-content clearfix'>
 					<?php the_content(); ?>
 				</div>
 			</article>

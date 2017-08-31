@@ -16,7 +16,7 @@ get_header(); ?>
                     </div>
                 </aside>
 
-                <div class='content-sidebar content-about'>
+                <div class='content-sidebar content-about clearfix'>
                     <h1><?php the_title(); ?></h1>
                     <?php the_content(); ?>
 
