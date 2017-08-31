@@ -20,7 +20,7 @@ $(function(){
     var loadMorePosts = require('./loadMorePosts.js');
     var initScrollReval = require('./initScrollReveal.js');
     var sticky = require('./sticky.js');
-    var map = require('./map.js');
+    var implantations = require('./map.js');
     var jobsSticky = require('./jobsSticky.js');
     var setSlider = require('./slider.js');
     $.fn.annotatedImage = require('./annotedImages.js');
@@ -74,7 +74,7 @@ $(function(){
     initScrollReval('.isAnimated');
 
     // Charge la map
-    // map();
+    implantations();
 
     // Since script is loaded asynchronously, load event isn't always fired !!!
     document.readyState === 'complete' ? loadHandler() : $(window).on('load', loadHandler);

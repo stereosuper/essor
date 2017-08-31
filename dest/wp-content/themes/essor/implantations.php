@@ -3,6 +3,38 @@
 Template Name: Implantations
 */
 
+// Source : https://wordpress.stackexchange.com/questions/33455/taxonomy-count-per-post-type
+function essor_count_posts_in_term($taxonomy, $term, $postType = 'post') {
+    $query = new WP_Query([
+        'posts_per_page' => 0,
+        'post_type' => $postType,
+        'tax_query' => [
+            [
+                'taxonomy' => $taxonomy,
+                'terms' => $term,
+                'field' => 'slug'
+            ]
+        ]
+    ]);
+
+    return $query->found_posts;
+}
+
+function essor_get_terms_csv($id, $taxonomy, $separator=', ', $field='name')
+{
+    $output = '';
+    $terms = wp_get_post_terms($id, $taxonomy);
+    $sep = '';
+    if($terms) {
+        foreach ($terms as $term) {
+            $output .= $sep . $term->$field;
+            $sep = $separator;
+        }
+    }
+
+    return $output;
+}
+
 function essor_get_field($selector, $post_id=false, $format_value=true, $default='')
 {
     if (function_exists('get_field')) {
@@ -27,7 +59,7 @@ function essor_query_all_implantation()
     return new WP_Query($query_args);
 }
 
-function essor_tpl_get_map_json($collection)
+function essor_tpl_get_map_json($features)
 {
     $implantation_query = essor_query_all_implantation();
 
@@ -63,26 +95,32 @@ function essor_tpl_get_map_json($collection)
             $email = '<a href="mailto:'.essor_get_field('email', $post->ID, '').'">'.essor_get_field('email', $post->ID, '').'</a>';
         }
 
+        $metiers = explode(',', essor_get_terms_csv($post->ID, 'metier', ',', 'slug'));
+
         if ($lng && $lat) {
-            $collection['source']['data']['features'][] = array(
+            $features[] = array(
                     'type' => 'Feature',
                     'geometry' => array(
                         'type' => 'Point',
                         'coordinates' => array($lng, $lat),
                     ),
-                    'properties' => array(
-                        'display'       => 'visible',
-                        'name'          => $name,
-                        'address_l1'    => $address_l1,
-                        'address_l2'    => $address_l2,
-                        'phone'         => $phone,
-                        'email'         => $email,
+                    'properties' => array_merge(
+                        array(
+                            'display'       => 'visible',
+                            'name'          => $name,
+                            'address_l1'    => $address_l1,
+                            'address_l2'    => $address_l2,
+                            'phone'         => $phone,
+                            'email'         => $email,
+                            'metiers'       => $metiers,
+                        ),
+                        array_fill_keys(array_keys(array_flip($metiers)), 1) // On merge les clés des métiers car le filter ['in', 'metiers', metier] de mapbox n'a pas l'air de trop fonctionner
                     ),
                 );
         }
     }
 
-    return $collection;
+    return $features;
 }
 add_filter('essor-get-map-features', 'essor_tpl_get_map_json', 10, 1);
 
@@ -97,6 +135,25 @@ get_header();
         <div class='container-small'>
             <h1><?php the_title(); ?></h1>
             <?php the_content(); ?>
+            <form action="." method="GET">
+                <?php
+                    $terms = get_terms(array(
+                            'taxonomy' => 'metier',
+                            'hide_empty' => true,
+                        ));
+                    if ($terms) :
+                ?>
+                <select id="map-filter" name='map-filter'>
+                    <option value="--all--" selected class='default'><?php _e('— Filtrer par métier', 'essor'); ?></option>
+                    <?php
+                        foreach($terms as $term) :
+                            $count = essor_count_posts_in_term('metier', $term, 'implantation');
+                    ?>
+                    <option value='<?php echo $term->slug; ?>'><?php echo $term->name; ?> <?php printf(_n('(%s implantation)', '(%s implantations)', $count), $count); ?></option>
+                    <?php endforeach; ?>
+                </select>
+                <?php endif; ?>
+            </form>
 
             <div id='map' class='map'>
                 <div class='activeArea'></div>

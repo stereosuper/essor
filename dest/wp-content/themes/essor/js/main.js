@@ -39595,7 +39595,7 @@ $(function () {
     var loadMorePosts = require('./loadMorePosts.js');
     var initScrollReval = require('./initScrollReveal.js');
     var sticky = require('./sticky.js');
-    var map = require('./map.js');
+    var implantations = require('./map.js');
     var jobsSticky = require('./jobsSticky.js');
     var setSlider = require('./slider.js');
     $.fn.annotatedImage = require('./annotedImages.js');
@@ -39648,7 +39648,7 @@ $(function () {
     initScrollReval('.isAnimated');
 
     // Charge la map
-    // map();
+    implantations();
 
     // Since script is loaded asynchronously, load event isn't always fired !!!
     document.readyState === 'complete' ? loadHandler() : $(window).on('load', loadHandler);
@@ -39679,6 +39679,7 @@ module.exports = function (slider) {
 
     var map,
         icon,
+        layers = [],
         initialCenter = [2.5377, 46.718],
         // Centre de la France (ça dépend) https://fr.wikipedia.org/wiki/Centre_de_la_France
     initialZoom = 3 // $(window).width() > 1200 ? 6 : 5
@@ -39701,6 +39702,9 @@ module.exports = function (slider) {
 
         // Affiche les marqueurs sur la carte
         map.on('load', setMarkers);
+
+        // S'intéresse au select des filtres par métier
+        $('#map-filter').change(filterMap);
     };
 
     var loadMarkerIcon = function loadMarkerIcon() {
@@ -39716,11 +39720,74 @@ module.exports = function (slider) {
 
     var setMarkers = function setMarkers() {
 
-        map.addLayer(window.wp.essor_places);
+        var features = window.wp.essor_places;
+        var layer = {
+            'type': 'geojson',
+            'data': {
+                'type': 'FeatureCollection',
+                'features': features
+            }
+        };
 
+        // Ajoute les marqueurs à la map
+        map.addSource('implantations', layer);
+
+        // Ajoute le layer affichant tous les points
+        var layerId = 'layer---all--';
+        layers.push(layerId);
+        map.addLayer({
+            "id": layerId,
+            "type": "symbol",
+            "source": "implantations",
+            "layout": {
+                "icon-image": "essor-icon",
+                "icon-allow-overlap": true
+            },
+            "visibility": "visible"
+        });
+
+        // Ajoute les layers de marqueurs filtrés par métiers
+        features.forEach(function (feature) {
+            var metiers = feature.properties.metiers;
+            if (metiers) {
+                for (var idx in metiers) {
+                    if (metiers.hasOwnProperty(idx)) {
+                        var metier = metiers[idx];
+                        if (!map.getLayer(metier)) {
+                            layerId = 'layer-' + metier;
+                            layers.push(layerId);
+                            map.addLayer({
+                                "id": layerId,
+                                "type": "symbol",
+                                "source": "implantations",
+                                "layout": {
+                                    "icon-image": "essor-icon",
+                                    "icon-allow-overlap": true
+                                },
+                                "visibility": "none",
+                                "filter": ["has", metier]
+                            });
+                        }
+                    }
+                }
+            }
+        });
+
+        // Gère le click sur les marqueurs
         map.on('click', 'implantations', function (e) {
             new mapboxgl.Popup().setLngLat(e.features[0].geometry.coordinates).setHTML('<h2>' + e.features[0].properties.name + '</h2>' + '<ul class="address">' + '<li class="address">' + '<div class="address-l1">' + e.features[0].properties.address_l1 + '</div>' + '<div class=address-l2"">' + e.features[0].properties.address_l2 + '</div>' + '</li>' + '<li class="phone">' + e.features[0].properties.phone + '</li>' + '<li class="email">' + e.features[0].properties.email + '</li>' + '</ul>').addTo(map);
         });
+    };
+
+    var filterMap = function filterMap(e) {
+        var $select = $(this);
+        var selected_value = $select.val();
+        for (var idx in layers) {
+            if (layers.hasOwnProperty(idx)) {
+                var layerId = layers[idx];
+                map.setLayoutProperty(layerId, 'visibility', layerId == 'layer-' + selected_value ? 'visible' : 'none');
+            }
+        }
     };
 
     init();

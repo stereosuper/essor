@@ -5,6 +5,7 @@ module.exports = function(slider){
 
     var map,
         icon,
+        layers = [],
         initialCenter = [2.5377, 46.718],   // Centre de la France (ça dépend) https://fr.wikipedia.org/wiki/Centre_de_la_France
         initialZoom = 3                     // $(window).width() > 1200 ? 6 : 5
         ;
@@ -26,6 +27,9 @@ module.exports = function(slider){
 
         // Affiche les marqueurs sur la carte
         map.on('load', setMarkers);
+
+        // S'intéresse au select des filtres par métier
+        $('#map-filter').change(filterMap);
     }
 
     var loadMarkerIcon = function() {
@@ -41,8 +45,61 @@ module.exports = function(slider){
 
     var setMarkers = function() {
 
-        map.addLayer(window.wp.essor_places);
+        var features = window.wp.essor_places;
+        var layer = {
+                'type': 'geojson',
+                'data': {
+                    'type': 'FeatureCollection',
+                    'features': features,
+                }
+            }
+            ;
 
+        // Ajoute les marqueurs à la map
+        map.addSource('implantations', layer);
+
+        // Ajoute le layer affichant tous les points
+        var layerId = 'layer---all--';
+        layers.push(layerId);
+        map.addLayer({
+                "id": layerId,
+                "type": "symbol",
+                "source": "implantations",
+                "layout": {
+                    "icon-image": "essor-icon",
+                    "icon-allow-overlap": true
+                },
+                "visibility": "visible",
+            });
+
+        // Ajoute les layers de marqueurs filtrés par métiers
+        features.forEach(function(feature) {
+            var metiers = feature.properties.metiers;
+            if (metiers) {
+                for (var idx in metiers) {
+                    if( metiers.hasOwnProperty( idx ) ) {
+                        var metier = metiers[idx];
+                        if (!map.getLayer(metier)) {
+                            layerId = 'layer-'+metier;
+                            layers.push(layerId);
+                            map.addLayer({
+                                    "id": layerId,
+                                    "type": "symbol",
+                                    "source": "implantations",
+                                    "layout": {
+                                        "icon-image": "essor-icon",
+                                        "icon-allow-overlap": true
+                                    },
+                                    "visibility": "none",
+                                    "filter": ["has", metier]
+                                });
+                        }
+                    }
+                }
+            }
+        });
+
+        // Gère le click sur les marqueurs
         map.on('click', 'implantations', function (e) {
             new mapboxgl.Popup()
                 .setLngLat(e.features[0].geometry.coordinates)
@@ -67,6 +124,17 @@ module.exports = function(slider){
                 )
                 .addTo(map);
         });
+    }
+
+    var filterMap = function(e) {
+        var $select = $(this);
+        var selected_value = $select.val();
+        for (var idx in layers) {
+            if (layers.hasOwnProperty(idx)) {
+                var layerId = layers[idx];
+                map.setLayoutProperty(layerId, 'visibility', (layerId == 'layer-'+selected_value) ? 'visible' : 'none');
+            }
+        }
     }
 
     init();

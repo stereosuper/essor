@@ -233,7 +233,7 @@ function essort_get_current_submenu( $sorted_menu_items, $args ){
         if( $root_id == 0){
             $root_id = $sorted_menu_items[1]->ID;
         }
-  
+
         // find the top level parent
         if( ! isset( $args->direct_parent ) ){
             $prev_root_id = $root_id;
@@ -403,20 +403,7 @@ add_filter('acf/fields/google_map/api', 'essor_acf_google_map_api');
 
 function essor_get_map_json()
 {
-    $collection = array(
-        'id' => 'implantations',
-        'type' => 'symbol',
-        'source' => array(
-            'type' => 'geojson',
-            'data' => array(
-                'type' => 'FeatureCollection',
-                'features' => array(),
-            ),
-        ),
-        'layout' => array(
-            'icon-image' => 'essor-icon',
-        ),
-    );
+    $collection = array();
 
     $collection = apply_filters('essor-get-map-features', $collection);
 
@@ -477,7 +464,7 @@ function essor_load_more(){
     $args['post_type'] = $postType;
     $args['posts_per_page'] = $postNb;
     $args['offset'] = $postNb;
-        
+
     $loop = new WP_Query( $args );
     while( $loop->have_posts() ){
         $loop->the_post();
@@ -498,7 +485,7 @@ add_action( 'wp_ajax_nopriv_essor_load_more', 'essor_load_more' );
 // Add defer attr to scripts
 function essor_defer_attr( $tag, $handle ){
     $scriptsToDefer = array('essor-scripts');
-   
+
     foreach( $scriptsToDefer as $script ){
         if( $script === $handle ){
             return str_replace( ' src', ' defer src', $tag );
@@ -519,12 +506,12 @@ function essor_scripts(){
 
     wp_register_script( 'essor-scripts', get_template_directory_uri() . '/js/main.js', array(), ESSOR_VERSION, true );
     wp_enqueue_script( 'essor-scripts' );
-    
+
 
     // load more posts
     $postType = is_home() || is_category() ? get_field('postType', get_option( 'page_for_posts' )) : get_field('postType');
     $args = $postType ? array('post_type' => $postType, 'tax_query' => array('relation' => 'AND'), 'post_status' => 'publish', 'posts_per_page' => -1) : '';
-    
+
     // if post type is reference
     if( get_field('sector') && $args ){
         array_push($args['tax_query'], array('taxonomy' => 'metier', 'field' => 'slug', 'terms' => get_term(get_field('sector'))->slug));
@@ -535,7 +522,7 @@ function essor_scripts(){
     }
     $refDate = isset( $_GET['year'] ) ? $_GET['year'] : '';
     if( $refDate && $args ){
-        $args['date_query'] = array(array('year'  => $refDate)); 
+        $args['date_query'] = array(array('year'  => $refDate));
     }
 
     // if post type is offre
