@@ -39675,7 +39675,9 @@ $(function () {
 var $ = require('jquery');
 var mapboxgl = require('mapbox-gl');
 
-module.exports = function (slider) {
+module.exports = function () {
+
+    if (!$('#map').length) return;
 
     var map,
         icon,
