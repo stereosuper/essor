@@ -39777,15 +39777,30 @@ module.exports = function (slider) {
         map.on('click', 'implantations', function (e) {
             new mapboxgl.Popup().setLngLat(e.features[0].geometry.coordinates).setHTML('<h2>' + e.features[0].properties.name + '</h2>' + '<ul class="address">' + '<li class="address">' + '<div class="address-l1">' + e.features[0].properties.address_l1 + '</div>' + '<div class=address-l2"">' + e.features[0].properties.address_l2 + '</div>' + '</li>' + '<li class="phone">' + e.features[0].properties.phone + '</li>' + '<li class="email">' + e.features[0].properties.email + '</li>' + '</ul>').addTo(map);
         });
+
+        // Filtre une première fois la map
+        filterMap(false);
     };
 
-    var filterMap = function filterMap(e) {
-        var $select = $(this);
-        var selected_value = $select.val();
+    var filterMap = function filterMap(reload) {
+        // Récupère la sélection
+        var $select = $('#map-filter');
+        var selectedValue = $select.val();
+        var selectedOption = $select.children().get($select.get(0).selectedIndex);
+
+        var redirect = selectedOption.dataset.redirect;
+        var title = selectedOption.dataset.title;
+
+        // Si on doit changer l'url
+        if (reload !== false && redirect) {
+            history.pushState({}, title, redirect);
+        }
+
+        // Applique le filtre
         for (var idx in layers) {
             if (layers.hasOwnProperty(idx)) {
                 var layerId = layers[idx];
-                map.setLayoutProperty(layerId, 'visibility', layerId == 'layer-' + selected_value ? 'visible' : 'none');
+                map.setLayoutProperty(layerId, 'visibility', layerId == 'layer-' + selectedValue ? 'visible' : 'none');
             }
         }
     };
