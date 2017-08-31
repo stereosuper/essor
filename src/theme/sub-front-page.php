@@ -25,13 +25,14 @@ get_header(); ?>
                 <?php wp_reset_postdata(); ?>
 
                 <div class='container'>
-                    <ul>
+                    <ul class='slider-nav'>
                         <?php $i = 0; foreach( $highlightedProjects as $post): ?>
                             <?php setup_postdata($post); ?>
-                            <li <?php if( $i === 0 ){ echo 'class="on"'; } ?>><a href='<?php the_permalink(); ?>'>
+                            <li <?php if( $i === 0 ){ echo 'class="on"'; } ?>><a href='<?php the_permalink(); ?>' class='slider-btn'>
                                 <span><?php the_field('place'); ?></span>
                                 <b><?php the_title(); ?></b>
                                 <svg class='icon'><use xlink:href='#icon-right'></use></svg>
+                                <div class='indicator'></div>
                             </a></li>
                         <?php $i++; endforeach; ?>
                     </ul>
