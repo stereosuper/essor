@@ -356,6 +356,8 @@ function essor_post_type(){
         'label' => 'Implantations',
         'singular_label' => 'Implantation',
         'public' => true,
+        'publicly_queryable' => false,
+        'query_var' => false,
         'menu_icon' => 'dashicons-building',
         'supports' => array('title', 'editor', 'thumbnail', 'excerpt', 'revisions')
     ) );
