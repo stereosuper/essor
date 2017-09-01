@@ -92,12 +92,12 @@ get_header(); ?>
                 </ul>
             <?php endif; ?>
 
-            <h2 class='has-margin'><?php the_field('projectTitle'); ?></h2>
             <?php
-                $projectsQuery = new WP_Query(array('post_type' => 'reference', 'posts_per_page' => 4, 'tax_query' => array('taxonomy' => 'batiment', 'field' => 'slug', 'terms' => get_field('sector')), 'post_status' => 'publish'));
+                $projectsQuery = new WP_Query(array('post_type' => 'reference', 'posts_per_page' => 4, 'tax_query' => array(array('taxonomy' => 'metier', 'field' => 'term_id', 'terms' => get_field('sector'))), 'post_status' => 'publish'));
 
                 if( $projectsQuery->have_posts() ) {
                 ?>
+                    <h2 class='has-margin'><?php the_field('projectTitle'); ?></h2>
                     <ul class='projects complete'>
                         <?php while( $projectsQuery->have_posts() ) : $projectsQuery->the_post(); ?>
                             <?php get_template_part( 'includes/reference' ); ?>
@@ -107,7 +107,7 @@ get_header(); ?>
                 wp_reset_query();
             ?>
         </div>
-
+        
         <div class='container-small'>
             <?php the_field('projectText'); ?>
         </div>
