@@ -76,6 +76,11 @@ $(function(){
     // Charge la map
     implantations();
 
+    // Header menu main
+    header.on('click', '.btn-menu-main', function(){
+        $(this).toggleClass('on');
+    });
+
     // Since script is loaded asynchronously, load event isn't always fired !!!
     document.readyState === 'complete' ? loadHandler() : $(window).on('load', loadHandler);
 

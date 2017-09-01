@@ -180,20 +180,39 @@
         right: 0;
         transition: $transition;
     }
-    // > .close{
-    //     top: 5px;
-    //     opacity: 0;
-    // }
-}
-.menu-main-wrapper:hover > .menu-main, .btn-menu-main:focus + .menu-main{
-    transition: transform 0s, opacity $transition;
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-    &:after{
-        opacity: 1;
-        transform: translate3d(0, 0, 0);
+    > .close{
+        top: 5px;
+        opacity: 0;
+    }
+    &.on{
+        + .menu-main{
+            transition: transform 0s, opacity $transition;
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+            &:after{
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        > .close{
+            opacity: 1;
+            transform: rotate(180deg) translate3d(0, 2.5px, 0);
+        }
+        > .down{
+            opacity: 0;
+            transform: rotate(180deg) translate3d(0, 2.5px, 0);
+        }
     }
 }
+// .menu-main-wrapper:hover > .menu-main, .btn-menu-main:focus + .menu-main{
+//     transition: transform 0s, opacity $transition;
+//     opacity: 1;
+//     transform: translate3d(0, 0, 0);
+//     &:after{
+//         opacity: 1;
+//         transform: translate3d(0, 0, 0);
+//     }
+// }
 // .menu-main-wrapper:hover > .btn-menu-main, .btn-menu-main:focus{
 //     > .close{
 //         opacity: 1;
