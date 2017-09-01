@@ -1,7 +1,10 @@
 var $ = require('jquery');
 var mapboxgl = require('mapbox-gl');
 
+
 module.exports = function(slider){
+
+    if( !$('#map').length ) return;
 
     var map,
         icon,

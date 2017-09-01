@@ -39748,8 +39748,6 @@ module.exports = function (slider) {
         handleMarkerClick(layerId);
 
         // Ajoute les layers de marqueurs filtrés par métiers
-        //features.forEach(function(feature)
-        console.log('features', features);
         for (var idx in features) {
             if (features.hasOwnProperty(idx)) {
                 var feature = features[idx];
