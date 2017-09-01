@@ -452,7 +452,7 @@ a{
 }
 
 @media (max-width: $tablet){
-    h1{
+    h1, .h1{
         font-size: 4.2rem;
     }
     h2{

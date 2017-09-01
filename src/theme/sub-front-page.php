@@ -9,8 +9,9 @@ get_header(); ?>
     
         <?php $highlightedProjects = get_field('highlightedProjects');
         $countProjects = 0;
+        $noImg = false;
 
-        if( $highlightedProjects ): ?>
+        if( $highlightedProjects ){ ?>
             <div class='slider' id='slider'>
                 <?php foreach( $highlightedProjects as $post): ?>
                     <?php setup_postdata($post); ?>
@@ -39,9 +40,13 @@ get_header(); ?>
                     <?php wp_reset_postdata(); ?>
                 </div>
             </div>
-        <?php endif; ?>
+        <?php }else if( has_post_thumbnail() ){ ?>
+            <div class='wrapper-top-img'>
+                <div class='top-img' style='background-image:url("<?php echo get_the_post_thumbnail_url();?>")'></div>
+            </div>
+        <?php }else{ $noImg = true; } ?>
 
-		<div class='container-small bloc-title-img' id='blocTitle'>
+		<div class='container-small <?php if( !$noImg ){ echo "bloc-title-img"; } ?>' id='blocTitle'>
 			<span class='h1'><?php the_title(); ?></span>
 			<?php the_content(); ?>
         </div>
