@@ -17,6 +17,9 @@
     'abstracts/placeholders';
 
 @import
+    'plugins/mapbox-gl';
+
+@import
     'layout/grid',
     'layout/forms',
     'layout/header',
@@ -28,7 +31,8 @@
     'layout/jobs',
     'layout/testimonies',
     'layout/about',
-    'layout/404';
+    'layout/404',
+    'layout/map';
 
 @import
     'components/buttons',

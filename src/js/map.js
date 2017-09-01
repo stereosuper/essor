@@ -6,16 +6,13 @@ module.exports = function(slider){
 
     if( !$('#map').length ) return;
 
-    var map,
-        icon,
-        layers = [],
+    var map, icon, layers = [],
         initialCenter = [2.5377, 46.718],   // Centre de la France (ça dépend) https://fr.wikipedia.org/wiki/Centre_de_la_France
-        initialZoom = 3                     // $(window).width() > 1200 ? 6 : 5
-        ;
+        initialZoom = 3;
 
-    var init = function() {
 
-        // Crée la map
+    var init = function(){
+
         mapboxgl.accessToken = 'pk.eyJ1Ijoic3RlcmVvc3VwZXIiLCJhIjoiY2lyM2JnMDIwMDAxM2k0bWNndmUzeTFhbSJ9.UZ-XuPASxGVtYFSqdVyppg';
 
         map = new mapboxgl.Map({
@@ -24,6 +21,7 @@ module.exports = function(slider){
             center: initialCenter,
             zoom: initialZoom
         });
+        map.scrollZoom.disable();
 
         // Load l'icône pour les marqueurs
         loadMarkerIcon();
@@ -35,28 +33,29 @@ module.exports = function(slider){
         $('#map-filter').change(filterMap);
     }
 
+
     var loadMarkerIcon = function() {
 
         icon = new Image();
 
-        icon.setAttribute('src', 'data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTYuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjMycHgiIGhlaWdodD0iMzJweCIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTI7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPGc+Cgk8cGF0aCBkPSJNMjU2LDBDMTY3LjY0MSwwLDk2LDcxLjYyNSw5NiwxNjBjMCwyNC43NSw1LjYyNSw0OC4yMTksMTUuNjcyLDY5LjEyNUMxMTIuMjM0LDIzMC4zMTMsMjU2LDUxMiwyNTYsNTEybDE0Mi41OTQtMjc5LjM3NSAgIEM0MDkuNzE5LDIxMC44NDQsNDE2LDE4Ni4xNTYsNDE2LDE2MEM0MTYsNzEuNjI1LDM0NC4zNzUsMCwyNTYsMHogTTI1NiwyNTZjLTUzLjAxNiwwLTk2LTQzLTk2LTk2czQyLjk4NC05Niw5Ni05NiAgIGM1MywwLDk2LDQzLDk2LDk2UzMwOSwyNTYsMjU2LDI1NnoiIGZpbGw9IiNGRkRBNDQiLz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K');
+        icon.setAttribute('src', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAArCAYAAABvhzi8AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OTRGRTEyRjk4NzREMTFFN0I4QTdCNTcwRDY0Q0I5ODYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OTRGRTEyRkE4NzREMTFFN0I4QTdCNTcwRDY0Q0I5ODYiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5NEZFMTJGNzg3NEQxMUU3QjhBN0I1NzBENjRDQjk4NiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5NEZFMTJGODg3NEQxMUU3QjhBN0I1NzBENjRDQjk4NiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pv5SZjYAAAIpSURBVHja7JY7SFxREIbvXo34IoI2QiT4BN8gyDYpglUEnwTsgl3AlFEEcVV8opUS0qaMYAqRuFgpaqE2Bi00Ygo3IRaCWviOorD5R2ZhPc6592YthHAGPvYyZ87898w5c+769hqzLQ+WCmpAFagANCkNhMEx+AnWwQKYARduCX0uws9BB2gGKZY3OwOfwTD4rQuyNf540AW2wbt/EI1Up4Xn0kvHeRVOB3NgACRZsVsSr3qWczoK074tgpcuSf+AHRACly6xVbz3GTphKskXUKZJcAi6QSFIBvkgj1dWCvrAkWZuOfgKEiThIfBKM/ETKACD4Icw/h30csy4JscLjrkjTG/cpplA/rcOq1Gr8oYPpmTtoCRauIdPsmofwGgMB4uq91HTLd2RPs7E764gHOL9vI7xVCeCLZCj+G9AFq24SbPafo1oHZgHpww91wpxdNpHNKt+bWta5wpMCn46XNPcIqkMPQd5TLUJznWvxUi4SBhY5qsv2mhVAYfSBrga0XYC1oTYYhJ+Jgz8EnytHvb1veDbFXy3e5wmDBwIvkoPwlLMvuB7agsltR5wR/s0p1u1c5ubXrUCwffNg/Cq4MuVKkrCm8KAHzxRfGMehMeEyvmFuA0SXhIG6EtSrfiCfCM53VZBxdfILafaCglPObSHumd0BzfwZy5i9Fwv3M+Uu1OTe8rn8T+XZGGHA+VqtvVIZoSNsBE2wkbYCBthI2yE/2PhvwIMAMoPYfo8MwxQAAAAAElFTkSuQmCC');
 
         icon.onload = function() {
-            map.addImage('essor-icon', icon, {width: 32, height: 32});
+            map.addImage('essor-icon', icon, {width: '10px'});
         }
     }
+
 
     var setMarkers = function() {
 
         var features = window.wp.essor_places;
         var layer = {
-                'type': 'geojson',
-                'data': {
-                    'type': 'FeatureCollection',
-                    'features': features,
-                }
+            'type': 'geojson',
+            'data': {
+                'type': 'FeatureCollection',
+                'features': features,
             }
-            ;
+        };
 
         // Ajoute les marqueurs à la map
         map.addSource('implantations', layer);
@@ -65,15 +64,15 @@ module.exports = function(slider){
         var layerId = 'layer---all--';
         layers.push(layerId);
         map.addLayer({
-                "id": layerId,
-                "type": "symbol",
-                "source": "implantations",
-                "layout": {
-                    "icon-image": "essor-icon",
-                    "icon-allow-overlap": true
-                },
-                "visibility": "visible",
-            });
+            "id": layerId,
+            "type": "symbol",
+            "source": "implantations",
+            "layout": {
+                "icon-image": "essor-icon",
+                "icon-allow-overlap": true
+            },
+            "visibility": "visible",
+        });
         handleMarkerClick(layerId);
 
         // Ajoute les layers de marqueurs filtrés par métiers
@@ -111,33 +110,32 @@ module.exports = function(slider){
         filterMap(false);
     }
 
+
     var handleMarkerClick = function(layerId) {
         // Gère le click sur les marqueurs du layer
-        map.on('click', layerId, function (e) {
+        map.on('click', layerId, function(e){
             new mapboxgl.Popup()
             .setLngLat(e.features[0].geometry.coordinates)
             .setHTML(
                 '<h2>' + e.features[0].properties.name + '</h2>' +
-                '<ul class="address">' +
-                '<li class="address">' +
-                '<div class="address-l1">' +
+                '<span>' +
                 e.features[0].properties.address_l1 +
-                '</div>' +
-                '<div class=address-l2"">' +
+                '</span><span>' +
                 e.features[0].properties.address_l2 +
-                '</div>' +
-                '</li>' +
-                '<li class="phone">' +
+                '</span>' +
+                '<span>' +
                 e.features[0].properties.phone +
-                '</li>' +
-                '<li class="email">' +
-                e.features[0].properties.email +
-                '</li>' +
-                '</ul>'
+                '</span>' +
+                e.features[0].properties.email
             )
             .addTo(map);
+        }).on('mouseenter', layerId, function(){
+            map.getCanvas().style.cursor = 'pointer';
+        }).on('mouseleave', layerId, function(){
+            map.getCanvas().style.cursor = '';
         });
     }
+
 
     var filterMap = function(reload) {
         // Récupère la sélection
@@ -161,6 +159,7 @@ module.exports = function(slider){
             }
         }
     }
+
 
     init();
 }

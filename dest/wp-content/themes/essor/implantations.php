@@ -4,8 +4,7 @@ Template Name: Implantations
 */
 
 // Source : https://wordpress.stackexchange.com/questions/33455/taxonomy-count-per-post-type
-function essor_count_posts_in_term($taxonomy, $term, $postType = 'post')
-{
+function essor_count_posts_in_term( $taxonomy, $term, $postType = 'post' ){
     $query = new WP_Query([
         'posts_per_page' => 0,
         'post_type' => $postType,
@@ -21,8 +20,7 @@ function essor_count_posts_in_term($taxonomy, $term, $postType = 'post')
     return $query->found_posts;
 }
 
-function essor_get_terms_csv($id, $taxonomy, $separator=', ', $field='name')
-{
+function essor_get_terms_csv( $id, $taxonomy, $separator = ', ', $field = 'name' ){
     $output = '';
     $terms = wp_get_post_terms($id, $taxonomy);
     $sep = '';
@@ -36,8 +34,7 @@ function essor_get_terms_csv($id, $taxonomy, $separator=', ', $field='name')
     return $output;
 }
 
-function essor_get_field($selector, $post_id=false, $format_value=true, $default='')
-{
+function essor_get_field( $selector, $post_id = false, $format_value = true, $default = '' ){
     if (function_exists('get_field')) {
         $value = get_field($selector, $post_id, $format_value);
         if ($value) {
@@ -47,24 +44,10 @@ function essor_get_field($selector, $post_id=false, $format_value=true, $default
     return $default;
 }
 
-function essor_query_all_implantation()
-{
-    // Cf. http://codex.wordpress.org/Class_Reference/WP_Query
-    $query_args = array(
-        // Type Parameters
-        'post_type' => 'implantation',
-        // Pagination Parameters
-        'posts_per_page' => -1,
-    );
+function essor_tpl_get_map_json( $features ){
+    $implantation_query = new WP_Query(array('post_type' => 'implantation', 'posts_per_page' => -1));
 
-    return new WP_Query($query_args);
-}
-
-function essor_tpl_get_map_json($features)
-{
-    $implantation_query = essor_query_all_implantation();
-
-    foreach($implantation_query->posts as $post) {
+    foreach( $implantation_query->posts as $post ){
         $loc = essor_get_field('geolocalisation', $post->ID);
 
         $lng = false;
@@ -96,7 +79,7 @@ function essor_tpl_get_map_json($features)
             $email = '<a href="mailto:'.essor_get_field('email', $post->ID, '').'">'.essor_get_field('email', $post->ID, '').'</a>';
         }
 
-        $metiers = explode(',', essor_get_terms_csv($post->ID, 'metier', ',', 'slug'));
+        $metiers = explode(',', essor_get_terms_csv($post->ID, 'metier-implantation', ',', 'slug'));
 
         if ($lng && $lat) {
             $features[] = array(
@@ -125,8 +108,7 @@ function essor_tpl_get_map_json($features)
 }
 add_filter('essor-get-map-features', 'essor_tpl_get_map_json', 10, 1);
 
-function essor_get_implantations_page_by_metier()
-{
+function essor_get_implantations_page_by_metier(){
     $result = array();
 
     // Récupère les pages ayant le template Implantations
@@ -165,48 +147,40 @@ get_header();
 
         <?php the_post_thumbnail('full'); ?>
 
-        <div class='container-small'>
+        <div class='container-map-txt'>
             <h1><?php the_title(); ?></h1>
             <?php the_content(); ?>
-            <form action="." method="GET">
+            <form action='<?php the_permalink(); ?>' method='POST'>
                 <?php
                     $default_metier = essor_get_field('metier_associe');
                     $pages_per_metier = essor_get_implantations_page_by_metier();
 
                     $terms = get_terms(array(
-                            'taxonomy' => 'metier',
+                            'taxonomy' => 'metier-implantation',
                             'hide_empty' => true,
                         ));
                     if ($terms) :
                 ?>
-                <select id="map-filter" name='map-filter'>
-                    <option
-                        value="--all--"
-                        class='default'
-                        data-redirect="<?php echo (isset($pages_per_metier['--all--'])?get_permalink($pages_per_metier['--all--']):''); ?>"
-                        data-title="<?php echo (isset($pages_per_metier['--all--'])?esc_attr($pages_per_metier['--all--']->post_title):''); ?>"
-                        <?php echo (!$default_metier)?'selected':''; ?>
-                    ><?php _e('— Filtrer par métier', 'essor'); ?></option>
-                    <?php
-                        foreach($terms as $term) :
-                            $count = essor_count_posts_in_term('metier', $term, 'implantation');
-                    ?>
-                    <option
-                        value='<?php echo $term->slug; ?>'
-                        data-redirect="<?php echo (isset($pages_per_metier[$term->slug])?get_permalink($pages_per_metier[$term->slug]):''); ?>"
-                        data-title="<?php echo (isset($pages_per_metier[$term->slug])?esc_attr($pages_per_metier[$term->slug]->post_title):''); ?>"
-                        <?php echo ($default_metier->slug==$term->slug)?'selected':''; ?>
-                    ><?php echo $term->name; ?> <?php printf(_n('(%s implantation)', '(%s implantations)', $count), $count); ?></option>
-                    <?php endforeach; ?>
-                </select>
+                <label for='map-filter'>Filtrer</label>
+                <div class='select'>
+                    <select id='map-filter' name='map-filter'>
+                        <option value='--all--' data-redirect="<?php echo (isset($pages_per_metier['--all--'])?get_permalink($pages_per_metier['--all--']):''); ?>" data-title="<?php echo (isset($pages_per_metier['--all--'])?esc_attr($pages_per_metier['--all--']->post_title):''); ?>" <?php echo (!$default_metier)?'selected':''; ?>
+                        ><?php _e('Sélectionnez une expertise', 'essor'); ?></option>
+                        <?php
+                            foreach($terms as $term) :
+                                $count = essor_count_posts_in_term('metier', $term, 'implantation');
+                        ?>
+                        <option value='<?php echo $term->slug; ?>' data-redirect="<?php echo (isset($pages_per_metier[$term->slug])?get_permalink($pages_per_metier[$term->slug]):''); ?>" data-title="<?php echo (isset($pages_per_metier[$term->slug])?esc_attr($pages_per_metier[$term->slug]->post_title):''); ?>" <?php echo ($default_metier->slug==$term->slug)?'selected':''; ?>
+                        ><?php echo $term->name; ?> <?php printf(_n('(%s implantation)', '(%s implantations)', $count), $count); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                    <svg class='icon'><use xlink:href='#icon-down'></use></svg>
+                </div>
                 <?php endif; ?>
             </form>
-
-            <div id='map' class='map'>
-                <div class='activeArea'></div>
-            </div>
-
         </div>
+
+        <div class='container-map'><div id='map' class='map'></div></div>
 
     <?php else : ?>
 

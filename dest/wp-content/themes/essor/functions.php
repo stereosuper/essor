@@ -365,7 +365,14 @@ function essor_post_type(){
 add_action( 'init', 'essor_post_type' );
 
 function essor_taxonomies(){
-    register_taxonomy( 'metier', array('reference', 'implantation'), array(
+    register_taxonomy( 'metier', array('reference'), array(
+        'label' => 'Métiers',
+        'singular_label' => 'Métier',
+        'hierarchical' => true,
+        'show_admin_column' => true
+    ) );
+
+    register_taxonomy( 'metier-implantation', array('implantation'), array(
         'label' => 'Métiers',
         'singular_label' => 'Métier',
         'hierarchical' => true,
@@ -408,24 +415,11 @@ function essor_acf_google_map_api( $api ){
 add_filter('acf/fields/google_map/api', 'essor_acf_google_map_api');
 
 function essor_get_map_json(){
-    $collection = array(
-        'id' => 'implantations',
-        'type' => 'symbol',
-        'source' => array(
-            'type' => 'geojson',
-            'data' => array(
-                'type' => 'FeatureCollection',
-                'features' => array(),
-            ),
-        ),
-        'layout' => array(
-            'icon-image' => 'essor-icon',
-        ),
-    );
+    $collection = array();
 
-    $collection = apply_filters('essor-get-map-features', $collection);
+   $collection = apply_filters('essor-get-map-features', $collection);
 
-    return $collection;
+   return $collection;
 }
 
 

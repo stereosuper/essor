@@ -2,6 +2,8 @@
 
 .footer{
     padding: 55px 0 40px;
+    position: relative;
+    z-index: 1;
     font-size: 1.3rem;
     background: $text url(../layoutImg/footer.png) no-repeat -50px -60px;
     color: $white;
