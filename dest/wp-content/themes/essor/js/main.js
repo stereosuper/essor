@@ -39677,6 +39677,8 @@ var mapboxgl = require('mapbox-gl');
 
 module.exports = function (slider) {
 
+    if (!$('#map').length) return;
+
     var map,
         icon,
         layers = [],
@@ -39840,6 +39842,9 @@ module.exports = function (slider) {
     if (!slider.length) return;
 
     var slides = slider.find('.slide');
+
+    if (slides.length < 2) return;
+
     var activeSlide = slider.find('.slide.on'),
         nonActiveSlides = slider.find('.slide.off');
     var sliderNav = slider.find('.slider-nav');

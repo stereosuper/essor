@@ -50,6 +50,18 @@
         margin: auto;
         background: $text;
     }
+    &.no-slide{
+        &:before{
+            content: none;
+        }
+        > li{
+            &.on{
+                .indicator{
+                    display: none;
+                }
+            }
+        }
+    }
     > li{
         width: 25%;
         padding: 0;

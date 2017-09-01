@@ -8,24 +8,24 @@ get_header(); ?>
     <?php if ( have_posts() ) : the_post(); ?>
     
         <?php $highlightedProjects = get_field('highlightedProjects');
-        $i = 0;
+        $countProjects = 0;
 
         if( $highlightedProjects ): ?>
             <div class='slider' id='slider'>
                 <?php foreach( $highlightedProjects as $post): ?>
                     <?php setup_postdata($post); ?>
-                    <div class='slide <?php if( $i === 0 ){ echo "on"; }else{ echo "off"; } ?>'>
+                    <div class='slide <?php if( $countProjects === 0 ){ echo "on"; }else{ echo "off"; } ?>'>
                         <?php if( function_exists('gacfai_get_field') && gacfai_get_field('img') ){ ?>
                             <a href='<?php the_permalink(); ?>'><?php echo gacfai_get_field('img', $post->ID, 'full', false, ''); ?></a>
                         <?php }else if( has_post_thumbnail() ){ ?>
                             <a href='<?php the_permalink(); ?>'><?php the_post_thumbnail('full'); ?></a>
                         <?php } ?>
                     </div>
-                <?php $i++; endforeach; ?>
+                <?php $countProjects++; endforeach; ?>
                 <?php wp_reset_postdata(); ?>
 
                 <div class='container'>
-                    <ul class='slider-nav'>
+                    <ul class='slider-nav <?php if( $countProjects < 2 ){ echo 'no-slide'; } ?>'>
                         <?php $i = 0; foreach( $highlightedProjects as $post): ?>
                             <?php setup_postdata($post); ?>
                             <li <?php if( $i === 0 ){ echo 'class="on"'; } ?>><a href='<?php the_permalink(); ?>' class='slider-btn'>
