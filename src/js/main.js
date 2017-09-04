@@ -102,16 +102,12 @@ $(function(){
 
         // Add a class to header when page is scrolled
         if( windowWidth > 768 ){
-            if( scrollTop > 100 ){
-                header.addClass('on');
-                blocTitle.addClass('offScroll');
-            }else{
-                header.removeClass('on');
-                blocTitle.removeClass('offScroll');
-            }
+            scrollTop > 100 ? header.addClass('on') : header.removeClass('on');
         }else if( header.hasClass('on') ){
             header.removeClass('on');
         }
+
+        scrollTop > 20 ? blocTitle.addClass('offScroll') : blocTitle.removeClass('offScroll');
     }, 60));
 
 });
