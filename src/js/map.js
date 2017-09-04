@@ -28,9 +28,6 @@ module.exports = function(slider){
 
         // Affiche les marqueurs sur la carte
         map.on('load', setMarkers);
-
-        // S'intéresse au select des filtres par métier
-        $('#map-filter').change(filterMap);
     }
 
 
@@ -107,7 +104,7 @@ module.exports = function(slider){
         }
 
         // Filtre une première fois la map
-        filterMap(false);
+        filterMap();
     }
 
 
@@ -137,19 +134,10 @@ module.exports = function(slider){
     }
 
 
-    var filterMap = function(reload) {
+    var filterMap = function() {
         // Récupère la sélection
         var $select = $('#map-filter');
-        var selectedValue = $select.val();
-        var selectedOption = $select.children().get($select.get(0).selectedIndex);
-
-        var redirect = selectedOption.dataset.redirect;
-        var title = selectedOption.dataset.title;
-
-        // Si on doit changer l'url
-        if (reload!==false && redirect) {
-            history.pushState({}, title, redirect);
-        }
+        var selectedValue = $select.find('.active').data('value');
 
         // Applique le filtre
         for (var idx in layers) {

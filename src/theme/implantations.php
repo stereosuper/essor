@@ -108,37 +108,6 @@ function essor_tpl_get_map_json( $features ){
 }
 add_filter('essor-get-map-features', 'essor_tpl_get_map_json', 10, 1);
 
-function essor_get_implantations_page_by_metier(){
-    $result = array();
-
-    // Récupère les pages ayant le template Implantations
-    // Cf. http://codex.wordpress.org/Class_Reference/WP_Query
-    $query_args = array(
-        // Type Parameters
-        'post_type' => 'page',
-        // Meta Parameters
-        'meta_key'        => '_wp_page_template',
-        'meta_value'      => 'implantations.php',
-        // Pagination Parameters
-        'posts_per_page' => -1,
-    );
-    $pages = get_posts($query_args);
-
-    // Crée un tableau associatif ayant pour clé les métiers et valeur les posts
-    if (is_array($pages)) {
-        foreach($pages as $page) {
-            $metier = essor_get_field('metier_associe', $page->ID);
-            if ($metier && !isset($result[$metier->slug])) {
-                $result[$metier->slug] = $page;
-            } else if (!isset($result['--all--'])) {
-                $result['--all--'] = $page;
-            }
-        }
-    }
-
-    return $result;
-}
-
 get_header();
 
 ?>
@@ -150,34 +119,24 @@ get_header();
         <div class='container-map-txt'>
             <h1><?php the_title(); ?></h1>
             <?php the_content(); ?>
-            <form action='<?php the_permalink(); ?>' method='POST'>
-                <?php
-                    $default_metier = essor_get_field('metier_associe');
-                    $pages_per_metier = essor_get_implantations_page_by_metier();
 
-                    $terms = get_terms(array(
-                            'taxonomy' => 'metier-implantation',
-                            'hide_empty' => true,
-                        ));
-                    if ($terms) :
-                ?>
-                <label for='map-filter'>Filtrer</label>
-                <div class='select'>
-                    <select id='map-filter' name='map-filter'>
-                        <option value='--all--' data-redirect="<?php echo (isset($pages_per_metier['--all--'])?get_permalink($pages_per_metier['--all--']):''); ?>" data-title="<?php echo (isset($pages_per_metier['--all--'])?esc_attr($pages_per_metier['--all--']->post_title):''); ?>" <?php echo (!$default_metier)?'selected':''; ?>
-                        ><?php _e('Sélectionnez une expertise', 'essor'); ?></option>
-                        <?php
-                            foreach($terms as $term) :
-                                $count = essor_count_posts_in_term('metier', $term, 'implantation');
-                        ?>
-                        <option value='<?php echo $term->slug; ?>' data-redirect="<?php echo (isset($pages_per_metier[$term->slug])?get_permalink($pages_per_metier[$term->slug]):''); ?>" data-title="<?php echo (isset($pages_per_metier[$term->slug])?esc_attr($pages_per_metier[$term->slug]->post_title):''); ?>" <?php echo ($default_metier->slug==$term->slug)?'selected':''; ?>
-                        ><?php echo $term->name; ?> <?php printf(_n('(%s implantation)', '(%s implantations)', $count), $count); ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                    <svg class='icon'><use xlink:href='#icon-down'></use></svg>
-                </div>
-                <?php endif; ?>
-            </form>
+            <span class='dropdown-title'></span>
+            <div class='dropdown'>
+                <button type='button' class='dropdown-title'><svg class='icon icon-down'><use xlink:href='#icon-down'></use></svg></button>
+                <?php
+                $allSectors = get_terms('metier-implantation');
+                if( $allSectors ){ ?>
+                    <ul id='map-filter'>
+                        <li <?php if( get_the_permalink() === get_field('mapLink', 'options') ){ echo "class='active'"; } ?> data-value='--all--'><a href='<?php the_field('mapLink', 'options'); ?>'>Sélectionnez une expertise</a></li>
+                        <?php foreach( $allSectors as $sector ){ ?>
+                            <?php
+                            $mapPageID = get_posts(array('post_type' => 'page', 'posts_per_page' => 1, 'meta_query' => array(array('key' => 'metier_associe', 'compare' => 'LIKE', 'value' => $sector->term_id))))[0]->ID;
+                            ?>
+                            <li <?php if( $mapPageID === $post->ID ){ echo "class='active'"; } ?> data-value='<?php echo $sector->slug; ?>'><a href='<?php echo get_the_permalink($mapPageID); ?>'><?php echo $sector->name; ?></a></li>
+                        <?php } ?>
+                    </ul>
+                <?php } ?>
+            </div>
         </div>
 
         <div class='container-map'><div id='map' class='map'></div></div>
