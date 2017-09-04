@@ -39669,7 +39669,7 @@ $(function () {
         scrollTop = $(document).scrollTop();
 
         // Add a class to header when page is scrolled
-        if (windowWidth > 768) {
+        if (windowWidth > 780) {
             scrollTop > 100 ? header.addClass('on') : header.removeClass('on');
         } else if (header.hasClass('on')) {
             header.removeClass('on');

@@ -26,8 +26,8 @@
 					$sectorID = '';
 					if( in_array($post->ID, $sectors) ){
 						$sectorID = $post->ID;
-					}else if( in_array(wp_get_post_parent_id( $post_ID ), $sectors) ){
-						$sectorID = wp_get_post_parent_id( $post_ID );
+					}else if( in_array(wp_get_post_parent_id( $post->ID ), $sectors) ){
+						$sectorID = wp_get_post_parent_id( $post->ID );
 					}
 				?>
 

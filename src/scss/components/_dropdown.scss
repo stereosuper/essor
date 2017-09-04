@@ -47,21 +47,19 @@
     }
     ul{
         display: flex;
+        padding: 0;
+        border: 1px solid $white;
+        border-top: 0;
         flex-direction: column;
         position: absolute;
         top: 0;
         left: 0;
         right: 0;
         margin: 0;
-        padding: 0;
-        border-right: 1px solid $white;
-        border-bottom: 1px solid $white;
-        border-left: 1px solid $white;
         z-index: 2;
         pointer-events: none;
         &:before{
             content: '';
-            display: block;
             width: 100%;
             position: absolute;
             top: 44px;
@@ -69,7 +67,7 @@
             left: 0;
             background: $primary;
         }
-        >li{
+        > li{
             display: none;
             padding: 0;
             order: 2;
@@ -91,11 +89,11 @@
     a{
         display: block;
         padding: 13px 40px 13px 20px;
-        color: $white;
         font-family: $poppinsLight;
         font-size: 1.5rem;
         line-height: 1.1;
         text-decoration: none;
+        color: $white;
     }
 }
 
@@ -122,10 +120,7 @@
     }
     .dropdown{
         width: 32%;
-        margin: 10px 8% 10px $gutter;
-        &:last-child{
-            margin-right: 0;
-        }
+        margin: 10px 0 10px $gutter;
     }
 }
 
@@ -143,7 +138,6 @@
         position: static;
         .dropdowns{
             width: 100%;
-            flex-wrap: wrap;
         }
         .dropdown{
             width: 100%;
@@ -157,6 +151,14 @@
 
     .wrapper-page{
         padding: 0;
+    }
+}
+
+@media(max-width: $tablet){
+    .wrapper-dropdowns{
+        .dropdowns{
+            flex-wrap: wrap;
+        }
     }
 }
 

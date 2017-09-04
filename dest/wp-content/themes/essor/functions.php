@@ -1,6 +1,6 @@
 <?php
 
-define( 'ESSOR_VERSION', 1.3 );
+define( 'ESSOR_VERSION', 1.4 );
 
 
 /*-----------------------------------------------------------------------------------*/
@@ -307,6 +307,16 @@ function essor_custom_post_nav_class( $classes, $item, $args ){
         }
     }
 
+    if( $args->menu->slug == 'carriere' ){
+        if( is_page_template('offres.php') ){
+            if( $item->object_id == url_to_postid( get_field('jobLink', 'options') ) ){
+                $classes[] = 'current_page_parent';
+            }else{
+                $classes = array_diff( $classes, array( 'current_page_parent' ) );
+            }
+        }
+    }
+
     if( is_page_template('about.php') ){
         if( $item->object_id == url_to_postid( get_field('aboutLink', 'options') ) ){
             $classes[] = 'current_page_parent';
@@ -396,6 +406,13 @@ function essor_taxonomies(){
     register_taxonomy( 'lieu', 'offre', array(
         'label' => 'Lieux',
         'singular_label' => 'Lieu',
+        'hierarchical' => true,
+        'show_admin_column' => true
+    ) );
+
+    register_taxonomy( 'metier-offre', 'offre', array(
+        'label' => 'Métiers',
+        'singular_label' => 'Métier',
         'hierarchical' => true,
         'show_admin_column' => true
     ) );
@@ -497,6 +514,9 @@ function essor_scripts(){
     }
 
     // if post type is offre
+    if( get_field('sector') && $args ){
+        array_push($args['tax_query'], array('taxonomy' => 'metier-offre', 'field' => 'slug', 'terms' => get_term(get_field('sector'))->slug));
+    }
     $offerContractType = isset( $_GET['contrat'] ) ? $_GET['contrat'] : '';
     if( $offerContractType && $args ){
         array_push($args['tax_query'], array('taxonomy' => 'contrat', 'field' => 'slug', 'terms' => $offerContractType));
