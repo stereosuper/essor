@@ -8,7 +8,7 @@ module.exports = function(slider){
 
     var map, icon, layers = [],
         initialCenter = [2.5377, 46.718],   // Centre de la France (ça dépend) https://fr.wikipedia.org/wiki/Centre_de_la_France
-        initialZoom = 3;
+        initialZoom = 5;
 
 
     var init = function(){
@@ -21,7 +21,12 @@ module.exports = function(slider){
             center: initialCenter,
             zoom: initialZoom
         });
+
+        // Disable zoom on scroll
         map.scrollZoom.disable();
+
+        // Add zoom and rotation controls to the map.
+        map.addControl(new mapboxgl.NavigationControl());
 
         // Load l'icône pour les marqueurs
         loadMarkerIcon();

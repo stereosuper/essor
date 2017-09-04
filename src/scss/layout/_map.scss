@@ -84,6 +84,35 @@
     }
 }
 
+.mapboxgl-ctrl-bottom-left, .mapboxgl-ctrl-compass{
+    display: none !important;
+}
+.mapboxgl-ctrl-top-right{
+    bottom: 20px;
+    left: 20px;
+    top: auto;
+    right: auto;
+}
+.mapboxgl-ctrl-group{
+    box-shadow: none;
+    border-radius: 0;
+    background: none;
+    > button{
+        border: 0;
+        margin: 5px 0 0;
+        &:hover, &:focus{
+            opacity: 0.7;
+            background-color: $primary;
+        }
+    }
+}
+.mapboxgl-ctrl-icon.mapboxgl-ctrl-zoom-in{
+    background: $primary url(../layoutImg/plus.png) 50% 50% no-repeat;
+}
+.mapboxgl-ctrl-icon.mapboxgl-ctrl-zoom-out{
+    background: $primary url(../layoutImg/minus.png) 50% 50% no-repeat;
+}
+
 
 @media (max-width: $desktopSmall){
     .page-template-implantations{
