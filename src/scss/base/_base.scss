@@ -19,7 +19,7 @@ html{
 
 body{
     font-family: $poppinsLight;
-    font-size: 1.6em;
+    font-size: 1.5em;
     line-height: 1.5;
     color: $text;
     // -webkit-font-smoothing: antialiased;
@@ -81,7 +81,7 @@ p, .p{
 }
 .p{
     font-family: $poppinsLight;
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     line-height: 1.5;
     letter-spacing: 0;
     color: $text;
@@ -133,7 +133,7 @@ blockquote{
         display: block;
         margin: 10px 0 0;
         font-family: $poppinsLight;
-        font-size: 1.6rem;
+        font-size: 1.5rem;
         text-indent: 0;
         > strong{
             font-size: 1.8rem;

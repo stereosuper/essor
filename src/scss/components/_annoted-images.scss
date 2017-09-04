@@ -67,7 +67,7 @@
 
 .bloc-title-img{
     width: 100%;
-    padding: 0 $gutter*2 45px $gutter;
+    padding: 0 $gutter*2 $gutter $gutter;
     position: absolute;
     top: 180px;
     left: 0;
@@ -89,7 +89,7 @@
         background: rgba($white, 0.9);
     }
     > h1, > .h1{
-        padding: 50px 0 0;
+        padding: $gutter 0 0;
         margin: 0;
         &:before{
             bottom: calc(100% - 1.83em);
