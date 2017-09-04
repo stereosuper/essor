@@ -29,6 +29,8 @@ $(function(){
     var dropdowns = $('.dropdown');
     var dropdownsSticky = $('#dropdownsSticky');
     var header = $('#header');
+    var blocTitle = $('#blocTitle');
+    var annotatedImages = $('.annotated-image');
     var windowWidth = window.outerWidth, windowHeight = $(window).height();
     var scrollTop;
 
@@ -53,7 +55,7 @@ $(function(){
         setSlider( $('#slider') );
 
         // Annoted images
-        $('.annotated-image').annotatedImage();
+        annotatedImages.annotatedImage();
 
         // Load more posts
         loadMorePosts(wp, $('#ajax-content'));
@@ -81,6 +83,12 @@ $(function(){
         $(this).toggleClass('on');
     });
 
+    // Annotated images bloc title
+    annotatedImages.on('mouseleave', function(){
+        blocTitle.removeClass('off');
+    });
+
+
     // Since script is loaded asynchronously, load event isn't always fired !!!
     document.readyState === 'complete' ? loadHandler() : $(window).on('load', loadHandler);
 
@@ -94,7 +102,13 @@ $(function(){
 
         // Add a class to header when page is scrolled
         if( windowWidth > 768 ){
-            scrollTop > 100 ? header.addClass('on') : header.removeClass('on');
+            if( scrollTop > 100 ){
+                header.addClass('on');
+                blocTitle.addClass('offScroll');
+            }else{
+                header.removeClass('on');
+                blocTitle.removeClass('offScroll');
+            }
         }else if( header.hasClass('on') ){
             header.removeClass('on');
         }

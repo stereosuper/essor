@@ -163,17 +163,13 @@ module.exports = function() {
         displayRelatedTextarea($noteHtml);
 
         $noteHtml.on('mouseenter', function(){
-            $(this).find('.text').stop().fadeIn(animTimeFade);
+            $(this).css('z-index', '1').find('.text').stop().fadeIn(animTimeFade);
 
             if($('#blocTitle').length){
                 $('#blocTitle').addClass('off');
             }
         }).on('mouseleave', function(){
-            $(this).find('.text').stop().fadeOut(animTimeFade);
-
-            if($('#blocTitle').length){
-                $('#blocTitle').removeClass('off');
-            }
+            $(this).css('z-index', 'auto').find('.text').stop().fadeOut(animTimeFade);
         });
     };
 

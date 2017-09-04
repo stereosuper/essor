@@ -46,7 +46,7 @@
     }
     .text-wrapper{
         position: absolute;
-        left: -35px;
+        left: -170px;
         bottom: 30px;
         font-size: 1.3rem;
         line-height: 1.7;
@@ -75,7 +75,7 @@
     margin: auto;
     z-index: 1;
     transition: opacity $transition;
-    &.off{
+    &.off, &.offScroll{
         opacity: 0;
     }
     &:after{
@@ -142,7 +142,7 @@
 @media(max-width: $desktop){
     .bloc-title-img{
         position: static;
-        &.off{
+        &.off, &.offScroll{
             opacity: 1;
         }
     }
@@ -152,7 +152,7 @@
     }
 }
 
-@media(max-width: $tablet){
+@media(max-width: $desktopSmall){
     .annotated-image{
         .note{
             display: none;
