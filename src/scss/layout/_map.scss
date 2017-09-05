@@ -133,6 +133,8 @@
     .container-map-txt{
         width: 100%;
         min-width: 0;
+        padding-left: $gutter;
+        padding-right: $gutter;
         float: none;
         margin: 0;
         > .dropdown-title, > .dropdown{
