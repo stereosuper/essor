@@ -22,7 +22,7 @@ button{
 }
 
 input, textarea, select, button{
-  	transition: $transition;
+  	transition: border-color $transition;
   	&:focus{
       	outline: 0;
   	}
