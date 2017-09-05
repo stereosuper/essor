@@ -150,7 +150,9 @@
             width: 100%;
             margin: 0;
             &.over-img{
-                margin: -432px 0 253px;
+                position: absolute;
+                top: 77px;
+                margin: 0;
             }
             &.contact-aside{
                 margin: 50px 0 0;
@@ -212,6 +214,15 @@
 
     .content-sidebar{
         padding-top: 85px;
+    }
+
+    .page-template-offres{
+        .wrapper-sticky{
+            position: static;
+        }
+        .content-sidebar{
+            margin: -77px 0 0;
+        }
     }
 }
 
