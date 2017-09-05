@@ -22,10 +22,10 @@
         &:hover, &:focus{
             opacity: 1;
             .wrapper-img{
-                transform: translate3d(0, 0, 0) scaleY(0.9);
+                transform: translate3d(0, 0, 1px) scaleY(0.9);
             }
             .img{
-                transform: translate3d(0, 0, 0) scaleX(1.15) scaleY(1.26);
+                transform: translate3d(0, 0, 1px) scaleX(1.15) scaleY(1.26);
             }
             h3{
                 &:after{
