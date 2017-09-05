@@ -22,12 +22,18 @@
 				<div class='container'>
 
 				<?php
+					// category pages
+					$queried_object = get_queried_object(); 
+					$taxonomy = $queried_object->taxonomy;
+					
+					$currentID = $taxonomy === 'category' ? get_field('sector', $queried_object) : $post->ID;
+
 					$sectors = get_field('sectorPages', 'options');
 					$sectorID = '';
-					if( in_array($post->ID, $sectors) ){
-						$sectorID = $post->ID;
-					}else if( in_array(wp_get_post_parent_id( $post->ID ), $sectors) ){
-						$sectorID = wp_get_post_parent_id( $post->ID );
+					if( in_array($currentID, $sectors) ){
+						$sectorID = $currentID;
+					}else if( in_array(wp_get_post_parent_id( $currentID ), $sectors) ){
+						$sectorID = wp_get_post_parent_id( $currentID );
 					}
 				?>
 
