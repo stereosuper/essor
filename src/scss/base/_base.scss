@@ -349,12 +349,12 @@ a{
         padding-right: $gutter;
     }
     aside{
-        align-self: flex-start;
-        margin-top: 116px;
         width: 25%;
         min-width: 300px;
-        flex-shrink: 0;
         padding: 50px $gutter 35px;
+        margin: 116px 0 0;
+        align-self: flex-start;
+        flex-shrink: 0;
         color: $white;
         background: $primary;
         .title-aside{
@@ -365,12 +365,11 @@ a{
             font-size: 2rem;
             &:before, &:after{
                 content: '';
-                display: block;
                 width: 20px;
                 height: 2px;
                 position: absolute;
                 top: 50%;
-                margin-top: -1px;
+                margin: -1px 0 0;
             }
             &:before{
                 left: -50px;
@@ -382,8 +381,8 @@ a{
             }
         }
         .dropdown{
-            margin-top: 28px;
             width: 100%;
+            margin-top: 28px;
         }
         .menu-social{
             margin: 46px 0 0;
@@ -483,6 +482,22 @@ a{
             width: 100%;
             max-width: 300px;
             min-width: 0;
+        }
+    }
+}
+
+@media (max-width: $phoneSmall){
+    .wrapper-title{
+        aside{
+            width: 100%;
+            max-width: 300px;
+            min-width: 0;
+        }
+        .menu-social{
+            a{
+                width: 40px;
+                height: 40px;
+            }
         }
     }
 }

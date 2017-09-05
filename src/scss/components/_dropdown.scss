@@ -169,3 +169,22 @@
         }
     }
 }
+
+@media (max-width: $phoneSmall){
+    .dropdown{
+        a{
+            padding: 16px 35px 13px 10px;
+            font-size: 1.4rem;
+        }
+        ul{
+            > li{
+                &.active{
+                    a{
+                        padding-top: 16px;
+                        font-size: 1.4rem;
+                    }
+                }
+            }
+        }
+    }
+}
