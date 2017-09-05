@@ -1,6 +1,7 @@
 .page-template-implantations{
     .main{
-        min-height: 95vh;
+        height: 95vh;
+        min-height: 650px;
         padding-bottom: 0;
         position: relative;
         overflow: hidden;
@@ -117,6 +118,7 @@
 @media (max-width: $desktopSmall){
     .page-template-implantations{
         .main{
+            height: auto;
             min-height: 0;
         }
     }
