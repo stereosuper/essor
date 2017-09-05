@@ -166,7 +166,9 @@
     .bloc-title-img{
         top: 155px;
     }
+}
 
+@media(max-height: 820px){
     .annotated-image{
         top: 100px;
     }
