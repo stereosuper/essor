@@ -120,7 +120,7 @@ get_header();
             <h1><?php the_title(); ?></h1>
             <?php the_content(); ?>
 
-            <span class='dropdown-title'></span>
+            <span class='dropdown-title'>Filtrer</span>
             <div class='dropdown'>
                 <button type='button' class='dropdown-title'><svg class='icon icon-down'><use xlink:href='#icon-down'></use></svg></button>
                 <?php

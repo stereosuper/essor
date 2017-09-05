@@ -39754,7 +39754,8 @@ module.exports = function (slider) {
             "source": "implantations",
             "layout": {
                 "icon-image": "essor-icon",
-                "icon-allow-overlap": true
+                "icon-allow-overlap": true,
+                'icon-offset': [-15, -40]
             },
             "visibility": "visible"
         });
