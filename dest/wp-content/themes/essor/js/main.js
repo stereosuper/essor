@@ -39413,8 +39413,11 @@ module.exports = function (dropdowns) {
         e.preventDefault();
         e.stopPropagation();
         $(this).parent().toggleClass('isOpen').siblings().find('.dropdown-title').removeClass('isOpen');
+    }).on('click', '.active', function (e) {
+        e.preventDefault();
     });
-    $('html').click(function () {
+
+    $('html').on('click', function () {
         dropdowns.removeClass('isOpen');
     });
 };
