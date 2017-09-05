@@ -35,9 +35,6 @@ $(function(){
     var scrollTop;
 
 
-
-    // isMobile.any ? body.addClass('is-mobile') : body.addClass('is-desktop');
-
     function resizeHandler(){
         windowWidth = window.outerWidth;
         windowHeight = $(window).height();
@@ -60,6 +57,9 @@ $(function(){
         // Load more posts
         loadMorePosts(wp, $('#ajax-content'));
     }
+
+
+    if(!(window.ActiveXObject) && "ActiveXObject" in window) body.addClass('ie11');
 
     // Open and close header searchform
     animSearchform( $('#formSearch') );
@@ -95,7 +95,6 @@ $(function(){
     $(window).on('resize', throttle(function(){
         requestAnimFrame(resizeHandler);
     }, 60));
-
 
     $(document).on('scroll', throttle(function(){
         scrollTop = $(document).scrollTop();
