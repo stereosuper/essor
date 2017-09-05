@@ -20,6 +20,7 @@
     a{
         text-decoration: none;
         &:hover, &:focus{
+            opacity: 1;
             .wrapper-img{
                 transform: translate3d(0, 0, 0) scaleY(0.9);
             }
