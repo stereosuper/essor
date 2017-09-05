@@ -39631,7 +39631,6 @@ $(function () {
         loadMorePosts(wp, $('#ajax-content'));
     }
 
-    console.log(!window.ActiveXObject && "ActiveXObject" in window);
     if (!window.ActiveXObject && "ActiveXObject" in window) body.addClass('ie11');
 
     // Open and close header searchform
