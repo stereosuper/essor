@@ -40,7 +40,7 @@
 					<div class='header-main-wrapper'>
 						<div class='header-main'>
 							<a href='<?php echo home_url('/'); ?>' title='<?php bloginfo( 'name' ); ?>' rel='home' class='logo <?php if( $sectorID ){ echo "logo-sector"; } ?>'>
-								<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 154.3 41.4'>
+								<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 154.3 41.4' height='40'>
 									<g class='logo-out'>
 										<path d='M16.3 32C5.9 32 2.4 24.1 1.6 21.8h7.6c.6.9 2.8 3.8 7.3 3.9 4.5 0 7.4-4.3 8.3-5.7l6 2.4c-1.1 2-5.4 9.6-14.5 9.6z' class='logo-primary-fill'/>
 										<path d='M24.9 20.6l5.1 2.1c-1.3 2.4-5.4 8.8-13.7 8.8-9.4 0-12.9-6.4-14-9.2h6.6c.8 1.2 3.2 3.8 7.6 3.9 4.3 0 7.3-3.9 8.4-5.6m-.4-1.2s-3.1 5.8-8 5.8c-5 0-7-3.9-7-3.9H.9s2.8 11.2 15.4 11.2c10.8 0 15.1-10.3 15.1-10.3l-6.9-2.8z' class='logo-primary'/>
