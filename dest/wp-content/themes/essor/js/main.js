@@ -39755,7 +39755,7 @@ module.exports = function (slider) {
             "layout": {
                 "icon-image": "essor-icon",
                 "icon-allow-overlap": true,
-                'icon-offset': [-15, -40]
+                'icon-offset': [0, -20]
             },
             "visibility": "visible"
         });
