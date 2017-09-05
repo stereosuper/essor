@@ -282,7 +282,7 @@ add_filter( 'walker_nav_menu_start_el', 'essort_menu_display_desc', 10, 4 );
 // Custom posts parents marked as current + filter css class in wp nav menu
 function essor_custom_post_nav_class( $classes, $item, $args ){
 	if( is_singular( 'reference' ) ){
-        if( $item->object_id == url_to_postid( get_field('refsLink', 'options') ) || $item->object_id == get_option( 'page_on_front' ) ){
+        if( $item->object_id == url_to_postid( get_field('refsLink', 'options') ) ){
             $classes[] = 'current_page_parent';
         }else{
             $classes = array_diff( $classes, array( 'current_page_parent' ) );
@@ -290,7 +290,7 @@ function essor_custom_post_nav_class( $classes, $item, $args ){
     }
 
     if( is_singular( 'offre' ) ){
-        if( $item->object_id == url_to_postid( get_field('jobLink', 'options') ) || $item->object_id == get_option( 'page_on_front' ) ){
+        if( $item->object_id == url_to_postid( get_field('jobLink', 'options') ) ){
             $classes[] = 'current_page_parent';
         }else{
             $classes = array_diff( $classes, array( 'current_page_parent' ) );
@@ -325,7 +325,7 @@ function essor_custom_post_nav_class( $classes, $item, $args ){
         }
     }
 
-    if( is_page_template('contact.php') || is_page_template('application.php') || is_page_template('testimonies.php') ){
+    if( is_single() || is_page_template('contact.php') || is_page_template('application.php') || is_page_template('testimonies.php') ){
         if( $item->object_id == get_option( 'page_on_front' ) ){
             $classes[] = 'current-page-ancestor';
         }else{

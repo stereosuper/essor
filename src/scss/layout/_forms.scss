@@ -19,9 +19,13 @@
 button{
     border: 0;
     color: inherit;
+    transition: $transition;
+    &:focus{
+        outline: 0;
+    }
 }
 
-input, textarea, select, button{
+input, textarea, select{
   	transition: border-color $transition;
   	&:focus{
       	outline: 0;
