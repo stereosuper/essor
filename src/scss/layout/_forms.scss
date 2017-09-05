@@ -234,3 +234,11 @@ label{
         }
     }
 }
+
+@media (max-width: $phoneSmall){
+    .field{
+        > i{
+            width: 100%;
+        }
+    }
+}
