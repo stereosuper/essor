@@ -4,9 +4,9 @@ var $ = require('jquery');
 var ScrollReveal = require('scrollreveal');
 
 // require('gsap');
-// require('gsap/CSSPlugin');
+require('gsap/CSSPlugin');
 // require('gsap/ScrollToPlugin');
-// var TweenLite = require('gsap/TweenLite');
+var TweenLite = require('gsap/TweenLite');
 
 
 $(function(){
@@ -102,9 +102,16 @@ $(function(){
 
         // Add a class to header when page is scrolled
         if( windowWidth > 780 ){
-            scrollTop > 100 ? header.addClass('on') : header.removeClass('on');
+            if( scrollTop > 100 ){
+                header.addClass('on');
+                TweenLite.to(header.find('.logo-in'), 0.3, {x: '-85px'});
+             }else{
+                 header.removeClass('on');
+                 TweenLite.to(header.find('.logo-in'), 0.3, {x: 0});
+             }
         }else if( header.hasClass('on') ){
             header.removeClass('on');
+            TweenLite.set(header.find('.logo-in'), {x: 0});
         }
 
         scrollTop > 20 ? blocTitle.addClass('offScroll') : blocTitle.removeClass('offScroll');

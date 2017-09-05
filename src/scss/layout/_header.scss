@@ -22,9 +22,6 @@
         .logo-out{
             opacity: 0;
         }
-        .logo-in{
-            transform: translate3d(-85px, 0, 0);
-        }
         .logo{
             transform: scale(0.8) translate3d(-20px, 0, 0);
             &.logo-sector{
@@ -323,7 +320,7 @@
 .logo-grey{
     fill: $text;
 }
-.logo-in, .logo-out{
+.logo-out{
     transition: $transition;
 }
 
