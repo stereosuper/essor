@@ -192,6 +192,11 @@
             &:before, &:after{
                 display: none;
             }
+            &.current-menu-item, &.current_page_parent{
+                > a{
+                    text-decoration: underline;
+                }
+            }
         }
         a{
             &:before{
