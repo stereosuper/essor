@@ -227,3 +227,12 @@
         padding-top: 0;
     }
 }
+
+@media (max-width: $phoneSmall){
+    .wrapper-content-sidebar{
+        > aside{
+            max-width: 300px;
+            min-width: 0;
+        }
+    }
+}
