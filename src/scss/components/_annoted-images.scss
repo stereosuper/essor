@@ -168,10 +168,12 @@
     }
 }
 
-@media(min-width: 1500px){
+@media(min-width: $desktop){
     @media(max-height: 820px){
-        .annotated-image{
-            top: 100px;
+        .home{
+            .annotated-image{
+                top: 100px;
+            }
         }
     }
 }
