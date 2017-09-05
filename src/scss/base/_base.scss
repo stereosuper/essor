@@ -487,6 +487,13 @@ a{
 }
 
 @media (max-width: $phoneSmall){
+    h1, .h1{
+        font-size: 3.25rem;
+        &:before{
+            height: 110px;
+        }
+    }
+
     .wrapper-title{
         aside{
             width: 100%;
