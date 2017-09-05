@@ -6,7 +6,7 @@ module.exports = function(dropdowns){
     dropdowns.on('click', '.dropdown-title', function(e){
         e.preventDefault();
         e.stopPropagation();
-        $(this).parent().toggleClass('isOpen').siblings().find('.dropdown-title').removeClass('isOpen');
+        $(this).parent().toggleClass('isOpen').siblings().removeClass('isOpen');
     }).on('click', '.active', function(e){
         e.preventDefault();
     });
