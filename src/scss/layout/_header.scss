@@ -438,6 +438,8 @@
 
 
 @media (min-width: 1px){
+    // to fix a ie11 bug where transition are lauched on page load https://stackoverflow.com/questions/25673707/ie11-triggers-css-transition-on-page-load-when-non-applied-media-query-exists
+    
     @media (max-width: $desktop){
         .btn-menu-main, .header-form-search{
             display: none;
