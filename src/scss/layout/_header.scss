@@ -39,21 +39,21 @@
                 margin: 0 0 0 -135px;
             }
         }
-        .menu-secondary{
-            a{
-                &:after{
-                    bottom: -2px;      
-                }
-            }
-            .current-menu-item, .current_page_parent, .current-page-ancestor{
-                > a{
-                    &:after{
-                        bottom: -17px;
-                        transform: rotate(90deg) translate3d(-15px, 0, 0); 
-                    }
-                }
-            }
-        }
+        // .menu-secondary{
+        //     a{
+        //         &:after{
+        //             bottom: -2px;      
+        //         }
+        //     }
+        //     .current-menu-item, .current_page_parent, .current-page-ancestor{
+        //         > a{
+        //             &:after{
+        //                 bottom: -17px;
+        //                 transform: rotate(90deg) translate3d(-15px, 0, 0); 
+        //             }
+        //         }
+        //     }
+        // }
         .header-hover{
             bottom: 0;
         }
