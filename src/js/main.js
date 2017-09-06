@@ -3,10 +3,8 @@
 var $ = require('jquery');
 var ScrollReveal = require('scrollreveal');
 
-// require('gsap');
-require('gsap/CSSPlugin');
-// require('gsap/ScrollToPlugin');
-var TweenLite = require('gsap/TweenLite');
+var throttle = require('./throttle.js');
+window.requestAnimFrame = require('./requestAnimFrame.js');
 
 
 $(function(){
@@ -14,6 +12,7 @@ $(function(){
     window.requestAnimFrame = require('./requestAnimFrame.js');
     var throttle = require('./throttle.js');
 
+    var animHeader = require('./animHeader.js');
     var animSearchform = require('./animSearchform.js');
     var animResponsiveHeader = require('./animResponsiveHeader.js');
     var customDropdown = require('./dropdown.js');
@@ -31,14 +30,9 @@ $(function(){
     var header = $('#header');
     var blocTitle = $('#blocTitle');
     var annotatedImages = $('.annotated-image');
-    var windowWidth = window.outerWidth, windowHeight = $(window).height();
+    
     var scrollTop;
 
-
-    function resizeHandler(){
-        windowWidth = window.outerWidth;
-        windowHeight = $(window).height();
-    }
 
     function loadHandler(){
         // Sticky
@@ -61,6 +55,9 @@ $(function(){
     
     if(!(window.ActiveXObject) && "ActiveXObject" in window) body.addClass('ie11');
 
+    // Anim header
+    animHeader(header);
+
     // Open and close header searchform
     animSearchform( $('#formSearch') );
 
@@ -78,11 +75,6 @@ $(function(){
     // Charge la map
     implantations();
 
-    // Header menu main
-    header.on('click', '.btn-menu-main', function(){
-        $(this).toggleClass('on');
-    });
-
     // Annotated images bloc title
     annotatedImages.on('mouseleave', function(){
         blocTitle.removeClass('off');
@@ -92,26 +84,9 @@ $(function(){
     // Since script is loaded asynchronously, load event isn't always fired !!!
     document.readyState === 'complete' ? loadHandler() : $(window).on('load', loadHandler);
 
-    $(window).on('resize', throttle(function(){
-        requestAnimFrame(resizeHandler);
-    }, 60));
 
     $(document).on('scroll', throttle(function(){
         scrollTop = $(document).scrollTop();
-
-        // Add a class to header when page is scrolled
-        if( windowWidth > 780 ){
-            if( scrollTop > 100 ){
-                header.addClass('on');
-                TweenLite.to(header.find('.logo-in'), 0.3, {x: '-85px'});
-             }else{
-                 header.removeClass('on');
-                 TweenLite.to(header.find('.logo-in'), 0.3, {x: 0});
-             }
-        }else if( header.hasClass('on') ){
-            header.removeClass('on');
-            TweenLite.set(header.find('.logo-in'), {x: 0});
-        }
 
         scrollTop > 20 ? blocTitle.addClass('offScroll') : blocTitle.removeClass('offScroll');
     }, 60));

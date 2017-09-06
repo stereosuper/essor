@@ -93,7 +93,11 @@
 							</div>
 
 							<div class='menu-secondary-wrapper' id='secondMenu'>
-								<?php wp_nav_menu( array( 'theme_location' => 'primary', 'container' => false, 'menu_class' => 'menu-secondary js-form-off', 'sub_menu' => true, 'menu_id' => 'menuSecondary' ) ); ?>
+								<div class='menu-secondary js-form-off'>
+									<?php wp_nav_menu( array( 'theme_location' => 'primary', 'container' => false, 'menu_class' => 'menu', 'sub_menu' => true, 'menu_id' => 'menuSecondary' ) ); ?>
+
+									<div id='hover' class='header-hover'></div>
+								</div>
 
 								<?php get_search_form(true); ?>
 

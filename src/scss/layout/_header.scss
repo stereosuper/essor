@@ -54,6 +54,9 @@
                 }
             }
         }
+        .header-hover{
+            bottom: 0;
+        }
     }
     > .container{
         display: flex;
@@ -223,65 +226,70 @@
 
 .menu-secondary-wrapper{
     display: flex;
+    position: relative;
     align-items: center;
     justify-content: space-between;
     flex: 1;
 }
 
 .menu-secondary{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    position: relative;
     margin: 0 6.8% 0 auto;
     transition: 0.1s opacity $transition;
     &.off{
         opacity: 0;
         transition-delay: 0s;
     }
+    > .menu{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 0;
+    }
     .current-menu-item, .current_page_parent, .current-page-ancestor{
         > a{
             color: $primary;
-            &:after{
-                width: 42px;
-                opacity: 1;
-                transform: rotate(90deg);
-            }
-            &:hover, &:focus{
-                &:after{
-                    transform: rotate(90deg);
-                }
-            }
+            // &:after{
+            //     width: 42px;
+            //     opacity: 1;
+            //     transform: rotate(90deg);
+            // }
+            // &:hover, &:focus{
+            //     &:after{
+            //         transform: rotate(90deg);
+            //     }
+            // }
         }
     }
     a{
         display: block;
         padding: 23px 22px;
         color: $text;
-        &:after{
-            content: '';
-            position: absolute;
-            height: 2px;
-            left: 22px;
-            right: 22px;
-            bottom: -17px;
-            margin: auto;
-            background: $primary;
-            opacity: 0;
-            transition: transform $transition, opacity $transition;            
-        }
-        &:hover, &:focus{
-            &:after{
-                opacity: 1;
-                transform: translate3d(0, -2px, 0);
-            }
-        }
+        // &:after{
+        //     content: '';
+        //     position: absolute;
+        //     height: 2px;
+        //     left: 22px;
+        //     right: 22px;
+        //     bottom: -17px;
+        //     margin: auto;
+        //     background: $primary;
+        //     opacity: 0;
+        //     transition: transform $transition, opacity $transition;            
+        // }
+        // &:hover, &:focus{
+        //     &:after{
+        //         opacity: 1;
+        //         transform: translate3d(0, -2px, 0);
+        //     }
+        // }
         &:focus{
             filter: none;
-            &:after{
-                width: 42px;
-                opacity: 1;
-                transform: rotate(90deg);
-            }
+            // &:after{
+            //     width: 42px;
+            //     opacity: 1;
+            //     transform: rotate(90deg);
+            // }
         }
     }
 }
@@ -436,10 +444,22 @@
     }
 }
 
+.header-hover{
+    width: 80px;
+    height: 2px;
+    position: absolute;
+    left: 0;
+    bottom: -15px;
+    background: $primary;
+    opacity: 0;
+    transform: translate3d(22px, 0, 0);
+    transition: bottom $transition;
+}
+
 
 @media (min-width: 1px){
-    // to fix a ie11 bug where transition are lauched on page load https://stackoverflow.com/questions/25673707/ie11-triggers-css-transition-on-page-load-when-non-applied-media-query-exists
-    
+    // to fix a ie11 bug where transitions are lauched on page load https://stackoverflow.com/questions/25673707/ie11-triggers-css-transition-on-page-load-when-non-applied-media-query-exists
+
     @media (max-width: $desktop){
         .btn-menu-main, .header-form-search{
             display: none;
@@ -591,8 +611,10 @@
         }
 
         .menu-secondary{
-            display: block;
             margin: 0;
+            > .menu{
+                display: block;
+            }
             li{
                 margin: 0 0 30px;
             }
@@ -643,6 +665,10 @@
 
         .burger, .menu-nav{
             display: block;
+        }
+
+        .header-hover{
+            display: none;
         }
     }
 
