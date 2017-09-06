@@ -38,7 +38,7 @@ module.exports = function(slider){
         activeSlide = slider.find('.slide.on');
         TweenLite.to(activeSlide, 0.3, {opacity: 1});
 
-        slider.css('height', activeSlide.height());
+        // slider.css('height', activeSlide.height());
 
         button.addClass('on').siblings().removeClass('on');
 
