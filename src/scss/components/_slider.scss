@@ -23,7 +23,6 @@
         margin: 0;
     }
     a{
-        display: block;
         width: 100%;
         text-decoration: none;
         &:hover, &:focus{
@@ -105,7 +104,7 @@
         display: none;
         height: 1px;
         position: absolute;
-        top: 6px;
+        top: 11px;
         left: 0;
         right: -2px;
         z-index: 1;
@@ -114,18 +113,21 @@
     }
 }
 .slider-btn{
-    padding: 25px $gutter;
+    display: flex;
+    align-items: center;
+    height: 105px;
+    padding: 20px $gutter;
     overflow: hidden;
     background: $text;
     color: $white;
     transform-origin: 0 50%;
     transform: translate3d(0, 0, 0);
     transition: transform 0s, background $transition;
-    > span{
+    span{
         display: block;
         transform-origin: 0 60%;
     }
-    > b{
+    b{
         font-family: $poppins;
         font-size: 2rem;
         line-height: 1;
@@ -152,6 +154,7 @@
         display: none;
     }
     > a{
+        display: block;
         height: 100%;
     }
     .annotated-image-wrapper{
@@ -202,7 +205,7 @@
             padding: 0;
             align-items: center;
             justify-content: center;
-            > span, b{
+            span, b{
                 display: none;
             }
         }
