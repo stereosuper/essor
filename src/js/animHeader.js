@@ -10,7 +10,9 @@ window.requestAnimFrame = require('./requestAnimFrame.js');
 module.exports = function(header){
 
     var hover = $('#hover'), widthHover = hover.width();
-    var current = $('#menuSecondary').find('.current-menu-item');
+    var menu = $('#menuSecondary');
+    var current = menu.find('.current-menu-item');
+    current = current.length ? current : menu.find('.current_page_parent');
     var menuLeft = header.find('.menu-secondary').offset().left;
     var currentX = current.length ? current.offset().left - menuLeft + (current.outerWidth() - widthHover)/2 : 0;
     var logoIn = header.find('.logo-in');
