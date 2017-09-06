@@ -12,10 +12,20 @@ module.exports = function(slider){
     if( !slider.length ) return;
 
     var slides = slider.find('.slide');
+    var activeSlide = slider.find('.slide.on');
+
+    slider.css('height', activeSlide.height());
+
+    $(window).on('resize', throttle(function(){
+
+        requestAnimFrame(function(){ slider.css('height', activeSlide.find('img').height()); });
+
+    }, 60));
+
 
     if( slides.length < 2 ) return;
 
-    var activeSlide = slider.find('.slide.on'), nonActiveSlides = slider.find('.slide.off');
+    var nonActiveSlides = slider.find('.slide.off');
     var sliderNav = slider.find('.slider-nav');
     var timeOut;
 
@@ -51,7 +61,6 @@ module.exports = function(slider){
     }
 
 
-    slider.css('height', activeSlide.height());
     slides.css('position', 'absolute');
     activeSlide.css('z-index', 1);
     nonActiveSlides.css('opacity', '0').removeClass('off');
@@ -70,11 +79,7 @@ module.exports = function(slider){
 
     });
 
-    $(window).on('resize', throttle(function(){
-
-        requestAnimFrame(function(){ slider.css('height', activeSlide.height()); });
-
-    }, 60)).on('focusout', function(){
+    $(window).on('focusout', function(){
 
         clearTimeout(timeOut);
 

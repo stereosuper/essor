@@ -151,12 +151,26 @@
     &.off{
         display: none;
     }
+    > a{
+        height: 100%;
+    }
     .annotated-image-wrapper{
         max-height: 100%;
+        img{
+            top: 0;
+            transform: translate3d(-50%, 0, 0);
+        }
     }
     img{
+        width: auto;
         height: auto;
+        min-width: 100%;
         min-height: 100%;
+        max-width: none;
+        position: relative;
+        top: 50%;
+        left: 50%;
+        transform: translate3d(-50%, -50%, 0);
     }
 }
 
@@ -198,7 +212,7 @@
         }
     }
 
-    .slide{
+    .slider{
         min-height: 150px;
     }
 }
