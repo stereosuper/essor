@@ -514,8 +514,8 @@ function essor_scripts(){
     }
 
     // if post type is offre
-    if( get_field('sector') && $args ){
-        array_push($args['tax_query'], array('taxonomy' => 'metier-offre', 'field' => 'slug', 'terms' => get_term(get_field('sector'))->slug));
+    if( get_field('sector-offer') && $args ){
+        array_push($args['tax_query'], array('taxonomy' => 'metier-offre', 'field' => 'slug', 'terms' => get_term(get_field('sector-offer'))->slug));
     }
     $offerContractType = isset( $_GET['contrat'] ) ? $_GET['contrat'] : '';
     if( $offerContractType && $args ){

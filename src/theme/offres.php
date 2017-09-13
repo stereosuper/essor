@@ -83,7 +83,7 @@ get_header(); ?>
                                                 <li <?php if( get_permalink() === get_field('jobLink', 'options') ){ echo "class='active'"; } ?>><a href='<?php the_field('jobLink', 'options'); ?>'>Secteur</a></li>
                                                 <?php foreach( $allSectors as $sector ){ ?>
                                                     <?php
-                                                    $sectorPageID = get_posts(array('post_type' => 'page', 'posts_per_page' => 1, 'meta_query' => array(array('key' => 'sector', 'compare' => 'LIKE', 'value' => $sector->term_id))))[0]->ID;
+                                                    $sectorPageID = get_posts(array('post_type' => 'page', 'posts_per_page' => 1, 'meta_query' => array(array('key' => 'sector-offer', 'compare' => 'LIKE', 'value' => $sector->term_id))))[0]->ID;
                                                     ?>
                                                     <li <?php if( $sectorPageID === $post->ID ){ echo "class='active'"; } ?>><a href='<?php echo get_the_permalink($sectorPageID); ?>'><?php echo $sector->name; ?></a></li>
                                                 <?php } ?>
@@ -109,8 +109,8 @@ get_header(); ?>
                             array_push($jobsArgs['tax_query'], array('taxonomy' => 'lieu', 'field' => 'slug', 'terms' => $placeQuery));
                         }
                         
-                        if( get_field('sector') ){
-                            array_push($jobsArgs['tax_query'], array('taxonomy' => 'metier-offre', 'field' => 'slug', 'terms' => get_term(get_field('sector'))->slug));
+                        if( get_field('sector-offer') ){
+                            array_push($jobsArgs['tax_query'], array('taxonomy' => 'metier-offre', 'field' => 'slug', 'terms' => get_term(get_field('sector-offer'))->slug));
                         }
 
                         $jobsQuery = new WP_Query( $jobsArgs );
