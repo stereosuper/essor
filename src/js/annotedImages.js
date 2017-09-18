@@ -163,7 +163,7 @@ module.exports = function() {
         displayRelatedTextarea($noteHtml);
 
         $noteHtml.on('mouseenter', function(){
-            $(this).css('z-index', '1').find('.text').stop().fadeIn(animTimeFade);
+            $(this).css('z-index', '10').find('.text').stop().fadeIn(animTimeFade);
 
             if($('#blocTitle').length){
                 $('#blocTitle').addClass('off');
