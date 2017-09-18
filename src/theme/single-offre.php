@@ -127,6 +127,22 @@ if( isset($_POST['submit']) ){
 
                 $sent = wp_mail($mailto, $subjectMail, $content, $headers, $upload['file']);
 
+
+                $subjectMail2 = 'Essor - Votre candidature';
+
+                $headers2 = 'From: "Groupe Essor" <' . $mailto . '>' . "\r\n" .
+                           'Reply-To: ' . $mailto . "\r\n";
+
+                $content2 = 'Bonjour ' . $name . "\r\n\r\n\r\n" .
+                'Nous accusons réception de votre candidature et nous vous remercions de l’intérêt que vous portez à notre société.' . "\r\n\r\n" .
+                'Nous allons l’étudier avec la plus grande attention et nous ne manquerons pas de vous contacter si votre profil répond à nos attentes.'. "\r\n\r\n" .
+                'Sans nouvelle de notre part dans un délai d’un mois à compter d’aujourd’hui, veuillez considérer que nous ne sommes pas en mesure de répondre favorablement à votre candidature.'. "\r\n\r\n" .
+                'Sauf avis contraire de votre part, nous nous permettons de conserver dans notre base de données votre candidature transmise afin de vous faire part d’opportunités futures susceptibles de vous intéresser.'. "\r\n\r\n\r\n" .
+                'Bien cordialement,'. "\r\n\r\n" .
+                'Le service Ressources Humaines';
+
+                wp_mail($mail, $subjectMail2, $content2, $headers2);
+
                 if( $sent ){
                     $success = true;
                 }else{
