@@ -79,6 +79,10 @@ module.exports = function(slider){
 
     });
 
+    slides.on('mouseenter', function(e){
+        clearTimeout(timeOut);
+    }).on('mouseleave', setSliderTimeout);
+
     $(window).on('focusout', function(){
 
         clearTimeout(timeOut);
