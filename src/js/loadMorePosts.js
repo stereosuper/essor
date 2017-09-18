@@ -27,6 +27,9 @@ module.exports = function(wp, container){
     if( postNb >= postMaxNb ) return;
 
     // Insert the "More Posts" link.
+    if(container.find('.js-none')){
+        container.find('.js-none').remove();
+    }
     container.append( '<li class="load-more isAnimated"><button id="load-more"><span class="txt-more"><span id="text-more">Charger la suite</span><svg class="icon"><use xlink:href="#icon-arrow-bottom"></use></svg></span></button></li>' );
 
     loadBtn = $('#load-more');

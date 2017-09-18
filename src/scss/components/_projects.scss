@@ -117,7 +117,12 @@
 }
 
 .load-more{
-    > button{
+    &.js-none{
+        .js &{
+            display: none;
+        }
+    }
+    > button, > a{
         display: block;
         width: 100%;
         position: relative;

@@ -1,6 +1,6 @@
 <?php
 
-define( 'ESSOR_VERSION', 2.85 );
+define( 'ESSOR_VERSION', 2.88 );
 
 
 /*-----------------------------------------------------------------------------------*/
@@ -319,6 +319,14 @@ function essor_custom_post_nav_class( $classes, $item, $args ){
 
     if( is_page_template('about.php') ){
         if( $item->object_id == url_to_postid( get_field('aboutLink', 'options') ) ){
+            $classes[] = 'current_page_parent';
+        }else{
+            $classes = array_diff( $classes, array( 'current_page_parent' ) );
+        }
+    }
+
+    if( is_page_template('offres-archives.php') ){
+        if( $item->object_id == url_to_postid( get_field('jobLink', 'options') ) ){
             $classes[] = 'current_page_parent';
         }else{
             $classes = array_diff( $classes, array( 'current_page_parent' ) );

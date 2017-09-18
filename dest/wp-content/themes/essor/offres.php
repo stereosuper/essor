@@ -6,6 +6,8 @@ Template Name: Offres
 $contractTypeQuery = isset( $_GET['contrat'] ) ? $_GET['contrat'] : '';
 $placeQuery = isset( $_GET['lieu'] ) ? $_GET['lieu'] : '';
 
+$archives = get_field('archives');
+
 get_header(); ?>
 
 	<?php if ( have_posts() ) : the_post(); ?>
@@ -115,12 +117,17 @@ get_header(); ?>
 
                         $jobsQuery = new WP_Query( $jobsArgs );
 
-                        if( $jobsQuery->have_posts() ){ ?>
+                        if( $jobsQuery->have_posts() ){ $count = 0; ?>
                             <ul class='jobs' id='ajax-content'>
                                 <?php while( $jobsQuery->have_posts() ){ $jobsQuery->the_post(); ?>
                                     <?php get_template_part( 'includes/offre' ); ?>
+                                <?php $count ++; } ?>
+                                <?php if($count === $jobsQuery->post_count && $count > 4){ ?>
+                                    <li class="load-more isAnimated js-none"><a href='<?php echo $archives; ?>'><span class="txt-more"><span>Voir toutes les offres</span><svg class="icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-right"></use></svg></span></a></li>
                                 <?php } ?>
                             </ul>
+                        <?php }else{ ?>
+                            <p>Il n'y a pas d'offres disponibles en ce moment!</p>
                         <?php } ?>
                     </div>
 

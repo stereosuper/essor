@@ -11,7 +11,7 @@
             margin-bottom: 0;
         }
         &.load-more{
-            > button{
+            > button, > a{
                 width: 80%;
                 min-height: 150px;
                 &:before{
@@ -55,7 +55,7 @@
     .jobs{
         > li{
             &.load-more{
-                > button{
+                > button, > a{
                     width: 100%;
                 }
             }
