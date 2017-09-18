@@ -35,6 +35,7 @@
         z-index: 1;
         overflow: visible !important;
         fill: $white;
+        filter: drop-shadow(0 10px 5px rgba(0, 0, 0, 0.4));
         > path{
             transform-origin: 50% 75%;
             animation: marker 3s ease-in-out infinite;
