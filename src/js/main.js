@@ -34,13 +34,16 @@ $(function(){
     var scrollTop;
 
 
-    function loadHandler(){
+    function loadHandler() {
+        // Load more posts
+        loadMorePosts(wp, $('#ajax-content'));
+
         // Sticky
-        sticky($('#blockSticky'), 130, {minimumWidth: 960});
-        sticky(dropdownsSticky, 0, {minimumWidth: 960});
+        sticky.stick($('#blockSticky'), 130, {minimumWidth: 960});
+        sticky.stick(dropdownsSticky, 0, {minimumWidth: 960});
 
         // Handle header pushed by filters
-        jobsSticky(body, header, $('#blockStickyJobs'), dropdownsSticky, 960);
+        jobsSticky.init(body, header, $('#blockStickyJobs'), dropdownsSticky, 960);
 
         // Slider
         setSlider( $('#slider') );
@@ -48,8 +51,7 @@ $(function(){
         // Annoted images
         annotatedImages.annotatedImage();
 
-        // Load more posts
-        loadMorePosts(wp, $('#ajax-content'));
+
     }
 
     

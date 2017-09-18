@@ -4,6 +4,8 @@ require('gsap/CSSPlugin');
 var TweenLite = require('gsap/TweenLite');
 
 var initScrollReval = require('./initScrollReveal.js');
+var jobsSticky = require('./jobsSticky.js');
+var sticky = require('./sticky.js');
 
 
 module.exports = function(wp, container){
@@ -12,6 +14,7 @@ module.exports = function(wp, container){
     var postType = wp.postType;
     var postMaxNb = parseInt(wp.postNb);
     var loadBtn, loadBtnLi, postNb;
+    var dropdownsSticky = $('#dropdownsSticky');
 
     if( !postType || !postMaxNb ) return;
 
@@ -63,7 +66,8 @@ module.exports = function(wp, container){
                         loadBtn.remove();
                     }});
                 }
-
+                jobsSticky.update($('#blockStickyJobs'));
+                sticky.update($('#dropdownsSticky'));
             },
             error: function(req, status, err){
                 console.log(err);
