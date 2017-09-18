@@ -81,15 +81,6 @@
         position: relative;
         margin: 0;
         color: $text;
-        &:before{
-            content: '';
-            width: 2px;
-            height: 55px;
-            position: absolute;
-            left: 0;
-            top: -57px;
-            background: $primary;
-        }
     }
     p{
         margin: 0;
