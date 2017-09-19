@@ -17,15 +17,11 @@
 
 		<div class='wrapper-global'>
 
-			<header role='banner' class='header' id='header'>
-		
-				<div class='container'>
-
-				<?php
+		<?php
 					// category pages
 					$queried_object = get_queried_object(); 
 					$taxonomy = $queried_object->taxonomy;
-					
+
 					$currentID = $taxonomy === 'category' ? get_field('sector', $queried_object) : $post->ID;
 
 					$sectors = get_field('sectorPages', 'options');
@@ -36,6 +32,10 @@
 						$sectorID = wp_get_post_parent_id( $currentID );
 					}
 				?>
+
+			<header role='banner' class='<?php if( $sectorID ){ echo 'sector'; } ?> header' id='header'>
+		
+				<div class='container'>
 
 					<div class='header-main-wrapper'>
 						<div class='header-main'>

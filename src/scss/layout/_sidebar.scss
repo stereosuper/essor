@@ -166,7 +166,8 @@
         width: calc(100% + #{$gutter*2});
         padding: 0;
         position: fixed;
-        top: 77px !important;
+        top: 104px !important;
+        bottom: auto !important;
         margin: 0 $gutter*-1;
         overflow-y: hidden;
         overflow-x: auto;
