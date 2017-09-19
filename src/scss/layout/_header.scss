@@ -508,12 +508,15 @@
 
         .header-main-wrapper{
             width: 100%;
-            padding: 20px $gutter;
+            padding: 31px $gutter;
             border-bottom: 2px solid $grey;
             position: fixed;
             top: 0;
             background: $white;
             transition: transform $transition;
+            .sector & {
+                padding: 20px $gutter;
+            }
             .off &{
                 position: absolute;
             }
