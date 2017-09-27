@@ -70,7 +70,9 @@ var init = function (body, header, blockSticky, dropdownsSticky, minimumWidth) {
     }, 10));
 };
 
-var update = function (blockSticky) {
+var update = function( blockSticky ){
+    if (!blockSticky.length) return;
+
     var wrapperSticky = blockSticky.closest('.wrapper-sticky');
 
     blockSticky.data({'offsetBottom': wrapperSticky.offset().top + wrapperSticky.outerHeight(), 'height': blockSticky.outerHeight() });

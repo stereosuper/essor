@@ -93,21 +93,17 @@ var stick = function (stickyElt, givenPosition, {
     }, 10));
 };
 
-var update = function (stickyElt, wrapper = true) {
+var update = function( stickyElt, wrapper = true ){
+    if( !stickyElt.length ) return;
 
     var wrapperSticky = stickyElt.closest('.wrapper-sticky');
 
-    if (wrapper) {
-        stickyElt.data({ 'offsetTop': wrapperSticky.offset().top });
-    } else {
-        stickyElt.data({ 'offsetTop': stickyElt.offset().top });
-    }
+    wrapper ? stickyElt.data({ 'offsetTop': wrapperSticky.offset().top }) : stickyElt.data({ 'offsetTop': stickyElt.offset().top });
 
     stickyElt.data({
         'offsetBottom': wrapperSticky.offset().top + wrapperSticky.outerHeight(),
         'height': stickyElt.outerHeight()
     });
-    console.log('yo');
 };
 
 module.exports = {
