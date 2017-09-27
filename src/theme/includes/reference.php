@@ -1,7 +1,7 @@
 <li class='isAnimated'>
     <a href='<?php the_permalink(); ?>'>
         <span class='wrapper-img'>
-            <span class='img' style='background-image:url("<?php echo get_the_post_thumbnail_url(); ?>")'></span>
+            <span class='img' style='background-image:url("<?php echo get_the_post_thumbnail_url($post, 'large'); ?>")'></span>
         </span>
         <h3><?php the_title(); ?><span><?php the_field('place'); ?></span></h3>
     </a>

@@ -20,7 +20,7 @@ module.exports = function(wp, container){
 
     // the number of posts per page
     if( postType === 'reference' ){
-        postNb = 10;
+        postNb = 15;
     }else if( postType === 'offre' ){
         postNb = 4;
     }else{

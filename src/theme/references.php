@@ -57,7 +57,7 @@ get_header(); ?>
             </div>
 
             <?php
-            $projectsArgs = array('post_type' => 'reference', 'posts_per_page' => 10, 'tax_query' => array('relation' => 'AND'), 'post_status' => 'publish');
+            $projectsArgs = array('post_type' => 'reference', 'posts_per_page' => 15, 'tax_query' => array('relation' => 'AND'), 'post_status' => 'publish');
             
             if( get_field('sector') ){
                 array_push($projectsArgs['tax_query'], array('taxonomy' => 'metier', 'field' => 'slug', 'terms' => get_term(get_field('sector'))->slug));
@@ -76,7 +76,7 @@ get_header(); ?>
                     <?php while( $projectsQuery->have_posts() ) : $projectsQuery->the_post(); ?>
                         <?php get_template_part( 'includes/reference' ); ?>
                     <?php $count ++; endwhile; ?>
-                    <?php if($count === $projectsQuery->post_count && $count > 10){ ?>
+                    <?php if($count === $projectsQuery->post_count && $count > 15){ ?>
                         <li class="load-more isAnimated js-none"><a href='<?php echo $archives; ?>'><span class="txt-more"><span>Voir toutes les références</span><svg class="icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-right"></use></svg></span></a></li>
                     <?php } ?>
                 </ul>

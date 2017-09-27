@@ -24,7 +24,7 @@ get_header(); ?>
             }
 
             $projects = get_posts( $projectsArgs );
-            $projects = array_slice($projects, 10);
+            $projects = array_slice($projects, 15);
 
             if(!empty($projects)){ ?>
                 <ul class='projects complete'>
