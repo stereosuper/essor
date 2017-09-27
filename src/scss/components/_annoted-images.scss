@@ -26,13 +26,29 @@
             }
         }
     }
-    .icon-marker{
+    .marker{
         width: 30px;
         height: 45px;
         position: absolute;
         bottom: 0.05em;
         left: -0.85em;
         z-index: 1;
+        text-align: center;
+        > span{
+            display: inline-block;
+            min-width: 25px;
+            padding: 6px 6px 5px;
+            position: relative;
+            top: -10px;
+            font-family: $poppinsMedium;
+            line-height: 1;
+            background: $primary;
+            color: $white;
+        }
+    }
+    .icon-marker{
+        width: 30px;
+        height: 45px;
         overflow: visible !important;
         fill: $white;
         filter: drop-shadow(0 10px 5px rgba(0, 0, 0, 0.4));

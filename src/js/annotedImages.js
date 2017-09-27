@@ -145,8 +145,8 @@ module.exports = function() {
         var sanitizedFieldName = sanitizedId( fieldname );
 
         noteHtml = noteHtml + '<div class="note" id="note-'+ sanitizedFieldName +'-' + id + '" style="left:' + relX.toString() + '%; top:' + relY.toString() + '%">';
-        noteHtml = noteHtml + '<svg class="icon icon-marker" viewBox="0 0 22 32"><path d="M21.7,14.7c0,0.1,0,0.1-0.1,0.1H17c0.7-1.2,1.1-2.6,1.1-4c0-4.1-3.1-7.3-7.1-7.3s-7,3.3-7,7.4c0.1,1.4,0.4,2.8,1.2,4l0,0 H0.7c0-0.1,0-0.1-0.1-0.1c-0.4-1.3-0.7-2.5-0.7-3.9C0,4.8,4.9,0,11.2,0s11.2,4.8,11.2,10.9C22.3,12.2,22.1,13.5,21.7,14.7z"/><circle cx="11.2" cy="11.2" r="3.7"/><rect x="10.4" y="14.2" width="1.5" height="17.8"/></svg>';
-        noteHtml = noteHtml + '<div class="text-wrapper"><div class="text">'+text.replace(/\n/g, "<br />")+'</div></div>';
+        noteHtml = noteHtml + '<div class="marker"><svg class="icon icon-marker" viewBox="0 0 22 32"><path d="M21.7,14.7c0,0.1,0,0.1-0.1,0.1H17c0.7-1.2,1.1-2.6,1.1-4c0-4.1-3.1-7.3-7.1-7.3s-7,3.3-7,7.4c0.1,1.4,0.4,2.8,1.2,4l0,0 H0.7c0-0.1,0-0.1-0.1-0.1c-0.4-1.3-0.7-2.5-0.7-3.9C0,4.8,4.9,0,11.2,0s11.2,4.8,11.2,10.9C22.3,12.2,22.1,13.5,21.7,14.7z"/><circle cx="11.2" cy="11.2" r="3.7"/><rect x="10.4" y="14.2" width="1.5" height="17.8"/></svg><span>' + id + '</span></div>';
+        noteHtml = noteHtml + '<div class="text-wrapper"><div class="text">'+text.replace(/\n/g, "<br>")+'</div></div>';
         noteHtml = noteHtml + '</div>';
 
         var $noteHtml = $(noteHtml);
