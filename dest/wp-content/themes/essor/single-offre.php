@@ -220,7 +220,7 @@ get_header(); ?>
 
                             <div class='field field-top <?php if($errorMsg) echo 'error'; ?>'>
                                 <label for='message'>Votre message</label>
-                                <textarea name='message' id='message' placeholder="J'aime beaucoup ce que vous faites! Laissez moi vous parler de mon incroyabe projet." required><?php echo esc_textarea( $msg ); ?></textarea>
+                                <textarea name='message' id='message' placeholder="J'aime beaucoup ce que vous faites! Laissez moi vous parler de mon incroyable projet." required><?php echo esc_textarea( $msg ); ?></textarea>
                             </div>
 
                             <div class='field <?php if($errorFile) echo 'error'; ?>'>
