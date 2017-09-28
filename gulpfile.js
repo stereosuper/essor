@@ -74,12 +74,12 @@ gulp.task('js', function () {
         .bundle()
         .pipe(source('main.js'))
         .pipe(buffer())
-        .pipe($.sourcemaps.init({loadMaps: true}))
+        // .pipe($.sourcemaps.init({loadMaps: true}))
         .pipe($.uglify({compress: {
             warnings: false,
             comparisons: false
         }}))
-        .pipe($.sourcemaps.write('./'))
+        // .pipe($.sourcemaps.write('./'))
         .pipe(gulp.dest('dest/wp-content/themes/essor/js'))
         .pipe($.size({ title: 'js' }));
 });

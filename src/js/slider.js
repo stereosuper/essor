@@ -66,7 +66,6 @@ module.exports = function(slider){
     nonActiveSlides.css('opacity', '0').removeClass('off');
 
     TweenLite.fromTo(sliderNav.find('.on').find('.indicator'), 8, {scaleX: 1}, {scaleX: 0});
-
     setSliderTimeout();
 
 
@@ -79,14 +78,16 @@ module.exports = function(slider){
 
     });
 
-    slides.on('mouseenter', function(e){
+    slides.on('mouseenter', function(){
         clearTimeout(timeOut);
-    }).on('mouseleave', setSliderTimeout);
+        TweenLite.to(sliderNav.find('.on').find('.indicator'), 0.2, {scaleX: 1});
+    }).on('mouseleave', function(){
+        TweenLite.fromTo(sliderNav.find('.on').find('.indicator'), 8, {scaleX: 1}, {scaleX: 0});
+        setSliderTimeout();
+    });
 
     $(window).on('focusout', function(){
-
         clearTimeout(timeOut);
-
     }).on('focusin', setSliderTimeout);
 
 }
