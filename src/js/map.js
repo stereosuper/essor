@@ -49,14 +49,16 @@ module.exports = function(slider){
 
 
     var setMarkers = function() {
-
         var features = window.wp.essor_places;
         var layer = {
             'type': 'geojson',
             'data': {
                 'type': 'FeatureCollection',
                 'features': features,
-            }
+            },
+            cluster: true,
+            clusterMaxZoom: 14, // Max zoom to cluster points on
+            clusterRadius: 50 // Radius of each cluster when clustering points (defaults to 50)
         };
 
         // Ajoute les marqueurs à la map
@@ -69,6 +71,7 @@ module.exports = function(slider){
             "id": layerId,
             "type": "symbol",
             "source": "implantations",
+            filter: ["!has", "point_count"],
             "layout": {
                 "icon-image": "essor-icon",
                 "icon-allow-overlap": true,
@@ -87,8 +90,8 @@ module.exports = function(slider){
                     for (var idx in metiers) {
                         if( metiers.hasOwnProperty( idx ) ) {
                             var metier = metiers[idx];
-                            if (!map.getLayer('layer-'+metier)) {
-                                layerId = 'layer-'+metier;
+                            layerId = 'layer-'+metier;
+                            if (!map.getLayer(layerId)) {
                                 layers.push(layerId);
                                 map.addLayer({
                                     "id": layerId,
@@ -99,7 +102,10 @@ module.exports = function(slider){
                                         "icon-allow-overlap": true
                                     },
                                     "visibility": "none",
-                                    "filter": ["has", metier]
+                                    "filter": [
+                                        ["has", metier],
+                                        ["!has", "point_count"]
+                                    ]
                                 });
                                 handleMarkerClick(layerId);
                             }
@@ -108,6 +114,37 @@ module.exports = function(slider){
                 }
             }
         }
+
+        map.addLayer({
+            id: "clusters",
+            type: "circle",
+            source: "implantations",
+            filter: ["has", "point_count"],
+            paint: {
+                "circle-color": "#e5512c",
+                "circle-radius": 20
+            },
+            "visibility": "visible",
+        });
+
+        map.addLayer({
+            id: "cluster-count",
+            type: "symbol",
+            source: "implantations",
+            filter: ["has", "point_count"],
+            layout: {
+                "text-field": "{point_count_abbreviated}",
+                "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
+                "text-size": 12,
+                "color": "#ffffff"
+            },
+            "visibility": "visible",
+        });
+
+        map.on('click', 'clusters', function(e){
+            map.setCenter(e.lngLat);
+            map.setZoom(map.getZoom()+1);
+        })
 
         // Filtre une première fois la map
         filterMap();
