@@ -135,8 +135,10 @@ module.exports = function(slider){
             layout: {
                 "text-field": "{point_count_abbreviated}",
                 "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
-                "text-size": 12,
-                "color": "#ffffff"
+                "text-size": 12
+            },
+            paint: {
+              "text-color": "#ffffff"
             },
             "visibility": "visible",
         });
