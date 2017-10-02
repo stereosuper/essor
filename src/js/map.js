@@ -8,7 +8,7 @@ module.exports = function(slider){
 
     var map, icon, layers = [],
         initialCenter = [2.5377, 46.718],   // Centre de la France (ça dépend) https://fr.wikipedia.org/wiki/Centre_de_la_France
-        initialZoom = 5;
+        initialZoom = 2;
 
 
     var init = function(){
