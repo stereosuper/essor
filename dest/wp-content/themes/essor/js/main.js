@@ -39913,7 +39913,7 @@ module.exports = function () {
             bounds.extend(feature.geometry.coordinates);
         });
 
-        map.fitBounds(bounds, { padding: { top: 50, bottom: 50, left: 50, right: 300 } });
+        map.fitBounds(bounds, { padding: { top: 100, bottom: 50, left: 50, right: 300 } });
 
         /*
         map.addLayer({
