@@ -215,6 +215,15 @@ module.exports = function(){
                 }
             }
         }
+
+        var features = window.wp.essor_places;
+        features.forEach(function(feature) {
+            if (feature && feature.properties && feature.properties.metiers && feature.properties.metiers.indexOf(selectedValue)>=0) {
+                bounds.extend(feature.geometry.coordinates);
+            }
+        });
+
+        map.fitBounds(bounds, {padding: {top: 50, bottom: 50, left: 50, right: 300}});
     }
 
 
