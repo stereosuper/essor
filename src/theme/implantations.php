@@ -61,8 +61,12 @@ function essor_tpl_get_map_json( $features ){
         }
         $address_l1 = '';
         $address_l2 = '';
+        $person_name = '';
         $phone = '';
         $email = '';
+        $person_name2 = '';
+        $phone2 = '';
+        $email2 = '';
 
         $name = get_the_title($post->ID);
 
