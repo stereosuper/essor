@@ -176,7 +176,13 @@ module.exports = function(slider){
                 '</span><span>' +
                 e.features[0].properties.phone +
                 '</span>' +
-                e.features[0].properties.email
+                e.features[0].properties.email +
+                '<span>' +
+                e.features[0].properties.person_name2 +
+                '</span><span>' +
+                e.features[0].properties.phone2 +
+                '</span>' +
+                e.features[0].properties.email2
             )
             .addTo(map);
         }).on('mouseenter', layerId, function(){

@@ -73,13 +73,22 @@ function essor_tpl_get_map_json( $features ){
             $address_l2 = essor_get_field('postal_code', $post->ID, '').' '.essor_get_field('city', $post->ID, '');
         }
         if (essor_get_field('name', $post->ID, false)) {
-            $phone = '<br>'.essor_get_field('name', $post->ID, '');
+            $person_name = '<br>'.essor_get_field('name', $post->ID, '');
         }
         if (essor_get_field('phone', $post->ID, false)) {
-            $person_name = __('Tél.', 'essor').': '.essor_get_field('phone', $post->ID, '');
+            $phone = __('Tél.', 'essor').': '.essor_get_field('phone', $post->ID, '');
         }
         if (essor_get_field('email', $post->ID, false)) {
             $email = '<a href="mailto:'.essor_get_field('email', $post->ID, '').'">'.essor_get_field('email', $post->ID, '').'</a>';
+        }
+        if (essor_get_field('name2', $post->ID, false)) {
+            $person_name2 = '<br>'.essor_get_field('name2', $post->ID, '');
+        }
+        if (essor_get_field('phone2', $post->ID, false)) {
+            $phone2 = __('Tél.', 'essor').': '.essor_get_field('phone2', $post->ID, '');
+        }
+        if (essor_get_field('email2', $post->ID, false)) {
+            $email2 = '<a href="mailto:'.essor_get_field('email2', $post->ID, '').'">'.essor_get_field('email2', $post->ID, '').'</a>';
         }
 
         $metiers = explode(',', essor_get_terms_csv($post->ID, 'metier-implantation', ',', 'slug'));
@@ -101,6 +110,9 @@ function essor_tpl_get_map_json( $features ){
                             'phone'         => $phone,
                             'email'         => $email,
                             'metiers'       => $metiers,
+                            'person_name2'  => $person_name2,
+                            'phone2'        => $phone2,
+                            'email2'        => $email2,
                         ),
                         array_fill_keys(array_keys(array_flip($metiers)), 1) // On merge les clés des métiers car le filter ['in', 'metiers', metier] de mapbox n'a pas l'air de trop fonctionner
                     ),
