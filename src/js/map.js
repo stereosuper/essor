@@ -162,8 +162,9 @@ module.exports = function(slider){
                 e.features[0].properties.address_l1 +
                 '</span><span>' +
                 e.features[0].properties.address_l2 +
-                '</span>' +
-                '<span>' +
+                '</span><span>' +
+                e.features[0].properties.person_name +
+                '</span><span>' +
                 e.features[0].properties.phone +
                 '</span>' +
                 e.features[0].properties.email

@@ -72,8 +72,11 @@ function essor_tpl_get_map_json( $features ){
         if (essor_get_field('postal_code', $post->ID, false) || essor_get_field('city', $post->ID, false)) {
             $address_l2 = essor_get_field('postal_code', $post->ID, '').' '.essor_get_field('city', $post->ID, '');
         }
+        if (essor_get_field('name', $post->ID, false)) {
+            $phone = '<br>'.essor_get_field('name', $post->ID, '');
+        }
         if (essor_get_field('phone', $post->ID, false)) {
-            $phone = __('Tél.', 'essor').': '.essor_get_field('phone', $post->ID, '');
+            $person_name = __('Tél.', 'essor').': '.essor_get_field('phone', $post->ID, '');
         }
         if (essor_get_field('email', $post->ID, false)) {
             $email = '<a href="mailto:'.essor_get_field('email', $post->ID, '').'">'.essor_get_field('email', $post->ID, '').'</a>';
@@ -94,6 +97,7 @@ function essor_tpl_get_map_json( $features ){
                             'name'          => $name,
                             'address_l1'    => $address_l1,
                             'address_l2'    => $address_l2,
+                            'person_name'   => $person_name,
                             'phone'         => $phone,
                             'email'         => $email,
                             'metiers'       => $metiers,
