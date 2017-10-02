@@ -39794,7 +39794,7 @@ $(function () {
 var $ = require('jquery');
 var mapboxgl = require('mapbox-gl');
 
-module.exports = function (slider) {
+module.exports = function () {
 
     if (!$('#map').length) return;
 
@@ -39863,7 +39863,7 @@ module.exports = function (slider) {
             "id": layerId,
             "type": "symbol",
             "source": "implantations",
-            filter: ["!has", "point_count"],
+            //"filter": ["!has", "point_count"],
             "layout": {
                 "icon-image": "essor-icon",
                 "icon-allow-overlap": true,
@@ -39893,8 +39893,11 @@ module.exports = function (slider) {
                                         "icon-image": "essor-icon",
                                         "icon-allow-overlap": true
                                     },
-                                    "visibility": "none",
-                                    "filter": [["has", metier], ["!has", "point_count"]]
+                                    "visibility": "none"
+                                    /*"filter": [
+                                        ["has", metier],
+                                        ["!has", "point_count"]
+                                    ]*/
                                 });
                                 handleMarkerClick(layerId);
                             }
@@ -39965,7 +39968,9 @@ module.exports = function (slider) {
         for (var idx in layers) {
             if (layers.hasOwnProperty(idx)) {
                 var layerId = layers[idx];
-                map.setLayoutProperty(layerId, 'visibility', layerId == 'layer-' + selectedValue ? 'visible' : 'none');
+                if (map.getLayer(layerId)) {
+                    map.setLayoutProperty(layerId, 'visibility', layerId == 'layer-' + selectedValue ? 'visible' : 'none');
+                }
             }
         }
     };
