@@ -55,10 +55,11 @@ module.exports = function(slider){
             'data': {
                 'type': 'FeatureCollection',
                 'features': features,
-            },
+            }/*,
             cluster: true,
             clusterMaxZoom: 14, // Max zoom to cluster points on
             clusterRadius: 50 // Radius of each cluster when clustering points (defaults to 50)
+            */
         };
 
         // Ajoute les marqueurs à la map
@@ -115,6 +116,7 @@ module.exports = function(slider){
             }
         }
 
+        /*
         map.addLayer({
             id: "clusters",
             type: "circle",
@@ -142,7 +144,7 @@ module.exports = function(slider){
             },
             "visibility": "visible",
         });
-        
+
         map.on('mouseenter', 'clusters', function(){
             map.getCanvas().style.cursor = 'pointer';
         }).on('mouseleave', 'clusters', function(){
@@ -151,6 +153,7 @@ module.exports = function(slider){
             map.setCenter(e.lngLat);
             map.setZoom(map.getZoom()+1);
         })
+        */
 
         // Filtre une première fois la map
         filterMap();
