@@ -142,8 +142,12 @@ module.exports = function(slider){
             },
             "visibility": "visible",
         });
-
-        map.on('click', 'clusters', function(e){
+        
+        map.on('mouseenter', 'clusters', function(){
+            map.getCanvas().style.cursor = 'pointer';
+        }).on('mouseleave', 'clusters', function(){
+            map.getCanvas().style.cursor = '';
+        }).on('click', 'clusters', function(e){
             map.setCenter(e.lngLat);
             map.setZoom(map.getZoom()+1);
         })
