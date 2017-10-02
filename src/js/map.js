@@ -103,6 +103,7 @@ module.exports = function(){
                                         "icon-allow-overlap": true
                                     },
                                     "visibility": "none",
+                                    "filter": ["has", metier],
                                     /*"filter": [
                                         ["has", metier],
                                         ["!has", "point_count"]

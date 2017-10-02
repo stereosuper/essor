@@ -75,10 +75,12 @@ gulp.task('js', function () {
         .pipe(source('main.js'))
         .pipe(buffer())
         // .pipe($.sourcemaps.init({loadMaps: true}))
+        /*
         .pipe($.uglify({compress: {
             warnings: false,
             comparisons: false
         }}))
+        */
         // .pipe($.sourcemaps.write('./'))
         .pipe(gulp.dest('dest/wp-content/themes/essor/js'))
         .pipe($.size({ title: 'js' }));
@@ -110,21 +112,21 @@ gulp.task('root', function() {
 
 
 gulp.task('watch', function () {
-    
+
     browserSync({
         notify: false,
         proxy: 'localhost'
     });
-    
+
 
     $.watch('src/scss/**/*', function(){
         gulp.start(['styles'], reload);
     });
-    
+
     $.watch('src/theme/**/*', function(){
         gulp.start(['theme'], reload);
     });
-    
+
     $.watch('src/fonts/**/*', function(){
         gulp.start(['fonts'], reload);
     });
@@ -137,7 +139,7 @@ gulp.task('watch', function () {
     $.watch('src/js/**/*', function(){
         gulp.start(['js'], reload);
     });
-    
+
     $.watch('src/*.*', function(){
         gulp.start(['root'], reload);
     });
@@ -145,4 +147,3 @@ gulp.task('watch', function () {
 
 
 gulp.task('start', ['styles', 'theme', 'fonts', 'img', 'layoutImg', 'js', 'root', 'sitemap']);
-
