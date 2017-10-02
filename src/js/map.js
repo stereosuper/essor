@@ -8,7 +8,8 @@ module.exports = function(){
 
     var map, icon, layers = [],
         initialCenter = [2.5377, 46.718],   // Centre de la France (ça dépend) https://fr.wikipedia.org/wiki/Centre_de_la_France
-        initialZoom = 2;
+        initialZoom = 2,
+        bounds = new mapboxgl.LngLatBounds();
 
 
     var init = function(){
@@ -116,6 +117,12 @@ module.exports = function(){
                 }
             }
         }
+
+        features.forEach(function(feature) {
+            bounds.extend(feature.geometry.coordinates);
+        });
+
+        map.fitBounds(bounds, {padding: {top: 50, bottom: 50, left: 50, right: 300}});
 
         /*
         map.addLayer({
