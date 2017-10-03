@@ -225,7 +225,11 @@ module.exports = function(){
             });
         }
 
-        map.fitBounds(bounds, {padding: {top: 100, bottom: 50, left: 50, right: 300}});
+        if( window.outerWidth > 960 ){
+            map.fitBounds(bounds, {padding: {top: 100, bottom: 50, left: 50, right: 300}, animate: false, maxZoom: 14});
+        }else{
+            map.fitBounds(bounds, {padding: {top: 50, bottom: 50, left: 50, right: 50}, animate: false, maxZoom: 14});
+        }
     }
 
 
