@@ -63,6 +63,29 @@
             </div>
         </div>
 
+        <?php if( get_field('numbers' ) ): ?>
+            <div class='container-small'>
+                <h2><?php the_field('numbersTitle'); ?></h2>
+            </div>
+            <div class='container'>
+                <?php if( have_rows('numbers') ): ?>
+                    <ul class='list-numbers list-numbers-home'>
+                    <?php while( have_rows('numbers') ): the_row(); ?>
+
+                        <li class='isAnimated'>
+                            <div>
+                                <?php echo wp_get_attachment_image( get_sub_field('img'), 'full' ); ?>
+                                <b><?php the_sub_field('number'); ?><span><?php the_sub_field('unit'); ?></span></b>
+                            </div>
+                            <?php the_sub_field('text'); ?>
+                        </li>
+
+                    <?php endwhile; ?>
+                    </ul>
+                <?php endif; ?>
+            </div>
+        <?php endif; ?>
+
         <?php if( get_field('about') ){ ?>
             <div class='container-small clearfix'>
                 <h2><?php echo get_field('about')->post_title; ?></h2>

@@ -59,6 +59,14 @@
     }
 }
 
+.list-numbers-home{
+    padding: 0 0 0 $gutter;
+    margin: -30px 0 7em 5.7%;
+    > li{
+        width: 33%;
+    }
+}
+
 
 @media (max-width: $desktopLarge){
     .list-numbers-sector{
@@ -79,6 +87,13 @@
         width: 100%;
         max-width: 600px;
         margin: 0 auto;
+    }
+
+    .list-numbers-home{
+        margin-left: 0;
+        > li{
+            width: 50% !important;
+        }
     }
 }
 
