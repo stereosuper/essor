@@ -15,6 +15,7 @@
         background: $white;
         color: $text;
         .dropdown-title{
+            min-height: 42px;
             border-color: #a8b3c0;
         }
         ul{
@@ -76,8 +77,15 @@
                 content: none;
             }
             &.active{
-                order: 1;
                 display: block;
+                order: 1;
+                &:not(:first-child){
+                    a{
+                        font-family: $poppinsMedium;
+                        font-size: 1.4rem;
+                        line-height: 1.3;
+                    }
+                }
                 a{
                     font-family: $proximaLightIt;
                     font-size: 1.6rem;
