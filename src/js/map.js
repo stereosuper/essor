@@ -118,12 +118,6 @@ module.exports = function(){
             }
         }
 
-        features.forEach(function(feature) {
-            bounds.extend(feature.geometry.coordinates);
-        });
-
-        map.fitBounds(bounds, {padding: {top: 100, bottom: 50, left: 50, right: 300}});
-
         /*
         map.addLayer({
             id: "clusters",
@@ -217,13 +211,21 @@ module.exports = function(){
         }
 
         var features = window.wp.essor_places;
-        features.forEach(function(feature) {
-            if (feature && feature.properties && feature.properties.metiers && feature.properties.metiers.indexOf(selectedValue)>=0) {
+        var bounds = new mapboxgl.LngLatBounds();
+        
+        features.forEach(function(feature){
+            if( feature && feature.properties && feature.properties.metiers && feature.properties.metiers.indexOf(selectedValue) >= 0 ){
                 bounds.extend(feature.geometry.coordinates);
             }
         });
 
-        map.fitBounds(bounds, {padding: {top: 50, bottom: 50, left: 50, right: 300}});
+        if( Object.keys(bounds).length === 0 ){
+            features.forEach(function(feature){
+                bounds.extend(feature.geometry.coordinates);
+            });
+        }
+
+        map.fitBounds(bounds, {padding: {top: 100, bottom: 50, left: 50, right: 300}});
     }
 
 
