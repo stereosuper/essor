@@ -58,6 +58,10 @@ h2{
     margin: 0.8em 0;
     font-size: 3.6rem;
     line-height: 1.4;
+    > a{
+        text-decoration: none;
+        color: $text;
+    }
 }
 
 h3{
