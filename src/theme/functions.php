@@ -272,7 +272,7 @@ add_filter( 'wp_nav_menu_objects', 'essort_get_current_submenu', 10, 2 );
 // Display descriptions in menu
 function essort_menu_display_desc( $item_output, $item, $depth, $args ){
     if( isset( $args->desc ) ){
-        $item_output = preg_replace( '/<\/a>/', '<span>' . $item->description . '</span></a>', $item_output );
+        $item_output = preg_replace( '/<\/a>/', ' <span>' . $item->description . '</span></a>', $item_output );
     }
 
     return $item_output;
