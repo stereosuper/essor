@@ -80,6 +80,10 @@
             }
         }
     }
+
+    .bloc-title-small{
+        top: -160px;
+    }
 }
 
 @media(max-width: $desktopSmall){
@@ -99,6 +103,7 @@
         position: relative;
         margin-bottom: -130px;
         left: 0;
+        top: - 130px;
     }
 
     .wrapper-map{
