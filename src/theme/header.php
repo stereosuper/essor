@@ -12,13 +12,13 @@
 
 		<script>document.getElementsByTagName('html')[0].className = 'js';</script>
 
-		<script async src='https://www.googletagmanager.com/gtag/js?id=UA-37415171-1'></script>
+		<script async src='https://www.googletagmanager.com/gtag/js?id=UA-107667679-1'></script>
 		<script>
 			window.dataLayer = window.dataLayer || [];
-			function gtag(){dataLayer.push(arguments)};
+			function gtag(){dataLayer.push(arguments);}
 			gtag('js', new Date());
 
-			gtag('config', 'UA-19728688-1');
+			gtag('config', 'UA-107667679-1');
 		</script>
 
 	</head>
