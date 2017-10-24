@@ -53,7 +53,11 @@ if( isset($_POST['submit']) ){
             $error = true;
         }
 
-        if( !empty($phone) ){
+        if( empty($phone) ){
+            $errorPhone = true;
+            $errorEmpty = true;
+            $error = true;
+        } else {
             if( !(strlen($phone) < 20 && strlen($phone) > 9 && preg_match("/^\+?[^.\-][0-9\.\- ]+$/", $phone)) ){
                 $errorPhoneTxt = 'Le numéro de téléphone est invalide.';
                 $errorPhone = true;
@@ -206,10 +210,9 @@ get_header(); ?>
                                 <input type='email' name='email' id='email' value='<?php echo esc_attr( $mail ); ?>' placeholder='jean.dupont@laposte.net' required>
                             </div>
 
-                            <div class='field optional <?php if($errorPhone) echo 'error'; ?>'>
+                            <div class='field <?php if($errorPhone) echo 'error'; ?>'>
                                 <label for='tel'>Votre numéro de téléphone</label>
-                                <input type='tel' name='tel' id='tel' value='<?php echo esc_attr( $phone ); ?>' placeholder='06 00 00 00 00'>
-                                <i>(facultatif)</i>
+                                <input type='tel' name='tel' id='tel' value='<?php echo esc_attr( $phone ); ?>' placeholder='06 00 00 00 00' required>
                             </div>
 
                             <div class='field optional'>
