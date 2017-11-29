@@ -28,7 +28,7 @@ var init = function (body, header, blockSticky, dropdownsSticky, minimumWidth) {
                         blockSticky.css({ 'position': 'fixed', 'top': '25px', 'margin-top': '', 'bottom': 'auto' });
                     }
                 } else {
-                    blockSticky.css({ 'position': '', 'top': '', 'margin-top': 109 + 'px' });
+                    blockSticky.css({ 'position': '', 'top': '', 'margin-top': '109px' });
                 }
             } else {
                 blockSticky.css({ 'position': 'fixed', 'top': '95px', 'margin-top': '' });
