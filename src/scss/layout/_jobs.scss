@@ -50,6 +50,17 @@
     }
 }
 
+.img-job-responsive{
+    display: none;
+}
+
+
+@media (max-width: $desktopSmall){
+    .img-job-responsive{
+        display: block;
+        margin: 7em 0 0;
+    }
+}
 
 @media (max-width: $phone){
     .jobs{
