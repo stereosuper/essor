@@ -27,12 +27,6 @@
     padding: 1px 0;
     position: relative;
 }
-.wrapper-menu{
-    img{
-        max-width: 300px;
-        margin: 20px 0 0;
-    }
-}
 .wrapper-menu-aside{
     width: 330px;
     padding: 0 0 0 $gutter;
@@ -41,6 +35,10 @@
     z-index: 3;
     overflow-y: hidden;
     transition: transform $transition;
+    + img{
+        max-width: 300px;
+        margin: 20px 0 0;
+    }
 }
 .menu-aside{
     width: calc(100% - 20px);
@@ -151,12 +149,6 @@
         }
     }
 
-    .wrapper-menu{
-        img{
-            display: none;
-        }
-    }
-
     .wrapper-content-sidebar{
         flex-direction: column;
         > aside{
@@ -185,6 +177,9 @@
         overflow-y: hidden;
         overflow-x: auto;
         background: $primary;
+        + img{
+            display: none;
+        }
     }
     .wrapper-aside{
         width: 100%;
