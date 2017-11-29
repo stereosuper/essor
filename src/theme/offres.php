@@ -25,7 +25,7 @@ get_header(); ?>
                             <div class='wrapper-menu-aside'>
                                 <?php wp_nav_menu( array( 'theme_location' => 'jobs', 'container' => false, 'menu_class' => 'menu-aside' ) ); ?>
                             </div>
-                            <img src='<?php echo get_template_directory_uri(); ?>/layoutImg/encart.jpg' alt=''>
+                            <img src='<?php echo get_template_directory_uri(); ?>/layoutImg/encart.png' alt=''>
                         </div>
                     </aside>
 
@@ -132,6 +132,8 @@ get_header(); ?>
                         <?php }else{ ?>
                             <p>Il n'y a pas d'offres disponibles en ce moment!</p>
                         <?php } ?>
+
+                        <img src='<?php echo get_template_directory_uri(); ?>/layoutImg/encart.png' alt='' class='img-job-responsive'>
                     </div>
 
                 </div>
