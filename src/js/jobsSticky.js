@@ -18,6 +18,7 @@ var init = function (body, header, blockSticky, dropdownsSticky, minimumWidth) {
     }
 
     function stickyInterval() {
+
         if (scrollTop >= blockSticky.data('initialPos') - 95) {
             if (scrollTop > posTop) {
                 if (scrollTop > posTop + 70) {
@@ -27,7 +28,7 @@ var init = function (body, header, blockSticky, dropdownsSticky, minimumWidth) {
                         blockSticky.css({ 'position': 'fixed', 'top': '25px', 'margin-top': '', 'bottom': 'auto' });
                     }
                 } else {
-                    blockSticky.css({ 'position': '', 'top': '', 'margin-top': blockSticky.height() - 46 + 'px' });
+                    blockSticky.css({ 'position': '', 'top': '', 'margin-top': 109 + 'px' });
                 }
             } else {
                 blockSticky.css({ 'position': 'fixed', 'top': '95px', 'margin-top': '' });
