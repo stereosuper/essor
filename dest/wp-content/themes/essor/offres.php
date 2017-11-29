@@ -21,8 +21,11 @@ get_header(); ?>
                 <div class='wrapper-content-sidebar'>
 
                     <aside class='over-img wrapper-sticky wrapper-menu'>
-                        <div class='wrapper-menu-aside' id='blockStickyJobs'>
-                            <?php wp_nav_menu( array( 'theme_location' => 'jobs', 'container' => false, 'menu_class' => 'menu-aside' ) ); ?>
+                        <div id='blockStickyJobs'>
+                            <div class='wrapper-menu-aside'>
+                                <?php wp_nav_menu( array( 'theme_location' => 'jobs', 'container' => false, 'menu_class' => 'menu-aside' ) ); ?>
+                            </div>
+                            <img src='<?php echo get_template_directory_uri(); ?>/layoutImg/encart.jpg' alt=''>
                         </div>
                     </aside>
 

@@ -10,6 +10,7 @@
         margin: 120px 150px 0 0;
         &.over-img{
             margin-top: -178px;
+            z-index: 3;
         }
         &.contact-aside{
             margin-top: 232px;
@@ -25,6 +26,12 @@
     width: 300px;
     padding: 1px 0;
     position: relative;
+}
+.wrapper-menu{
+    img{
+        max-width: 300px;
+        margin: 20px 0 0;
+    }
 }
 .wrapper-menu-aside{
     width: 330px;
@@ -141,6 +148,12 @@
         .wrapper-aside{
             width: 100%;
             position: static !important;
+        }
+    }
+
+    .wrapper-menu{
+        img{
+            display: none;
         }
     }
 
