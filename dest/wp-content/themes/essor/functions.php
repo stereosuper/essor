@@ -506,6 +506,11 @@ function essor_scripts(){
 
     wp_register_script( 'essor-scripts', get_template_directory_uri() . '/js/main.js', array(), ESSOR_VERSION, true );
     wp_enqueue_script( 'essor-scripts' );
+
+    if( is_page_template( 'contact.php' ) ){
+        wp_register_script( 'essor-captcha-scripts', 'https://www.google.com/recaptcha/api.js', array(), ESSOR_VERSION, false );
+        wp_enqueue_script( 'essor-captcha-scripts' );
+    }
     
 
     // load more posts

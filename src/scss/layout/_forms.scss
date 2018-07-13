@@ -206,6 +206,10 @@ label{
     }
 }
 
+.g-recaptcha{
+    margin: 0 0 0 39%;
+}
+
 
 @media (max-width: $desktopSmall){
     .form-error{
@@ -229,7 +233,7 @@ label{
     }
 
     .form-contact, .form-offer{
-        .btn{
+        .btn, .g-recaptcha{
             margin-left: 0;
         }
     }

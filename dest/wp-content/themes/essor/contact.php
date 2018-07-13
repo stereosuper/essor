@@ -2,6 +2,9 @@
 /*
 Template Name: Contact
 */
+require_once('includes/recaptchalib.php');
+$publickey = "6Lfl2GMUAAAAAFdXSU912U-MgMUObd4tenlBUTEf";
+$privatekey = "6Lfl2GMUAAAAAKEhxRJuHJpQRrsKCAXs9LfcIAc-";
 
 $error = false;
 $success = false;
@@ -26,6 +29,26 @@ $spamUrl = isset($_POST['url']) ? strip_tags(stripslashes($_POST['url'])) : '';
 $mailto = get_field('emailsContact', 'options');
 
 if( isset($_POST['submit']) ){
+
+	
+	$response = $_POST['g-recaptcha-response'];
+	$remoteip = $_SERVER['REMOTE_ADDR'];
+	$api_url = "https://www.google.com/recaptcha/api/siteverify?secret=" 
+	    . $privatekey
+	    . "&response=" . $response
+	    . "&remoteip=" . $remoteip ;
+
+	$decode = json_decode(file_get_contents($api_url), true);
+	
+	if ($decode['success'] == true) {
+		// C'est un humain
+		
+	}else {
+		// C'est un robot ou le code de vérification est incorrecte
+		$errorCaptchaTxt = 'Faîtes la vérification pour dire que vous n\'êtes pas un robot.';
+		$errorCaptcha = true;
+		$error = true;
+	}
 
 	if( !isset($_POST['essor_contact_nonce']) || !wp_verify_nonce($_POST['essor_contact_nonce'], 'essor_contact') ){
 	
@@ -134,6 +157,7 @@ get_header(); ?>
 									<?php echo $errorSend; ?>
 								<?php }else{ ?>
 									<?php if($errorEmpty) echo 'Merci de corriger les erreurs ci-dessous.'; ?>
+									<span><?php if($errorCaptcha) echo $errorCaptchaTxt; ?></span>
 									<span><?php if($errorMailTxt) echo $errorMailTxt; ?></span>
 									<span><?php if($errorPhoneTxt) echo $errorPhoneTxt; ?></span>
 								<?php } ?>
@@ -165,6 +189,9 @@ get_header(); ?>
 								<label for='message'>Votre message</label>
 								<textarea name='message' id='message' placeholder="J'aime beaucoup ce que vous faites! Laissez moi vous parler de mon incroyable projet." required><?php echo esc_textarea( $msg ); ?></textarea>
 							</div>
+
+							<div class="g-recaptcha" data-sitekey="6Lfl2GMUAAAAAFdXSU912U-MgMUObd4tenlBUTEf"></div>
+          					<?php //echo recaptcha_get_html($publickey); ?>
 
 							<div class='hidden'>
 								<input type='url' name='url' id='url' value='<?php echo esc_url( $spamUrl ); ?>'>
