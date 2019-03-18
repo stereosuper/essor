@@ -36,10 +36,8 @@ function essor_get_terms_csv( $id, $taxonomy, $separator = ', ', $field = 'name'
 
 function essor_get_field( $selector, $post_id = false, $format_value = true, $default = '' ){
     if (function_exists('get_field')) {
-        $value = get_field($selector, $post_id, $format_value);
-        if ($value) {
-            return $value;
-        }
+        $value = get_field($selector, $post_id);
+        if ($value) return $value;
     }
     return $default;
 }
