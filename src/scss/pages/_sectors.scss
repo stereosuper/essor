@@ -72,6 +72,83 @@
     }
 }
 
+.page-template-sectors{
+    .main, .container{
+        position: relative;
+    }
+}
+.sectors-page{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    color: #fff;
+    h1{
+        color: #fff;
+    }
+}
+.sectors-list{
+    display: flex;
+    width: 75%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 35px 0 0;
+    > li{
+        width: 31%;
+        margin: 40px 0 0;
+        &:before{
+            content: none;
+        }
+    }
+    img{
+        display: inline-block;
+        max-width: 75%;
+        margin: 0 20px 25px 0;
+    }
+    a{
+        display: block;
+        text-align: right;
+        line-height: 2;
+        text-decoration: none;
+    }
+    span{
+        text-decoration: underline;
+    }
+    div{
+        text-align: left;
+    }
+    p{
+        position: relative;
+        margin: 0;
+        text-align: left;
+        color: #fff;
+        &:first-of-type{
+            font-size: 2rem;
+            &:before{
+                content: '';
+                width: 2px;
+                height: 55px;
+                position: absolute;
+                top: -60px;
+                left: 0;
+                background: $primary;
+            }
+        }
+    }
+    .icon{
+        width: 8px;
+        height: 8px;
+        margin: 0 0 0 5px;
+    }
+}
+.sectors-bg{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+}
+
 
 @media(max-width: $desktopLarge){
     .map-sector{
@@ -90,6 +167,12 @@
     .sector-text{
         width: 100%;
         padding: 0;
+    }
+
+    .sectors-list{
+        > li{
+            padding-left: 0;
+        }
     }
 }
 
@@ -118,10 +201,31 @@
             }
         }
     }
+
+    .sectors-page{
+        display: block;
+    }
+    .sectors-list{
+        width: 100%;
+    }
+}
+
+@media(max-width: $tablet){
+    .page-template-sectors{
+        .main{
+            padding-top: 1px;
+        }
+    }
+
+    .sectors-list{
+        > li{
+            width: 46%;
+        }
+    }
 }
 
 @media(max-width: $phone){
-    .list-people-sector{
+    .list-people-sector, .sectors-list{
         > li{
             width: 100%;
         }
