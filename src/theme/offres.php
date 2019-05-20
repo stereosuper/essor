@@ -88,7 +88,7 @@ get_header(); ?>
                                                 <li <?php if( get_permalink() === get_field('jobLink', 'options') ){ echo "class='active'"; } ?>><a href='<?php the_field('jobLink', 'options'); ?>'>Secteur</a></li>
                                                 <?php foreach( $allSectors as $sector ){ ?>
                                                     <?php
-                                                    $sectorPageID = get_posts(array('post_type' => 'page', 'posts_per_page' => 1, 'meta_query' => array(array('key' => 'sector-offer', 'compare' => 'LIKE', 'value' => $sector->term_id))))[0]->ID;
+                                                    $sectorPageID = get_posts(array('post_type' => 'page', 'posts_per_page' => 1, 'meta_query' => array(array('key' => 'sector-offer', 'compare' => '=', 'value' => $sector->term_id, 'type' => 'NUMERIC'))))[0]->ID;
                                                     ?>
                                                     <li <?php if( $sectorPageID === $post->ID ){ echo "class='active'"; } ?>><a href='<?php echo get_the_permalink($sectorPageID); ?>'><?php echo $sector->name; ?></a></li>
                                                 <?php } ?>

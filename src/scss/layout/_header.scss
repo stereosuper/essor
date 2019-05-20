@@ -39,21 +39,6 @@
                 margin: 0 0 0 -135px;
             }
         }
-        // .menu-secondary{
-        //     a{
-        //         &:after{
-        //             bottom: -2px;      
-        //         }
-        //     }
-        //     .current-menu-item, .current_page_parent, .current-page-ancestor{
-        //         > a{
-        //             &:after{
-        //                 bottom: -17px;
-        //                 transform: rotate(90deg) translate3d(-15px, 0, 0); 
-        //             }
-        //         }
-        //     }
-        // }
         .header-hover{
             bottom: 0;
         }
@@ -204,25 +189,6 @@
         }
     }
 }
-// .menu-main-wrapper:hover > .menu-main, .btn-menu-main:focus + .menu-main{
-//     transition: transform 0s, opacity $transition;
-//     opacity: 1;
-//     transform: translate3d(0, 0, 0);
-//     &:after{
-//         opacity: 1;
-//         transform: translate3d(0, 0, 0);
-//     }
-// }
-// .menu-main-wrapper:hover > .btn-menu-main, .btn-menu-main:focus{
-//     > .close{
-//         opacity: 1;
-//         transform: rotate(180deg) translate3d(0, 2.5px, 0);
-//     }
-//     > .down{
-//         opacity: 0;
-//         transform: rotate(180deg) translate3d(0, 2.5px, 0);
-//     }
-// }
 
 .menu-secondary-wrapper{
     display: flex;
@@ -249,47 +215,14 @@
     .current-menu-item, .current_page_parent, .current-page-ancestor{
         > a{
             color: $primary;
-            // &:after{
-            //     width: 42px;
-            //     opacity: 1;
-            //     transform: rotate(90deg);
-            // }
-            // &:hover, &:focus{
-            //     &:after{
-            //         transform: rotate(90deg);
-            //     }
-            // }
         }
     }
     a{
         display: block;
         padding: 23px 22px;
         color: $text;
-        // &:after{
-        //     content: '';
-        //     position: absolute;
-        //     height: 2px;
-        //     left: 22px;
-        //     right: 22px;
-        //     bottom: -17px;
-        //     margin: auto;
-        //     background: $primary;
-        //     opacity: 0;
-        //     transition: transform $transition, opacity $transition;            
-        // }
-        // &:hover, &:focus{
-        //     &:after{
-        //         opacity: 1;
-        //         transform: translate3d(0, -2px, 0);
-        //     }
-        // }
         &:focus{
             filter: none;
-            // &:after{
-            //     width: 42px;
-            //     opacity: 1;
-            //     transform: rotate(90deg);
-            // }
         }
     }
 }
@@ -491,7 +424,7 @@
                 display: block;
                 width: auto;
                 height: auto;
-                padding: 10px 25px;
+                padding: 10px 0;
                 font-family: $poppinsMedium;
                 font-size: 2rem;
                 line-height: 1;
@@ -597,20 +530,20 @@
 
         .menu-main-wrapper, .menu-secondary-wrapper{
             width: 50%;
-            padding: 0 $gutter;
         }
         .menu-secondary-wrapper{
             display: block;
+            padding: $gutter;
             position: relative;
-            &:before{
-                content: '';
-                width: 2px;
-                position: absolute;
-                top: 0;
-                bottom: 0;
-                left: $gutter;
-                background: $primary;
-            }
+            // &:before{
+            //     content: '';
+            //     width: 2px;
+            //     position: absolute;
+            //     top: 0;
+            //     bottom: 0;
+            //     left: $gutter;
+            //     background: $primary;
+            // }
         }
 
         .menu-secondary{
@@ -623,7 +556,7 @@
             }
             a{
                 display: block;
-                padding: 10px 25px;
+                padding: 10px 0;
                 font-family: $poppinsMedium;
                 font-size: 2rem;
                 line-height: 1;
@@ -655,12 +588,12 @@
             }
         }
 
-        .menus-wrapper{
-            width: 200%;
-            &.swiped{
-                transform: translate3d(-50%, 0, 0);
-            }
-        }
+        // .menus-wrapper{
+        //     width: 200%;
+        //     &.swiped{
+        //         transform: translate3d(-50%, 0, 0);
+        //     }
+        // }
 
         .logo{
             width: 130px;

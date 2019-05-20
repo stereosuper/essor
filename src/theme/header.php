@@ -77,6 +77,8 @@
 
 							<?php if( $sectorID ){ ?>
 								<span><?php the_field('name', $sectorID); ?></span>
+							<?php }else{ ?>
+								<span>Groupe</span>
 							<?php } ?>
 						</a>
 
@@ -117,10 +119,10 @@
 						</div>
 					</div>
 
-					<div class='menu-nav'>
+					<!--<div class='menu-nav'>
 						<button type='button' class='js-btn-menu btn-swipe'>Menu principal</button>
 						<button type='button' class='js-btn-menu btn-swipe'>Menu secondaire</button>
-					</div>
+					</div>-->
 				</nav>
 
 			</div>
