@@ -1,0 +1,51 @@
+{
+    "key": "group_59a824af547b5",
+    "title": "[page] implantations",
+    "fields": [
+        {
+            "key": "field_59a824b99a112",
+            "label": "Métier associé",
+            "name": "metier_associe",
+            "type": "taxonomy",
+            "instructions": "Permet de filtrer les implantations dès le chargement de la page. \r\nLaissez vide si vous souhaitez ne pas filtrer et afficher toutes les implantations par défaut. \r\nCette valeur sert aussi à modifier l'url lorsqu'on filtre la page : un métier doit avoir au plus une page avec le modèle \"Implantations\" sans quoi l'url ne pourra pas être déterminée de façon unique.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "metier-implantation",
+            "field_type": "select",
+            "allow_null": 1,
+            "add_term": 0,
+            "save_terms": 0,
+            "load_terms": 0,
+            "return_format": "id",
+            "multiple": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            },
+            {
+                "param": "post_template",
+                "operator": "==",
+                "value": "implantations.php"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1558354949
+}
