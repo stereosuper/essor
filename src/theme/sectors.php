@@ -20,12 +20,20 @@ get_header(); ?>
                 <ul class='sectors-list'>
                     <?php while( have_rows('sectors') ) : the_row(); ?>
                     <li>
-                        <a href='<?php the_sub_field('page'); ?>'>
+                        <?php $link = get_sub_field('page'); if( $link ){ ?>
+                            <a class='sector-item' href='<?php the_sub_field('page'); ?>'>
+                        <?php }else{ ?>
+                            <div class='sector-item'>
+                        <?php } ?>
                             <?php echo wp_get_attachment_image(get_sub_field('img'), 'medium'); ?>
                             <p><?php the_sub_field('name'); ?></p>
                             <p><?php the_sub_field('desc'); ?></p>
-                            <div><span>Voir la page <svg class='icon'><use xlink:href='#icon-right'></use></svg></span></div>
-                        </a>
+                            <?php if( $link ){ ?>
+                                <div><span>Voir la page <svg class='icon'><use xlink:href='#icon-right'></use></svg></span></div>
+                            </a>
+                        <?php }else{ ?>
+                            </div>
+                        <?php } ?>
                     </li>
                     <?php endwhile; ?>
                 </ul>

@@ -43,7 +43,6 @@ get_header(); ?>
                                 <?php foreach( $allSectors as $sector ){ ?>
                                     <?php
                                     $sectorPageID = get_posts(array('post_type' => 'page', 'posts_per_page' => 1, 'meta_query' => array(array('key' => 'sector', 'compare' => '=', 'value' => $sector->term_id, 'type' => 'NUMERIC'))))[0]->ID;
-                                    //echo $sector->term_id;
                                     ?>
                                     <?php if( $buildingTypeQuery ){ ?>
                                         <li <?php if( $sectorPageID === $post->ID ){ echo "class='active'"; } ?>><a href='<?php echo get_the_permalink($sectorPageID); ?>?batiment=<?php echo $buildingTypeQuery; ?>'><?php echo $sector->name; ?></a></li>
