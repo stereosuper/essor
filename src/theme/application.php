@@ -175,7 +175,6 @@ get_header(); ?>
                         <div class='wrapper-menu-aside'>
                             <?php wp_nav_menu( array( 'theme_location' => 'jobs', 'container' => false, 'menu_class' => 'menu-aside' ) ); ?>
                         </div>
-                        <img src='<?php echo get_template_directory_uri(); ?>/layoutImg/encart2.jpg' alt=''>
                     </div>
                 </aside>
                 <div class='content-sidebar'>
@@ -249,8 +248,6 @@ get_header(); ?>
                             </button>
                         </form>
                     </div>
-
-                    <img src='<?php echo get_template_directory_uri(); ?>/layoutImg/encart2.jpg' alt='' class='img-job-responsive'>
                 </div>
             </div>
 		</div>
